@@ -21,7 +21,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: Chzhdndb!2
-    url: jdbc:mysql://3.37.89.107:3306/
+    url: jdbc:mysql://3.37.89.107:3306/LotteOn
     username: root
   devtools:
     livereload:
@@ -46,6 +46,8 @@ spring:
   thymeleaf:
     cache: false
     prefix: classpath:/templates
+    mvc:
+      static-path-patttern: "/static/**"
 
   servlet:
     multipart:
