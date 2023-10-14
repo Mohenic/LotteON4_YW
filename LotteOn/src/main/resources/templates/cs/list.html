@@ -1,0 +1,47 @@
+<th:block th:insert="~{@{/cs/_header.html}}"/>
+      <section id="cs">
+        <div class="notice">
+          <nav>
+            <div>
+              <p>홈<span>></span>공지사항</p>
+            </div>
+          </nav>
+          <section class="list">
+            <th:block th:insert="~{@{/cs/_aside.html}}"/>
+            <article>
+              <nav>
+                <h1>전체</h1>
+                <h2>공지사항 전체 내용입니다.</h2>
+              </nav>
+
+              <table>
+
+                <tr th:each="article:${articles.getDtoList()}">
+                  <td><a href="#" th:text="${article.getTitle()}"></a></td>
+                  <td th:text="${article.getRdate()}"></td>
+                </tr>
+
+              </table>
+
+              <div class="page">
+                <th:block th:if="${articles.prev}">
+                  <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=1)}" class="prev">처음으로</a>
+                  <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.start-1})}" class="prev">이전</a>
+                </th:block>
+
+                <th:block th:each="num:${#numbers.sequence(articles.start,articles.end)}">
+                  <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${num})}" class="num on">[[${num}]]</a>
+                </th:block>
+
+                <th:block th:if="${articles.next}">
+                    <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.end+1})}" class="next">다음</a>
+                    <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.getTotal()/10})}" class="next">마지막으로</a>
+                </th:block>
+              </div>
+
+            </article>
+          </section>
+        </div>
+      </section>
+
+<th:block th:insert="~{@{/cs/_footer.html}}"/>
