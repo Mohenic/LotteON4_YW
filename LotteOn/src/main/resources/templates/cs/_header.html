@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.thymeleaf.org/"
+
+        lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>롯데ON::고객센터</title>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/cs/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{/css/cs/style.css}">
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <div class="top">
+          <div>
+            <p>
+              <a th:href="@{/member/login}">로그인</a>
+              <a href="#">회원가입</a>
+              <a href="#">마이페이지</a>
+              <a href="#"
+                ><i class="fa fa-shopping-cart" aria-hidden="true"></i
+                >&nbsp;장바구니</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="logo">
+          <div>
+            <a href="#"><img th:src="@{/images/main/header_logo.png}" alt="로고" />고객센터</a>
+          </div>
+        </div>
+      </header>
+
