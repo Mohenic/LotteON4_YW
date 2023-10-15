@@ -10,5 +10,9 @@ public class AdminController {
     public String index(){
         return "/admin/index";
     }
+    @GetMapping("/admin/product/register")
+    public String register(){
+        return "/admin/product/register";
+    }
 
 }
