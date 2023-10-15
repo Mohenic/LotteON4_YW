@@ -13810,3 +13810,203 @@ org.springframework.expression.spel.SpelEvaluationException: EL1011E: Method cal
 2023-10-15T21:58:14.430+09:00  INFO 17712 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
 2023-10-15T21:58:14.466+09:00  INFO 17712 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2023-10-15T21:58:14.474+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : Started LotteOnApplication in 5.722 seconds (process running for 7.729)
+2023-10-15T22:02:57.541+09:00  INFO 17712 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 2 class path changes (0 additions, 2 deletions, 0 modifications)
+2023-10-15T22:02:57.554+09:00  INFO 17712 --- [Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-10-15T22:02:57.567+09:00  INFO 17712 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-15T22:02:57.570+09:00  INFO 17712 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-10-15T22:02:57.680+09:00  INFO 17712 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-10-15T22:02:57.798+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : Starting LotteOnApplication using Java 17.0.7 with PID 17712 (C:\Users\admin\Desktop\Workshop\LotteON4_user1\LotteOn\build\classes\java\main started by admin in C:\Users\admin\Desktop\Workshop\LotteON4_user1\LotteOn)
+2023-10-15T22:02:57.798+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : No active profile set, falling back to 1 default profile: "default"
+2023-10-15T22:02:58.175+09:00  INFO 17712 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-15T22:02:58.199+09:00  INFO 17712 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 3 JPA repository interfaces.
+2023-10-15T22:02:58.316+09:00  INFO 17712 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-10-15T22:02:58.317+09:00  INFO 17712 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-10-15T22:02:58.317+09:00  INFO 17712 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-10-15T22:02:58.363+09:00  INFO 17712 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-10-15T22:02:58.364+09:00  INFO 17712 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 557 ms
+2023-10-15T22:02:58.401+09:00  INFO 17712 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-15T22:02:58.420+09:00  INFO 17712 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-15T22:02:58.420+09:00  INFO 17712 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-15T22:02:58.423+09:00  INFO 17712 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-10-15T22:02:58.549+09:00  INFO 17712 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7758c9d0
+2023-10-15T22:02:58.549+09:00  INFO 17712 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-10-15T22:02:58.550+09:00  WARN 17712 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL57Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2023-10-15T22:02:58.580+09:00  INFO 17712 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-15T22:02:58.653+09:00  INFO 17712 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-15T22:02:58.688+09:00  INFO 17712 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-15T22:02:58.805+09:00  WARN 17712 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-15T22:02:58.952+09:00  INFO 17712 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4411c759, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7e15d0, org.springframework.security.web.context.SecurityContextHolderFilter@794e34a8, org.springframework.security.web.header.HeaderWriterFilter@6d68fb59, org.springframework.security.web.csrf.CsrfFilter@77c11d4e, org.springframework.security.web.authentication.logout.LogoutFilter@4f8d0ee3, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@716e36dc, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@39a28f12, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@368b00b1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@211c7132, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@61a6da2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13ba0c0f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@745c62b3, org.springframework.security.web.access.ExceptionTranslationFilter@3594142a, org.springframework.security.web.access.intercept.AuthorizationFilter@1a13604c]
+2023-10-15T22:02:58.959+09:00  INFO 17712 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-10-15T22:02:58.970+09:00  INFO 17712 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-10-15T22:02:58.973+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : Started LotteOnApplication in 1.23 seconds (process running for 292.228)
+2023-10-15T22:02:58.976+09:00  INFO 17712 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   SpringBootWebSecurityConfiguration.SecurityFilterChainConfiguration matched:
+      - AllNestedConditions 2 matched 0 did not; NestedCondition on DefaultWebSecurityCondition.Beans @ConditionalOnMissingBean (types: org.springframework.security.web.SecurityFilterChain; SearchStrategy: all) did not find any beans; NestedCondition on DefaultWebSecurityCondition.Classes @ConditionalOnClass found required classes 'org.springframework.security.web.SecurityFilterChain', 'org.springframework.security.config.annotation.web.builders.HttpSecurity' (DefaultWebSecurityCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2023-10-15T22:03:01.023+09:00  INFO 17712 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 69 class path changes (0 additions, 69 deletions, 0 modifications)
+2023-10-15T22:03:01.034+09:00  INFO 17712 --- [Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-10-15T22:03:01.038+09:00  INFO 17712 --- [Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-15T22:03:01.038+09:00  INFO 17712 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-10-15T22:03:01.153+09:00  INFO 17712 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2023-10-15T22:03:01.251+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : Starting LotteOnApplication using Java 17.0.7 with PID 17712 (C:\Users\admin\Desktop\Workshop\LotteON4_user1\LotteOn\build\classes\java\main started by admin in C:\Users\admin\Desktop\Workshop\LotteON4_user1\LotteOn)
+2023-10-15T22:03:01.252+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : No active profile set, falling back to 1 default profile: "default"
+2023-10-15T22:03:01.511+09:00  INFO 17712 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-15T22:03:01.513+09:00  INFO 17712 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1 ms. Found 0 JPA repository interfaces.
+2023-10-15T22:03:01.605+09:00  INFO 17712 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-10-15T22:03:01.606+09:00  INFO 17712 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-10-15T22:03:01.606+09:00  INFO 17712 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-10-15T22:03:01.645+09:00  INFO 17712 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-10-15T22:03:01.645+09:00  INFO 17712 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 392 ms
+2023-10-15T22:03:01.674+09:00  INFO 17712 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-15T22:03:01.692+09:00  INFO 17712 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-15T22:03:01.692+09:00  INFO 17712 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-15T22:03:01.694+09:00  INFO 17712 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-10-15T22:03:01.827+09:00  INFO 17712 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5edf09a4
+2023-10-15T22:03:01.827+09:00  INFO 17712 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-10-15T22:03:01.828+09:00  WARN 17712 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL57Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2023-10-15T22:03:01.835+09:00  INFO 17712 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-15T22:03:01.845+09:00  INFO 17712 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-15T22:03:01.845+09:00  INFO 17712 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-15T22:03:01.873+09:00  WARN 17712 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-15T22:03:02.015+09:00  INFO 17712 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@73dbbe5e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@40ab3dad, org.springframework.security.web.context.SecurityContextHolderFilter@33bf8254, org.springframework.security.web.header.HeaderWriterFilter@52e71c6, org.springframework.security.web.csrf.CsrfFilter@4aae54e3, org.springframework.security.web.authentication.logout.LogoutFilter@5db7902b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7da4d290, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@6faaa59c, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@1b40577a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1c7333c7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@b8ed18c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@19fc4724, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1e28a2de, org.springframework.security.web.access.ExceptionTranslationFilter@7e5d97be, org.springframework.security.web.access.intercept.AuthorizationFilter@1cb5eed6]
+2023-10-15T22:03:02.025+09:00  INFO 17712 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-10-15T22:03:02.041+09:00  INFO 17712 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-10-15T22:03:02.046+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : Started LotteOnApplication in 0.836 seconds (process running for 295.301)
+2023-10-15T22:03:02.048+09:00  INFO 17712 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   UserDetailsServiceAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.security.authentication.AuthenticationManager' (OnClassCondition)
+      - @ConditionalOnBean (types: org.springframework.security.config.annotation.ObjectPostProcessor; SearchStrategy: all) found bean 'objectPostProcessor'; @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.authentication.AuthenticationProvider,org.springframework.security.core.userdetails.UserDetailsService,org.springframework.security.authentication.AuthenticationManagerResolver,org.springframework.security.oauth2.jwt.JwtDecoder,org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector,org.springframework.security.oauth2.client.registration.ClientRegistrationRepository,org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2023-10-15T22:03:04.103+09:00  INFO 17712 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 167 class path changes (74 additions, 0 deletions, 93 modifications)
+2023-10-15T22:03:04.115+09:00  INFO 17712 --- [Thread-11] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-10-15T22:03:04.119+09:00  INFO 17712 --- [Thread-11] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-15T22:03:04.119+09:00  INFO 17712 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-10-15T22:03:04.232+09:00  INFO 17712 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-10-15T22:03:04.343+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : Starting LotteOnApplication using Java 17.0.7 with PID 17712 (C:\Users\admin\Desktop\Workshop\LotteON4_user1\LotteOn\build\classes\java\main started by admin in C:\Users\admin\Desktop\Workshop\LotteON4_user1\LotteOn)
+2023-10-15T22:03:04.344+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : No active profile set, falling back to 1 default profile: "default"
+2023-10-15T22:03:04.671+09:00  INFO 17712 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-15T22:03:04.692+09:00  INFO 17712 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 3 JPA repository interfaces.
+2023-10-15T22:03:04.795+09:00  INFO 17712 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-10-15T22:03:04.796+09:00  INFO 17712 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-10-15T22:03:04.796+09:00  INFO 17712 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-10-15T22:03:04.836+09:00  INFO 17712 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-10-15T22:03:04.836+09:00  INFO 17712 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 490 ms
+2023-10-15T22:03:04.872+09:00  INFO 17712 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-15T22:03:04.890+09:00  INFO 17712 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-15T22:03:04.890+09:00  INFO 17712 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-15T22:03:04.892+09:00  INFO 17712 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2023-10-15T22:03:05.005+09:00  INFO 17712 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a64f715
+2023-10-15T22:03:05.005+09:00  INFO 17712 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2023-10-15T22:03:05.006+09:00  WARN 17712 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL57Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2023-10-15T22:03:05.030+09:00  INFO 17712 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-15T22:03:05.088+09:00  INFO 17712 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-15T22:03:05.120+09:00  INFO 17712 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-15T22:03:05.231+09:00  WARN 17712 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-15T22:03:05.303+09:00  INFO 17712 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2e6ce544, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3cab7876, org.springframework.security.web.context.SecurityContextHolderFilter@41551705, org.springframework.security.web.header.HeaderWriterFilter@6a1eafac, org.springframework.security.web.authentication.logout.LogoutFilter@52dad979, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@50b84da2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3e978efe, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24a2a4cf, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3552a07a, org.springframework.security.web.access.ExceptionTranslationFilter@7efc8a61, org.springframework.security.web.access.intercept.AuthorizationFilter@2af9e073]
+2023-10-15T22:03:05.343+09:00  INFO 17712 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-10-15T22:03:05.355+09:00  INFO 17712 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-10-15T22:03:05.358+09:00  INFO 17712 --- [restartedMain] kr.co.lotteon.LotteOnApplication         : Started LotteOnApplication in 1.064 seconds (process running for 298.613)
+2023-10-15T22:03:05.360+09:00  INFO 17712 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+    None
+
+
+Negative matches:
+-----------------
+
+   SpringBootWebSecurityConfiguration.SecurityFilterChainConfiguration:
+      Did not match:
+         - AllNestedConditions 1 matched 1 did not; NestedCondition on DefaultWebSecurityCondition.Beans @ConditionalOnMissingBean (types: org.springframework.security.web.SecurityFilterChain; SearchStrategy: all) found beans of type 'org.springframework.security.web.SecurityFilterChain' filterChain; NestedCondition on DefaultWebSecurityCondition.Classes @ConditionalOnClass found required classes 'org.springframework.security.web.SecurityFilterChain', 'org.springframework.security.config.annotation.web.builders.HttpSecurity' (DefaultWebSecurityCondition)
+
+   UserDetailsServiceAutoConfiguration:
+      Did not match:
+         - @ConditionalOnMissingBean (types: org.springframework.security.authentication.AuthenticationManager,org.springframework.security.authentication.AuthenticationProvider,org.springframework.security.core.userdetails.UserDetailsService,org.springframework.security.authentication.AuthenticationManagerResolver,org.springframework.security.oauth2.jwt.JwtDecoder,org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector,org.springframework.security.oauth2.client.registration.ClientRegistrationRepository,org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository; SearchStrategy: all) found beans of type 'org.springframework.security.authentication.AuthenticationManager' authenticationManager and found beans of type 'org.springframework.security.core.userdetails.UserDetailsService' securityUserService (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.security.authentication.AuthenticationManager' (OnClassCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2023-10-15T22:03:16.925+09:00  INFO 17712 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-15T22:03:16.926+09:00  INFO 17712 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2023-10-15T22:03:17.035+09:00  INFO 17712 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
