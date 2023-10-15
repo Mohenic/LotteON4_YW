@@ -1,7 +1,6 @@
 package kr.co.lotteon.dto.cs;
 
-import kr.co.lotteon.entity.cs.CsCate1Entity;
-import kr.co.lotteon.entity.cs.CsCate2Entity;
+import kr.co.lotteon.entity.cs.CsCate3Entity;
 import lombok.*;
 
 @Getter
@@ -9,14 +8,16 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CsCate2DTO {
+public class CsCate3DTO {
 
     private String cate2;
+    private String cate3;
     private String detail;
 
-    public CsCate2Entity toEntity(){
-        return CsCate2Entity.builder()
+    public CsCate3Entity toEntity(){
+        return CsCate3Entity.builder()
                 .cate2(cate2)
+                .cate3(cate3)
                 .detail(detail)
                 .build();
     }

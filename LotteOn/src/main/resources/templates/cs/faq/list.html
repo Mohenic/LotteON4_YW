@@ -1,4 +1,4 @@
-<th:block th:insert="~{@{/cs/_header.html}}"/>
+<th:block th:insert="~{@{/cs/_header.html}}" xmlns:th="http://www.w3.org/1999/html"/>
   <section id="cs">
     <div class="faq">
       <nav>
@@ -7,26 +7,37 @@
         </div>
       </nav>
       <section class="list">
-        <aside>
-          <h2>자주묻는 질문</h2>
-          <ul>
-            <li class="on"><a href="#">회원</a></li>
-            <li><a href="#">쿠폰/이벤트</a></li>
-            <li><a href="#">주문/결제</a></li>
-            <li><a href="#">배송</a></li>
-            <li><a href="#">취소/반품/교환</a></li>
-            <li><a href="#">여행/숙박/항공</a></li>
-            <li><a href="#">안전거래</a></li>
-          </ul>
-        </aside>
+        <th:block th:insert="~{@{/cs/_aside.html}}"/>
         <article>
+
           <nav>
-            <h1>회원</h1>
+            <th:block th:if="${types.get(1).cate2 == 'member'}">
+              <h1>회원</h1>
+            </th:block>
+            <th:block th:if="${types.get(1).cate2 == 'event'}">
+              <h1>쿠폰/이벤트</h1>
+            </th:block>
+            <th:block th:if="${types.get(1).cate2 == 'order'}">
+              <h1>주문/결제</h1>
+            </th:block>
+            <th:block th:if="${types.get(1).cate2 == 'delivery'}">
+              <h1>배송</h1>
+            </th:block>
+            <th:block th:if="${types.get(1).cate2 == 'cancle'}">
+              <h1>취소/반품/교환</h1>
+            </th:block>
+            <th:block th:if="${types.get(1).cate2 == 'travel'}">
+              <h1>여행/숙박/항공</h1>
+            </th:block>
+            <th:block th:if="${types.get(1).cate2 == 'safety'}">
+              <h1>안전거래</h1>
+            </th:block>
             <h2>가장 자주 묻는 질문입니다.</h2>
           </nav>
 
+          <th:block th:each="article :${articles.dtoList}">
           <div>
-            <h3>가입</h3>
+            <h3></h3>
             <ul>
               <li><a href="view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
               <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
@@ -36,39 +47,7 @@
               <li class="more"><a href="#">더보기</a></li>
             </ul>
           </div>
-          <div>
-            <h3>탈퇴</h3>
-            <ul>
-              <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-              <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-              <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-              <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-              <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-              <li class="more"><a href="#">더보기</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>회원정보</h3>
-            <ul>
-              <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-              <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-              <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-              <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-              <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-              <li class="more"><a href="#">더보기</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3>로그인</h3>
-            <ul>
-              <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-              <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-              <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-              <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-              <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-              <li class="more"><a href="#">더보기</a></li>
-            </ul>
-          </div>
+          </th:block>
 
         </article>
       </section>
