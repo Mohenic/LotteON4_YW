@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Builder
 public class MemberDTO {
     private String uid;
-    private String pass;
+    private String pass1;
     private String name;
     private int gender;
     private String hp;
@@ -50,7 +50,7 @@ public class MemberDTO {
     public MemberEntity toEntity(){
         return MemberEntity.builder()
                 .uid(uid)
-                .pass(pass)
+                .pass(pass1)
                 .name(name)
                 .gender(gender)
                 .hp(hp)
