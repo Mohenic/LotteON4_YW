@@ -38,6 +38,7 @@ public class MemberEntity {
     private int type;
     @ColumnDefault("0")
     private int point;
+    // 기본값 적용 안됨
     @ColumnDefault("1")
     private int level;
     private String zip;
@@ -65,7 +66,7 @@ public class MemberEntity {
     public MemberDTO toDTO(){
         return MemberDTO.builder()
                 .uid(uid)
-                .pass(pass)
+                .pass1(pass)
                 .name(name)
                 .gender(gender)
                 .hp(hp)
