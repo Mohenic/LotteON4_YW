@@ -38,7 +38,9 @@
                     <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.getTotal()/10})}" class="next">마지막으로</a>
                 </th:block>
               </div>
-
+              <th:block th:if ="${articles.cate1 == 'qna'}">
+                <a href="write.html" class="btnWrite">문의하기</a>
+              </th:block>
             </article>
           </section>
         </div>

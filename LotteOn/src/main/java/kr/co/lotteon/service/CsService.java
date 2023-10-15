@@ -4,6 +4,8 @@ import kr.co.lotteon.dto.cs.CsArticleDTO;
 import kr.co.lotteon.dto.cs.PageRequestDTO;
 import kr.co.lotteon.dto.cs.PageResponseDTO;
 import kr.co.lotteon.entity.cs.CsArticleEntity;
+import kr.co.lotteon.entity.cs.CsCate3Entity;
+import kr.co.lotteon.repository.CsCate3Repository;
 import kr.co.lotteon.repository.CsRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,6 +20,7 @@ public class CsService {
 
     private final CsRepository csrepo;
     private final ModelMapper modelMapper;
+    private final CsCate3Repository cs3repo;
 
     public PageResponseDTO selectCate1(PageRequestDTO pageRequestDTO){
 
@@ -38,6 +41,11 @@ public class CsService {
                 .total(totalElement)
                 .build();
 
+    }
+    
+    public List<CsCate3Entity> selectCate2(String cate2){
+        
+        return cs3repo.findCsCate3EntitiesByCate2(cate2);
     }
 
     public PageResponseDTO  selectCate1AndCate2(PageRequestDTO pageRequestDTO){
