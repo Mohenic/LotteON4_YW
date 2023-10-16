@@ -14,6 +14,7 @@ public class ProductCate2DTO {
     private int cate1;
     private int cate2;
     private String c2Name;
+
     
     public ProductCate2Entity toEntity() {
         return ProductCate2Entity.builder()
