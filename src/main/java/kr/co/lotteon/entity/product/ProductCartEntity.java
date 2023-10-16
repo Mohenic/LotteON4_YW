@@ -2,10 +2,7 @@ package kr.co.lotteon.entity.product;
 
 
 import jakarta.persistence.*;
-import kr.co.lotteon.dto.MemberDTO;
-import kr.co.lotteon.dto.cs.CsCate1DTO;
 import kr.co.lotteon.dto.product.ProductCartDTO;
-import kr.co.lotteon.entity.MemberEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -23,10 +20,7 @@ public class ProductCartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartNo;
-   // @JoinColumn(name = "member_id", column)
     private String uid;
-   // @JoinColumn(name = "prod_no")
-    //private ProductEntity prodNo;
     private int prodNo;
     private int count;
     private int price;
