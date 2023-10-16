@@ -1,24 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.thymeleaf.org"
 	  layout:decorate="/member/member.html">
-<script>
-	$(function(){
-		let name = $('input[name=name]').val();
-		$('input[name=manager]').focusout(function () {
-			alert('포커스아웃');
-			let manager = $(this).val();
-			console.log(manager);
-			name = manager;
-		});
-	});
-</script>
+
             <div class="registerSeller" layout:fragment="content">
 				<nav>
 					<h1>판매자 회원가입</h1>
 				</nav>
                 
 				<form th:action="@{/member/registerSeller}" method="POST">
-					<input type="hidden" name="type" th:value="2"/>
+					<input type="text" name="type" th:value="${type}"/>
 					<input type="text" name="name"/>
 					<section>
 						<table>
