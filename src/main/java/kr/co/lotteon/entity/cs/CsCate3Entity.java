@@ -1,10 +1,10 @@
 package kr.co.lotteon.entity.cs;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import kr.co.lotteon.dto.cs.CsCate3DTO;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,6 +17,9 @@ import lombok.*;
 public class CsCate3Entity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int cno;
+
     private String cate2;
     private String cate3;
     private String detail;

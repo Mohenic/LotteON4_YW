@@ -17,7 +17,12 @@
               <table>
 
                 <tr th:each="article:${articles.getDtoList()}">
-                  <td><a href="#" th:text="${article.getTitle()}"></a></td>
+                  <td></td>
+                  <td>
+                    <a href="#" th:text="${article.getTitle()}"></a>
+                  </td>
+                  <td></td>
+                  <td th:if="${article.cate1=='qna'}" th:text="${article.writer}"></td>
                   <td th:text="${article.getRdate()}"></td>
                 </tr>
 
