@@ -26,7 +26,7 @@ public class CsListController {
 
 
         PageResponseDTO articles = null;
-        if (pageRequestDTO.getCate2().equals("all")) {
+        if (pageRequestDTO.getCate1().equals("all")) {
             articles = csService.selectCate1(pageRequestDTO);
         } else {
             articles = csService.selectCate1AndCate2(pageRequestDTO);
