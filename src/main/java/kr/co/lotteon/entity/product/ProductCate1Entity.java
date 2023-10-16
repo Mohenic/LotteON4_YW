@@ -7,6 +7,7 @@ import kr.co.lotteon.dto.product.ProductCate1DTO;
 import lombok.*;
 
 @Getter
+@Setter
 @ToString
 @Builder
 @AllArgsConstructor
