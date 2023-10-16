@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "lo_product")
 @Entity
+
 public class ProductEntity {
     
     @Id
