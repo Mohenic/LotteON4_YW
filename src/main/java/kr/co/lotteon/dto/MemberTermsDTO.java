@@ -1,5 +1,6 @@
 package kr.co.lotteon.dto;
 
+import jakarta.persistence.Id;
 import kr.co.lotteon.entity.MemberTermsEntity;
 import lombok.*;
 
@@ -10,14 +11,16 @@ import lombok.*;
 @ToString
 @Builder
 public class MemberTermsDTO {
+    private int no;
     private String terms;
     private String privacy;
     private String location;
     private String finance;
     private String tax;
 
-    public MemberTermsEntity toEntity (){
+    public MemberTermsEntity toEntity(){
         return MemberTermsEntity.builder()
+                .no(no)
                 .terms(terms)
                 .privacy(privacy)
                 .location(location)

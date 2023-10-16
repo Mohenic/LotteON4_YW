@@ -1,4 +1,4 @@
-<th:block th:insert="~{@{/cs/_header.html}}" xmlns:th="http://www.w3.org/1999/html"/>
+<th:block th:insert="~{/cs/_header.html}"/>
   <section id="cs">
     <div class="faq">
       <nav>
@@ -7,7 +7,7 @@
         </div>
       </nav>
       <section class="list">
-        <th:block th:insert="~{@{/cs/_aside.html}}"/>
+        <th:block th:insert="~{/cs/_aside.html}"/>
         <article>
 
           <nav>
@@ -35,7 +35,7 @@
             <h2>가장 자주 묻는 질문입니다.</h2>
           </nav>
 
-          <th:block th:each="article :${articles.dtoList}">
+         <th:block th:each="type :${types}">
           <div>
             <h3></h3>
             <ul>
@@ -47,10 +47,10 @@
               <li class="more"><a href="#">더보기</a></li>
             </ul>
           </div>
-          </th:block>
+         </th:block>
 
         </article>
       </section>
     </div>
   </section>
-<th:block th:insert="~{@{/cs/_footer.html}}"/>
+<th:block th:insert="~{/cs/_footer.html}"/>
