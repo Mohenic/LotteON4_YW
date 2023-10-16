@@ -4,6 +4,7 @@ package kr.co.lotteon.entity.product;
 import jakarta.persistence.*;
 import kr.co.lotteon.dto.product.ProductDTO;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -45,7 +46,10 @@ public class ProductEntity {
     private String bizType;
     private String origin;
     private String ip;
+
+    @CreationTimestamp
     private LocalDateTime rdate;
+
     private String useyn;
     private int etc1;
     private int etc2;

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AdminController {
 
+    @Autowired
+    private AdminService adminService;
+
     @GetMapping(value = {"/admin", "/admin/index"})
     public String index(){
         return "/admin/index";
@@ -18,6 +21,15 @@ public class AdminController {
     @GetMapping("/admin/product/register")
     public String register(){
         return "/admin/product/register";
+    }
+
+    @PostMapping("/admin/product/register")
+    public String register(HttpServletRequest request, ProductDTO dto){
+
+        dto.setIp(request.getRemoteAddr());
+        adminService.save(dto);
+
+        return "redirect:/admin/product/list";
     }
 
 }

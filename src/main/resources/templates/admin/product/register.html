@@ -11,7 +11,8 @@
                 </nav>
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
-                    <form action="formRegister">
+                    <form th:action="@{/admin/product/register}" name="formRegister" method="post">
+                        <input type="text" name="seller" value="seller">
 
                         <!-- 상품분류 -->
                         <section>
@@ -23,7 +24,7 @@
                                 <tr>
                                     <td>1차 분류</td>
                                     <td>
-                                        <select name="category1">
+                                        <select name="prodCate1">
                                             <option value="cate0">1차 분류 선택</option>
                                             <option value="10">패션·의류·뷰티</option>
                                             <option value="11">가전·디지털</option>
@@ -35,7 +36,7 @@
                                 <tr>
                                     <td>2차 분류</td>
                                     <td>
-                                        <select name="category2">
+                                        <select name="prodCate2">
                                             <option value="cate0">2차 분류 선택</option>
                                             <option value="10">남성의류</option>
                                             <option value="11">여성의류</option>
