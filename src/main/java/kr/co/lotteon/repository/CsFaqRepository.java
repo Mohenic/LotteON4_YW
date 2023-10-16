@@ -16,5 +16,7 @@ public interface CsFaqRepository extends JpaRepository<CsArticleFaqEntity, Integ
     //public Page<CsArticleNoticeEntity> findCsArticleEntitiesByCate1AndCate2AndUseynAndParent(String cate1, String cate2, String useyn, int parent, Pageable pageable);
 
 
-    public List<CsArticleFaqEntity> findCsArticleFaqEntitiesByCate1AndCate2AndUseynAndParent(String cate1,String cate2, String useyn, int parent);
+   // public List<CsArticleFaqEntity> findCsArticleFaqEntitiesByCate1AndCate2AndUseynAndParent(String cate1,String cate2, String useyn, int parent);
+
+    public List<CsArticleFaqEntity> findTop10ByCate1AndCate2AndUseynAndParent(String cate1,String cate2, String useyn, int parent);
 }

@@ -1,4 +1,30 @@
 <th:block th:insert="~{/cs/_header.html}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  $(function(){
+    var isOpen =false;
+    var cate3 = document.getElementById().id
+    $('.').click(function(e){
+      e.preventDefault();
+      //  일단 로직을 한번생각해보자 -> more 을 눌렀을경우 게시글이 10개까지 표시되어야함
+      //게시글은 10개까지 불러오기로하고 4개째부터는 display : none 을 줘서 안보이게함
+      //그러면 이 more 을눌렀을때 이항목의 게시글만 display : none 속성이 사라지거나
+      // visibility: visible; 이속성으로 지정되어야함 그러면 ul이나 어디에 id값을 줘야할것같은데 흠...
+      // display 를 쓰는게 맞을것같음 그리고 창이 새로고침되면 안됨
+      // 그냥 id 값 하나씩 다줘서 스크립트를 여러개짤까? 아 근데 그렇게하면 이게 aside 마다 다달라지니까 양이 많구나;
+      if(isOpen){
+        item.slideUp(100);
+      }else{
+        item.slideDown(100);
+      }
+
+
+    });
+  });
+  /*]]>*/
+
+</script>
   <section id="cs">
     <div class="faq">
       <nav>
@@ -38,13 +64,13 @@
          <th:block th:each="type ,loop:${types}">
           <div>
             <h3 th:text="${type.getDetail()}"></h3>
-            <ul>
-              <li><a href="view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-              <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-              <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-              <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-              <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-              <li class="more"><a href="#">더보기</a></li>
+            <ul th:id="${type.getCate3()}">
+              <th:block th:each="article :${articles}">
+                <th:block th:if="${type.getCate3() == article.getType()}">
+                  <li><a href="#" th:text="${article.getTitle()}"><span>Q.</span></a></li>
+                </th:block>
+              </th:block>
+              <li th:class="more" th:classappend="${type.getCate3()}" th:id="${type.getCate3()}"><a href="#">더보기</a></li>
             </ul>
           </div>
          </th:block>
