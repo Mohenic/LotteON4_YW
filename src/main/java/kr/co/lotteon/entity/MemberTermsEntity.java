@@ -1,8 +1,6 @@
 package kr.co.lotteon.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import kr.co.lotteon.dto.MemberTermsDTO;
 import lombok.*;
 
@@ -17,20 +15,23 @@ import lombok.*;
 public class MemberTermsEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int no;
     private String terms;
     private String privacy;
     private String location;
     private String finance;
     private String tax;
 
-    public MemberTermsDTO toDTO (){
+    public MemberTermsDTO toDTO(){
         return MemberTermsDTO.builder()
+                .no(no)
                 .terms(terms)
                 .privacy(privacy)
                 .location(location)
                 .finance(finance)
                 .tax(tax)
                 .build();
-
     }
+
 }

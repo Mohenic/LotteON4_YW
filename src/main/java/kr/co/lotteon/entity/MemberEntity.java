@@ -36,11 +36,11 @@ public class MemberEntity {
     @Column(name = "email", unique = true)
     private String email;
     private int type;
-    @ColumnDefault("0")
-    private int point;
+    @Builder.Default
+    private int point = 0;
     // 기본값 적용 안됨
-    @ColumnDefault("1")
-    private int level;
+    @Builder.Default
+    private int level=1;
     private String zip;
     private String addr1;
     private String addr2;
