@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 public class ProductCartEntity {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartNo;
    // @JoinColumn(name = "member_id", column)
     private String uid;

@@ -2,6 +2,7 @@ package kr.co.lotteon.entity.product;
 
 
 import jakarta.persistence.*;
+import kr.co.lotteon.dto.product.ProductDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -50,5 +51,42 @@ public class ProductEntity {
     private String etc4;
     private String etc5;
     
+    public ProductDTO toDTO(){
+        return ProductDTO.builder()
+              .prodNo(prodNo)
+              .prodCate1(prodCate1)
+              .prodCate2(prodCate2)
+              .prodName(prodName)
+              .descript(descript)
+              .seller(seller)
+              .company(company)
+              .price(price)
+              .discount(discount)
+              .point(point)
+              .stock(stock)
+              .sold(sold)
+              .delivery(delivery)
+              .hit(hit)
+              .score(score)
+              .review(review)
+              .thumb1(thumb1)
+              .thumb2(thumb2)
+              .thumb3(thumb3)
+              .detail(detail)
+              .status(status)
+              .duty(duty)
+              .receipt(receipt)
+              .bizType(bizType)
+              .origin(origin)
+              .ip(ip)
+              .rdate(rdate)
+              .useyn(useyn)
+              .etc1(etc1)
+              .etc2(etc2)
+              .etc4(etc4)
+              .etc5(etc5)
+              .build();
+        
+    }
     
 }

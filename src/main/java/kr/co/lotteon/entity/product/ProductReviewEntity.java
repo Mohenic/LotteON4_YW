@@ -2,6 +2,7 @@ package kr.co.lotteon.entity.product;
 
 
 import jakarta.persistence.*;
+import kr.co.lotteon.dto.product.ProductReviewDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -26,5 +27,16 @@ public class ProductReviewEntity {
     private LocalDateTime rdate;
     private String useyn;
     
-    
+    public ProductReviewDTO toDTO(){
+        return ProductReviewDTO.builder()
+                .revNo(revNo)
+                .prodNo(prodNo)
+                .content(content)
+                .uid(uid)
+                .rating(rating)
+                .regip(regip)
+                .rdate(rdate)
+                .useyn(useyn)
+                .build();
+    }
 }

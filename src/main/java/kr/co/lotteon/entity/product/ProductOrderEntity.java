@@ -1,6 +1,7 @@
 package kr.co.lotteon.entity.product;
 
 import jakarta.persistence.*;
+import kr.co.lotteon.dto.product.ProductOrderDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -35,4 +36,25 @@ public class ProductOrderEntity {
     private LocalDateTime ordDate;
     
     
+    public ProductOrderDTO toDTO(){
+        return ProductOrderDTO.builder()
+              .ordNo(ordNo)
+              .ordUid(ordUid)
+              .ordCount(ordCount)
+              .ordPrice(ordPrice)
+              .ordDiscount(ordDiscount)
+              .ordDelivery(ordDelivery)
+              .savePoint(savePoint)
+              .usedPoint(usedPoint)
+              .ordTotPrice(ordTotPrice)
+              .recipName(recipName)
+              .recipHp(recipHp)
+              .recipZip(recipZip)
+              .recipAddr1(recipAddr1)
+              .recipAddr2(recipAddr2)
+              .ordPayment(ordPayment)
+              .ordComplete(ordComplete)
+              .ordDate(ordDate)
+              .build();
+    }
 }

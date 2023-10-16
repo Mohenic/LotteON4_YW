@@ -1,5 +1,6 @@
 package kr.co.lotteon.dto.product;
 
+import kr.co.lotteon.entity.product.ProductEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -44,5 +45,38 @@ public class ProductDTO {
     private int etc2;
     private String etc4;
     private String etc5;
+    
+    public ProductEntity toEntity() {
+        return ProductEntity.builder()
+                .prodNo(prodNo)
+                .prodCate1(prodCate1)
+                .prodCate2(prodCate2)
+                .prodName(prodName)
+                .descript(descript)
+                .seller(seller)
+                .company(company)
+                .price(price)
+                .discount(discount)
+                .point(point)
+                .stock(stock)
+                .sold(sold)
+                .delivery(delivery)
+                .hit(hit)
+                .score(score)
+                .review(review)
+                .thumb1(thumb1)
+                .thumb2(thumb2)
+                .thumb3(thumb3)
+                .detail(detail)
+                .status(status)
+                .duty(duty)
+                .receipt(receipt)
+                .bizType(bizType)
+                .origin(origin)
+                .ip(ip)
+                .rdate(rdate)
+                .useyn(useyn)
+                .build();
+    }
     
 }
