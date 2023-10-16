@@ -3,7 +3,7 @@ jwt:
   secret: '6Qj2b7bj3m7zUAhEFnqB48J6tXqDo7tK '
 logging:
   file:
-    name: log/LotteOn.log
+    name: log/LotteOn4.log
   level:
     jdbc:
       connection: info
@@ -16,7 +16,7 @@ logging:
     root: info
 server:
   servlet:
-    context-path: /LotteOn
+    context-path: /LotteON
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
