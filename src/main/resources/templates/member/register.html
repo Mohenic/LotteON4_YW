@@ -6,7 +6,7 @@
                     <h1>일반 회원가입</h1>
                 </nav>
 				<form th:action="@{/member/register}" method="POST">
-					<input type="hidden" name="type" th:value="1"/>
+					<input type="text" name="type" th:value="${type}"/>
 					<section>
 						<table>
 							<caption>필수 정보입력</caption>

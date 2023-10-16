@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
 @Log4j2
 @Controller
 public class MemberController {
@@ -20,7 +19,8 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping("/member/login")
-    public String login(){
+    public String login(Model model, String success){
+        model.addAttribute("success", success);
         return "/member/login";
     }
 
@@ -30,7 +30,8 @@ public class MemberController {
     }
 
     @GetMapping("/member/register")
-    public String register(){
+    public String register(Model model, String type){
+        model.addAttribute("type", type);
         return "/member/register";
     }
     @PostMapping ("/member/register")
@@ -40,7 +41,8 @@ public class MemberController {
         return "redirect:/member/login?success=200";
     }
     @GetMapping("/member/registerSeller")
-    public String registerSeller(){
+    public String registerSeller(Model model, String type){
+        model.addAttribute("type", type);
         return "/member/registerSeller";
     }
     @PostMapping ("/member/registerSeller")
@@ -51,7 +53,7 @@ public class MemberController {
     }
     @GetMapping("/member/signup")
     public String signup(Model model, String type){
-        List<MemberTermsDTO> terms = memberService.selectTerms();
+        MemberTermsDTO terms= memberService.selectTerms();
         model.addAttribute("terms", terms);
         log.info("terms : "+terms);
         model.addAttribute("type", type);
