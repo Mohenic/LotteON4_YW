@@ -1,12 +1,7 @@
 package kr.co.lotteon.dto.cs;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -16,7 +11,7 @@ import java.util.List;
 public class PageResponseDTO {
 
 
-    private List<CsArticleDTO> dtoList;
+    private List<CsArticleNoticeDTO> dtoList;
     private int pg;
     private int size;
     private int total;
@@ -28,7 +23,7 @@ public class PageResponseDTO {
     private boolean prev,next;
 
     @Builder
-    public PageResponseDTO(PageRequestDTO pageRequestDTO, List<CsArticleDTO> dtoList,int total){
+    public PageResponseDTO(PageRequestDTO pageRequestDTO, List<CsArticleNoticeDTO> dtoList, int total){
         this.cate1= pageRequestDTO.getCate1();
         this.cate2= pageRequestDTO.getCate2();
         this.pg=pageRequestDTO.getPg();
