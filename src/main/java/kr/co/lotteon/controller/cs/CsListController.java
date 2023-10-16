@@ -1,7 +1,9 @@
 package kr.co.lotteon.controller.cs;
 
 import kr.co.lotteon.dto.cs.PageRequestDTO;
+import kr.co.lotteon.dto.cs.PageResponse2DTO;
 import kr.co.lotteon.dto.cs.PageResponseDTO;
+import kr.co.lotteon.entity.cs.CsArticleFaqEntity;
 import kr.co.lotteon.entity.cs.CsCate3Entity;
 import kr.co.lotteon.service.CsService;
 import lombok.extern.log4j.Log4j2;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,33 +28,49 @@ public class CsListController {
     public String list(Model model, PageRequestDTO pageRequestDTO) {
 
 
-        PageResponseDTO articles = null;
-        if (pageRequestDTO.getCate1().equals("all")) {
-            articles = csService.selectCate1(pageRequestDTO);
-        } else {
-            articles = csService.selectCate1AndCate2(pageRequestDTO);
+        PageResponseDTO articles1 = null;
+        PageResponse2DTO articles2 = null;
+        log.info("cate1:" + pageRequestDTO.getCate1());
+        if(pageRequestDTO.getCate1().equals("notice")) {
+            if (pageRequestDTO.getCate2().equals("all")) {
+                articles1 = csService.selectCate1(pageRequestDTO);
+                model.addAttribute("articles",articles1);
+            } else {
+                articles1 = csService.selectCate1AndCate2(pageRequestDTO);
+                model.addAttribute("articles",articles1);
+            }
+        }else if (pageRequestDTO.getCate1().equals("qna")){
+                articles2 = csService.selectQnaCate1AndCate2(pageRequestDTO);
+                model.addAttribute("articles",articles2);
         }
 
-        model.addAttribute("articles",articles);
+
+
+
+
 
         return "/cs/list";
     }
 
     @GetMapping("/cs/faq/list")
-    public String faqList(Model model,PageRequestDTO pageRequestDTO){
-        PageResponseDTO articles = null;
-        List<CsCate3Entity> types = null;
+    public String faqList(@RequestParam("cate1") String cate1 ,@RequestParam("cate2") String cate2 , Model model){
 
-        if (pageRequestDTO.getCate2()== null) {
-            articles = csService.selectCate1(pageRequestDTO);
-        } else {
-            articles = csService.selectCate1AndCate2(pageRequestDTO);
-            types=csService.selectCate2(pageRequestDTO.getCate2());
-        }
-
+        log.info(cate1);
+        log.info(cate2);
+        List<CsCate3Entity> types = csService.selectCate2(cate2);
         log.info("type : "+types);
+        List<CsCate3Entity> types2= csService.selectCate(cate2);
+        List<CsArticleFaqEntity> articles = csService.selectFaqArticles(cate1,cate2);
+        log.info("type2 : "+types2);
+        log.info("articles"+articles);
+
 
         model.addAttribute("articles",articles);
+        model.addAttribute("cate1",cate1);
+        model.addAttribute("cate2",cate2);
+
+        log.info(cate1);
+        log.info(cate2);
         model.addAttribute("types",types);
 
         return "/cs/faq/list";

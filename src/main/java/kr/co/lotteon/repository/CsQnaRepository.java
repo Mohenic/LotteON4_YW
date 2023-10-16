@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CsQnaRepository extends JpaRepository<CsArticleQnaEntity, Integer> {
 
-    public Page<CsArticleNoticeEntity> findCsArticleEntitiesByCate1AndUseynAndParent(String cate1, String useyn, int parent, Pageable pageable);
-    public Page<CsArticleNoticeEntity> findCsArticleEntitiesByCate1AndCate2AndUseynAndParent(String cate1, String cate2, String useyn, int parent, Pageable pageable);
+    public Page<CsArticleQnaEntity> findCsArticleQnaEntitiesByCate1AndUseynAndParent(String cate1, String useyn, int parent, Pageable pageable);
+    public Page<CsArticleQnaEntity> findCsArticleQnaEntitiesByCate1AndCate2AndUseynAndParent(String cate1, String cate2, String useyn, int parent, Pageable pageable);
 
 }
