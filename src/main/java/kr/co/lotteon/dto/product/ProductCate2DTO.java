@@ -14,6 +14,6 @@ public class ProductCate2DTO {
     private int cate2;
     private String c2Name;
     
-    public ProductCate2DTO toEntity() {}
+    /*public ProductCate2DTO toEntity() {}*/
     
 }

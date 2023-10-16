@@ -7,5 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, String> {
-
+    int countByUid(String uid);
+    int countByEmail(String email);
+    int countByHp(String hp);
+    int countByManagerHp(String managerHp);
 }
