@@ -1,11 +1,7 @@
-package kr.co.lotteon.entity.cs;
+package kr.co.lotteon.dto.cs;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import kr.co.lotteon.dto.cs.CsArticleDTO;
+import kr.co.lotteon.entity.cs.CsArticleNoticeEntity;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -15,11 +11,9 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "lo_cs_article")
-public class CsArticleEntity {
+public class CsArticleNoticeDTO {
 
-    @Id
+
     private int no;
     private int parent;
     private int comment;
@@ -32,12 +26,10 @@ public class CsArticleEntity {
     private int hit;
     private String useyn;
     private String regip;
-
-    @CreationTimestamp
     private LocalDateTime rdate;
 
-    public CsArticleDTO toDTO(){
-        return CsArticleDTO.builder()
+    public CsArticleNoticeEntity toEntity(){
+        return CsArticleNoticeEntity.builder()
                 .no(no)
                 .parent(parent)
                 .comment(comment)
@@ -53,6 +45,5 @@ public class CsArticleEntity {
                 .rdate(rdate)
                 .build();
     }
-
 
 }

@@ -1,12 +1,12 @@
 package kr.co.lotteon.service;
 
-import kr.co.lotteon.dto.cs.CsArticleDTO;
+import kr.co.lotteon.dto.cs.CsArticleNoticeDTO;
 import kr.co.lotteon.dto.cs.PageRequestDTO;
 import kr.co.lotteon.dto.cs.PageResponseDTO;
-import kr.co.lotteon.entity.cs.CsArticleEntity;
+import kr.co.lotteon.entity.cs.CsArticleNoticeEntity;
 import kr.co.lotteon.entity.cs.CsCate3Entity;
 import kr.co.lotteon.repository.CsCate3Repository;
-import kr.co.lotteon.repository.CsRepository;
+import kr.co.lotteon.repository.CsNoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.*;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CsService {
 
-    private final CsRepository csrepo;
+    private final CsNoticeRepository csrepo;
     private final ModelMapper modelMapper;
     private final CsCate3Repository cs3repo;
 
@@ -26,11 +26,11 @@ public class CsService {
 
         Pageable pageable =pageRequestDTO.getPageable("no");
 
-        Page<CsArticleEntity> result =csrepo.findCsArticleEntitiesByCate1AndUseynAndParent(pageRequestDTO.getCate1(), "Y",0,pageable);
+        Page<CsArticleNoticeEntity> result =csrepo.findCsArticleEntitiesByCate1AndUseynAndParent(pageRequestDTO.getCate1(), "Y",0,pageable);
 
-        List<CsArticleDTO> dtoList =result.getContent()
+        List<CsArticleNoticeDTO> dtoList =result.getContent()
                 .stream()
-                .map(e-> modelMapper.map(e,CsArticleDTO.class))
+                .map(e-> modelMapper.map(e, CsArticleNoticeDTO.class))
                 .toList();
 
         int totalElement =(int) result.getTotalElements();
@@ -52,13 +52,13 @@ public class CsService {
 
         Pageable pageable =pageRequestDTO.getPageable("no");
 
-        Page<CsArticleEntity> result =csrepo.findCsArticleEntitiesByCate1AndCate2AndUseynAndParent(pageRequestDTO.getCate1(),
+        Page<CsArticleNoticeEntity> result =csrepo.findCsArticleEntitiesByCate1AndCate2AndUseynAndParent(pageRequestDTO.getCate1(),
                 pageRequestDTO.getCate2()
                 ,"Y",0,pageable);
 
-        List<CsArticleDTO> dtoList =result.getContent()
+        List<CsArticleNoticeDTO> dtoList =result.getContent()
                 .stream()
-                .map(e->modelMapper.map(e,CsArticleDTO.class))
+                .map(e->modelMapper.map(e, CsArticleNoticeDTO.class))
                 .toList();
 
         int totalElement =(int) result.getTotalElements();
