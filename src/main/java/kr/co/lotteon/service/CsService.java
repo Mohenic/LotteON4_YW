@@ -26,7 +26,7 @@ public class CsService {
 
         Pageable pageable =pageRequestDTO.getPageable("no");
 
-        Page<CsArticleNoticeEntity> result =csrepo.findCsArticleEntitiesByCate1AndUseynAndParent(pageRequestDTO.getCate1(), "Y",0,pageable);
+        Page<CsArticleNoticeEntity> result =csrepo.findCsArticleNoticeEntitiesByCate1AndUseynAndParent(pageRequestDTO.getCate1(), "Y",0,pageable);
 
         List<CsArticleNoticeDTO> dtoList =result.getContent()
                 .stream()
@@ -52,7 +52,7 @@ public class CsService {
 
         Pageable pageable =pageRequestDTO.getPageable("no");
 
-        Page<CsArticleNoticeEntity> result =csrepo.findCsArticleEntitiesByCate1AndCate2AndUseynAndParent(pageRequestDTO.getCate1(),
+        Page<CsArticleNoticeEntity> result =csrepo.findCsArticleNoticeEntitieByCate1AndCate2AndUseynAndParent(pageRequestDTO.getCate1(),
                 pageRequestDTO.getCate2()
                 ,"Y",0,pageable);
 

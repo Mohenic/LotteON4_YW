@@ -16,6 +16,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script>
+        window.onload=function(){
+
+            const agree1=document.getElementsByName('agree1')[0];
+            const agree2=document.getElementsByName('agree2')[0];
+            const agree3=document.getElementsByName('agree3')[0];
+
+            const agree=document.querySelector('.agree');
+
+            agree.addEventListener('click',function(e){
+                console.log(type);
+                e.preventDefault();
+
+
+                if(agree1.checked==false){
+                    alert('이용약관에 동의하셔야합니다')
+                    return;
+                }else if(agree2.checked==false){
+                    alert('전자금융거래 이용약관에 동의하셔야 합니다')
+                    return;
+                }else if(agree3.checked==false){
+                    alert('개인정보 취급방침에 동의하셔야 합니다')
+                    return;
+                }else {
+                    location.href='/member/register(type=normal)'
+                }
+
+
+            })
+
+        }
+
+
+    </script>
 </head>
 <body>
     <div id="wrapper">

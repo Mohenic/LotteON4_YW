@@ -1,6 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org"
       layout:decorate="/member/member.html">
+
             <div class="signup" layout:fragment="content">
 				<!-- terms 출력 안 됨 thymeleaf 에러라고 뜸-->
 				<nav>
@@ -8,6 +9,7 @@
 				</nav>
 				<section>
 					<h3><span class="essential">(필수)</span>케이마켓 이용약관</h3>
+
 						<th:block th:if="${type == 'normal'}">
 							<textarea class="terms" readonly>[[${terms.terms}]]</textarea>
 						</th:block>
@@ -32,7 +34,7 @@
 				</section>
 
 				<div>
-					<input type="button" class="agree" value="동의하기" />
+					<input type="button" class="agree" name="agree" value="동의하기" />
 				</div>
             </div>
 </html>
