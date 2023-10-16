@@ -16,7 +16,7 @@ logging:
     root: info
 server:
   servlet:
-    context-path: /LotteOn
+    context-path: /LotteON
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

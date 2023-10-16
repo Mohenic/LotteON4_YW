@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CsNoticeRepository extends JpaRepository<CsArticleNoticeEntity, Integer> {
 
-    public Page<CsArticleNoticeEntity> findCsArticleEntitiesByCate1AndUseynAndParent(String cate1, String useyn, int parent, Pageable pageable);
-    public Page<CsArticleNoticeEntity> findCsArticleEntitiesByCate1AndCate2AndUseynAndParent(String cate1, String cate2, String useyn, int parent, Pageable pageable);
+    public Page<CsArticleNoticeEntity> findCsArticleNoticeEntitiesByCate1AndUseynAndParent(String cate1, String useyn, int parent, Pageable pageable);
+    public Page<CsArticleNoticeEntity> findCsArticleNoticeEntitieByCate1AndCate2AndUseynAndParent(String cate1, String cate2, String useyn, int parent, Pageable pageable);
 
 }

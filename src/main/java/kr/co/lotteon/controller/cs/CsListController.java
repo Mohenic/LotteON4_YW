@@ -41,6 +41,7 @@ public class CsListController {
     public String faqList(Model model,PageRequestDTO pageRequestDTO){
         PageResponseDTO articles = null;
         List<CsCate3Entity> types = null;
+
         if (pageRequestDTO.getCate2()== null) {
             articles = csService.selectCate1(pageRequestDTO);
         } else {
