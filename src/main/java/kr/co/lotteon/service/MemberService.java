@@ -39,4 +39,17 @@ public class MemberService {
         memberRepository.save(entity);
     }
 
+    public int countUid(String uid){
+        return memberRepository.countByUid(uid);
+    }
+    public int countEmail(String email){
+        return memberRepository.countByEmail(email);
+    }
+    public int countHp(String hp){
+        return memberRepository.countByHp(hp);
+    }
+    public int countManagerHp(String managerHp){
+        return memberRepository.countByManagerHp(managerHp);
+    }
+
 }

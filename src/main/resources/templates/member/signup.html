@@ -2,23 +2,6 @@
       xmlns:layout="http://www.thymeleaf.org"
       layout:decorate="/member/member.html">
 
-            <div class="signup" layout:fragment="content">
-				<!-- terms 출력 안 됨 thymeleaf 에러라고 뜸-->
-				<nav>
-					<h1>약관동의</h1>
-				</nav>
-				<section>
-					<h3><span class="essential">(필수)</span>케이마켓 이용약관</h3>
-
-						<th:block th:if="${type == 'normal'}">
-							<textarea class="terms" readonly>[[${terms.terms}]]</textarea>
-						</th:block>
-						<th:block th:if="${type == 'seller'}">
-							<textarea class="terms" readonly>[[${terms.tax}]]</textarea>
-						</th:block>
-					<label><input type="checkbox" name="agree1" />동의합니다.</label>
-
-
 <div class="signup" layout:fragment="content">
 	<nav>
 		<h1>약관동의</h1>
