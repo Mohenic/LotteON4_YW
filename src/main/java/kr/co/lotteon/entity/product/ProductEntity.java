@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @ToString
 @Builder
 @AllArgsConstructor
@@ -74,10 +75,6 @@ public class ProductEntity {
               .hit(hit)
               .score(score)
               .review(review)
-              .thumb1(thumb1)
-              .thumb2(thumb2)
-              .thumb3(thumb3)
-              .detail(detail)
               .status(status)
               .duty(duty)
               .receipt(receipt)

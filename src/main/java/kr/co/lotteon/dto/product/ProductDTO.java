@@ -2,6 +2,7 @@ package kr.co.lotteon.dto.product;
 
 import kr.co.lotteon.entity.product.ProductEntity;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -29,10 +30,10 @@ public class ProductDTO {
     private int hit;
     private int score;
     private int review;
-    private String thumb1;
-    private String thumb2;
-    private String thumb3;
-    private String detail;
+    private MultipartFile fileThumb1;
+    private MultipartFile fileThumb2;
+    private MultipartFile fileThumb3;
+    private MultipartFile fileDetail;
     private String status;
     private String duty;
     private String receipt;
@@ -64,10 +65,6 @@ public class ProductDTO {
                 .hit(hit)
                 .score(score)
                 .review(review)
-                .thumb1(thumb1)
-                .thumb2(thumb2)
-                .thumb3(thumb3)
-                .detail(detail)
                 .status(status)
                 .duty(duty)
                 .receipt(receipt)

@@ -1,6 +1,61 @@
 <th:block th:insert="~{/admin/_header.html}"/>
 <th:block th:insert="~{/admin/_aside.html}"/>
 <script>
+
+    function changeSelect() {
+        const selectValue = $([name = "prodCate1"]).val();
+        const jsonData = {
+            "selectValue": selectValue
+        };
+        $.ajax({
+            url: '/admin/product/register',
+            type: 'GET',
+            data: jsonData,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                const cate2Select = $([name = "prodCate2"]);
+                cate2Select.empty(); // 기존 옵션을 모두 제거합니다.
+                // 새로운 옵션 추가
+                cate2Select.append($('<option>', {
+                    value: '',
+                    text: '2차 분류 선택',
+                    disabled: 'disabled',
+                    selected: 'selected'
+                }));
+                // 데이터를 이용하여 옵션을 동적으로 생성
+                $.each(data, function (index, item) {
+                    cate2Select.append($('<option>', {
+                        value: item.cate2,
+                        text: item.c2Name
+                    }));
+                });
+            }
+        });
+        $(function () {
+
+            $('select[name=prodCate2]').change(function () {
+
+                let cate1 = $('select[name=prodCate1]').val();
+                let cate2 = $(this).val();
+
+
+                let actionUrl = "/admin/product/register?cate1=" + cate1 + "&cate2=" + cate2;
+                $('#formRegister').attr('action', actionUrl);
+
+
+            });
+
+            $('input[name=price]').focusout(function () {
+                const price = $(this).val();
+                const point = $('input[name=point]');
+
+                point.val(price * 0.01);
+            });
+
+        });
+    }
+
 </script>
             <section id="admin-product-register">
                 <nav>
@@ -11,7 +66,7 @@
                 </nav>
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
-                    <form th:action="@{/admin/product/register}" name="formRegister" method="post">
+                    <form th:action="@{/admin/product/register}" name="formRegister" method="post" enctype="multipart/form-data">
                         <input type="text" name="seller" value="seller">
 
                         <!-- 상품분류 -->
@@ -24,12 +79,11 @@
                                 <tr>
                                     <td>1차 분류</td>
                                     <td>
-                                        <select name="prodCate1">
-                                            <option value="cate0">1차 분류 선택</option>
-                                            <option value="10">패션·의류·뷰티</option>
-                                            <option value="11">가전·디지털</option>
-                                            <option value="12">식품·생필품</option>
-                                            <option value="13">홈·문구·취미</option>
+                                         <select name="prodCate1">
+                                            <option value="0">1차 분류 선택</option>
+                                             <th:block th:each="cate1 : ${setCate1}">
+                                                 <option th:value="${cate1.prodCate1}" th:text="${cate1.c1Name}"></option>
+                                             </th:block>
                                         </select>
                                     </td>
                                 </tr>
@@ -103,20 +157,20 @@
                                     <td>상품 썸네일</td>
                                     <td>
                                         <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다. </span>
-                                        <input type="file" name="thumb1"/>
+                                        <input type="file" name="fileThumb1"/>
 
                                         <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다. </span>
-                                        <input type="file" name="thumb2"/>
+                                        <input type="file" name="fileThumb2"/>
 
                                         <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다. </span>
-                                        <input type="file" name="thumb3"/>
+                                        <input type="file" name="fileThumb3"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>상세 상품정보</td>
                                     <td>
                                         <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
-                                        <input type="file" name="detail"/>
+                                        <input type="file" name="fileDetail"/>
                                     </td>
                                 </tr>
                             </table>                                
