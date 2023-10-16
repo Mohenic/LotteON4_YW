@@ -1,5 +1,6 @@
 package kr.co.lotteon.dto.product;
 
+import kr.co.lotteon.entity.product.ProductCate2Entity;
 import lombok.*;
 
 @Getter
@@ -14,6 +15,12 @@ public class ProductCate2DTO {
     private int cate2;
     private String c2Name;
     
-    public ProductCate2DTO toEntity() {}
+    public ProductCate2Entity toEntity() {
+        return ProductCate2Entity.builder()
+              .cate1(cate1)
+              .cate2(cate2)
+              .c2Name(c2Name)
+              .build();
+    }
     
 }
