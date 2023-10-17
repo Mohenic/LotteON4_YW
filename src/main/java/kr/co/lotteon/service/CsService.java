@@ -61,9 +61,9 @@ public class CsService {
     }
 
     public List<CsCate3Entity> selectCate(String cate2){
-        List<CsCate3Entity> result=cs3repo.findByCate2(cate2);
-        log.info(result);
-        return result;
+
+        log.info("result : ");
+        return null;
     }
 
     public PageResponseDTO  selectCate1AndCate2(PageRequestDTO pageRequestDTO){
@@ -114,7 +114,7 @@ public class CsService {
 
     public List<CsArticleFaqEntity> selectFaqArticles(String cate1,String cate2){
 
-         return  csfaqrepo.findCsArticleFaqEntitiesByCate1AndCate2AndUseynAndParent(cate1,cate2,"Y",0);
+         return csfaqrepo.findByCate1AndCate2AndUseynAndParent(cate1,cate2,"Y",0);
     }
 
 }

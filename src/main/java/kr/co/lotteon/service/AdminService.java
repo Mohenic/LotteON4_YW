@@ -28,6 +28,10 @@ public class AdminService {
         return productRepository.findAll();
     }
 
+    public List<ProductCate1Entity> cateList(){
+        return productCate1Repository.findAll();
+    }
+
     public List<ProductCate1Entity> getCate1() {
         return productCate1Repository.findAll();
     }
