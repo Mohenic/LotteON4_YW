@@ -3,7 +3,7 @@
         <div class="notice">
           <nav>
             <div>
-              <p th:text="${cate1 == 'notice' ? '홈 > 공지사항':'홈 > 문의사항'}"><span>></span></p>
+              <p th:text="${cate1 == 'notice' ? '홈 > 공지사항':'홈 > 문의하기'}"><span>></span></p>
             </div>
           </nav>
           <section class="list">
@@ -19,11 +19,11 @@
                 <tr th:each="article:${articles.getDtoList()}">
                   <td></td>
                   <td>
-                    <a href="#" th:text="${article.getTitle()}"></a>
+                    <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"></a>
                   </td>
                   <td></td>
                   <td th:if="${article.cate1=='qna'}" th:text="${article.writer}"></td>
-                  <td th:text="${article.getRdate()}"></td>
+                  <td th:text="${article.getRdate().toLocalDate()}"></td>
                 </tr>
 
               </table>

@@ -75,7 +75,7 @@
             <ul th:id="${type.getCate3()}">
               <th:block th:each="article :${articles}">
                 <th:block th:if="${type.getCate3() == article.getType()}">
-                  <li><a href="#" th:text="${article.getTitle()}"><span>Q.</span></a></li>
+                  <li><a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"><span>Q.</span></a></li>
                 </th:block>
               </th:block>
               <li th:class="more" th:classappend="${type.getCate3()}" th:id="${type.getCate3()}"><a href="#">더보기</a></li>
