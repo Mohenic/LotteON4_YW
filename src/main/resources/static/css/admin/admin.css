@@ -226,7 +226,8 @@ label {
 
 input {
     width: 200px;
-    padding: 6px;
+    padding: 7px;
+    margin-bottom: 4px;
     border: 1px solid #959595;
     font-size: 13px;            
     background-color: #fefefe;
