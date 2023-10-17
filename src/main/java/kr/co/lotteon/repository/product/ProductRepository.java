@@ -13,6 +13,10 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     public Page<ProductEntity> findAllByprodCate1(String cate1, Pageable pageable);
     
     
-    public Page<ProductEntity> findByProdNoAndProdCate1AndProdCate2(int prodNo, String cate1, String cate2, Pageable pageable);
-    
+
+    public Page<ProductEntity> findProductEntityByProdNoAndProdCate1AndProdCate2(int prodNo, String cate1, String cate2, Pageable pageable);
+
+
+    public Page<ProductEntity> findByUseyn(String useyn, Pageable pageable);
+
 }
