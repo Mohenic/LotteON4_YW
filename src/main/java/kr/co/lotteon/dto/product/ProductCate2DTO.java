@@ -15,10 +15,7 @@ public class ProductCate2DTO {
     private int cate2;
     private String c2Name;
 
-    
-<<<<<<< HEAD
-    /*public ProductCate2DTO toEntity() {}*/
-=======
+
     public ProductCate2Entity toEntity() {
         return ProductCate2Entity.builder()
               .cate1(cate1)
@@ -26,6 +23,5 @@ public class ProductCate2DTO {
               .c2Name(c2Name)
               .build();
     }
->>>>>>> 80022b3320e1f7be895590d96e49ebf272bace44
-    
+
 }

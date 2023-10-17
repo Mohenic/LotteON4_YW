@@ -33,7 +33,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 				.csrf(CsrfConfigurer::disable) // 메서드 참조 연산자로 람다식을 간결하게 표현
 				// 폼 로그인 설정
 				.formLogin(config -> config.loginPage("/member/login")
-						.defaultSuccessUrl("/")
+						.defaultSuccessUrl("/",true)
 						.failureUrl("/member/login?success=100")
 						.usernameParameter("uid")
 						.passwordParameter("pass"))
