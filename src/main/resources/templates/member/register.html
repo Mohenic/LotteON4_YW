@@ -5,7 +5,7 @@
                 <nav>
                     <h1>일반 회원가입</h1>
                 </nav>
-				<form th:action="@{/member/register}" method="POST">
+				<form id="registerForm" th:action="@{/member/register}" method="POST">
 					<input type="text" name="type" th:value="${type}"/>
 					<section>
 						<table>
