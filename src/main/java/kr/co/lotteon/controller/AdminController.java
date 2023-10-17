@@ -1,6 +1,8 @@
 package kr.co.lotteon.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import kr.co.lotteon.dto.admin.PageRequestDTO;
+import kr.co.lotteon.dto.admin.PageResponseDTO;
 import kr.co.lotteon.dto.product.ProductDTO;
 import kr.co.lotteon.entity.product.ProductCate1Entity;
 import kr.co.lotteon.entity.product.ProductCate2Entity;
@@ -10,10 +12,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,12 +29,10 @@ public class AdminController {
     }
 
     @GetMapping("/admin/product/list")
-    public String list(Model model){
-        List<ProductEntity> lists = adminService.list();
+    public String list(Model model, PageRequestDTO pageRequestDTO){
+        PageResponseDTO pageResponseDTO = adminService.findByUseyn(pageRequestDTO);
 
-        log.info("list" + lists);
-
-        model.addAttribute("lists",lists);
+        model.addAttribute(pageResponseDTO);
         return "/admin/product/list";
     }
 

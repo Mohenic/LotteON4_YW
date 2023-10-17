@@ -1,5 +1,7 @@
 package kr.co.lotteon.service;
 
+import kr.co.lotteon.dto.admin.PageRequestDTO;
+import kr.co.lotteon.dto.admin.PageResponseDTO;
 import kr.co.lotteon.dto.product.ProductDTO;
 import kr.co.lotteon.entity.product.ProductCate1Entity;
 import kr.co.lotteon.entity.product.ProductCate2Entity;
@@ -9,6 +11,9 @@ import kr.co.lotteon.repository.product.ProductCate2Repository;
 import kr.co.lotteon.repository.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,9 +32,26 @@ public class AdminService {
     private final ProductRepository productRepository;
     private final ProductCate1Repository productCate1Repository;
     private final ProductCate2Repository productCate2Repository;
+    private final ModelMapper modelMapper;
 
-    public List<ProductEntity> list() {
-        return productRepository.findAll();
+    public PageResponseDTO findByUseyn(PageRequestDTO pageRequestDTO){
+
+        Pageable pageable = pageRequestDTO.getPageable("prodNo");
+
+        Page<ProductEntity> result = productRepository.findByUseyn("Y", pageable);
+
+        List<ProductEntity> dtoList = result.getContent()
+                .stream()
+                .map(dto -> modelMapper.map(dto, ProductEntity.class))
+                .toList();
+
+        int totalElement = (int) result.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElement)
+                .build();
     }
 
     public List<ProductCate1Entity> cateList(){
