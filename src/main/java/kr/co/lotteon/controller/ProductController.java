@@ -5,6 +5,7 @@ import kr.co.lotteon.dto.product.PageRequestDTO;
 import kr.co.lotteon.dto.product.PageResponseDTO;
 import kr.co.lotteon.service.ProductService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Log4j2
 @Controller
 public class ProductController {
-    
+    @Autowired
     private ProductService prodService;
     
     
@@ -21,7 +22,7 @@ public class ProductController {
 
         PageResponseDTO articles1 = null;
         PageResponse2DTO articles2 = null;
-        log.info("cate1:" + pagerequest.getCate1()); //10들고왔음
+        log.info("prodCate1:" + pagerequest.getProdCate1()); //10들고왔음
         
          articles1 = prodService.findByCate1Product(pagerequest);
          
