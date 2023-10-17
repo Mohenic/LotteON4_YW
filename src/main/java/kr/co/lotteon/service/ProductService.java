@@ -22,17 +22,24 @@ public class ProductService {
     private final ProductRepository prodrepo;
     private final ModelMapper modelMapper;
 
-    public PageResponseDTO findByProdunctAndCate(PageRequestDTO pageRequestDTO) {
-
+    public PageResponseDTO findByCate1Product(PageRequestDTO pageRequestDTO) {
+        
         Pageable pageable = pageRequestDTO.getPageable("prodNo"); // Pageable 가져오는 방법 수정
 
-        Page<ProductEntity> result = prodrepo.findProductEntityByProdNoAndProdCate1AndProdCate2(pageRequestDTO.getProdNo(), pageRequestDTO.getCate1(), pageRequestDTO.getCate2(), pageable);
+        Page<ProductEntity> result = prodrepo.findAllByprodCate1(pageRequestDTO.getCate1(), pageable); //
 
+        log.info("result.getTotalElements():" + result.getTotalElements()); // 100
+        log.info("result.getContent():" + result.getContent()); // 100
+        
         List<ProductDTO> dtoList = result.getContent()
                 .stream()
                 .map(entity -> modelMapper.map(entity, ProductDTO.class)) // ModelMapper 사용 방법 수정
                 .toList();
-
+    
+        log.info("dtoList.size():" + dtoList.size()); // 10
+        log.info("dtoList:" + dtoList); // 100
+        log.info(""+dtoList.get(0).getProdNo()); // 100
+        
         int totalElement = (int) result.getTotalElements();
 
         return PageResponseDTO.builder()
