@@ -1,10 +1,13 @@
 package kr.co.lotteon.service;
 
 import kr.co.lotteon.dto.product.ProductCate1DTO;
+import kr.co.lotteon.dto.product.ProductCate2DTO;
 import kr.co.lotteon.dto.product.ProductDTO;
 import kr.co.lotteon.entity.product.ProductCate1Entity;
+import kr.co.lotteon.entity.product.ProductCate2Entity;
 import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.repository.product.ProductCate1Repository;
+import kr.co.lotteon.repository.product.ProductCate2Repository;
 import kr.co.lotteon.repository.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,7 @@ import java.util.UUID;
 public class AdminService {
     private final ProductRepository productRepository;
     private final ProductCate1Repository productCate1Repository;
+    private final ProductCate2Repository productCate2Repository;
 
     public List<ProductEntity> list() {
         return productRepository.findAll();
@@ -32,8 +36,8 @@ public class AdminService {
         return productCate1Repository.findAll();
     }
 
-    public List<ProductCate1Entity> getCate1() {
-        return productCate1Repository.findAll();
+    public List<ProductCate2Entity> cate2List(int cate1){
+        return productCate2Repository.findAllByCate1(cate1);
     }
 
     public void save(ProductDTO dto) {

@@ -23,10 +23,12 @@ public class MemberCheckController {
     @GetMapping("/email/{email}")
     public int checkEmail(@PathVariable("email") String email){
         int result = memberService.countEmail(email);
+        log.info("result: " + result);
         return result;
     }
     @GetMapping("/hp/{hp}")
     public int checkHp(@PathVariable("hp") String hp){
+        log.info("hp : "+hp);
         log.info("hp : "+memberService.countHp(hp));
         return memberService.countHp(hp);
     }
