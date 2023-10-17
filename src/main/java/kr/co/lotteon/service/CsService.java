@@ -114,7 +114,7 @@ public class CsService {
 
     public List<CsArticleFaqEntity> selectFaqArticles(String cate1,String cate2){
 
-         return csfaqrepo.findTop10ByCate1AndCate2AndUseynAndParent(cate1,cate2,"Y",0);
+         return csfaqrepo.findByCate1AndCate2AndUseynAndParent(cate1,cate2,"Y",0);
     }
 
 }

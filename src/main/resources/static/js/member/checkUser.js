@@ -53,8 +53,9 @@
 				return;
 			}
 			console.log("유효성검사통과!");
+			console.log
 			$.ajax({
-				url: '/LotteON/member/check/hp',
+				url: '/LotteON/member/check/hp/'+hp,
 				dataType: 'json',
 				type: 'GET',
 				contentType: 'application/json',
@@ -63,7 +64,7 @@
 					if(data > 0) {
 						$('.msgHp').css('color', 'red').text('이미 사용중인 휴대폰 번호입니다.');
 						isHpOk = false;
-					}else{
+					}else {
 						$('.msgHp').css('color', 'green').text('사용가능한 휴대폰 번호입니다.');
 						isHpOk = true;
 					}
@@ -80,7 +81,7 @@
 				isHpOk = false;
 				return;
 			}
-			const url = '/LotteON/member/check/managerHp'+managerHp;
+			const url = '/LotteON/member/check/managerHp/'+managerHp;
 			$.get(url, function(data){
 				console.log(data);
 				if(data > 0) {
@@ -99,19 +100,19 @@
 
 			if(!email.match(reEmail)) {
 				$('.msgEmail').css('color', 'red').text('이메일이 유효하지 않습니다.');
-				isHpOk = false;
+				isEmailOk = false;
 				return;
 			}
-			const url = '/LotteON/member/check/email'+email;
+			const url = '/LotteON/member/check/email/'+email;
 			$.get(url, function(data){
 				console.log(data);
 
 				if(data > 0) {
 					$('.msgEmail').css('color', 'red').text('이미 사용중인 이메일입니다.');
-					isHpOk = false;
+					isEmailOk = false;
 				}else{
 					$('.msgEmail').css('color', 'green').text('사용가능한 이메일 입니다.');
-					isHpOk = true;
+					isEmailOk = true;
 				}
 			});
 
