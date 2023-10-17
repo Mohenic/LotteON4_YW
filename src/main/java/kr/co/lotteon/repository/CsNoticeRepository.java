@@ -12,5 +12,5 @@ public interface CsNoticeRepository extends JpaRepository<CsArticleNoticeEntity,
     public Page<CsArticleNoticeEntity> findCsArticleNoticeEntitiesByCate1AndUseynAndParent(String cate1, String useyn, int parent, Pageable pageable);
     public Page<CsArticleNoticeEntity> findCsArticleNoticeEntitieByCate1AndCate2AndUseynAndParent(String cate1, String cate2, String useyn, int parent, Pageable pageable);
 
-
+    public CsArticleNoticeEntity findCsArticleNoticeEntitiesByNo(int no);
 }

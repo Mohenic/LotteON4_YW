@@ -117,4 +117,19 @@ public class CsService {
          return csfaqrepo.findByCate1AndCate2AndUseynAndParent(cate1,cate2,"Y",0);
     }
 
+    public CsArticleQnaEntity selectCsArticleQna(int no){
+        CsArticleQnaEntity qna=csqnarepo.findCsArticleQnaEntitiesByNo(no);
+        return qna;
+    }
+
+    public  CsArticleFaqEntity selectCsArticleFaq(int no){
+        CsArticleFaqEntity faq =csfaqrepo.findCsArticleFaqEntitiesByNo(no);
+        return  faq;
+    }
+
+    public CsArticleNoticeEntity selectCsArticleNotice(int no){
+        CsArticleNoticeEntity notice = csrepo.findCsArticleNoticeEntitiesByNo(no);
+        return notice;
+    }
+
 }
