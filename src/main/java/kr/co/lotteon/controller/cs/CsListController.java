@@ -45,6 +45,11 @@ public class CsListController {
         }
 
 
+        String cate1= pageRequestDTO.getCate1();
+        String cate2= pageRequestDTO.getCate2();
+
+        model.addAttribute("cate1",cate1);
+        model.addAttribute("cate2",cate2);
 
 
 

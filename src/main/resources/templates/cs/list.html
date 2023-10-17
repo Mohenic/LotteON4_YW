@@ -3,7 +3,7 @@
         <div class="notice">
           <nav>
             <div>
-              <p>홈<span>></span>공지사항</p>
+              <p th:text="${cate1 == 'notice' ? '홈 > 공지사항':'홈 > 문의사항'}"><span>></span></p>
             </div>
           </nav>
           <section class="list">
