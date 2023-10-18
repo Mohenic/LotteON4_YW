@@ -57,7 +57,7 @@ public class MemberDTO {
                 .email(email)
                 .type(type)
                 .point(point)
-                .level(level)
+                .level(level==0?1:level)
                 .zip(zip)
                 .addr1(addr1)
                 .addr2(addr2)

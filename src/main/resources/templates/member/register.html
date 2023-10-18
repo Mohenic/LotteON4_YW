@@ -7,6 +7,7 @@
                 </nav>
 				<form id="registerForm" th:action="@{/member/register}" method="POST">
 					<input type="text" name="type" th:value="${type}"/>
+					<input type="text" name="division" th:value="REGISTER"/>
 					<section>
 						<table>
 							<caption>필수 정보입력</caption>
@@ -46,14 +47,36 @@
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>EMAIL</th>
-								<td><input type="email" name="email" placeholder="이메일 입력"
-									required />
-									<span class="msgEmail">&nbsp;&nbsp;@ 표시 포함 예) kmarket@kmarket.com</span>
+								<td>
+									<input type="text" name="email" id="lo_email" placeholder="이메일 입력" required />&nbsp;@
+									<input type="text" name="email" id="lo_email2" placeholder="도메인 입력" required />
+									<select name="selectEmail" id="selectEmail">
+										<option value="1" selected>직접입력</option>
+										<option value="naver.com">naver.com</option>
+										<option value="daum.net">daum.net</option>
+										<option value="hotmail.com">hotmail.com</option>
+										<option value="nate.com">nate.com</option>
+										<option value="yahoo.co.kr">yahoo.co.kr</option>
+										<option value="empas.com">empas.com</option>
+										<option value="dreamwiz.com">dreamwiz.com</option>
+										<option value="freechal.com">freechal.com</option>
+										<option value="lycos.co.kr">lycos.co.kr</option>
+										<option value="korea.com">korea.com</option>
+										<option value="gmail.com">gmail.com</option>
+										<option value="hanmir.com">hanmir.com</option>
+										<option value="paran.com">paran.com</option>
+									</select>
+									<button type="button" id="btnEmailCode">인증번호 받기</button><br>
+									<span class="msgEmail"></span>
+									<div class="auth">
+										<input type="text" name="auth" placeholder="인증번호 입력" required/>
+										<button type="button" id="btnEmailAuth">확인</button>
+									</div>
 								</td>
 							</tr>
 							<tr>
 								<th><span class="essential">*</span>휴대폰</th>
-								<td><input type="text" name="hp" maxlength="13"
+								<td><input type="text" oninput="HpAutoHyphen(this)" name="hp" maxlength="13"
 									placeholder="휴대폰번호 입력" required /> <span class="msgHp"> -
 										포함 13자리를 입력하세요.</span></td>
 							</tr>

@@ -1,14 +1,8 @@
 package kr.co.lotteon.service;
 
 import kr.co.lotteon.dto.cs.*;
-import kr.co.lotteon.entity.cs.CsArticleFaqEntity;
-import kr.co.lotteon.entity.cs.CsArticleNoticeEntity;
-import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
-import kr.co.lotteon.entity.cs.CsCate3Entity;
-import kr.co.lotteon.repository.CsCate3Repository;
-import kr.co.lotteon.repository.CsFaqRepository;
-import kr.co.lotteon.repository.CsNoticeRepository;
-import kr.co.lotteon.repository.CsQnaRepository;
+import kr.co.lotteon.entity.cs.*;
+import kr.co.lotteon.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -28,7 +22,7 @@ public class CsService {
     private final CsCate3Repository cs3repo;
     private final CsQnaRepository csqnarepo;
     private final CsFaqRepository csfaqrepo;
-
+    private final CsCate2Repository cs2repo;
 
     public PageResponseDTO selectCate1(PageRequestDTO pageRequestDTO){
 
@@ -60,10 +54,8 @@ public class CsService {
         return result;
     }
 
-    public List<CsCate3Entity> selectCate(String cate2){
-
-        log.info("result : ");
-        return null;
+    public List<CsCate3Entity> selectCate(){
+        return cs3repo.findAll();
     }
 
     public PageResponseDTO  selectCate1AndCate2(PageRequestDTO pageRequestDTO){
@@ -131,5 +123,24 @@ public class CsService {
         CsArticleNoticeEntity notice = csrepo.findCsArticleNoticeEntitiesByNo(no);
         return notice;
     }
+
+    public void insertQna(CsArticleQnaDTO dto){
+        CsArticleQnaEntity entity = dto.toEntity();
+        csqnarepo.save(entity);
+    }
+
+    public List<CsCate2Entity> selectCate2Detail(){
+       return cs2repo.findAll();
+
+    }
+
+    public List<CsArticleNoticeEntity> selectNoticeTop5Desc(){
+        return csrepo.findTop5ByOrderByNoDesc();
+    }
+
+    public List<CsArticleQnaEntity> selectQnaTop5Desc(){
+        return csqnarepo.findTop5ByOrderByNo();
+    }
+
 
 }
