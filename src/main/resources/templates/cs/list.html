@@ -17,12 +17,15 @@
               <table>
 
                 <tr th:each="article:${articles.getDtoList()}">
-                  <td></td>
-                  <td>
-                    <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"></a>
+                  <td th:if="${article.cate1 == 'notice'}">
+                    <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${'[안내]'+article.getTitle()}"></a>
+                  </td>
+                  <td th:if="${article.cate1 == 'qna'}">
+                    <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"></a> <!-- 마이바티스 사용이후로는 통합하고 수정할예정 -->
                   </td>
                   <td></td>
-                  <td th:if="${article.cate1=='qna'}" th:text="${article.writer}"></td>
+                    <td th:if="${article.cate1=='qna'}" th:text="${article.writer.substring(0,3)+article.writer.substring(3,article.writer.length()).replaceAll('\w', '*')}"></td>
+
                   <td th:text="${article.getRdate().toLocalDate()}"></td>
                 </tr>
 
@@ -35,7 +38,7 @@
                 </th:block>
 
                 <th:block th:each="num:${#numbers.sequence(articles.start,articles.end)}">
-                  <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${num})}" class="num on">[[${num}]]</a>
+                  <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${num})}" th:classappend="${num eq articles.pg ? 'on' : ''}" class="num">[[${num}]]</a>
                 </th:block>
 
                 <th:block th:if="${articles.next}">
@@ -44,7 +47,7 @@
                 </th:block>
               </div>
               <th:block th:if ="${articles.cate1 == 'qna'}">
-                <a href="write.html" class="btnWrite">문의하기</a>
+                <a th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=${articles.getCate2()})}" class="btnWrite">문의하기</a>
               </th:block>
             </article>
           </section>

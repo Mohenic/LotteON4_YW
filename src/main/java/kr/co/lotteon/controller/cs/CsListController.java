@@ -4,8 +4,10 @@ import kr.co.lotteon.dto.cs.PageRequestDTO;
 import kr.co.lotteon.dto.cs.PageResponse2DTO;
 import kr.co.lotteon.dto.cs.PageResponseDTO;
 import kr.co.lotteon.entity.cs.CsArticleFaqEntity;
+import kr.co.lotteon.entity.cs.CsCate2Entity;
 import kr.co.lotteon.entity.cs.CsCate3Entity;
 import kr.co.lotteon.service.CsService;
+import kr.co.lotteon.util.Utils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class CsListController {
     @Autowired
     private CsService csService;
 
+
+    private Utils utils;
+
     //{cate1}/{cate2}
     //@PathVariable("cate1") String cate1,@PathVariable("cate2") String cate2 ,
     @GetMapping("/cs/list")
@@ -35,13 +40,17 @@ public class CsListController {
             if (pageRequestDTO.getCate2().equals("all")) {
                 articles1 = csService.selectCate1(pageRequestDTO);
                 model.addAttribute("articles",articles1);
+                List<CsCate2Entity> cate2Detail = csService.selectCate2Detail();
+
             } else {
                 articles1 = csService.selectCate1AndCate2(pageRequestDTO);
                 model.addAttribute("articles",articles1);
             }
         }else if (pageRequestDTO.getCate1().equals("qna")){
                 articles2 = csService.selectQnaCate1AndCate2(pageRequestDTO);
+
                 model.addAttribute("articles",articles2);
+
         }
 
 
@@ -64,9 +73,7 @@ public class CsListController {
         log.info(cate2);
         List<CsCate3Entity> types = csService.selectCate2(cate2);
         log.info("type : "+types);
-        List<CsCate3Entity> types2= csService.selectCate(cate2);
         List<CsArticleFaqEntity> articles = csService.selectFaqArticles(cate1,cate2);
-        log.info("type2 : "+types2);
         log.info("articles"+articles);
 
 
