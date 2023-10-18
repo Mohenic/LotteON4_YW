@@ -1,9 +1,9 @@
 package kr.co.lotteon.service;
 
-import kr.co.lotteon.dto.product.PageRequestDTO;
-import kr.co.lotteon.dto.product.PageResponseDTO;
-import kr.co.lotteon.dto.product.ProductDTO;
+import kr.co.lotteon.dto.product.*;
+import kr.co.lotteon.entity.product.ProductCate1Entity;
 import kr.co.lotteon.entity.product.ProductEntity;
+import kr.co.lotteon.repository.product.ProductCate1Repository;
 import kr.co.lotteon.repository.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,6 +20,7 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository prodrepo;
+    private final ProductCate1Repository prodCate1Repo;
     private final ModelMapper modelMapper;
 
     public PageResponseDTO findByCate1Product(PageRequestDTO pageRequestDTO) {
@@ -56,4 +57,19 @@ public class ProductService {
                 .build();
     }
 
+ /*   public ProductCate2DTO findByProductIndexCate(ProductCate2DTO cate2DTO) {
+        
+        
+        //return prodCate1Repo.findProductIndexCateByprodCate1(cate2DTO);
+        return null;
+        
+    }*/
+
+/*    public ProductCate1DTO findByProductIndexCate1() {
+        ProductCate1Entity prodCate1Entity = prodCate1Repo.findc1Name();
+        log.info("prodCate1Entity:" + prodCate1Entity);
+        
+        ProductCate1DTO prodCate1DTO = modelMapper.map(prodCate1Entity, ProductCate1DTO.class);
+        return prodCate1DTO;
+    }*/
 }

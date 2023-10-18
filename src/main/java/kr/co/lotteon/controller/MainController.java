@@ -1,15 +1,38 @@
 package kr.co.lotteon.controller;
 
 
+<<<<<<< HEAD
+import kr.co.lotteon.dto.product.ProductCate1DTO;
+import kr.co.lotteon.service.ProductService;
+import lombok.extern.log4j.Log4j2;
+=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
+>>>>>>> bd4e9025e1e54c7c0df4a069c0229f60d05e1f5e
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+@Log4j2
 @Controller
 public class MainController {
 
+<<<<<<< HEAD
+    private ProductAjaxController service;
+    
+   
+    @GetMapping(value = {"/","/index"})  //findByProductIndexCate1
+    public String main(Model model){
+
+/*        ProductCate1DTO cate1DTO = service.findByProductIndexCate1();
+        
+        model.addAttribute("cate1DTO", cate1DTO);
+        
+        log.info("cate1DTO:" + cate1DTO.toString());*/
+        
+        
+=======
     @Autowired
     private BuildProperties buildProperties; // 빌드 정보를 갖는 객체 주입
 
@@ -24,6 +47,7 @@ public class MainController {
         model.addAttribute("appInfo", appName+version);
 
 
+>>>>>>> bd4e9025e1e54c7c0df4a069c0229f60d05e1f5e
         return "/index";
     }
 
