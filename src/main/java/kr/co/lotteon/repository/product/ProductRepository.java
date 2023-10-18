@@ -1,5 +1,6 @@
 package kr.co.lotteon.repository.product;
 
+import kr.co.lotteon.dto.product.ProductCate2DTO;
 import kr.co.lotteon.entity.product.ProductEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,11 +13,9 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 
     public Page<ProductEntity> findProductEntitiesByprodCate1(int cate1, Pageable pageable);
     
-    
-
-    public Page<ProductEntity> findProductEntityByProdNoAndProdCate1AndProdCate2(int prodNo, String cate1, String cate2, Pageable pageable);
 
 
     public Page<ProductEntity> findByUseyn(String useyn, Pageable pageable);
+
 
 }
