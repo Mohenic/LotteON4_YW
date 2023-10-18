@@ -1,7 +1,7 @@
 package kr.co.lotteon.controller;
 
 
-<<<<<<< HEAD
+
 import kr.co.lotteon.dto.product.ProductCate1DTO;
 import kr.co.lotteon.service.ProductService;
 import lombok.extern.log4j.Log4j2;
