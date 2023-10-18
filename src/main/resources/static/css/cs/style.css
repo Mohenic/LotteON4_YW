@@ -979,3 +979,8 @@ footer p > strong {
   padding: 10px;
   box-sizing: border-box;
 }
+
+#cs > .qna  article .qna_button{
+  text-align: center;
+}
+

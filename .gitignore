@@ -40,4 +40,6 @@ out/
 log/
 .log/
 *.log
+*.md
+
 
