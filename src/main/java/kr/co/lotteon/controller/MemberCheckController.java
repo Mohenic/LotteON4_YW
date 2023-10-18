@@ -1,12 +1,13 @@
 package kr.co.lotteon.controller;
 
+import kr.co.lotteon.dto.RequestEmailDTO;
 import kr.co.lotteon.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Log4j2
 @RequestMapping("/member/check")
@@ -20,12 +21,7 @@ public class MemberCheckController {
     public int checkUid(@PathVariable("uid") String uid){
         return memberService.countUid(uid);
     }
-    @GetMapping("/email/{email}")
-    public int checkEmail(@PathVariable("email") String email){
-        int result = memberService.countEmail(email);
-        log.info("result: " + result);
-        return result;
-    }
+
     @GetMapping("/hp/{hp}")
     public int checkHp(@PathVariable("hp") String hp){
         log.info("hp : "+hp);

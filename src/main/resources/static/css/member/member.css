@@ -383,7 +383,10 @@ header {
   border-radius: 2px;
   cursor: pointer;
 }
-
+#member > .register .auth {
+  display:none;
+  margin-top: 6px;
+}
 /* member > .registerSeller */
 #member > .registerSeller {
   width: 900px;

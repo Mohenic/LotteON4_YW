@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -24,6 +26,7 @@ public class MemberService {
     private final MemberTermsRepository memberTermsRepository;
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    String generatedCode;
 
     public MemberTermsDTO selectTerms() {
         log.info("selectTerms : "+memberTermsRepository.findById(1).get().toDTO());
@@ -50,6 +53,12 @@ public class MemberService {
     }
     public int countManagerHp(String managerHp){
         return memberRepository.countByManagerHp(managerHp);
+    }
+    public int countByNameAndEmail(String name, String email){
+        return memberRepository.countByNameAndEmail(name, email);
+    }
+    public int countByUidAndEmail(String uid, String email){
+        return memberRepository.countByUidAndEmail(uid, email);
     }
 
 }
