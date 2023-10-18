@@ -11,4 +11,6 @@ public interface MemberRepository extends JpaRepository<MemberEntity, String> {
     int countByEmail(String email);
     int countByHp(String hp);
     int countByManagerHp(String managerHp);
+    int countByNameAndEmail(String name, String email);
+    int countByUidAndEmail(String uid, String email);
 }
