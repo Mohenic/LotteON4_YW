@@ -94,7 +94,7 @@
 			});
 
 		});
-		// 이메일 중복체크
+		/*// 이메일 중복체크
 		$('input[name=email]').focusout(function() {
 			const email = $(this).val();
 
@@ -116,6 +116,6 @@
 				}
 			});
 
-		});
+		});*/
 	}); // onload end
 	
