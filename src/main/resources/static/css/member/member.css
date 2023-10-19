@@ -370,6 +370,31 @@ header {
   vertical-align: middle;
   margin-right: 5px;
 }
+#member > .register table #selectEmail {
+  width: 117px;
+  height: 31px;
+  vertical-align: middle;
+}
+#member > .register table #btnEmailCode, #btnEmailAuth{
+  color: #ffffff;
+  background: #ef3f43;
+  width: 90px;
+  height: 25px;
+  vertical-align: middle;
+  margin-right: 5px;
+  border: 1px solid #dfe5ed;
+  border-radius: 5px;
+}
+#member > .register table #btnEmailAuth{
+  color: #ffffff;
+  background: #ef3f43;
+  width: 50px;
+  height: 25px;
+  vertical-align: middle;
+  margin-right: 5px;
+  border: 1px solid #dfe5ed;
+  border-radius: 5px;
+}
 
 #member > .register form input[type="submit"] {
   display: block;
