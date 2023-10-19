@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @Controller
@@ -32,7 +30,15 @@ public class MemberController {
 
     @GetMapping("/member/login")
     public String login(Model model, String success){
-        return "/member/login";
+        log.info("success : "+success);
+        if(success != null){
+            model.addAttribute("success", success);
+            return "/member/login";
+        }else{
+            return "/member/login";
+        }
+
+
     }
 
     @GetMapping("/member/join")

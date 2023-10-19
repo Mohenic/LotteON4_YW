@@ -8,9 +8,9 @@
 				</nav>
                 
 				<form th:action="@{/member/registerSeller}" method="POST">
-					<input type="text" name="type" th:value="${type}"/>
-					<input type="text" name="division" th:value="REGISTER"/>
-					<input type="text" name="name"/>
+					<input type="hidden" name="type" th:value="${type}"/>
+					<input type="hidden" name="division" th:value="REGISTER"/>
+					<input type="hidden" name="name"/>
 					<section>
 						<table>
 							<caption>필수 정보입력</caption>
@@ -77,8 +77,9 @@
 							<tr>
 								<th><span class="essential">*</span>EMAIL</th>
 								<td>
-									<input type="text" name="lo_email" id="km_email" placeholder="이메일 입력" required />&nbsp;@
-									<input type="text" name="lo_email2" id="km_email2" placeholder="도메인 입력" required />
+									<input type="hidden" name="email" required />
+									<input type="text" name="email1" id="lo_email1" placeholder="이메일 입력" required />&nbsp;@
+									<input type="text" name="email2" id="lo_email2" placeholder="도메인 입력" required />
 									<select name="selectEmail" id="selectEmail">
 										<option value="1" selected>직접입력</option>
 										<option value="naver.com">naver.com</option>
@@ -95,11 +96,11 @@
 										<option value="hanmir.com">hanmir.com</option>
 										<option value="paran.com">paran.com</option>
 									</select>
-									<button type="button" id="btnEmailCode"><img src="./img/chk_auth.gif" alt="인증번호 받기"/></button><br>
+									<button type="button" id="btnEmailCode">인증번호 받기</button><br>
 									<span class="msgEmail"></span>
 									<div class="auth">
 										<input type="text" name="auth" placeholder="인증번호 입력" required/>
-										<button type="button" id="btnEmailAuth"><img src="./img/chk_confirm.gif" alt="확인"/></button>
+										<button type="button" id="btnEmailAuth">확인</button>
 									</div>
 								</td>
 							</tr>
