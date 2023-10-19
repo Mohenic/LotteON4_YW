@@ -1,6 +1,5 @@
-package kr.co.lotteon.service;
+package kr.co.lotteon.service.admin;
 
-import jakarta.persistence.EntityNotFoundException;
 import kr.co.lotteon.dto.admin.PageRequestDTO;
 import kr.co.lotteon.dto.admin.PageResponseDTO;
 import kr.co.lotteon.dto.product.ProductDTO;
