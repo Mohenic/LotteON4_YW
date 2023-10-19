@@ -1,7 +1,6 @@
 package kr.co.lotteon.dto.admin;
 
 import kr.co.lotteon.dto.product.ProductDTO;
-import kr.co.lotteon.entity.product.ProductEntity;
 import lombok.Builder;
 import lombok.Data;
 

@@ -22,8 +22,8 @@ $(function(){
 		const division = $('input[name=division]').val();
 		const name = $('input[name=name]').val();
 		const uid = $('input[name=uid]').val();
-		const email = $('#lo_email').val()+"@"+$('#lo_email2').val();
-		console.log("email : "+email);
+		const email = $('#lo_email1').val()+"@"+$('#lo_email2').val();
+
 		
 		const jsonData = {
 									"division" : division,
@@ -90,6 +90,8 @@ $(function(){
 		}, 1000);
 	});
 	$('#btnEmailAuth').click(function(){
+		const email = $('#lo_email1').val()+"@"+$('#lo_email2').val();
+		console.log("email : "+email);
 		const code = $('input[name=auth]').val();
 		$.ajax({
 			url:'/LotteON/member/email/confirmEmail/'+code,
@@ -101,6 +103,7 @@ $(function(){
 					$('.msgEmail').css('color', 'green').text('이메일 인증이 완료 되었습니다.');
 					$('.resultEmailForId').css('color', 'green').text('이메일 인증이 완료 되었습니다.');
 					$('.resultEmailForPass').css('color', 'green').text('이메일 인증이 완료 되었습니다.');
+					$('input[name=email]').val(email);
 					isEmailOk = true;
 				}else{
 					$('.msgEmail').css('color', 'red').text('이메일 인증에 실패했습니다.');

@@ -28,6 +28,9 @@ public class CsArticleNoticeDTO {
     private String regip;
     private LocalDateTime rdate;
 
+    // admin notice list 추가필드
+    private String detail;
+
     public CsArticleNoticeEntity toEntity(){
         return CsArticleNoticeEntity.builder()
                 .no(no)
