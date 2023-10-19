@@ -52,6 +52,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 						.requestMatchers("/cs/**").permitAll()
 						.requestMatchers("/product/**").permitAll()
 						.requestMatchers("/").permitAll()
+						.requestMatchers("/LotteON").permitAll()
 						.requestMatchers("/css/**", "/js/**", "/images/**", "/file/**").permitAll());
 
 		return http.build();

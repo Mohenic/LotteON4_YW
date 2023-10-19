@@ -6,6 +6,7 @@ import kr.co.lotteon.dto.product.ProductDTO;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 @Getter
@@ -89,8 +90,24 @@ public class ProductEntity {
               .etc2(etc2)
               .etc4(etc4)
               .etc5(etc5)
+                .thumb1(thumb1)
+                .thumb2(thumb2)
+                .thumb2(thumb3)
               .build();
         
+    }
+    public int getDiscountPrice(int price, int discount) {
+        int discountPrice=0;
+
+        discountPrice=(int)(price-(price*(discount*0.01)));
+
+        return discountPrice;
+    }
+
+    public String getDiscount(int price, int discount) {
+
+        DecimalFormat df = new DecimalFormat("###,###");
+        return df.format(getDiscountPrice(price, discount));
     }
     
 }

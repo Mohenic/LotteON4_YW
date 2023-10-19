@@ -177,4 +177,8 @@ public class CsService {
         mapper.deleteArticle(no);
     }
 
+    public CsCate2Entity selectCate2Detail(String cate2){
+        return mapper.selectCate2(cate2).toEntity();
+    }
+
 }

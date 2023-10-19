@@ -36,6 +36,7 @@ public class CsListController {
 
         PageResponseDTO articles1 = null;
         PageResponse2DTO articles2 = null;
+        
         log.info("cate1:" + pageRequestDTO.getCate1());
         if(pageRequestDTO.getCate1().equals("notice")) {
             if (pageRequestDTO.getCate2().equals("all")) {
@@ -61,9 +62,13 @@ public class CsListController {
         String cate1= pageRequestDTO.getCate1();
         String cate2= pageRequestDTO.getCate2();
 
+        CsCate2Entity entity = csService.selectCate2Detail(cate2);
+        
+        // 여기에서 cate2 뿌려줄것
+
         model.addAttribute("cate1",cate1);
         model.addAttribute("cate2",cate2);
-
+        model.addAttribute("entity",entity);
 
 
 
