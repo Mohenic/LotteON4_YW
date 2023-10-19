@@ -6,9 +6,11 @@ import kr.co.lotteon.dto.MemberTermsDTO;
 import kr.co.lotteon.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Log4j2
@@ -18,14 +20,23 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private BuildProperties buildProperties; // 빌드 정보를 갖는 객체 주입
+
+    @ModelAttribute("appInfo")
+    public String appversion(){
+        String appName = buildProperties.getName(); // settings.gradle 파일에서 앱이름 가져옴
+        String version = buildProperties.getVersion(); // build.gradle 파일에서 버전값 가져옴
+        return appName+version;
+    }
+
     @GetMapping("/member/login")
     public String login(Model model, String success){
-        model.addAttribute("success", success);
         return "/member/login";
     }
 
     @GetMapping("/member/join")
-    public String join(){
+    public String join(Model model){
         return "/member/join";
     }
 
@@ -35,8 +46,9 @@ public class MemberController {
         return "/member/register";
     }
     @PostMapping ("/member/register")
-    public String register(HttpServletRequest request, MemberDTO dto){
+    public String register(Model model, HttpServletRequest request, MemberDTO dto){
         dto.setRegip(request.getRemoteAddr());
+        log.info("email : "+dto.getEmail());
         memberService.save(dto);
         return "redirect:/member/login?success=200";
     }
@@ -46,7 +58,7 @@ public class MemberController {
         return "/member/registerSeller";
     }
     @PostMapping ("/member/registerSeller")
-    public String registerSeller(HttpServletRequest request, MemberDTO dto){
+    public String registerSeller(Model model, HttpServletRequest request, MemberDTO dto){
         dto.setRegip(request.getRemoteAddr());
         memberService.save(dto);
         return "redirect:/member/login?success=200";
