@@ -1,4 +1,4 @@
-package kr.co.lotteon.controller;
+package kr.co.lotteon.controller.admin;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.admin.PageRequestDTO;
@@ -6,8 +6,7 @@ import kr.co.lotteon.dto.admin.PageResponseDTO;
 import kr.co.lotteon.dto.product.ProductDTO;
 import kr.co.lotteon.entity.product.ProductCate1Entity;
 import kr.co.lotteon.entity.product.ProductCate2Entity;
-import kr.co.lotteon.entity.product.ProductEntity;
-import kr.co.lotteon.service.AdminService;
+import kr.co.lotteon.service.admin.AdminService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
