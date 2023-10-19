@@ -34,6 +34,9 @@ public class ProductDTO {
     private MultipartFile fileThumb2;
     private MultipartFile fileThumb3;
     private MultipartFile fileDetail;
+    private String Thumb1;
+    private String Thumb2;
+    private String Thumb3;
     private String status;
     private String duty;
     private String receipt;
