@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/member/email")
 @RestController
 public class MailController {
-/*
+
     @Autowired
     private MemberService memberService;
     @Autowired
@@ -51,6 +51,6 @@ public class MailController {
 
             }
         }
-    }*/
+    }
     // 코드확인 method 설정
 }

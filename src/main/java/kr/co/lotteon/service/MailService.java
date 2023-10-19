@@ -1,6 +1,10 @@
 package kr.co.lotteon.service;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -8,7 +12,9 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 @RequiredArgsConstructor
 public class MailService {
-    /*private final JavaMailSender javaMailSender;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
     private static final String senderEmail= "wisejohn950330@gmail.com";
     private static int number;
 
@@ -50,5 +56,5 @@ public class MailService {
         }else {
             return 0;
         }
-    }*/
+    }
 }
