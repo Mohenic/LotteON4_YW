@@ -44,7 +44,7 @@
         ORDER BY a.no DESC LIMIT #{start}, 10;
     </select>
 
-    <select id="selectCountTotal" resultType="kr.co.lotteon.dto.cs.CsArticleNoticeDTO">
+    <select id="selectCountTotal" resultType="int">
         SELECT count(*)
         FROM lo_cs_article_notice
         WHERE parent = 0;
