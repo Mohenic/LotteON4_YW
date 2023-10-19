@@ -26,6 +26,11 @@ public class ProductController {
         
          articles1 = prodService.findByCate1Product(pagerequest);
          
+         log.info("articles1 Change pg Num: " + articles1.getPg()); //
+         log.info("articles1 Change pg Num: " + articles1.getEnd()); //
+         log.info("articles1 Change pg Num: " + articles1.getStart()); //
+         log.info("articles1 Change pg Num: " + articles1.toString()); //
+         
          model.addAttribute("articles",articles1);
     
         return "/product/list";

@@ -105,7 +105,7 @@
                     <td><a href="#" class="thumb"><img th:src="@{/file/__${article.getProdCate1()}__/__${article.getProdCate2()}__/__${article.getThumb1()}__}" alt="상품이미지"/></a></td>
                     <td>
                         <h3 class="name" th:text="${article.getProdName()}"></h3>
-                        <a href="#" class="desc" th:text="${article.getDescript()}"></a>
+                        <a th:href="@{/product/view(prodCate1=${article.getProdCate1()}, prodCate2=${article.getProdCate2()}, prodName=${article.getProdNo()})}" class="desc" th:text="${article.getDescript()}"></a>
                     </td>
                     <td>
                         <ul>
@@ -128,17 +128,17 @@
             <!-- 상품목록 페이지번호 -->
             <div class="page">
                 <th:block th:if="${articles.prev}">
-                    <a th:href="@{/product/list(cate1=${articles.getProdCate1()},cate2=${articles.getProdCate2()},pg=1)}" class="prev"></a>
-                    <a th:href="@{/product/list(cate1=${articles.getProdCate1()},cate2=${articles.getProdCate2()},pg=${articles.start-1})}" class="prev">이전</a>
+                    <a th:href="@{/product/list(prodCate1=${articles.getProdCate1()},prodCate2=${articles.getProdCate2()},pg=1)}" class="prev"></a>
+                    <a th:href="@{/product/list(prodCate1=${articles.getProdCate1()},prodCate2=${articles.getProdCate2()},pg=${articles.getStart()-1})}" class="prev">이전</a>
                 </th:block>
 
                 <th:block th:each="num:${#numbers.sequence(articles.getStart(),articles.getEnd())}">
-                    <a th:href="@{/product/list(cate1=${articles.getProdCate1()},cate2=${articles.getProdCate2()},pg=${num})}" class="num on">[[${num}]]</a>
+                    <a th:href="@{/product/list(prodCate1=${articles.getProdCate1()},prodCate2=${articles.getProdCate2()},pg=${num})}" class="num on">[[${num}]]</a>
                 </th:block>
 
                 <th:block th:if="${articles.next}">
-                    <a th:href="@{/product/list(cate1=${articles.getProdCate1()},cate2=${articles.getProdCate2()},pg=${articles.getEnd()+1})}" class="next">다음</a>
-                    <a th:href="@{/product/list(cate1=${articles.getProdCate1()},cate2=${articles.getProdCate2()},pg=${articles.getTotal()/10})}" class="next">마지막으로</a>
+                    <a th:href="@{/product/list(prodCate1=${articles.getProdCate1()},prodCate2=${articles.getProdCate2()},pg=${articles.getEnd()+1})}" class="next">다음</a>
+                    <a th:href="@{/product/list(prodCate1=${articles.getProdCate1()},prodCate2=${articles.getProdCate2()},pg=${articles.getTotal()/10})}" class="next">마지막으로</a>
                 </th:block>
             </div>
         </section>

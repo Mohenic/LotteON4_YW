@@ -23,8 +23,10 @@ public class PageResponseDTO {
     private int prodNo;
     private String useyn="Y";
 
-    private int start, end;
-    private boolean prev,next;
+    private int start;
+    private int end;
+    private boolean prev;
+    private boolean next;
 
     @Builder
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<ProductDTO> dtoList, int total){

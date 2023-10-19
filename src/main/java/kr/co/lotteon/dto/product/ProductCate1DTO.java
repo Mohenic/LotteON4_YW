@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString
+@ToString //exclude로 toString에 필요없는 컬럼을 제거할 수 있다 특히 리스트로 들어오는 것들을 제거하곤 한다.
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
