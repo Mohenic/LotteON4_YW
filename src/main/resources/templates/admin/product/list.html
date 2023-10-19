@@ -1,5 +1,41 @@
 <th:block th:insert="~{/admin/_header.html}"/>
 <th:block th:insert="~{/admin/_aside.html}"/>
+<script>
+    $(function() {
+        // 전체 선택 체크박스 클릭 이벤트 핸들러
+        $('#selectAll').change(function() {
+            const isChecked = $(this).is(':checked');
+            // 개별 체크박스 상태를 변경
+            $('.checkbox').prop('checked', isChecked);
+        });
+
+        // 개별 체크박스 클릭 이벤트 핸들러
+        $('.checkbox').change(function() {
+            const isChecked = $(this).is(':checked');
+            // 개별 체크박스 중 하나라도 해제되면 전체 선택 체크박스도 해제
+            if (!isChecked) {
+                $('#selectAll').prop('checked', false);
+            }
+        });
+
+        $('.list-delete').click(function(e) {
+            e.preventDefault();
+            if (confirm("삭제하시겠습니까?")) {
+                $('#formCheck').submit();
+            }
+        });
+
+        $('.buttonDelete').click(function(e) {
+            e.preventDefault();
+            if (confirm("삭제하시겠습니까?")) {
+                var prodNo = $(this).closest('tr').find('.chk input[type="checkbox"]').val();
+                // 클릭된 행에서 체크박스 값을 가져오도록 설정
+                window.location.href = '/LotteON/admin/product/delete?chk=' + prodNo;
+            }
+        });
+    });
+
+</script>
             <section id="admin-product-list">
                 <nav>
                     <h3>상품목록</h3>
@@ -10,17 +46,21 @@
                 <!-- 상품목록 컨텐츠 시작 -->                                
                 <section>
                     <div>
-                        <select name="search">
-                            <option value="search1">상품명</option>
-                            <option value="search1">상품코드</option>
-                            <option value="search1">제조사</option>
-                            <option value="search1">판매자</option>                                    
-                        </select>
-                        <input type="text" name="search">
+                        <form th:action="@{/admin/product/list}" method="get">
+                            <select name="searchCate">
+                                <option value="prodName">상품명</option>
+                                <option value="prodNo">상품코드</option>
+                                <option value="company">제조사</option>
+                                <option value="seller">판매자</option>
+                            </select>
+                            <input type="text" name="search">
+                            <input type="submit" class="list-search" value="검색" />
+                        </form>
                     </div>
                     <table>
+                        <form id="formCheck" th:action="@{/admin/product/delete}" method="get">
                         <tr>
-                            <th><input type="checkbox" name="all"/></th>
+                            <th><input type="checkbox" name="all" id="selectAll"/></th>
                             <th>이미지</th>
                             <th>상품코드</th>
                             <th>상품명</th>
@@ -34,7 +74,7 @@
                         </tr>
 
                         <tr th:each="list : ${pageResponseDTO.dtoList}">
-                            <td><input type="checkbox" name="상품코드"/></td>
+                            <td class="chk"><input type="checkbox" name ="chk" class="checkbox" th:value="${list.prodNo}"></td>
                             <td><img th:src="@{/file/}+${list.prodCate1}+'/'+${list.prodCate2}+'/'+${list.thumb1}" class="thumb"></td>
                             <td th:text="${list.prodNo}"></td>
                             <td th:text="${list.prodName}"></td>
@@ -45,16 +85,13 @@
                             <td th:text="${list.seller}"></td>
                             <td th:text="${list.hit}"></td>
                             <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
+                                <a class="buttonDelete" href="#">[삭제]</a>
+                                <a th:href="@{/admin/product/modify}">[수정]</a>
                             </td>
                         </tr>
+                        </form>
                     </table>
-
-                    
-                    <input type="button" value="선택삭제" />
-
-
+                    <input type="button" class="list-delete" value="선택삭제" />
                     <div class="paging">
                         <span class="prev" th:if="${pageResponseDTO.prev}">
                             <a th:href="@{/admin/product/list(pg=${pageResponseDTO.start - 1})}"><&nbsp;이전</a>
