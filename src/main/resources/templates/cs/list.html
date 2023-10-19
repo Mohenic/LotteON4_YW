@@ -1,4 +1,22 @@
 <th:block th:insert="~{/cs/_header.html}"/>
+<script>
+  $(document).ready(function() {
+    // "status" 클래스를 가진 모든 셀을 찾아서 처리
+    $('.answer').each(function() {
+      // 현재 셀의 텍스트 가져오기
+      var text = $(this).text();
+
+      // 텍스트에 따라 스타일 변경
+      if (text === '검토중') {
+        $(this).css("color","black");
+      } else if (text === '답변완료') {
+        $(this).css("color","blue");
+      }
+    });
+  });
+
+
+</script>
       <section id="cs">
         <div class="notice">
           <nav>
@@ -23,7 +41,12 @@
                   <td th:if="${article.cate1 == 'qna'}">
                     <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"></a> <!-- 마이바티스 사용이후로는 통합하고 수정할예정 -->
                   </td>
-                  <td></td>
+                    <th:block th:if="${article.comment == 1}">
+                      <td class="answer">답변완료</td>
+                    </th:block>
+                  <th:block th:if="${article.comment == 0}">
+                    <td class="answer">검토중</td>
+                  </th:block>
                     <td th:if="${article.cate1=='qna'}" th:text="${article.writer.substring(0,3)+article.writer.substring(3,article.writer.length()).replaceAll('\w', '*')}"></td>
 
                   <td th:text="${article.getRdate().toLocalDate()}"></td>
@@ -47,7 +70,15 @@
                 </th:block>
               </div>
               <th:block th:if ="${articles.cate1 == 'qna'}">
-                <a th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=${articles.getCate2()})}" class="btnWrite">문의하기</a>
+                <a
+                        th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=${articles.getCate2()})}"
+                        th:if="${#authorization.expression('isAuthenticated()')}"
+                        class="btnWrite">문의하기</a>
+                <a
+                        th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=${articles.getCate2()})}"
+                        th:unless="${#authorization.expression('isAuthenticated()')}"
+                        onclick="afterLogin()"
+                        class="btnWrite">문의하기</a>
               </th:block>
             </article>
           </section>

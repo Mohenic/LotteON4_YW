@@ -4,6 +4,7 @@ import kr.co.lotteon.dto.cs.PageRequestDTO;
 import kr.co.lotteon.dto.cs.PageResponse2DTO;
 import kr.co.lotteon.dto.cs.PageResponseDTO;
 import kr.co.lotteon.entity.cs.CsArticleFaqEntity;
+import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.entity.cs.CsCate2Entity;
 import kr.co.lotteon.entity.cs.CsCate3Entity;
 import kr.co.lotteon.service.CsService;
@@ -48,8 +49,11 @@ public class CsListController {
             }
         }else if (pageRequestDTO.getCate1().equals("qna")){
                 articles2 = csService.selectQnaCate1AndCate2(pageRequestDTO);
+               // List<CsArticleQnaEntity> qnaEntityList = csService.selectArticleAndCate();
+               // log.info(qnaEntityList);
 
                 model.addAttribute("articles",articles2);
+               // model.addAttribute("qnalist",qnaEntityList);
 
         }
 
