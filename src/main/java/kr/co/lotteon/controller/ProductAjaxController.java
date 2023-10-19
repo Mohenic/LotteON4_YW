@@ -30,16 +30,21 @@ public class ProductAjaxController {
 
         return prodService.findByProductIndexCate1();
     }*/
-    
-        @ResponseBody
-        @GetMapping("/mainProdCate1")
-        public List<ProductCate1Entity> mainProdCate1(){
-            
-        List<ProductCate1Entity> cate1DTO = prodService.getAllProdCate1();
-
-
-        log.info("cate1DTO:" + cate1DTO.toString());
+       
+    @GetMapping("/product/mainProdCate1")
+    public List<ProductCate1DTO> mainProdCate1(){
+        log.info("mainProdCate1==========");
+        List<ProductCate1DTO> cate1DTO = prodService.getAllProdCate1();    
+        // System.out.println("asdkfjalkdsj : " + cate1DTO);
+        log.info("cate1DTO:" + cate1DTO.size());
         
-            return cate1DTO;
-        };
+        return cate1DTO;
+    }
+
+    @GetMapping("/product/mainProdCate2")
+    public int mainProdCate2(){
+        log.info("mainProdCate2==========");
+        
+        return 100;
+    }
 }

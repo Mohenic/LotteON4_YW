@@ -105,7 +105,7 @@
                     <td><a href="#" class="thumb"><img th:src="@{/file/__${article.getProdCate1()}__/__${article.getProdCate2()}__/__${article.getThumb1()}__}" alt="상품이미지"/></a></td>
                     <td>
                         <h3 class="name" th:text="${article.getProdName()}"></h3>
-                        <a th:href="@{/product/view(prodCate1=${article.getProdCate1()}, prodCate2=${article.getProdCate2()}, prodName=${article.getProdNo()})}" class="desc" th:text="${article.getDescript()}"></a>
+                        <a th:href="@{/product/view(prodCate1=${article.getProdCate1()}, prodCate2=${article.getProdCate2()}, prodNo=${article.getProdNo()})}" class="desc" th:text="${article.getDescript()}"></a>
                     </td>
                     <td>
                         <ul>

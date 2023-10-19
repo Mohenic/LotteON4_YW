@@ -53,40 +53,50 @@
         }
 
     </style>
-    <script>
+    <script th:inline="javascript">
+        /*<@[CDATA[*/
         $(function () {
             $('#bannerTop .btnClose').click(function () {
                 $(this).closest('#bannerTop').removeClass('on');
             });
         });
 
-        $(document).ready(function() {
+        console.log('제발 나와우저');
+        
+        window.onload = function() {
             // 페이지 로드 시 실행되는 코드
 
-            var categoryHtml = '<a href="#"><i class="fas fa-tshirt"></i>' + category.name + '<i class="fas fa-angle-right"></i></a>';
+            console.log('category.name : 67라인');
+            
             
             // 서버로부터 카테고리 목록을 비동기적으로 가져오는 함수
-            function loadCategories() {
-                $.ajax({
-                    type: 'GET',
-                    url: '/mainProdCate1',
-                    success: function(categories) {
-                        console.log(categories)
-                        console.log(categories.c1Name)
-                        console.log(categories.cate1)
-                        // 카테고리 목록을 출력
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/LotteON/product/mainProdCate1');
+            xhr.send();
+            console.log('보내죠ㅕ따')
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == XMLHttpRequest.DONE){
+                    console.log('xhr.status : ' + xhr.status);
+                    if(xhr.status == 200) {
+                        console.log('성공!');
+                        const categories = xhr.response;
+                        console.log('categories : '+categories);
                         categories.forEach(function(category) {
-                            $('#mainProdCate1').append(categoryHtml);
+                            cosole.log('category : '+category);
+                            const categoryHtml = '<a href="#"><i class="fas fa-tshirt"></i>' + category.name + '<i class="fas fa-angle-right"></i></a>';
+                            console.log('success');
+                            const mainProdCate1 =  getElementById('mainProdCate1');
+                            mainProdCate1.append(categoryHtml);
                         });
-                    },
-                    error(categories){
-                        console.log("에러 실패"+ categories.error())
                     }
-                });
-            }
+                }// readyState end
+            }//onreadystatechange end 
+           
+            
+            console.log('sskldjfsljfkdj');
 
             // 서버로부터 2차 카테고리 목록을 비동기적으로 가져오는 함수
-            function loadSubcategories(categoryName) {
+            /*function loadSubcategories(categoryName) {
 
                 var subcategoryHtml = '<a href="#"><i class="fas fa-tshirt"></i>' + subcategory.name + '<i class="fas fa-angle-right"></i></a>';
                 
@@ -114,9 +124,9 @@
             $(document).on('mouseenter', '.category', function() {
                 var categoryName = $(this).data('category');
                 loadSubcategories(categoryName);
-            });
-        });
-
+            });*/
+        };
+        /*]]>*/
     </script>
 </head>
 <body>
