@@ -94,28 +94,6 @@
 			});
 
 		});
-		/*// 이메일 중복체크
-		$('input[name=email]').focusout(function() {
-			const email = $(this).val();
 
-			if(!email.match(reEmail)) {
-				$('.msgEmail').css('color', 'red').text('이메일이 유효하지 않습니다.');
-				isEmailOk = false;
-				return;
-			}
-			const url = '/LotteON/member/check/email/'+email;
-			$.get(url, function(data){
-				console.log(data);
-
-				if(data > 0) {
-					$('.msgEmail').css('color', 'red').text('이미 사용중인 이메일입니다.');
-					isEmailOk = false;
-				}else{
-					$('.msgEmail').css('color', 'green').text('사용가능한 이메일 입니다.');
-					isEmailOk = true;
-				}
-			});
-
-		});*/
 	}); // onload end
 	

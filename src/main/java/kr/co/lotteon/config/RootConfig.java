@@ -12,8 +12,5 @@ public class RootConfig {
         return new ModelMapper();
     }
 
-    @Bean
-    public JavaMailSender javaMailSender() {
-        return new JavaMailSender();
-    }
+
 }

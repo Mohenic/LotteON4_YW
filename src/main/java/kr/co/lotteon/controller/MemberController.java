@@ -42,11 +42,13 @@ public class MemberController {
 
     @GetMapping("/member/register")
     public String register(Model model, String type){
+        model.addAttribute("type", type);
         return "/member/register";
     }
     @PostMapping ("/member/register")
     public String register(Model model, HttpServletRequest request, MemberDTO dto){
         dto.setRegip(request.getRemoteAddr());
+        log.info("email : "+dto.getEmail());
         memberService.save(dto);
         return "redirect:/member/login?success=200";
     }

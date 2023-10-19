@@ -1,6 +1,7 @@
 package kr.co.lotteon.controller;
 
 import kr.co.lotteon.dto.RequestEmailDTO;
+import kr.co.lotteon.dto.ResponseEmailDTO;
 import kr.co.lotteon.service.MailService;
 import kr.co.lotteon.service.MemberService;
 import lombok.extern.log4j.Log4j2;
@@ -17,11 +18,14 @@ public class MailController {
     @Autowired
     private MailService mailService;
 
-    @ResponseBody
+
     @GetMapping("/authEmail")
-    public void checkAuthEmail(@RequestBody RequestEmailDTO dto) {
+    public ResponseEmailDTO checkAuthEmail(RequestEmailDTO dto) {
+        log.info("들어오긴 하는데....");
+            //
         int result = 0;
         int status = 0;
+        log.info("requestEmailDTO의 division 종류 : "+dto.getDivision());
 
         if(dto.getDivision().equals("REGISTER")) {
             //회원가입 할 때 이메일 인증
@@ -51,6 +55,16 @@ public class MailController {
 
             }
         }
+        ResponseEmailDTO response = new ResponseEmailDTO();
+        response.setResult(result);
+        response.setStatus(status);
+        return response;
     }
+
     // 코드확인 method 설정
+    @PostMapping("/confirmEmail/{code}")
+    public int confirmEmail(@PathVariable("code") String code) {
+        int result = mailService.confirmCodeByEmail(code);
+        return result;
+    }
 }
