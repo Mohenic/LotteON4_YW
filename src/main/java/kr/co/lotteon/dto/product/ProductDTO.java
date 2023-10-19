@@ -82,6 +82,9 @@ public class ProductDTO {
                 .ip(ip)
                 .rdate(rdate)
                 .useyn(useyn == null ? "Y" : "")
+                .thumb1(Thumb1)
+                .thumb2(Thumb2)
+                .thumb3(Thumb3)
                 .build();
     }
     

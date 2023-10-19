@@ -1,6 +1,7 @@
 package kr.co.lotteon.mapper;
 
 import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
+import kr.co.lotteon.dto.cs.CsCate2DTO;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -16,5 +17,6 @@ public interface CsMapper {
 
     public void deleteArticle(int no);
 
+    public CsCate2DTO selectCate2(String cate2);
 
 }

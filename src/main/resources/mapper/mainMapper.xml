@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.lotteon.mapper.ProductMapper">
+
+
+    <select id="selectProductHit" resultType="kr.co.lotteon.dto.product.ProductDTO">
+        select * from `lo_product` where `useyn`='Y' order by `hit` DESC limit 8;
+    </select>
+
+    <select id="selectProductScore" resultType="kr.co.lotteon.dto.product.ProductDTO">
+        select * from `lo_product` where `useyn`='Y' order by `score` DESC limit 8;
+    </select>
+
+    <select id="selectProductNew" resultType="kr.co.lotteon.dto.product.ProductDTO">
+        select * from `lo_product` where `useyn`='Y' order by `prodNo` DESC limit 8;
+    </select>
+
+    <select id="selectProductDiscount" resultType="kr.co.lotteon.dto.product.ProductDTO">
+        select * from `lo_product` where `useyn`='Y' order by `discount` DESC limit 8;
+    </select>
+
+    <select id="selectProductSold" resultType="kr.co.lotteon.dto.product.ProductDTO">
+        select * from `lo_product` where `useyn`='Y' order by `sold` DESC limit 5;
+    </select>
+
+
+
+</mapper>

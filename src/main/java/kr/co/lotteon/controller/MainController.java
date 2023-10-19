@@ -2,6 +2,8 @@ package kr.co.lotteon.controller;
 
 
 import kr.co.lotteon.dto.product.ProductCate1DTO;
+import kr.co.lotteon.entity.product.ProductEntity;
+import kr.co.lotteon.service.MainService;
 import kr.co.lotteon.service.ProductService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Log4j2
 @Controller
 public class MainController {
 
-
+    @Autowired
+    private MainService mainService;
     private ProductAjaxController service;
 
     @Autowired
@@ -31,12 +36,17 @@ public class MainController {
 
         model.addAttribute("appInfo", appName+version);
 
-        /*        ProductCate1DTO cate1DTO = service.findByProductIndexCate1();
+        List<ProductEntity> productHit =mainService.selectProductHtiList();
+        List<ProductEntity> productScore =mainService.selectProductScoreList();
+        List<ProductEntity> productNew =mainService.selectProductNewList();
+        List<ProductEntity> productDiscount =mainService.selectProductDiscountList();
+        List<ProductEntity> productSold =mainService.selectProductSoldList();
 
-        model.addAttribute("cate1DTO", cate1DTO);
-
-        log.info("cate1DTO:" + cate1DTO.toString());*/
-
+        model.addAttribute("productHit", productHit);
+        model.addAttribute("productScore", productScore);
+        model.addAttribute("productNew", productNew);
+        model.addAttribute("productDiscount", productDiscount);
+        model.addAttribute("productSold", productSold);
         return "/index";
     }
 

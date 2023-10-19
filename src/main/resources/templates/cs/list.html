@@ -28,8 +28,13 @@
             <th:block th:insert="~{/cs/_aside.html}"/>
             <article>
               <nav>
-                <h1>전체</h1>
-                <h2>공지사항 전체 내용입니다.</h2>
+                <h1 th:text="${entity.detail}">전체</h1> <!-- 이거는 mapper 받아오자 어짜피 cate2값받아오니까 ㅇㅇ -->
+                <th:block th:if="${cate1 == 'notice'}">
+                      <h2>공지사항 [[${entity.detail}]] 내용입니다.</h2>
+                </th:block>
+                <th:block th:if="${cate1 == 'qna'}">
+                      <h2>문의하기 [[${entity.detail}]] 내용입니다.</h2>
+                </th:block>
               </nav>
 
               <table>
@@ -69,7 +74,7 @@
 
                 <th:block th:if="${articles.next}">
                     <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.end+1})}" class="next">다음</a>
-                    <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.getTotal()/10})}" class="next">마지막으로</a>
+                    <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${(articles.getTotal()/10)+1})}" class="next">마지막으로</a>
                 </th:block>
               </div>
               <th:block th:if ="${articles.cate1 == 'qna'}">

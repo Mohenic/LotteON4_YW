@@ -409,12 +409,20 @@ main > section > section > article > a {
 }
 
 main > section > section > article .thumb {
-  width: 100%;
+  width: 230px;
   height: 230px;
   margin: 0px auto;
   overflow: hidden;
   text-align: center;
 }
+
+main > section > section > article .thumb > img{
+  width: 230px;
+  height: 230px;
+  margin: 0px auto;
+  text-align: center;
+}
+
 
 main > section > section > article h2 {
   font-size: 15px;
@@ -467,7 +475,7 @@ main > section > section > article .dis_price > .free {
   vertical-align: text-bottom;
   width: 55px;
   height: 13px;
-  background: url("../../../templates/images/ico_freeshipping.gif") no-repeat;
+  background: url('../../images/main/ico_freeshipping.gif') no-repeat;
 }
 
 /* 슬라이더 영역 */
