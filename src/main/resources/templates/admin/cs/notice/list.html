@@ -28,18 +28,6 @@
                             <th>날짜</th>
                             <th>관리</th>
                         </tr>
-                        <tr>
-                            <td class="chk"><input type="checkbox"></td>
-                            <td class="no">1</td>
-                            <td class="type">고객서비스</td>
-                            <td class="title">[안내] 해외결제 사칭 문자 주의</td>
-                            <td class="hit">1</td>
-                            <td class="rdate">2023.09.19</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
                         <tr th:each="list:${lists}">
                             <td class="chk"><input type="checkbox"></td>
                             <td class="no" th:text="${list.no}"></td>

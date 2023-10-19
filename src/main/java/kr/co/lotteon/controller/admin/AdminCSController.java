@@ -42,7 +42,7 @@ public class AdminCSController {
 
         }
 
-        //전체상품 갯수조회
+        //전체 갯수조회
         total=service.selectCountTotal();
 
         //LIMIT 시작값계산
