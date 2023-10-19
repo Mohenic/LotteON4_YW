@@ -4,6 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <mappers>
-    <mapper resource="./mappers/mapper.xml"/>
+    <mapper resource="./mapper/mapper.xml"/>
   </mappers>
 </configuration>

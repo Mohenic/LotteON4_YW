@@ -37,7 +37,9 @@ public class CsViewController {
             log.info("no: "+article2);
         }else if(cate1.equals("qna")){
             CsArticleQnaEntity articles3 =service.selectCsArticleQna(no);
+            CsArticleQnaEntity comment =service.selectCsArticleQnaComment(no);
             model.addAttribute("articles",articles3);
+            model.addAttribute("comment",comment);
             log.info("no: "+articles3);
         }
 

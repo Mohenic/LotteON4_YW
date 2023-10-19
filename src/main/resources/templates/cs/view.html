@@ -18,15 +18,23 @@
               <div class="content">
                 <p th:text="${articles.content}"></p>
               </div>
+
+              <th:block th:if="${cate1=='qna' && comment != null}">
+                <div class="qnaView">
+                  <nav class="title" th:text="'[답변]'+${comment.title}"></nav>
+                  <div>
+                    <p>
+                      [[${comment.content}]]
+                    </p>
+                  </div>
+                <a href="list.html" class="btnList">수정하기</a>
+                <a href="list.html" class="btnList">삭제하기</a>
+              </th:block>
               <th:block th:if="${articles.cate1=='notice' || articles.cate1=='qna'}">
-                 <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${cate2})}" class="btnList">목록보기</a>
+                <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${cate2})}" class="btnList">목록보기</a>
               </th:block>
               <th:block th:if="${articles.cate1=='faq'}">
                 <a th:href="@{/cs/faq/list(cate1=${articles.cate1},cate2=${articles.cate2})}" class="btnList">목록보기</a>
-              </th:block>
-              <th:block th:if="${cate1=='qna'}">
-                <a href="list.html" class="btnList">수정하기</a>
-                <a href="list.html" class="btnList">삭제하기</a>
               </th:block>
             </article>
           </section>

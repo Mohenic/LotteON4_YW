@@ -11,6 +11,15 @@
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/cs/favicon.ico}" />
     <link rel="stylesheet" th:href="@{/css/cs/style.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      function afterLogin() {
+        if(confirm('로그인후 작성해주세요')){
+          window.location.href = '/LotteON/member/login';
+        }else{
+          window.location.href='/LotteON/cs/index';
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="wrapper">

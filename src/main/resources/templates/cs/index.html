@@ -1,15 +1,5 @@
 <th:block th:insert="~{/cs/_header.html}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-  $(function (){
-     $('.ask').click(function (e){
-       if(AuthenticatorResponse)
-
-     })
-  })
-
-
-</script>
       <section id="cs">
         <div class="main">
           <h1 class="title"><strong>롯데ON</strong>이 도와드릴게요!</h1>              
@@ -69,7 +59,16 @@
               </li>
               </th:block>
             </ul>
-            <a th:href="@{/cs/qna/write(cate1=qna,cate2=all)}" class="ask">문의글 작성 ></a>
+            <a th:href="@{/cs/qna/write(cate1=qna,cate2=all)}"
+               th:if="${#authorization.expression('isAuthenticated()')}"
+               class="ask">문의글 작성 ></a>
+
+            <a th:href="@{/cs/qna/write(cate1=qna,cate2=all)}"
+               th:unless="${#authorization.expression('isAuthenticated()')}"
+               onclick="afterLogin()"
+               class="ask">문의글 작성 ></a>
+
+
           </section>
 
           <section class="tel">

@@ -1,11 +1,13 @@
 package kr.co.lotteon.service;
 
+import kr.co.lotteon.dao.CsDAO;
 import kr.co.lotteon.dto.cs.*;
 import kr.co.lotteon.entity.cs.*;
 import kr.co.lotteon.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class CsService {
     private final CsQnaRepository csqnarepo;
     private final CsFaqRepository csfaqrepo;
     private final CsCate2Repository cs2repo;
+
+    @Autowired
+    private CsDAO dao;
 
     public PageResponseDTO selectCate1(PageRequestDTO pageRequestDTO){
 
@@ -85,7 +90,8 @@ public class CsService {
 
         Pageable pageable =pageRequestDTO.getPageable("no");
 
-        Page<CsArticleQnaEntity> result =csqnarepo.findCsArticleQnaEntitiesByCate1AndCate2AndUseynAndParent(pageRequestDTO.getCate1(),
+        Page<CsArticleQnaEntity> result =
+                csqnarepo.findCsArticleQnaEntitiesByCate1AndCate2AndUseynAndParent(pageRequestDTO.getCate1(),
                 pageRequestDTO.getCate2()
                 ,"Y",0,pageable);
 
@@ -112,6 +118,11 @@ public class CsService {
     public CsArticleQnaEntity selectCsArticleQna(int no){
         CsArticleQnaEntity qna=csqnarepo.findCsArticleQnaEntitiesByNo(no);
         return qna;
+    }
+
+    public CsArticleQnaEntity selectCsArticleQnaComment(int no){
+        CsArticleQnaEntity comment =csqnarepo.findCsArticleQnaEntitiesByParent(no);
+        return comment;
     }
 
     public  CsArticleFaqEntity selectCsArticleFaq(int no){
@@ -142,5 +153,12 @@ public class CsService {
         return csqnarepo.findTop5ByOrderByNo();
     }
 
+    public List<CsArticleQnaEntity> selectArticleAndCate(){
+        List<CsArticleQnaEntity> entityList = dao.selectArticleAndCate().stream().map(e -> e.toEntity()).toList();
+        log.info(entityList);
+
+        return  entityList;
+
+    }
 
 }
