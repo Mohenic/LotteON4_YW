@@ -67,12 +67,27 @@ public class ProductService {
         
     }*/
 
-    public List<ProductCate1Entity> getAllProdCate1() {
+    public List<ProductCate1DTO> getAllProdCate1() {
         
-        List<ProductCate1Entity> prodCate1Entity = prodCate1Repo.findAll();
-        log.info("prodCate1Entity:" + prodCate1Entity);
+        List<ProductCate1DTO> prodCate1DTO = prodCate1Repo.findAll()
+                .stream()
+                .map(entity -> modelMapper.map(entity, ProductCate1DTO.class))
+                .toList();
+        log.info("prodCate1DTO:" + prodCate1DTO);
 
 
-        return prodCate1Entity;
+        return prodCate1DTO;
     }
+    
+    public List<ProductEntity> getAllProduct(int prodNo) {
+     
+        log.info("prodNo:" + prodNo);
+        
+        List<ProductEntity> productEntity = prodrepo.findByProdNo(prodNo);
+        log.info("productEntity:" + productEntity);
+
+        return productEntity;
+    }
+    
+    
 }
