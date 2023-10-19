@@ -41,12 +41,15 @@
                   <td th:if="${article.cate1 == 'qna'}">
                     <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"></a> <!-- 마이바티스 사용이후로는 통합하고 수정할예정 -->
                   </td>
+                  <th:block th:if="${article.cate1 == 'qna'}">
                     <th:block th:if="${article.comment == 1}">
                       <td class="answer">답변완료</td>
                     </th:block>
-                  <th:block th:if="${article.comment == 0}">
-                    <td class="answer">검토중</td>
+                    <th:block th:if="${article.comment == 0}">
+                      <td class="answer">검토중</td>
+                    </th:block>
                   </th:block>
+
                     <td th:if="${article.cate1=='qna'}" th:text="${article.writer.substring(0,3)+article.writer.substring(3,article.writer.length()).replaceAll('\w', '*')}"></td>
 
                   <td th:text="${article.getRdate().toLocalDate()}"></td>

@@ -10,6 +10,11 @@ import java.util.List;
 public interface CsMapper {
 
     public List<CsArticleQnaDTO> selectArticleAndCate();
+    public CsArticleQnaDTO selectArticleNo(int no);
+
+    public void updateArticle(CsArticleQnaDTO dto);
+
+    public void deleteArticle(int no);
 
 
 }
