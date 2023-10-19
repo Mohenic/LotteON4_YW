@@ -1,5 +1,6 @@
 package kr.co.lotteon.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import kr.co.lotteon.dto.admin.PageRequestDTO;
 import kr.co.lotteon.dto.admin.PageResponseDTO;
 import kr.co.lotteon.dto.product.ProductDTO;
@@ -34,15 +35,16 @@ public class AdminService {
     private final ProductCate2Repository productCate2Repository;
     private final ModelMapper modelMapper;
 
+    // product list 출력 , search
     public PageResponseDTO findByUseyn(PageRequestDTO pageRequestDTO){
 
         Pageable pageable = pageRequestDTO.getPageable("prodNo");
 
         Page<ProductEntity> result = productRepository.findByUseyn("Y", pageable);
 
-        List<ProductEntity> dtoList = result.getContent()
+        List<ProductDTO> dtoList = result.getContent()
                 .stream()
-                .map(dto -> modelMapper.map(dto, ProductEntity.class))
+                .map(entity -> modelMapper.map(entity, ProductDTO.class))
                 .toList();
 
         int totalElement = (int) result.getTotalElements();
@@ -53,6 +55,109 @@ public class AdminService {
                 .total(totalElement)
                 .build();
     }
+
+    public PageResponseDTO findByProdName(PageRequestDTO pageRequestDTO, String prodName){
+
+        Pageable pageable = pageRequestDTO.getPageable("prodNo");
+
+        Page<ProductEntity> result = productRepository.findByProdNameLike("%" + prodName + "%", pageable);
+
+        List<ProductDTO> dtoList = result.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, ProductDTO.class))
+                .toList();
+
+        int totalElement = (int) result.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElement)
+                .build();
+    }
+    public PageResponseDTO findByProdNo(PageRequestDTO pageRequestDTO, int prodNo){
+
+        Pageable pageable = pageRequestDTO.getPageable("prodNo");
+
+        Page<ProductEntity> result = productRepository.findByProdNoLike(prodNo, pageable);
+
+        List<ProductDTO> dtoList = result.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, ProductDTO.class))
+                .toList();
+
+        int totalElement = (int) result.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElement)
+                .build();
+    }
+    public PageResponseDTO findByCompany(PageRequestDTO pageRequestDTO, String company){
+
+        Pageable pageable = pageRequestDTO.getPageable("prodNo");
+
+        Page<ProductEntity> result = productRepository.findByCompanyLike("%" + company + "%", pageable);
+
+        List<ProductDTO> dtoList = result.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, ProductDTO.class))
+                .toList();
+
+        int totalElement = (int) result.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElement)
+                .build();
+    }
+
+    public PageResponseDTO findBySeller(PageRequestDTO pageRequestDTO, String seller){
+
+        Pageable pageable = pageRequestDTO.getPageable("prodNo");
+
+        Page<ProductEntity> result = productRepository.findBySellerLike("%" + seller + "%", pageable);
+
+        List<ProductDTO> dtoList = result.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, ProductDTO.class))
+                .toList();
+
+        int totalElement = (int) result.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElement)
+                .build();
+    }
+
+    // product list delete
+
+    public int deleteByProdNo(List<Integer> prodNos) {
+        int deletedCount = 0;
+
+        for (Integer prodNo : prodNos) {
+            List<ProductEntity> productEntities = productRepository.findByProdNo(prodNo);
+
+            if (productEntities != null && !productEntities.isEmpty()) {
+                for (ProductEntity productEntity : productEntities) {
+                    productEntity.setUseyn("N"); // 변경할 필드 설정
+                }
+
+                // 변경된 엔티티 저장
+                productRepository.saveAll(productEntities);
+                deletedCount += productEntities.size();
+            }
+        }
+
+        return deletedCount; // 삭제된 엔티티 수 반환
+    }
+
+
+    // product register
 
     public List<ProductCate1Entity> cateList(){
         return productCate1Repository.findAll();
@@ -121,4 +226,5 @@ public class AdminService {
 
         return randomFilename;
     }
+
 }

@@ -46,6 +46,12 @@ public class ProductDTO {
     private int etc2;
     private String etc4;
     private String etc5;
+
+    // 추가필드
+    private String thumb1;
+    private String thumb2;
+    private String thumb3;
+    private String detail;
     
     public ProductEntity toEntity() {
         return ProductEntity.builder()
@@ -72,7 +78,7 @@ public class ProductDTO {
                 .origin(origin)
                 .ip(ip)
                 .rdate(rdate)
-                .useyn(useyn)
+                .useyn(useyn == null ? "Y" : "")
                 .build();
     }
     

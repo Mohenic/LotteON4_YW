@@ -404,6 +404,15 @@ button[type=submit] {
     margin-bottom: 10px;
 }
 
+#admin-product-list > section > div > form  {
+    float: left;
+    margin-bottom: 10px;
+}
+
+#admin-product-list > section > div > form > .list-search  {
+    width: 70px;
+}
+
 #admin-product-list > section > table  {
     border-top: 2px solid #8798a3;
 }

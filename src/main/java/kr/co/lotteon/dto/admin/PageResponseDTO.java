@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class PageResponseDTO {
 
-    private List<ProductEntity> dtoList;
+    private List<ProductDTO> dtoList;
     private String useyn;
     private int pg;
     private int size;
@@ -20,7 +20,7 @@ public class PageResponseDTO {
     private boolean prev, next;
 
     @Builder
-    public PageResponseDTO(PageRequestDTO pageRequestDTO, List<ProductEntity> dtoList, String useyn, int total){
+    public PageResponseDTO(PageRequestDTO pageRequestDTO, List<ProductDTO> dtoList, String useyn, int total){
 
         this.useyn = pageRequestDTO.getUseyn();
         this.pg = pageRequestDTO.getPg();
