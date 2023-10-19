@@ -49,11 +49,11 @@ public class CsListController {
             }
         }else if (pageRequestDTO.getCate1().equals("qna")){
                 articles2 = csService.selectQnaCate1AndCate2(pageRequestDTO);
-               // List<CsArticleQnaEntity> qnaEntityList = csService.selectArticleAndCate();
-               // log.info(qnaEntityList);
+                List<CsArticleQnaEntity> qnaEntityList = csService.selectArticleAndCate();
+                log.info(qnaEntityList);
 
                 model.addAttribute("articles",articles2);
-               // model.addAttribute("qnalist",qnaEntityList);
+                model.addAttribute("qnalist",qnaEntityList);
 
         }
 

@@ -1,0 +1,122 @@
+<th:block th:insert="~{/cs/_header.html}"/>
+<script>
+
+
+ function changeSelect() {
+    const cate2 = $('select[name=cate2]').val();
+
+    $.ajax({
+      url:'/LotteON/cs/qna/write/selectcate2?cate2='+cate2,
+      type: 'GET',
+      dataType:'json',
+      success: function (data){
+        console.log('data'+data);
+
+        const typeSelect =$('select[name=type]');
+
+        typeSelect.empty();
+        typeSelect.append($('<option>', {
+          value: '0',
+          text: '선택'
+        }));
+        $.each(data, function (index,item){
+          typeSelect.append($('<option>',{
+            value: item.cate3,
+            text:item.detail
+          }));
+
+        })
+      }
+
+    })
+
+
+ }
+
+
+
+
+
+
+</script>
+
+      <section id="cs">
+        <div class="qna">
+          <nav>
+            <div>
+              <p>홈<span>></span>문의하기</p>
+            </div>
+          </nav>
+          <section class="write">
+            <th:block th:insert="~{/cs/_aside.html}"/>
+            <article>
+              <form th:action="@{/cs/qna/modify}" method="post">
+                <input type="hidden" name="writer" th:value="${#authentication.principal.member.uid}">
+                <input type="hidden" name="cate1" th:value="${cate1}">
+                <input type="hidden" name="no" th:value="${entity.no}">
+                <th:block th:if="${cate2 != 'all'}">
+                  <input type="hidden" name="cate2" th:value="${cate2}">
+                </th:block>
+                <table>
+                  <tr>
+                    <td>문의유형</td>
+                    <th:block th:if="${cate2=='all'}">
+                      <td>
+                        <select name="cate2" onchange="changeSelect()">
+                          <option value="0">선택</option>
+                          <option th:selected="${entity.cate2 == 'member'}" value="member">회원</option>
+                          <option th:selected="${entity.cate2 == 'event'}"  value="event">쿠폰/이벤트</option>
+                          <option th:selected="${entity.cate2 == 'order'}"  value="order">주문/결제</option>
+                          <option th:selected="${entity.cate2 == 'delivery'}" value="delivery">배송</option>
+                          <option th:selected="${entity.cate2 == 'cancle'}" value="cancle">취소/반품/교환</option>
+                          <option th:selected="${entity.cate2 == 'travel'}" value="travel">여행/숙박/항공</option>
+                          <option th:selected="${entity.cate2 == 'safety'}" value="safety">안전거래</option>
+                        </select>
+                        <select name="type" >
+                            <option value="0">선택</option>
+                        </select>
+                      </td>
+                    </th:block>
+                    <th:block th:if="${cate2 != 'all'}">
+                    <td>
+
+                      <select name="type">
+                        <option value="0">선택</option>
+                        <th:block th:each="cates2 : ${csCate2}">
+                          <option th:value="${cates2.cate3}"
+                                  th:text="${cates2.detail}">
+                          </option>
+                        </th:block>
+                      </select>
+                    </td>
+                    </th:block>
+                  </tr>
+                  <tr>
+                    <td>문의제목</td>                  
+                    <td>
+                      <input type="text" name="title" th:value="${entity.title}" placeholder="제목을 입력하세요."/>
+                    </td>
+                  </tr>                
+                  <tr>
+                    <td>문의내용</td>                  
+                    <td>
+                      <textarea name="content"  placeholder="내용을 입력하세요.">[[${entity.content}]]</textarea>
+                    </td>
+                  </tr>
+                </table>
+                <div class="qna_button">
+                  <th:block th:if="${cate2=='all'}">
+                    <a th:href="@{/cs/list(cate1=${cate1},cate2=${entity.cate2})}" class="btnList">취소하기</a>
+                  </th:block>
+                  <th:block th:if="${cate2 != 'all'}">
+                    <a th:href="@{/cs/list(cate1=${cate1},cate2=${entity.cate2})}" class="btnList">취소하기</a>
+                  </th:block>
+                  <input type="submit" class="btnSubmit" value="등록하기"/>
+                </div>
+              </form>
+            </article>
+          </section>
+        </div>
+      </section>
+
+<th:block th:insert="~{/cs/_footer.html}"/>

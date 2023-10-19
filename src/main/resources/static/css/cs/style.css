@@ -186,7 +186,7 @@ header > .logo a {
 #cs > .main > .faq > ol > li span {
   position: relative;
   top: 100px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 #cs > .main > .faq > ol > li:nth-child(1) > a {

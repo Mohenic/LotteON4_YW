@@ -3,6 +3,7 @@ package kr.co.lotteon.service;
 import kr.co.lotteon.dao.CsDAO;
 import kr.co.lotteon.dto.cs.*;
 import kr.co.lotteon.entity.cs.*;
+import kr.co.lotteon.mapper.CsMapper;
 import kr.co.lotteon.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -27,7 +28,7 @@ public class CsService {
     private final CsCate2Repository cs2repo;
 
     @Autowired
-    private CsDAO dao;
+    private CsMapper mapper;
 
     public PageResponseDTO selectCate1(PageRequestDTO pageRequestDTO){
 
@@ -140,6 +141,12 @@ public class CsService {
         csqnarepo.save(entity);
     }
 
+    public void updateQna(CsArticleQnaDTO dto){
+        log.info("dto:"+dto);
+        mapper.updateArticle(dto);
+
+    }
+
     public List<CsCate2Entity> selectCate2Detail(){
        return cs2repo.findAll();
 
@@ -154,11 +161,20 @@ public class CsService {
     }
 
     public List<CsArticleQnaEntity> selectArticleAndCate(){
-        List<CsArticleQnaEntity> entityList = dao.selectArticleAndCate().stream().map(e -> e.toEntity()).toList();
+        List<CsArticleQnaEntity> entityList = mapper.selectArticleAndCate().stream().map(e -> e.toEntity()).toList();
         log.info(entityList);
 
         return  entityList;
 
+    }
+
+    public CsArticleQnaEntity selectArticleNo(int no){
+        CsArticleQnaEntity entity =mapper.selectArticleNo(no).toEntity();
+        return entity;
+    }
+
+    public void deleteArticle(int no){
+        mapper.deleteArticle(no);
     }
 
 }
