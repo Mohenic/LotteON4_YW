@@ -53,7 +53,7 @@ spring:
     multipart:
       location: src/main/resources/static/file
       max-file-size: 10MB
-
+application:
   mail:
     host: smtp.gmail.com
     port: 587
@@ -66,4 +66,6 @@ spring:
           starttls:
             enable: true
   mybatis:
-    mapper-locations: mapper/*.xml
+    mapper-locations: /mapper/*.xml
+
+

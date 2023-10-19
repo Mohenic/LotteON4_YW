@@ -51,7 +51,9 @@ public class ProductEntity {
     @CreationTimestamp
     private LocalDateTime rdate;
 
-    private String useyn;
+    @Builder.Default
+    private String useyn="Y";
+
     private int etc1;
     private int etc2;
     private String etc4;

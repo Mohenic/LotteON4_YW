@@ -5,6 +5,7 @@ import kr.co.lotteon.entity.product.ProductCate1Entity;
 import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.repository.product.ProductCate1Repository;
 import kr.co.lotteon.repository.product.ProductRepository;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -41,7 +43,7 @@ public class ProductService {
         
         List<ProductDTO> dtoList = result.getContent()
                 .stream()
-                .map(entity -> modelMapper.map(entity, ProductDTO.class)) // ModelMapper 사용 방법 수정
+                .map(entity -> modelMapper.map(entity, ProductDTO.class)) // ModelMapper 사용 방법 수정 //map.()의 파라미터중 앞에는 소스 뒤는 목적하는 타겟의 타입을 명시
                 .toList();
     
         log.info("dtoList.size():" + dtoList.size()); // 10
@@ -65,11 +67,12 @@ public class ProductService {
         
     }*/
 
-/*    public ProductCate1DTO findByProductIndexCate1() {
-        ProductCate1Entity prodCate1Entity = prodCate1Repo.findc1Name();
-        log.info("prodCate1Entity:" + prodCate1Entity);
+    public List<ProductCate1Entity> getAllProdCate1() {
         
-        ProductCate1DTO prodCate1DTO = modelMapper.map(prodCate1Entity, ProductCate1DTO.class);
-        return prodCate1DTO;
-    }*/
+        List<ProductCate1Entity> prodCate1Entity = prodCate1Repo.findAll();
+        log.info("prodCate1Entity:" + prodCate1Entity);
+
+
+        return prodCate1Entity;
+    }
 }
