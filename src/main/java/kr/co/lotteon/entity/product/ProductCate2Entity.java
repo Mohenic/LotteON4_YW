@@ -1,10 +1,7 @@
 package kr.co.lotteon.entity.product;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import kr.co.lotteon.dto.product.ProductCate2DTO;
 import lombok.*;
 

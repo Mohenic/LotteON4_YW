@@ -62,70 +62,41 @@
             });
         });
 
-        console.log('제발 나와우저');
         
         window.onload = function() {
             // 페이지 로드 시 실행되는 코드
 
-            console.log('category.name : 67라인');
-            
             
             // 서버로부터 카테고리 목록을 비동기적으로 가져오는 함수
             const xhr = new XMLHttpRequest();
             xhr.open('GET', '/LotteON/product/mainProdCate1');
             xhr.send();
-            console.log('보내죠ㅕ따')
             xhr.onreadystatechange = function(){
                 if(xhr.readyState == XMLHttpRequest.DONE){
                     console.log('xhr.status : ' + xhr.status);
                     if(xhr.status == 200) {
+                        
                         console.log('성공!');
-                        const categories = xhr.response;
-                        console.log('categories : '+categories);
+                        
+                        const categories = JSON.parse(xhr.response);
+                        console.log('categories 포이치전 : '+categories);
                         categories.forEach(function(category) {
-                            cosole.log('category : '+category);
-                            const categoryHtml = '<a href="#"><i class="fas fa-tshirt"></i>' + category.name + '<i class="fas fa-angle-right"></i></a>';
+                            console.log('category 포이치 : '+category);
+                            console.log('category 포이치 : '+category.c1Name);
+                            const categoryHtml = '<a href="#"><i class="fas fa-tshirt"></i>' + category.c1Name + '<i class="fas fa-angle-right"></i>' +
+                                '' +
+                                '' +
+                                '</a>';
                             console.log('success');
-                            const mainProdCate1 =  getElementById('mainProdCate1');
-                            mainProdCate1.append(categoryHtml);
+                            const mainProdCate1 =  document.getElementById('mainProdCate1');
+                            mainProdCate1.innerHTML += categoryHtml;
                         });
                     }
                 }// readyState end
             }//onreadystatechange end 
-           
+            console.log('==================================================');
             
-            console.log('sskldjfsljfkdj');
 
-            // 서버로부터 2차 카테고리 목록을 비동기적으로 가져오는 함수
-            /*function loadSubcategories(categoryName) {
-
-                var subcategoryHtml = '<a href="#"><i class="fas fa-tshirt"></i>' + subcategory.name + '<i class="fas fa-angle-right"></i></a>';
-                
-                $.ajax({
-                    type: 'GET',
-                    url: '/mainProdCate2',
-                    data: { category: categoryName },
-                    success: function(subcategories) {
-                        console.log(subcategory.c1Name)
-                        console.log(subcategory.c1Name)
-                        // 2차 카테고리 목록을 출력
-                        $('#mainProdCate2').empty();
-                        subcategories.forEach(function(subcategory) {
-                            
-                            $('#subcategories').append(subcategoryHtml);
-                        });
-                    }
-                });
-            }
-
-            // 카테고리 목록을 페이지 로드 시 가져옴
-            loadCategories();
-
-            // 카테고리에 마우스를 올렸을 때 2차 카테고리를 가져옴
-            $(document).on('mouseenter', '.category', function() {
-                var categoryName = $(this).data('category');
-                loadSubcategories(categoryName);
-            });*/
         };
         /*]]>*/
     </script>
