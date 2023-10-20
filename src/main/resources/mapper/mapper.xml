@@ -4,7 +4,7 @@
 <mapper namespace="kr.co.lotteon.mapper.CsMapper">
 
 
-    <select id="selectArticleAndCate" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
+    <select id="selectQnaAndCate3" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
         select * from `lo_cs_article_qna` as a inner join `lo_cs_cate3` as b on a.`type` = b.`cate3` where a.`useyn`='Y' AND a.`parent`=0;
     </select>
 
@@ -22,6 +22,18 @@
 
     <select id="selectCate2" resultType="kr.co.lotteon.dto.cs.CsCate2DTO">
         select * from `lo_cs_cate2` where `cate2`=#{cate2};
+    </select>
+
+    <select id="selectCate3" resultType="kr.co.lotteon.dto.cs.CsCate3DTO">
+        select * from `lo_cs_cate3`;
+    </select>
+
+    <select id="selectNoticeAndCate3" resultType="kr.co.lotteon.dto.cs.CsArticleNoticeDTO">
+        select * from `lo_cs_article_notice` as a inner join `lo_cs_cate3` as b on a.`type` = b.`cate3` where a.`useyn`='Y' AND a.`parent`=0 order by `no` DESC limit 5;
+    </select>
+
+    <select id="selectQnaAndCate3andJoin" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
+        select * from `lo_cs_article_qna` as a inner join `lo_cs_cate3` as b on a.`type` = b.`cate3` where a.`useyn`='Y' AND a.`parent`=0 order by `no` DESC limit 5;
     </select>
 
 </mapper>

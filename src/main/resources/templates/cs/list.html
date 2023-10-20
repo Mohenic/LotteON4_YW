@@ -21,7 +21,7 @@
         <div class="notice">
           <nav>
             <div>
-              <p th:text="${cate1 == 'notice' ? '홈 > 공지사항':'홈 > 문의하기'}"><span>></span></p>
+              <p th:text="${cate1 == 'notice' ? '홈 > 공지사항':'홈 > 문의하기'}"></p>
             </div>
           </nav>
           <section class="list">
@@ -40,10 +40,21 @@
               <table>
 
                 <tr th:each="article:${articles.getDtoList()}">
+
                   <td th:if="${article.cate1 == 'notice'}">
-                    <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${'[안내]'+article.getTitle()}"></a>
+                    <th:block th:each="cate3:${entity2}">
+                      <th:block th:if="${cate3.cate3==article.type}">
+                        <span th:text="${'['+cate3.detail+']'}"></span>
+                      </th:block>
+                    </th:block>
+                    <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"></a>
                   </td>
                   <td th:if="${article.cate1 == 'qna'}">
+                    <th:block th:each="cate3:${entity2}">
+                      <th:block th:if="${cate3.cate3==article.type}">
+                        <span th:text="${'['+cate3.detail+']'}"></span>
+                      </th:block>
+                    </th:block>
                     <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"></a> <!-- 마이바티스 사용이후로는 통합하고 수정할예정 -->
                   </td>
                   <th:block th:if="${article.cate1 == 'qna'}">
@@ -79,11 +90,11 @@
               </div>
               <th:block th:if ="${articles.cate1 == 'qna'}">
                 <a
-                        th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=${articles.getCate2()})}"
+                        th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=all)}"
                         th:if="${#authorization.expression('isAuthenticated()')}"
                         class="btnWrite">문의하기</a>
                 <a
-                        th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=${articles.getCate2()})}"
+                        th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=all)}"
                         th:unless="${#authorization.expression('isAuthenticated()')}"
                         onclick="afterLogin()"
                         class="btnWrite">문의하기</a>

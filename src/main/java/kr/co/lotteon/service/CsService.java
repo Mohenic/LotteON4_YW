@@ -161,7 +161,7 @@ public class CsService {
     }
 
     public List<CsArticleQnaEntity> selectArticleAndCate(){
-        List<CsArticleQnaEntity> entityList = mapper.selectArticleAndCate().stream().map(e -> e.toEntity()).toList();
+        List<CsArticleQnaEntity> entityList = mapper.selectQnaAndCate3().stream().map(e -> e.toEntity()).toList();
         log.info(entityList);
 
         return  entityList;
@@ -179,6 +179,24 @@ public class CsService {
 
     public CsCate2Entity selectCate2Detail(String cate2){
         return mapper.selectCate2(cate2).toEntity();
+    }
+
+    public List<CsCate3Entity> selectCate3List(){
+        return mapper.selectCate3().stream().map(e -> e.toEntity()).toList();
+    }
+
+    public List<CsArticleNoticeEntity> selectNoticeAndCate3(){
+        return mapper.selectNoticeAndCate3().stream().map(e -> e.toEntity()).toList();
+    }
+
+    public List<CsArticleQnaEntity> selectQnaAndCate3(){
+
+        return mapper.selectQnaAndCate3().stream().map(e -> e.toEntity()).toList();
+
+    }
+
+    public List<CsArticleQnaEntity> selectQnaAndCate3andJoin(){
+        return mapper.selectQnaAndCate3andJoin().stream().map(e -> e.toEntity()).toList();
     }
 
 }

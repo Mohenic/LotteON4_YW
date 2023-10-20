@@ -36,6 +36,8 @@ public class CsListController {
 
         PageResponseDTO articles1 = null;
         PageResponse2DTO articles2 = null;
+
+        List<CsCate3Entity> entity2 = csService.selectCate3List();
         
         log.info("cate1:" + pageRequestDTO.getCate1());
         if(pageRequestDTO.getCate1().equals("notice")) {
@@ -69,6 +71,7 @@ public class CsListController {
         model.addAttribute("cate1",cate1);
         model.addAttribute("cate2",cate2);
         model.addAttribute("entity",entity);
+        model.addAttribute("entity2",entity2);
 
 
 

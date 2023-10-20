@@ -50,6 +50,14 @@
 
   -admin 공지사항/자주묻는질문 목록기능(단순목록) 구현완료 페이징처리중
 
+0.0.8 -SNAPSHOT
 
+  -main index list 출력완료 , 헤더부분의 로그인인가처리 완료
+
+  -cs 작업완료
+
+  -product 카테고리 1차값 불러오기 완료 , product 리스트 조건에따라 정렬 완료 페이징 완료 ,product view 구현중
+
+  -admin notice/faq/qna 글목록 불러오기 페이징처리 선택삭제 정렬기능 완료 , write 구현중
 
 

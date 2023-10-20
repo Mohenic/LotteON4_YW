@@ -109,5 +109,17 @@ public class ProductEntity {
         DecimalFormat df = new DecimalFormat("###,###");
         return df.format(getDiscountPrice(price, discount));
     }
-    
+    public int getDiscountPrice2(int price, int discount) {
+        int discountPrice=0;
+
+        discountPrice=(int)(price*(discount*0.01));
+
+        return discountPrice;
+    }
+
+    public String getDiscount2(int price, int discount) {
+
+        DecimalFormat df = new DecimalFormat("###,###");
+        return df.format(getDiscountPrice2(price, discount));
+    }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import kr.co.lotteon.dto.cs.CsArticleNoticeDTO;
+import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -36,8 +37,8 @@ public class CsArticleQnaEntity {
     @CreationTimestamp
     private LocalDateTime rdate;
 
-    public CsArticleNoticeDTO toDTO(){
-        return CsArticleNoticeDTO.builder()
+    public CsArticleQnaDTO toDTO(){
+        return CsArticleQnaDTO.builder()
                 .no(no)
                 .parent(parent)
                 .comment(comment)
