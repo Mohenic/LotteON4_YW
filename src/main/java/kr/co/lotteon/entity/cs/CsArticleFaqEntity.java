@@ -3,6 +3,7 @@ package kr.co.lotteon.entity.cs;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import kr.co.lotteon.dto.cs.CsArticleFaqDTO;
 import kr.co.lotteon.dto.cs.CsArticleNoticeDTO;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -36,8 +37,8 @@ public class CsArticleFaqEntity {
     @CreationTimestamp
     private LocalDateTime rdate;
 
-    public CsArticleNoticeDTO toDTO(){
-        return CsArticleNoticeDTO.builder()
+    public CsArticleFaqDTO toDTO(){
+        return CsArticleFaqDTO.builder()
                 .no(no)
                 .parent(parent)
                 .comment(comment)

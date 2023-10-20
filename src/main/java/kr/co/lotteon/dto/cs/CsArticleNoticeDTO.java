@@ -29,7 +29,7 @@ public class CsArticleNoticeDTO {
     private LocalDateTime rdate;
 
     // admin notice list 추가필드
-    private String detail;
+
 
     public CsArticleNoticeEntity toEntity(){
         return CsArticleNoticeEntity.builder()
@@ -46,6 +46,7 @@ public class CsArticleNoticeDTO {
                 .useyn(useyn)
                 .regip(regip)
                 .rdate(rdate)
+
                 .build();
     }
 

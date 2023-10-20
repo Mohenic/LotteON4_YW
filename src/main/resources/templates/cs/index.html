@@ -8,7 +8,12 @@
             <ul>
               <th:block th:each="notice : ${notices}">
               <li>
-                <a href="#" class="title" th:text="${notice.title}">[안내] 해외결제 사칭 문자 주의</a>
+                <th:block th:each="cate3:${entity2}">
+                  <th:block th:if="${cate3.cate3==notice.type}">
+                    <span th:text="${'['+cate3.detail+']'}"></span>
+                  </th:block>
+                </th:block>
+                <a th:href="@{/cs/view(cate1=${notice.cate1},cate2=${notice.cate2},no=${notice.no})}" class="title" th:text="${notice.title}">[안내] 해외결제 사칭 문자 주의</a>
                 <span class="date" th:text="${notice.rdate.toLocalDate()}">22.10.31</span>
               </li>
               </th:block>
@@ -51,7 +56,13 @@
             <ul>
               <th:block th:each="qna : ${qnas}">
               <li>
-                <a href="#" class="title" th:text="${qna.title}">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
+                <th:block th:each="cate3:${entity2}">
+                  <th:block th:if="${cate3.cate3==qna.type}">
+                    <span th:text="${'['+cate3.detail+']'}"></span>
+                  </th:block>
+                </th:block>
+                <a th:href="@{/cs/view(cate1=${qna.cate1},cate2=${qna.cate2},no=${qna.no})}" class="title" th:text="${qna.title}">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
+                </p>
                 <p>
                   <span class="uid" th:text="${qna.writer.substring(0,3)+qna.writer.substring(3,qna.writer.length()).replaceAll('\w', '*')}">chh**</span>
                   <span class="date" th:text="${qna.rdate.toLocalDate()}">22.10.31</span>

@@ -4,7 +4,7 @@
         <div class="notice">
           <nav>
             <div>
-              <p>홈<span>></span>공지사항</p>
+              <p th:text="${articles.cate1 == 'notice' ? '홈 > 공지사항':'홈 > 문의하기'}"></p>
             </div>
           </nav>
           <section class="view">
@@ -35,9 +35,15 @@
               <th:block th:if="${articles.cate1=='faq'}">
                 <a th:href="@{/cs/faq/list(cate1=${articles.cate1},cate2=${articles.cate2})}" class="btnList">목록보기</a>
               </th:block>
+              <th:blcok th:if="${articles.cate1=='qna'}">
+                <th:block sec:authorize="isAuthenticated()">
 
-              <a th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/cs/qna/modify(cate1=${cate1},cate2=all,no=${articles.no})}" class="btnList">수정하기</a>
-              <a th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/cs/delete(no=${articles.no},cate1=${cate1},cate2=${articles.cate2})}" class="btnList">삭제하기</a>
+                  <th:block th:if="${#authentication.principal.member.uid == articles.writer}">
+                    <a th:href="@{/cs/qna/modify(cate1=${cate1},cate2=all,no=${articles.no})}" class="btnList">수정하기</a>
+                    <a th:href="@{/cs/delete(no=${articles.no},cate1=${cate1},cate2=${articles.cate2})}" class="btnList">삭제하기</a>
+                  </th:block>
+                </th:block>
+              </th:blcok>
             </article>
           </section>
         </div>
