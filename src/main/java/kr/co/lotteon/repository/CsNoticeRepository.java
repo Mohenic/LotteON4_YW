@@ -18,4 +18,8 @@ public interface CsNoticeRepository extends JpaRepository<CsArticleNoticeEntity,
     public CsArticleNoticeEntity findCsArticleNoticeEntitiesByNo(int no);
     public List<CsArticleNoticeEntity> findTop5ByOrderByNoDesc();
 
+
+    // admin part
+
+    public List<CsArticleNoticeEntity> findByNo(int no);
 }
