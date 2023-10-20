@@ -22,13 +22,15 @@ public class ProductController {
     
     
     @GetMapping("/product/list")
-    public String list(Model model, PageRequestDTO pagerequest){
+    public String list(Model model, PageRequestDTO pagerequest) {
 
         PageResponseDTO articles1 = null;
         PageResponse2DTO articles2 = null;
         
         log.info("prodCate1:" + pagerequest.getProdCate1()); //10들고왔음
-        
+        log.info("sort : " + pagerequest.getSort());
+        log.info("orderBy : " + pagerequest.getOrderBy());
+
          articles1 = prodService.findByCate1Product(pagerequest);
          
          log.info("articles1 Change pg Num: " + articles1.getPg()); //

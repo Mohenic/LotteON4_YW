@@ -29,8 +29,13 @@ public class ProductService {
 
         log.info("pageRequestDTO.getCate1():" + pageRequestDTO.getProdCate1());
         log.info("pageRequestDTO.getCate1():" + pageRequestDTO.toString());
-        
-        Pageable pageable = pageRequestDTO.getPageable("prodNo"); // Pageable 가져오는 방법 수정
+        Pageable pageable;
+            if(pageRequestDTO.getOrderBy().equals("A")) {
+                pageable = pageRequestDTO.getPageableA(pageRequestDTO.getSort()); // Pageable 가져오는 방법 수정
+            }else {
+                pageable = pageRequestDTO.getPageableD(pageRequestDTO.getSort()); // Pageable 가져오는 방법 수정
+            }
+
 
         log.info("pageRequestDTO.getCate1():" + pageRequestDTO.getProdCate1());
         

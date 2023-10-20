@@ -28,9 +28,20 @@ public class PageRequestDTO {
     @Builder.Default
     private String useyn="Y";
 
+    @Builder.Default
+    private String sort = "prodNo";
+
+    @Builder.Default
+    private String orderBy = "D";
+
     //desc
-    public Pageable getPageable(String sort){
+    public Pageable getPageableD(String sort){
+        sort = this.sort;
         return PageRequest.of(this.pg-1, this.size, Sort.by(sort).descending());
+    }
+    public Pageable getPageableA(String sort){
+        sort = this.sort;
+        return PageRequest.of(this.pg-1, this.size, Sort.by(sort));
     }
 
 

@@ -1,4 +1,4 @@
-package kr.co.lotteon.controller;
+package kr.co.lotteon.controller.member;
 
 import kr.co.lotteon.dto.RequestEmailDTO;
 import kr.co.lotteon.service.MemberService;

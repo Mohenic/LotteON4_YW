@@ -22,6 +22,8 @@ public class PageResponseDTO {
     private int prodCate2;
     private int prodNo;
     private String useyn="Y";
+    private String sort;
+    private String orderBy;
 
     private int start;
     private int end;
@@ -49,8 +51,13 @@ public class PageResponseDTO {
         this.end= end > last ? last : end;
         this.prev = this.start>1;
         this.next=total > this.end* this.size;
+        this.sort = pageRequestDTO.getSort();
+        this.orderBy = pageRequestDTO.getOrderBy();
+
+
 
     }
+
 
 
 }
