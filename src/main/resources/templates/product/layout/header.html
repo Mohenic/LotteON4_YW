@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.thymeleaf.org">
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>롯데ON::롯데 온라인 쇼핑몰</title>
@@ -20,3 +21,56 @@
 
     </style>
 </head>
+<body>
+<div id="wrapper">
+    <header>
+        <div class="top">
+            <div>
+                <th:block sec:authorize="isAnonymous()">
+                    <a th:href="@{/member/login}">로그인</a>
+                    <a th:href="@{/member/join}">회원가입</a>
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <a href="#" >[[${#authentication.principal.member.name}]]</a>
+                    <th:block sec:authorize="hasRole('1')">
+                        <a href="#">마이페이지</a>
+                    </th:block>
+                    <th:block sec:authorize="hasAnyRole('2','3')" >
+                        <a th:href="@{/admin/index}">관리자</a>
+                    </th:block>
+                    <a th:href="@{/member/logout}">로그아웃</a>
+                    <a href="#">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
+                        장바구니
+                    </a>
+            </div>
+        </div>
+        <div class="logo">
+            <div>
+                <a th:href="@{/}"><img th:src="@{/images/main/header_logo.png}" alt="로고" /></a>
+                <form action="#">
+                    <input type="text" name="keyword"/>
+                    <button><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+
+        </div>
+        <div class="menu">
+            <div>
+                <ul>
+                    <li><a href="#">히트상품</a></li>
+                    <li><a href="#">추천상품</a></li>
+                    <li><a href="#">최신상품</a></li>
+                    <li><a href="#">인기상품</a></li>
+                    <li><a href="#">할인상품</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">쿠폰존</a></li>
+                    <li><a href="#">사용후기</a></li>
+                    <li><a href="#">개인결제</a></li>
+                    <li><a href="#">고객센터</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>

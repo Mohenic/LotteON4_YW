@@ -47,9 +47,9 @@ public class ProductController {
     public String view(int prodNo, Model model){
 
 
-        List<ProductEntity> product = prodService.getAllProduct(prodNo);
+        List<ProductEntity> products = prodService.getAllProduct(prodNo);
         
-        model.addAttribute("product",product);
+        model.addAttribute("products",products);
         
         return "/product/view";
     }

@@ -127,7 +127,7 @@
   color: #333;
 }
 
-#product > .list > table .desc:hover {
+#product > .list > table .name:hover {
   text-decoration: underline;
 }
 
