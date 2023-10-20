@@ -1,6 +1,7 @@
 package kr.co.lotteon.controller;
 
 import kr.co.lotteon.dto.product.ProductCate1DTO;
+import kr.co.lotteon.dto.product.ProductCate2DTO;
 import kr.co.lotteon.entity.product.ProductCate1Entity;
 import kr.co.lotteon.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -19,26 +20,16 @@ public class ProductAjaxController {
     private final ProductService prodService;
 
     
-/*    @GetMapping("/productIndexCate")
-    public ProductCate2DTO productIndex(@RequestBody ProductCate2DTO cate2DTO){
-        
-        //return prodService.findProductIndexCate(cate2DTO);
-        return null;
-    }*/
 
-  /*  public ProductCate1DTO findByProductIndexCate1() {
-
-        return prodService.findByProductIndexCate1();
-    }*/
        
     @GetMapping("/product/mainProdCate1")
-    public List<ProductCate1DTO> mainProdCate1(){
+    public List<ProductCate2DTO> mainProdCate1(){
         log.info("mainProdCate1==========");
-        List<ProductCate1DTO> cate1DTO = prodService.getAllProdCate1();    
+        List<ProductCate2DTO> cate2DTO = prodService.getAllProdCates();    
         // System.out.println("asdkfjalkdsj : " + cate1DTO);
-        log.info("cate1DTO:" + cate1DTO.size());
+        log.info("cateDTO:" + cate2DTO.size());
         
-        return cate1DTO;
+        return cate2DTO;
     }
 
     @GetMapping("/product/mainProdCate2")

@@ -3,6 +3,7 @@ package kr.co.lotteon.service;
 import kr.co.lotteon.dto.product.*;
 import kr.co.lotteon.entity.product.ProductCate1Entity;
 import kr.co.lotteon.entity.product.ProductEntity;
+import kr.co.lotteon.mapper.ProductMapper;
 import kr.co.lotteon.repository.product.ProductCate1Repository;
 import kr.co.lotteon.repository.product.ProductRepository;
 import lombok.Builder;
@@ -24,6 +25,7 @@ public class ProductService {
     private final ProductRepository prodrepo;
     private final ProductCate1Repository prodCate1Repo;
     private final ModelMapper modelMapper;
+    private final ProductMapper prodMapper;
 
     public PageResponseDTO findByCate1Product(PageRequestDTO pageRequestDTO) {
 
@@ -72,16 +74,14 @@ public class ProductService {
         
     }*/
 
-    public List<ProductCate1DTO> getAllProdCate1() {
+    public List<ProductCate2DTO> getAllProdCates() {
         
-        List<ProductCate1DTO> prodCate1DTO = prodCate1Repo.findAll()
-                .stream()
-                .map(entity -> modelMapper.map(entity, ProductCate1DTO.class))
-                .toList();
-        log.info("prodCate1DTO:" + prodCate1DTO);
+        List<ProductCate2DTO> prodCate2DTO = prodMapper.selectProductCatesMain();
+  
+        log.info("prodCate2DTO:" + prodCate2DTO);
 
 
-        return prodCate1DTO;
+        return prodCate2DTO;
     }
     
     public List<ProductEntity> getAllProduct(int prodNo) {

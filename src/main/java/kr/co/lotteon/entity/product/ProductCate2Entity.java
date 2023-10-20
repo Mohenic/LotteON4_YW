@@ -1,9 +1,11 @@
 package kr.co.lotteon.entity.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
 import kr.co.lotteon.dto.product.ProductCate2DTO;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Getter
 @ToString
