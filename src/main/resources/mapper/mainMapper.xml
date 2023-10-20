@@ -24,6 +24,11 @@
         select * from `lo_product` where `useyn`='Y' order by `sold` DESC limit 5;
     </select>
 
+    <select id="selectProductCatesMain" resultType="kr.co.lotteon.dto.product.ProductCate2DTO">
+        SELECT * FROM `lo_product_cate1` AS a
+                          JOIN `lo_product_cate2` AS b ON a.`cate1` = b.`cate1`;
+    </select>
 
+    
 
 </mapper>
