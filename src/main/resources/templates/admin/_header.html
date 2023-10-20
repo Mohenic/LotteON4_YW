@@ -8,6 +8,9 @@
     <script th:src="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js}"></script>
     <script th:src="@{https://kit.fontawesome.com/20962f3e4b.js}" crossorigin="anonymous"}></script>
     <script th:src="@{/js/admin/gnb.js}"></script>
+    <script th:src="@{/js/admin/checkbox.js}"></script>
+    <script th:src="@{/js/admin/ListDelete.js}"></script>
+    <script th:src="@{/js/admin/productCate.js}"></script>
     <link rel="stylesheet" th:href="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css}">
     <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/admin/admin.css}">
@@ -19,10 +22,10 @@
         <div>
             <a th:href="@{/admin/index}" class="logo"><img th:src="@{/images/admin/admin_logo.png}" alt="admin_logo"/></a>
             <p>
-                <span>홍길동님 반갑습니다.</span>
-                <a href="#">HOME |</a>
-                <a href="#">로그아웃 |</a>
-                <a href="#">고객센터</a>
+                <span>님 반갑습니다.</span>
+                <a th:href="@{/admin/index}">HOME |</a>
+                <a th:href="@{/member/logout}">로그아웃 |</a>
+                <a th:href="@{/cs/index}">고객센터</a>
             </p>
         </div>
     </header>
