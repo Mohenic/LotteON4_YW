@@ -1,8 +1,6 @@
 package kr.co.lotteon.entity.product;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import kr.co.lotteon.dto.product.ProductCate1DTO;
 import lombok.*;
 
@@ -17,6 +15,7 @@ import lombok.*;
 public class ProductCate1Entity {
     
     @Id
+    //@OneToMany(mappedBy = "productCate1")
     private int cate1;
     private String c1Name;
     
