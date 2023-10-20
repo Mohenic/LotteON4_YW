@@ -66,7 +66,7 @@
 
     <!-- notice Write -->
     <insert id="NoticeWrite">
-        INSERT INTO `lo_cs_article_notice` ()
+        INSERT INTO `lo_cs_article_notice`
     </insert>
 
 </mapper>

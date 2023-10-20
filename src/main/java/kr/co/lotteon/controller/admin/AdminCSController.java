@@ -2,6 +2,8 @@ package kr.co.lotteon.controller.admin;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.cs.CsArticleNoticeDTO;
+import kr.co.lotteon.entity.cs.CsCate3Entity;
+import kr.co.lotteon.service.CsService;
 import kr.co.lotteon.service.admin.AdminCSService;
 import kr.co.lotteon.service.admin.AdminService;
 import lombok.extern.log4j.Log4j2;
@@ -20,6 +22,8 @@ public class AdminCSController {
 
     @Autowired
     private AdminCSService service;
+    @Autowired
+    private CsService csService;
 
     // notice part
 
@@ -30,6 +34,7 @@ public class AdminCSController {
 
         String pg = req.getParameter("pg");
         String cate2 = req.getParameter("cate2");
+        List<CsCate3Entity> entity2 = csService.selectCate3List();
 
         //페이지 관련 변수
         int start=0;
@@ -103,6 +108,7 @@ public class AdminCSController {
         log.info("cate2" + cate2);
 
         model.addAttribute("lists",lists);
+        model.addAttribute("entity2",entity2);
         req.setAttribute("cate2",cate2);
         req.setAttribute("start", start);
         req.setAttribute("currentPage", currentPage);
@@ -132,6 +138,7 @@ public class AdminCSController {
 
     @GetMapping("/admin/cs/notice/write")
     public String noticeWrite(){
+
         return "/admin/cs/notice/write";
     }
 

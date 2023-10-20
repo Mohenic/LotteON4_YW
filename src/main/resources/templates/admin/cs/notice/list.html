@@ -46,7 +46,11 @@
                             <tr th:each="list:${lists}">
                                 <td class="chk"><input type="checkbox" name="chk" class="checkbox" th:value="${list.no}"></td>
                                 <td class="no" th:text="${list.no}"></td>
-                                <td class="type" th:text="${list.detail}"></td>
+                                <th:block th:each="cate3:${entity2}">
+                                    <th:block th:if="${cate3.cate3==list.type}">
+                                        <td class="type" th:text="${'['+cate3.detail+']'}"></td>
+                                    </th:block>
+                                </th:block>
                                 <td class="title" ><a th:href="@{/admin/cs/notice/view(no=${list.no})}" th:text="${list.title}"></a></td>
                                 <td class="hit" th:text="${list.hit}"></td>
                                 <td class="rdate" th:text="${list.rdate.toLocalDate()}"></td>
@@ -59,7 +63,7 @@
                     </tbody>
                 </table>
                 <a href="#" class="btnDelete">선택삭제</a>
-                <a href="#" class="btnWrite">작성하기</a>
+                <a th:href="@{/admin/cs/notice/write}" class="btnWrite">작성하기</a>
                 <div class="paging">
                     <span class="prev" th:if="${pageGroupStart > 1}">
                         <a th:href="@{/admin/cs/notice/list(pg=${pageGroupStart - 1})}"><&nbsp;이전</a>
