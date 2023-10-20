@@ -1,4 +1,4 @@
-package kr.co.lotteon.controller;
+package kr.co.lotteon.controller.member;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.MemberDTO;
