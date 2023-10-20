@@ -3,6 +3,7 @@ package kr.co.lotteon.controller.cs;
 
 import kr.co.lotteon.entity.cs.CsArticleNoticeEntity;
 import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
+import kr.co.lotteon.entity.cs.CsCate3Entity;
 import kr.co.lotteon.service.CsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,11 +24,14 @@ public class CsController {
     @GetMapping("/cs/index")
     public String index(Model model){
 
-        List<CsArticleNoticeEntity> notice = service.selectNoticeTop5Desc();
-        List<CsArticleQnaEntity> qna = service.selectQnaTop5Desc();
+        List<CsArticleNoticeEntity> notice = service.selectNoticeAndCate3();
+        List<CsArticleQnaEntity> qna = service.selectQnaAndCate3andJoin();
+        List<CsCate3Entity> entity2 = service.selectCate3List();
+
 
         model.addAttribute("notices",notice);
         model.addAttribute("qnas",qna);
+        model.addAttribute("entity2",entity2);
 
 
         return "/cs/index";
