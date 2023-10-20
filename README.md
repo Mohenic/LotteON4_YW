@@ -58,6 +58,6 @@
 
   -product 카테고리 1차값 불러오기 완료 , product 리스트 조건에따라 정렬 완료 페이징 완료 ,product view 구현중
 
-  -admin notice/faq/qna 글목록 불러오기 페이징처리 선택삭제 정렬기능 완료
+  -admin notice/faq/qna 글목록 불러오기 페이징처리 선택삭제 정렬기능 완료 , write 구현중
 
 
