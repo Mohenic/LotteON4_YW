@@ -19,7 +19,9 @@ public interface CsQnaRepository extends JpaRepository<CsArticleQnaEntity, Integ
    EntityManager em =null;
 
     public Page<CsArticleQnaEntity> findCsArticleQnaEntitiesByCate1AndUseynAndParent(String cate1, String useyn, int parent, Pageable pageable);
+    public Page<CsArticleQnaEntity> findCsArticleQnaEntitiesByCate1AndUseynAndParentAndTitleLike(String cate1, String useyn, int parent,String title ,Pageable pageable);
     public Page<CsArticleQnaEntity> findCsArticleQnaEntitiesByCate1AndCate2AndUseynAndParent(String cate1, String cate2, String useyn, int parent, Pageable pageable);
+    public Page<CsArticleQnaEntity> findCsArticleQnaEntitiesByCate1AndCate2AndUseynAndParentAndTitleContains(String cate1, String cate2, String useyn, int parent,String title, Pageable pageable);
 
     public CsArticleQnaEntity findCsArticleQnaEntitiesByNo(int no);
     public CsArticleQnaEntity findCsArticleQnaEntitiesByParent(int no);

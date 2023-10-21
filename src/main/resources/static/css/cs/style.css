@@ -291,7 +291,7 @@ header > .logo a {
 /* 푸터영역 */
 footer {
   width: 100%;
-  height: 192px;  
+  height: 192px;
   background: #f8f8f8;
   border-top: 1px solid #e9e9e9;
   box-sizing: border-box;
@@ -347,7 +347,7 @@ footer p > strong {
 .btnWrite {
   float: right;
   padding: 10px 20px;
-  text-align: center;        
+  text-align: center;
   margin-top: -48px;
   background-color: #067dfd;
   border: 1px solid #0063ce;
@@ -380,7 +380,7 @@ footer p > strong {
   height: 60px;
   margin: 40px auto 0;
   background-color: #067dfd;
-  border: 1px solid #0063ce;  
+  border: 1px solid #0063ce;
   border-radius: 34px;
   font-size: 16px;
   color: #fff;
@@ -507,6 +507,7 @@ footer p > strong {
   padding: 16px;
   border-bottom: 1px solid #ccc;
 }
+
 #cs > .notice > .list > article > table td:last-child {
   text-align: center;
   font-size: 14px;
@@ -522,12 +523,12 @@ footer p > strong {
 #cs > .notice > .list > article > .page > a {
   display: inline-block;
   width: 34px;
-  height: 34px;        
+  height: 34px;
   box-sizing: border-box;
   text-align: center;
   line-height: 34px;
   font-size: 13px;
-  font-weight: bold;        
+  font-weight: bold;
   vertical-align: bottom;
 }
 #cs > .notice > .list > article > .page > .prev {
@@ -564,14 +565,14 @@ footer p > strong {
   font-weight: bold;
 }
 
-#cs > .notice > .view > article > nav > .date {        
+#cs > .notice > .view > article > nav > .date {
   font-size: 14px;
-  color: #777;        
+  color: #777;
 }
 
 #cs > .notice > .view > article > .content {
   width: 100%;
-  height: 100%;        
+  height: 100%;
   border-bottom: 1px solid #e9e9e9;
   padding: 26px;
   box-sizing: border-box;
@@ -696,7 +697,7 @@ footer p > strong {
   width: 100%;
   height: auto;
   border-bottom: 1px solid #ccc;
-}    
+}
 
 #cs > .faq > .list > article > div > ul > li:nth-child(n+4) {
   display: none;
@@ -707,8 +708,8 @@ footer p > strong {
   width: 100%;
   height: 100%;
   padding: 16px;
-  font-size: 16px;       
-  border-radius: 6px; 
+  font-size: 16px;
+  border-radius: 6px;
   box-sizing: border-box;
 }
 
@@ -729,7 +730,7 @@ footer p > strong {
   border-bottom: none;
   text-align: center;
 }
-            
+
 /* faq - 글보기 */
 #cs > .faq > .view {}
 #cs > .faq > .view > article {}
@@ -755,14 +756,14 @@ footer p > strong {
   margin-right: 6px;
 }
 
-#cs > .faq > .view > article > nav > .date {        
+#cs > .faq > .view > article > nav > .date {
   font-size: 14px;
-  color: #777;        
+  color: #777;
 }
 
 #cs > .faq > .view > article > .content {
   width: 100%;
-  height: 100%;        
+  height: 100%;
   border-bottom: 1px solid #e9e9e9;
   padding: 26px;
   box-sizing: border-box;
@@ -884,12 +885,12 @@ footer p > strong {
 #cs > .qna > .list > article > .page > a {
   display: inline-block;
   width: 34px;
-  height: 34px;        
+  height: 34px;
   box-sizing: border-box;
   text-align: center;
   line-height: 34px;
   font-size: 13px;
-  font-weight: bold;        
+  font-weight: bold;
   vertical-align: bottom;
 }
 #cs > .qna > .list > article > .page > .prev {
@@ -926,14 +927,14 @@ footer p > strong {
   font-weight: bold;
 }
 
-#cs > .qna > .view > article > nav > .date {        
+#cs > .qna > .view > article > nav > .date {
   font-size: 14px;
-  color: #777;        
+  color: #777;
 }
 
 #cs > .qna > .view > article > .content {
   width: 100%;
-  height: 100%;        
+  height: 100%;
   border-bottom: 1px solid #e9e9e9;
   padding: 26px;
   box-sizing: border-box;
@@ -958,7 +959,7 @@ footer p > strong {
 #cs > .qna > .write > article table td {
   padding: 16px;
   border-bottom: 1px solid #ccc;
-  font-size: 16px;        
+  font-size: 16px;
 }
 
 #cs > .qna > .write > article table td:first-child {
@@ -1013,4 +1014,66 @@ footer p > strong {
   margin-top: 30px;
   font-size: 20px;
   line-height: 32px;
+}
+
+#cs >.notice > .list > article > .logo {
+  height: auto;
+
+}
+#cs >.notice > .list> article > .logo {
+  position: relative;
+  width: 1200px;
+  height: 120px;
+  margin: 0 auto;
+}
+#cs >.notice > .list > article > .logo > div > a {
+  display: inline-block;
+  margin-top: 30px;
+}
+#cs >.notice > .list > article > .logo  > a > img {
+  width: 300px;
+}
+#cs >.notice > .list > article > .logo > form {
+  position: absolute;
+  left: 30%;
+  top: 20%;
+  margin-left: -185px;
+  margin-top: 10px;
+  display: inline-block;
+  width: 600px;
+  height: 45px;
+}
+#cs >.notice > .list > article > .logo > form > input {
+  position: absolute;
+  width: 70%;
+  height: 100%;
+  right: 0%;
+  border: 1px solid #ef2a23;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 30px;
+  box-sizing: border-box;
+}
+
+#cs >.notice > .list > article > .logo > form > select {
+  position: absolute;
+  left: 0%;
+  width: 30%;
+  height: 100%;
+  border: 1px solid #ef2a23;
+  border-radius: 5px;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+#cs >.notice > .list > article > .logo > form > button {
+  position: absolute;
+  right: 6px;
+  top: 10px;
+  background: #fff;
+  border: none;
+  font-size: 20px;
+  color: #ef2a23;
+  outline: none;
 }

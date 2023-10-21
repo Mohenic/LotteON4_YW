@@ -8,13 +8,12 @@
 
       // 텍스트에 따라 스타일 변경
       if (text === '검토중') {
-        $(this).css('color','black');
+        $(this).css("color","black");
       } else if (text === '답변완료') {
-        $(this).css('color','blue');
+        $(this).css("color","blue");
       }
     });
   });
-
 
 
 </script>
@@ -76,17 +75,17 @@
 
               <div class="page">
                 <th:block th:if="${articles.prev}">
-                  <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=1)}" class="prev">처음으로</a>
-                  <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.start-1})}" class="prev">이전</a>
+                  <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=1,search=${search})}" class="prev">처음으로</a>
+                  <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.start-1},search=${search})}" class="prev">이전</a>
                 </th:block>
 
                 <th:block th:each="num:${#numbers.sequence(articles.start,articles.end)}">
-                  <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${num})}" th:classappend="${num eq articles.pg ? 'on' : ''}" class="num">[[${num}]]</a>
+                  <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=${num},search=${search})}" th:classappend="${num eq articles.pg ? 'on' : ''}" class="num">[[${num}]]</a>
                 </th:block>
 
                 <th:block th:if="${articles.next}">
-                    <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.end+1})}" class="next">다음</a>
-                    <a th:href="@{/cs/list(cate1=${articles.cate1},cate2=${articles.cate2},pg=${(articles.getTotal()/10)+1})}" class="next">마지막으로</a>
+                    <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.end+1},search=${search})}" class="next">다음</a>
+                    <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=${(articles.getTotal()/10)+1},search=${search})}" class="next">마지막으로</a>
                 </th:block>
               </div>
               <th:block th:if ="${articles.cate1 == 'qna'}">
@@ -104,14 +103,14 @@
                 <form th:action="@{/cs/search(cate1=${cate1},cate2=${cate2})}" method="get" id="searchForm" >
                   <select name="select" id="selected">
                     <th:block th:if="${cate1=='qna'}">
-                    <option value="0" selected >선택</option>
-                    <option value="member" >회원</option>
-                    <option value="event">쿠폰/이벤트</option>
-                    <option value="order">주문/결제</option>
-                    <option value="delivery">배송</option>
-                    <option value="cancle">취소/반품/교환</option>
-                    <option value="travel">여행/숙박/항공</option>
-                    <option value="safety">안전거래</option>
+                      <option value="0" selected >선택</option>
+                      <option value="member" >회원</option>
+                      <option value="event">쿠폰/이벤트</option>
+                      <option value="order">주문/결제</option>
+                      <option value="delivery">배송</option>
+                      <option value="cancle">취소/반품/교환</option>
+                      <option value="travel">여행/숙박/항공</option>
+                      <option value="safety">안전거래</option>
                     </th:block>
                     <th:block th:if="${cate1=='notice'}">
                       <option value="0"  selected>선택</option>

@@ -13,7 +13,9 @@ import java.util.List;
 public interface CsNoticeRepository extends JpaRepository<CsArticleNoticeEntity, Integer> {
 
     public Page<CsArticleNoticeEntity> findCsArticleNoticeEntitiesByCate1AndUseynAndParent(String cate1, String useyn, int parent, Pageable pageable);
+    public Page<CsArticleNoticeEntity> findCsArticleNoticeEntitiesByCate1AndUseynAndParentAndTitleContains(String cate1, String useyn, int parent, String title ,Pageable pageable);
     public Page<CsArticleNoticeEntity> findCsArticleNoticeEntitieByCate1AndCate2AndUseynAndParent(String cate1, String cate2, String useyn, int parent, Pageable pageable);
+    public Page<CsArticleNoticeEntity> findCsArticleNoticeEntitieByCate1AndCate2AndUseynAndParentAndTitleContains(String cate1, String cate2, String useyn, int parent,String title ,Pageable pageable);
 
     public CsArticleNoticeEntity findCsArticleNoticeEntitiesByNo(int no);
     public List<CsArticleNoticeEntity> findTop5ByOrderByNoDesc();
