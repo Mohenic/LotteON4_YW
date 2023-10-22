@@ -60,4 +60,8 @@
 
   -admin notice/faq/qna 글목록 불러오기 페이징처리 선택삭제 정렬기능 완료 , write 구현중
 
+0.0.8 -SNAPSHOT
+
+  -cs notice, qna 게시글검색기능 추가
+
 
