@@ -25,15 +25,33 @@ public class ProductController {
     public String list(Model model, PageRequestDTO pagerequest) {
 
         PageResponseDTO articles1 = null;
-        PageResponse2DTO articles2 = null;
+        PageResponseDTO articles2 = null;
         
         log.info("prodCate1:" + pagerequest.getProdCate1()); //10들고왔음
         log.info("sort : " + pagerequest.getSort());
         log.info("orderBy : " + pagerequest.getOrderBy());
 
-         articles1 = prodService.findByCate1Product(pagerequest);
-         
-         log.info("articles1 Change pg Num: " + articles1.getPg()); //
+        log.info("prodCate1: ===========================" + pagerequest.getSize()); //10
+        
+        log.info("prodCate1: ===========================" + pagerequest.toString()); //10
+        log.info("prodCate1: ===========================" + pagerequest.getProdCate1()); //10
+        log.info("prodCate1: ===========================" + pagerequest.getProdCate2()); //10
+
+
+        if (pagerequest.getProdCate2() != 0) {
+            // 만약 prodCate2가 존재한다면 articles2를 조회
+            articles2 = prodService.findByCate2Product(pagerequest);
+            model.addAttribute("articles", articles2);
+        } else {
+            // 그 외의 경우에는 articles1를 조회
+            articles1 = prodService.findByCate1Product(pagerequest);
+            model.addAttribute("articles", articles1);
+        }
+
+
+
+
+        log.info("articles1 Change pg Num: " + articles1.getPg()); //
          log.info("articles1 Change pg Num: " + articles1.getEnd()); //
          log.info("articles1 Change pg Num: " + articles1.getStart()); //
          log.info("articles1 Change pg Num: " + articles1.toString()); //
