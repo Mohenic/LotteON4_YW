@@ -9,5 +9,9 @@
     </select>
 
 
+    
+    <select id="selectProduct" resultType="kr.co.lotteon.dto.cs.ProductDTO">
+        select * from `lo_product` where `prodNo` = #{prodNo};
+    </select>
 
 </mapper>

@@ -14,7 +14,6 @@ public class PageResponseDTO {
 
     private List<ProductDTO> dtoList;
     
-    //private List<CsArticleNoticeDTO> noticeList;   노티스 테스트 
     private int pg;
     private int size;
     private int total;

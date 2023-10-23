@@ -108,16 +108,7 @@ public class ProductService {
     }
     
     
-    public List<ProductCate2DTO> getAllProdCates() {
-        
-        List<ProductCate2DTO> prodCate2DTO = prodMapper.selectProductCatesMain();
-  
-        log.info("prodCate2DTO:" + prodCate2DTO);
 
-
-        return prodCate2DTO;
-    }
-    
     public List<ProductEntity> getAllProduct(int prodNo) {
      
         log.info("prodNo:" + prodNo);
@@ -128,18 +119,9 @@ public class ProductService {
         return productEntity;
     }
 
+    
 
-    public List<ProductCate1DTO> getAllProdCate1s() {
-        
-        List<ProductCate1DTO> prodCate1DTO = prodMapper.selectProductCate1sMain();
-        
-        
-        
-        
-        return prodCate1DTO;
-    }
-
-    public List<ProductCate1DTO> getCate() {
+    public List<ProductCate1DTO> getProdCate() {
         List<ProductCate1Entity> productCate1Entities = prodCate1Repo.findAll();
         List<ProductCate2Entity> productCate2Entities = prodCate2Repo.findAll();
         List<ProductCate1DTO> productCate1DTOS = new ArrayList<>();
@@ -157,6 +139,12 @@ public class ProductService {
         }
         return productCate1DTOS;
     }
-    
-    
+
+
+    public ProductDTO selectOrderProd(int prodNo) {
+
+        prodMapper.selectProduct(prodNo);
+        
+        return null;
+    }
 }

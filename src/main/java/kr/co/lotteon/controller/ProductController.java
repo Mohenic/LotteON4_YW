@@ -7,6 +7,7 @@ import kr.co.lotteon.dto.product.ProductDTO;
 import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.service.ProductService;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +41,8 @@ public class ProductController {
 
         if (pagerequest.getProdCate2() != 0) {
             // 만약 prodCate2가 존재한다면 articles2를 조회
-            articles2 = prodService.findByCate2Product(pagerequest);
-            model.addAttribute("articles", articles2);
+            articles1 = prodService.findByCate2Product(pagerequest);
+            model.addAttribute("articles", articles1);
         } else {
             // 그 외의 경우에는 articles1를 조회
             articles1 = prodService.findByCate1Product(pagerequest);
@@ -64,20 +65,34 @@ public class ProductController {
     @GetMapping("/product/view")
     public String view(int prodNo, Model model){
 
-
+        
         List<ProductEntity> products = prodService.getAllProduct(prodNo);
         
         model.addAttribute("products",products);
+        model.addAttribute("prodNo",prodNo);
         
         return "/product/view";
     }
     
     @GetMapping("/product/order")
-    public String order(){
+    public String order(Model model, ProductDTO prodDTO){
+        
+        log.info("prodDTO=============================: " + prodDTO.getProdNo());
+        log.info("prodDTO=============================: " + prodDTO.getUpdatedValue());
+        
+        ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo()); 
+        
+/*        prodNO 서치 + 믈픔 갯수;
+        
+                        
+        prodDTO.getProdNo();~~~
+        model.addAttribute("prodNO",prodDTO.getProdNo());~~
+                */
+                
         
         return "/product/order";
     }
-    
+     
     @GetMapping("/product/search")
     public String search(){
     

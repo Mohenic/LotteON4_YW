@@ -1,4 +1,60 @@
 <th:block th:insert = "~{/product/layout/header.html}" />
+<script>
+
+    $(document).ready(function () {
+        // 입력에서 초기값 가져오기
+        var numInput = $("input[name='num']");
+        var currentValue = parseInt(numInput.val());
+        var oriProdNo = [[${prodNo}]];
+
+        // "감소" 버튼에 대한 클릭 이벤트
+        $(".decrease").click(function () {
+            if (currentValue > 1) {
+                currentValue--;
+                numInput.val(currentValue);
+            }
+        });
+        
+
+        // "증가" 버튼에 대한 클릭 이벤트
+        $(".increase").click(function () {
+            currentValue++;
+            numInput.val(currentValue);
+        });
+
+        // AJAX를 사용하여 서버로 업데이트된 값을 보내는 처리
+        $(".order").click(function () {
+            var updatedValue = numInput.val();
+            var prodNo = oriProdNo;
+
+            console.log("view AJAX 상품 주문 개수 : " + updatedValue);
+
+            window.location.href = "/LotteON/product/order?prodNo=" + prodNo + "&updatedValue=" + updatedValue;
+
+
+
+            // 서버 엔드포인트로 AJAX POST 요청 보내기
+            /* $.ajax({
+                 type: "GET",
+                 url: "/LotteON/product/order", // 실제 엔드포인트로 업데이트하세요
+                 data: { prodNo: prodNo, updatedValue: updatedValue },
+                 success: function (response) {
+                     // 필요한 경우 서버로부터의 응답 처리
+                     console.log("view 성공 콘솔 "+response)
+                     
+                 },
+                 error: function (error) {
+                     // 요청 중 발생하는 오류 처리
+                     console.log("view 실패 콘솔 "+error)
+                 }
+           });
+                 */
+        
+    });
+    });
+    
+    
+</script>
         <main id="product">
             <th:block th:insert = "~{/product/layout/aside.html}" />
 
@@ -49,8 +105,10 @@
                         <nav>
                             <span class="origin">원산지-상세설명 참조</span>
                         </nav>
-                        <img src="../images/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립!" class="banner" />
+                        <img th:src="@{/images/main/vip_plcc_banner.png}" alt="100원만 결제해도 1만원 적립!" class="banner" />
                         
+
+                        <h2 class="tit_options" >수량</h2>
                         <div class="count">
                             <button class="decrease">-</button>
                             <input type="text" name="num" value="1" readonly/>
@@ -63,25 +121,25 @@
                         </div>
 
                         <div class="button">
-                            <input type="button" class="cart"  value="장바구니"/>
-                            <input type="button" class="order" value="구매하기"/>
+                            <input type="button" class="cart"  th:value="장바구니" />
+                            <input type="button" class="order" th:value="구매하기"  />
                         </div>
                     </div>
                 </article>
 
                 <!-- 상품 정보 내용 -->
-                <article class="detail">
+                <article class="detail" th:each="product:${products}">
                     <nav>
                         <h1>상품정보</h1>
                     </nav>
                     <!-- 상품상세페이지 이미지 -->
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+                    <img th:src="@{/file/__${product.prodCate1}__/__${product.prodCate2}__/__${product.thumb3}__}" alt="상세페이지1">
+                    <img th:src="@{/file/__${product.prodCate1}__/__${product.prodCate2}__/__${product.thumb3}__}" alt="상세페이지1">
+                    <img th:src="@{/file/__${product.prodCate1}__/__${product.prodCate2}__/__${product.thumb3}__}" alt="상세페이지1">
                 </article>
 
                 <!-- 상품 정보 제공 고시 내용 -->
-                <article class="notice">
+                <article class="notice" th:each="product:${products}">
                     <nav>
                         <h1>상품 정보 제공 고시</h1>
                         <p>[전자상거래에 관한 상품정보 제공에 관한 고시] 항목에 의거 등록된 정보입니다.</p>
@@ -89,23 +147,23 @@
                     <table border="0">
                         <tr>
                             <td>상품번호</td>
-                            <td>10110125435</td>
+                            <td>[[${product.prodNo}]]</td>
                         </tr>
                         <tr>
                             <td>상품상태</td>
-                            <td>새상품</td>
+                            <td>[[${product.status}]]</td>
                         </tr>
                         <tr>
                             <td>부가세 면세여부</td>
-                            <td>과세상품</td>
+                            <td>[[${product.duty}]]</td>
                         </tr>
                         <tr>
                             <td>영수증발행</td>
-                            <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                            <td>[[${product.receipt}]]</td>
                         </tr>
                         <tr>
                             <td>사업자구분</td>
-                            <td>사업자 판매자</td>
+                            <td>[[${product.bizType}]]</td>
                         </tr>
                         <tr>
                             <td>브랜드</td>
@@ -113,7 +171,7 @@
                         </tr>
                         <tr>
                             <td>원산지</td>
-                            <td>국내생산</td>
+                            <td>[[${product.origin}]]</td>
                         </tr>
                     </table>
                     <table border="0">
@@ -172,7 +230,7 @@
                 </article>
                 
                 <!-- 상품 리뷰 내용 -->
-                <article class="review">
+                <article class="review" >
                     <nav>
                         <h1>상품리뷰</h1>
                     </nav>

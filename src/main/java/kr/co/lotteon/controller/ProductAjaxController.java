@@ -21,17 +21,9 @@ public class ProductAjaxController {
 
     
 
-       
-    @GetMapping("/product/mainProdCate1")
-    public List<ProductCate2DTO> mainProdCate1(){
-        List<ProductCate2DTO> cate2DTO = prodService.getAllProdCates();    
-        
-        return cate2DTO;
-    }
-
     @GetMapping("/product/mainProdCate2")
     public String mainProdCate2(){
-        List<ProductCate1DTO> productCate1DTOS = prodService.getCate();
+        List<ProductCate1DTO> productCate1DTOS = prodService.getProdCate();
 
         StringBuilder html = new StringBuilder("<li><i class=\"fa fa-bars\" aria-hidden=\"true\"></i>카테고리</li>");
 
