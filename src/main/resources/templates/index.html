@@ -104,7 +104,7 @@
                 <th:block sec:authorize="isAuthenticated()">
                     <a href="#" >[[${#authentication.principal.member.name}]]</a>
                     <th:block sec:authorize="hasRole('1')">
-                        <a href="#">마이페이지</a>
+                        <a th:href="@{/my/home}">마이페이지</a>
                     </th:block>
                     <th:block sec:authorize="hasAnyRole('2','3')" >
                         <a th:href="@{/admin/index}">관리자</a>
