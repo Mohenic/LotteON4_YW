@@ -62,42 +62,27 @@
             });
         });
 
-        
-        window.onload = function() {
-            // 페이지 로드 시 실행되는 코드
 
+        $(function() {
+            /* 전역 변수로 컨텍스트 경로 값을 설정 */
+            $.ajax({
+                url: '/LotteON/product/mainProdCate2',
+                type: 'GET',
+                data: '',
+                success: function(data) {
+                    console.log("1");
+                    console.log(data);
+                    
+                    $('.category').children().remove();
+                    $('.category').append(data);
+                },
+                error: function(){
+                    console.log('error');    
+                }
+            });
+        });
 
-                        // 서버로부터 카테고리 목록을 비동기적으로 가져오는 함수
-                        const xhr = new XMLHttpRequest();
-                        xhr.open('GET', '/LotteON/product/mainProdCate1');
-                        xhr.send();
-                        xhr.onreadystatechange = function(){
-                            if(xhr.readyState == XMLHttpRequest.DONE){
-                                console.log('xhr.status : ' + xhr.status);
-                                if(xhr.status == 200) {
-
-                                    console.log('성공!');
-
-                                    const categories = JSON.parse(xhr.response);
-                                    console.log('categories 포이치전 : '+categories);
-                        categories.forEach(function(category) {
-                            console.log('category 포이치 : '+category);
-                            console.log('category 포이치 : '+category.c1Name);
-                            const categoryHtml = '<a href="#"><i class="fas fa-tshirt"></i>' + category.c1Name + '<i class="fas fa-angle-right"></i>' +
-                                '' +
-                                '' +
-                                '</a>';
-                            console.log('success');
-                            const mainProdCate1 =  document.getElementById('mainProdCate1');
-                            mainProdCate1.innerHTML += categoryHtml;
-                        });
-                    }
-                }// readyState end
-            }//onreadystatechange end 
-            console.log('==================================================');
-            
-
-        };
+   
         /*]]>*/
     </script>
 </head>
@@ -164,14 +149,16 @@
         <aside>
             <!-- 카테고리 -->
             <ul class="category">
-                <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
+            </ul>
+            
+               <!-- <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
                 <li id="mainProdCate1">
                     <a href="#"><i class="fas fa-tshirt"></i>패션·의류·뷰티<i class="fas fa-angle-right"></i></a>
                     <ol id="mainProdCate2">
                         <li data-prod-cate1="11" data-prod-cate2="11"><a th:href="@{/product/list(prodCate1=10)}">남성의류</a></li>
-                        
+
                     </ol>
-                </li>
+                </li>-->
                 <!--<li>
                     <a href="#" id="mainProdCate1"><i class="fas fa-laptop"></i>가전·디지털<i class="fas fa-angle-right"></i></a>
                     <ol>
@@ -204,7 +191,7 @@
                         <li><a href="#">사무용품</a></li>
                     </ol>
                 </li>-->
-            </ul>
+            <!--</ul>-->
             <!-- 베스트상품 배너 -->
             <article class="best">
                 <h1><i class="fas fa-crown"></i>베스트상품</h1>
