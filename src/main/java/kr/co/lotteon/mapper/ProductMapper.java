@@ -19,8 +19,9 @@ public interface ProductMapper {
     public List<ProductDTO> selectProductDiscount();
 
     public List<ProductDTO> selectProductSold();
-    
-    public List<ProductCate2DTO> selectProductCatesMain();
 
-    public List<ProductCate1DTO> selectProductCate1sMain();
+
+    public ProductDTO selectProduct(int prodNo);
+
+   
 }

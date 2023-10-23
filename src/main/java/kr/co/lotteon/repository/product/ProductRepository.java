@@ -26,6 +26,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     // admin list delete
     public List<ProductEntity> findByProdNo(int prodNo);
 
-    @Query("SELECT p FROM ProductEntity p WHERE p.prodCate1 = :cate1 AND p.prodCate2 = :cate2")
-    public Page<ProductEntity> findProductEntitiesByProdCate1AndProdCate2(@Param("cate1") int cate1, @Param("cate2") int cate2, Pageable pageable);
+    @Query("SELECT m FROM ProductEntity m WHERE m.prodCate1 =:prodCate1 AND m.prodCate2 =:prodCate2")
+    public Page<ProductEntity> findProductEntitiesByProdCate1AndProdCate2(@Param("prodCate1") int prodCate1, @Param("prodCate2") int prodCate2, Pageable pageable);
 }

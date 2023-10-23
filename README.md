@@ -66,3 +66,12 @@
   -cs notice, qna 게시글검색기능 추가
 
 
+0.0.9 -SNAPSHOT
+  
+  -main, product aside ver.1 구현 완료
+  
+  -my HTML 모듈화
+  
+  -policy HTML 추가
+
+  -company HTML 추가
