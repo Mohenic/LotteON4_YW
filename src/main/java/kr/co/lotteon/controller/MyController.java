@@ -1,5 +1,8 @@
 package kr.co.lotteon.controller;
 
+import kr.co.lotteon.dto.PageRequestOrderDTO;
+import kr.co.lotteon.dto.PageResponseOrderDTO;
+import kr.co.lotteon.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class MyController {
     @Autowired
     private BuildProperties buildProperties; // 빌드 정보를 갖는 객체 주입
+
+    @Autowired
+    private MyService myService; // �
 
     @ModelAttribute("appInfo")
     public String appversion(){
@@ -32,7 +38,9 @@ public class MyController {
         return "/my/info";
     }
     @GetMapping("/my/order")
-    public String order(Model model){
+    public String order(Model model, PageRequestOrderDTO pageRequestOrderDTO){
+        PageResponseOrderDTO pageResponseOrderDTO = myService.order(pageRequestOrderDTO);
+        model.addAttribute("pageResponseOrderDTO", pageResponseOrderDTO);
         return "/my/order";
     }
     @GetMapping("/my/point")
