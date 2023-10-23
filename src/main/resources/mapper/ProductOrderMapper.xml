@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.lotteon.mapper.ProductOrderMapper">
+    <select id="selectProductOrders" resultType="kr.co.lotteon.dto.product.ProductOrderItemDTO">
+        SELECT a.prodNo, b.*, c.prodCate2, c.thum1, c.prodName
+        FROM lo_product_order_item AS a
+            JOIN lo_product_order AS b ON a.ordNo = b.ordNo
+            JOIN lo_product AS c ON a.prodNo = c.prodNo
+        WHERE b.ordUid = #{ordUid}
+        ORDER BY a.ordNo DESC
+        LIMIT #{startNum}, 10
+    </select>
+</mapper>
