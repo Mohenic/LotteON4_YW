@@ -2,7 +2,7 @@ package kr.co.lotteon.service.admin.cs;
 
 import kr.co.lotteon.dto.cs.CsArticleNoticeDTO;
 import kr.co.lotteon.entity.cs.CsArticleNoticeEntity;
-import kr.co.lotteon.mapper.AdminCSMapper;
+import kr.co.lotteon.mapper.admin.NoticeMapper;
 import kr.co.lotteon.repository.CsNoticeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminNoticeService {
 
-    private final AdminCSMapper mapper;
+    private final NoticeMapper mapper;
     private final CsNoticeRepository csNoticeRepository;
 
 

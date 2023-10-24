@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.lotteon.mapper.admin.FaqMapper">
+
+    <!-- faq list -->
+
+    <select id="faqList" resultType="kr.co.lotteon.dto.cs.CsArticleFaqDTO">
+        SELECT * FROM lo_cs_article_faq WHERE parent = 0 AND Cate1 = #{cate1};
+    </select>
+
+
+    <select id="faqListType" resultType="kr.co.lotteon.dto.cs.CsCate3DTO">
+        SELECT * FROM lo_cs_cate3 WHERE cate2 = #{cate2};
+    </select>
+
+</mapper>
