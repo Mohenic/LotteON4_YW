@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -63,14 +64,19 @@ public class ProductController {
     }
 
     @GetMapping("/product/view")
-    public String view(int prodNo, Model model){
+    public String view(int prodNo, int price, Model model){
 
 
         List<ProductEntity> products = prodService.getAllProduct(prodNo);
 
         model.addAttribute("products",products);
         model.addAttribute("prodNo",prodNo);
+<<<<<<< HEAD
+        model.addAttribute("price",price);
+        
+=======
 
+>>>>>>> ae9a24e5adc15fef215a7b4dd2496e60546364ea
         return "/product/view";
     }
 
@@ -78,10 +84,25 @@ public class ProductController {
     public String order(Model model, ProductDTO prodDTO){
 
         log.info("prodDTO=============================: " + prodDTO.getProdNo());
+<<<<<<< HEAD
+        log.info("prodDTO=============================: " + prodDTO.getFinalValue());
+        
+        ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo()); 
+        
+        
+        model.addAttribute("ProdDTO",orderProdDTO);
+        
+        
+        log.info("orderProdDTO.getTotalPrice=============================: " + prodDTO.getFinalValue());
+        log.info("orderProdDTO.getInputNum=============================: " + prodDTO.getInputValue());
+        log.info("orderProdDTO.getProdNum=============================: " + orderProdDTO.getProdNo());
+        
+=======
         log.info("prodDTO=============================: " + prodDTO.getUpdatedValue());
 
         ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo());
 
+>>>>>>> ae9a24e5adc15fef215a7b4dd2496e60546364ea
 /*        prodNO 서치 + 믈픔 갯수;
 
 

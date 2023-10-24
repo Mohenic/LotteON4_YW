@@ -4,14 +4,19 @@
 <mapper namespace="kr.co.lotteon.mapper.ProductMapper2">
 
 
-    <select id="selectQnaAndCate3" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
+    <!--<select id="selectQnaAndCate3" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
         select * from `lo_cs_article_qna` as a inner join `lo_cs_cate3` as b on a.`type` = b.`cate3` where a.`useyn`='Y' AND a.`parent`=0;
-    </select>
+    </select>-->
 
-
+<<<<<<< HEAD
+    
+    
+ 
+=======
 
     <select id="selectProduct" resultType="kr.co.lotteon.dto.product.ProductDTO">
         select * from `lo_product` where `prodNo` = #{prodNo};
     </select>
+>>>>>>> ae9a24e5adc15fef215a7b4dd2496e60546364ea
 
 </mapper>

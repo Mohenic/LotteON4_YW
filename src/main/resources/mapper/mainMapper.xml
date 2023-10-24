@@ -36,7 +36,10 @@
                  JOIN `lo_product_cate2` AS b ON a.`cate1` = b.`cate1`
         GROUP BY a.cate1;
     </select>
-    
+
+    <select id="selectProduct" resultType="kr.co.lotteon.dto.product.ProductDTO">
+        select * from lo_product where prodNo =#{prodNo}
+    </select>
     <!--  SELECT * FROM `lo_product_cate1` AS a
                           JOIN `lo_product_cate2` AS b ON a.`cate1` = b.`cate1`;  -->
 </mapper>

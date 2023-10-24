@@ -23,9 +23,9 @@
             <!-- 상품목록 -->
             <table border="0">
                 <tr th:each="article:${articles.getDtoList()}" >
-                    <td><a th:href="@{/product/view(prodCate1=${article.getProdCate1()}, prodCate2=${article.getProdCate2()}, prodNo=${article.getProdNo()})}" class="thumb"><img th:src="@{/file/__${article.getProdCate1()}__/__${article.getProdCate2()}__/__${article.getThumb1()}__}" alt="상품이미지"/></a></td>
+                    <td><a th:href="@{/product/view(prodCate1=${article.getProdCate1()}, prodCate2=${article.getProdCate2()}, prodNo=${article.getProdNo()}, price=${article.getPrice()})}" class="thumb"><img th:src="@{/file/__${article.getProdCate1()}__/__${article.getProdCate2()}__/__${article.getThumb1()}__}" alt="상품이미지"/></a></td>
                     <td>
-                        <a th:href="@{/product/view(prodCate1=${article.getProdCate1()}, prodCate2=${article.getProdCate2()}, prodNo=${article.getProdNo()})}"><h3 class="name" th:text="${article.getProdName()}"></h3></a>
+                        <a th:href="@{/product/view(prodCate1=${article.getProdCate1()}, prodCate2=${article.getProdCate2()}, prodNo=${article.getProdNo()}, price=${article.getPrice()})}"><h3 class="name" th:text="${article.getProdName()}"></h3></a>
                         <span class="desc" th:text="${article.getDescript()}"></span>
                     </td>
                     <td>

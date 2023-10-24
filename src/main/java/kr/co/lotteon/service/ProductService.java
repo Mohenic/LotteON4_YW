@@ -143,8 +143,8 @@ public class ProductService {
 
     public ProductDTO selectOrderProd(int prodNo) {
 
-        prodMapper.selectProduct(prodNo);
+        ProductDTO product = prodMapper.selectProduct(prodNo);
         
-        return null;
+        return product;
     }
 }
