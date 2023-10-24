@@ -3,54 +3,84 @@
 
     $(document).ready(function () {
         // 입력에서 초기값 가져오기
-        var numInput = $("input[name='num']");
+        var numInput = $("input[name=num]");
         var currentValue = parseInt(numInput.val());
+        var disPriceValue = parseInt($("#disPrice").text().replace(/,/g, ''));
+        var totalPrice = disPriceValue * currentValue;
+        
+        // 추가
         var oriProdNo = [[${prodNo}]];
+        var oriPrice = parseInt([[${price}]]);
 
+        $("#totalValue").text(totalPrice);
+       
         // "감소" 버튼에 대한 클릭 이벤트
         $(".decrease").click(function () {
             if (currentValue > 1) {
                 currentValue--;
                 numInput.val(currentValue);
+                totalPrice = currentValue * disPriceValue;
             }
+
+            $("#totalValue").text(totalPrice).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+            updateFinalValueAndInputValue();
         });
-        
+
 
         // "증가" 버튼에 대한 클릭 이벤트
         $(".increase").click(function () {
             currentValue++;
             numInput.val(currentValue);
+            totalPrice = currentValue * disPriceValue;
+            $("#totalValue").text(totalPrice).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+            updateFinalValueAndInputValue();
         });
 
-        // AJAX를 사용하여 서버로 업데이트된 값을 보내는 처리
-        $(".order").click(function () {
-            var updatedValue = numInput.val();
-            var prodNo = oriProdNo;
+        function updateFinalValueAndInputValue() {
 
-            console.log("view AJAX 상품 주문 개수 : " + updatedValue);
+            finalValue = totalPrice;
+            inputValue = numInput.val();
+            $("#totalValue").text(totalPrice).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 
-            window.location.href = "/LotteON/product/order?prodNo=" + prodNo + "&updatedValue=" + updatedValue;
-
-
-
-            // 서버 엔드포인트로 AJAX POST 요청 보내기
-            /* $.ajax({
-                 type: "GET",
-                 url: "/LotteON/product/order", // 실제 엔드포인트로 업데이트하세요
-                 data: { prodNo: prodNo, updatedValue: updatedValue },
-                 success: function (response) {
-                     // 필요한 경우 서버로부터의 응답 처리
-                     console.log("view 성공 콘솔 "+response)
-                     
-                 },
-                 error: function (error) {
-                     // 요청 중 발생하는 오류 처리
-                     console.log("view 실패 콘솔 "+error)
-                 }
-           });
-                 */
+            // URL 파라미터 업데이트
+            updateURLParameters();
+        }
         
-    });
+        let finalValue = $("#totalValue").text();
+        let inputValue = numInput.val();
+        let prodNo = oriProdNo;
+
+        function updateURLParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('quantity', currentValue);
+            urlParams.set('finalValue', finalValue);
+
+            // 현재 페이지 URL 업데이트
+            const newURL = window.location.pathname + '?' + urlParams.toString();
+            window.history.replaceState({}, '', newURL);
+        }
+
+
+
+        // "구매하기" 버튼 클릭 이벤트
+        $(".order").click(function () {
+            console.log("inputValue : "+inputValue);
+            console.log("finalValue  "+finalValue );
+            console.log("prodNo :"+ prodNo );
+
+            alert("주문하기@@@");
+
+            const newURL = "/LotteON/product/order" + window.location.search;
+
+            // 이동
+            window.location.href = newURL;
+            
+            /*window.location.href = "/LotteON/product/order?prodNo=" + prodNo + "&finalValue=" + finalValue + "&inputValue=" + inputValue;*/
+        });
+       
+
     });
     
     
@@ -90,7 +120,7 @@
                                 <span class="discount">[[${product.discount}]]</span>
                             </div>
                             <div class="dis_price">
-                                <ins th:text="${#numbers.formatInteger((product.price-(product.price*(product.discount*0.01))), 3, 'COMMA')}"></ins>
+                                <ins id="disPrice" th:text="${#numbers.formatInteger((product.price-(product.price*(product.discount*0.01))), 3, 'COMMA')}"></ins>
                             </div>
                         </nav>
                         <nav>
@@ -116,7 +146,7 @@
                         </div>
                         
                         <div class="total">
-                            <span>35,000</span>
+                            <span id="totalValue"></span>
                             <em>총 상품금액</em>
                         </div>
 
