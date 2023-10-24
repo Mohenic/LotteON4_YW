@@ -47,13 +47,13 @@ spring:
     cache: false
     prefix: classpath:/templates
     mvc:
-      static-path-patttern: "/static/**"
+      static-path-pattern: "/static/**"
 
   servlet:
     multipart:
       location: /file
       max-file-size: 10MB
-  mail:
+  mail: 
     host: smtp.gmail.com
     port: 587
     username: 'wjdals1217@gmail.com'

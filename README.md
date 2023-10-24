@@ -30,6 +30,7 @@
   -admin 상품목록 기능 1차완료(단순목록, 페이징처리)
   
 0.0.5 -SNAPSHOT
+ 
   -cs 게시글 목록기능(날자형식'yy-mm-dd'으로 수정) , 마스킹처리 완료
 
   -member 유효성검사, 중복검사 기능구현완료
@@ -60,4 +61,17 @@
 
   -admin notice/faq/qna 글목록 불러오기 페이징처리 선택삭제 정렬기능 완료 , write 구현중
 
+0.0.8 -SNAPSHOT
 
+  -cs notice, qna 게시글검색기능 추가
+
+
+0.0.9 -SNAPSHOT
+  
+  -main, product aside ver.1 구현 완료
+  
+  -my HTML 모듈화
+  
+  -policy HTML 추가
+
+  -company HTML 추가

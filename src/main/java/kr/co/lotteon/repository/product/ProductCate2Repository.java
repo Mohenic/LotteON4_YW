@@ -10,4 +10,10 @@ import java.util.List;
 @Repository
 public interface ProductCate2Repository extends JpaRepository<ProductCate2Entity, Integer>{
     List<ProductCate2Entity> findAllByCate1(int cate1);
+
+    public ProductCate2Entity findByCate1AndCate2(int cate1, int cate2);
+
+    public List<ProductCate2Entity> findByCate2(int cate2);
+    public List<ProductCate2Entity> findByCate1(int cate2);
+
 }

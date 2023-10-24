@@ -35,7 +35,7 @@ public class AdminCSController {
         String pg = req.getParameter("pg");
         String cate2 = req.getParameter("cate2");
         List<CsCate3Entity> entity2 = csService.selectCate3List();
-
+        log.info("entity2 : " + entity2);
         //페이지 관련 변수
         int start=0;
         int currentPage =1;

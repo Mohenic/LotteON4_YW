@@ -1,0 +1,137 @@
+<th:block th:insert="~{/cs/_header.html}"/>
+<script>
+  $(document).ready(function() {
+    // "status" 클래스를 가진 모든 셀을 찾아서 처리
+    $('.answer').each(function() {
+      // 현재 셀의 텍스트 가져오기
+      var text = $(this).text();
+
+      // 텍스트에 따라 스타일 변경
+      if (text === '검토중') {
+        $(this).css("color","black");
+      } else if (text === '답변완료') {
+        $(this).css("color","blue");
+      }
+    });
+  });
+
+
+</script>
+      <section id="cs">
+        <div class="notice">
+          <nav>
+            <div>
+              <p th:text="${cate1 == 'notice' ? '홈 > 공지사항':'홈 > 문의하기'}"></p>
+            </div>
+          </nav>
+          <section class="list">
+            <th:block th:insert="~{/cs/_aside.html}"/>
+            <article>
+              <nav>
+                <h1 th:text="${entity.detail}">전체</h1> <!-- 이거는 mapper 받아오자 어짜피 cate2값받아오니까 ㅇㅇ -->
+                <th:block th:if="${cate1 == 'notice'}">
+                      <h2>공지사항 [[${entity.detail}]] 내용입니다.</h2>
+                </th:block>
+                <th:block th:if="${cate1 == 'qna'}">
+                      <h2>문의하기 [[${entity.detail}]] 내용입니다.</h2>
+                </th:block>
+              </nav>
+
+              <table>
+
+                <tr th:each="article:${articles.getDtoList()}">
+
+                  <td th:if="${article.cate1 == 'notice'}">
+                    <th:block th:each="cate3:${entity2}">
+                      <th:block th:if="${cate3.cate3==article.type}">
+                        <span th:text="${'['+cate3.detail+']'}"></span>
+                      </th:block>
+                    </th:block>
+                    <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"></a>
+                  </td>
+                  <td th:if="${article.cate1 == 'qna'}">
+                    <th:block th:each="cate3:${entity2}">
+                      <th:block th:if="${cate3.cate3==article.type}">
+                        <span th:text="${'['+cate3.detail+']'}"></span>
+                      </th:block>
+                    </th:block>
+                    <a th:href="@{/cs/view(cate1=${article.cate1},cate2=${article.cate2},no=${article.no})}" th:text="${article.getTitle()}"></a> <!-- 마이바티스 사용이후로는 통합하고 수정할예정 -->
+                  </td>
+                  <th:block th:if="${article.cate1 == 'qna'}">
+                    <th:block th:if="${article.comment == 1}">
+                      <td class="answer">답변완료</td>
+                    </th:block>
+                    <th:block th:if="${article.comment == 0}">
+                      <td class="answer">검토중</td>
+                    </th:block>
+                  </th:block>
+
+                    <td th:if="${article.cate1=='qna'}" th:text="${article.writer.substring(0,3)+article.writer.substring(3,article.writer.length()).replaceAll('\w', '*')}"></td>
+
+                  <td th:text="${article.getRdate().toLocalDate()}"></td>
+                </tr>
+
+              </table>
+
+              <div class="page">
+                <th:block th:if="${articles.prev}">
+                  <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=1,search=${search})}" class="prev">처음으로</a>
+                  <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.start-1},search=${search})}" class="prev">이전</a>
+                </th:block>
+
+                <th:block th:each="num:${#numbers.sequence(articles.start,articles.end)}">
+                  <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=${num},search=${search})}" th:classappend="${num eq articles.pg ? 'on' : ''}" class="num">[[${num}]]</a>
+                </th:block>
+
+                <th:block th:if="${articles.next}">
+                    <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=${articles.end+1},search=${search})}" class="next">다음</a>
+                    <a th:href="@{/cs/search(cate1=${articles.cate1},cate2=${articles.cate2},pg=${(articles.getTotal()/10)+1},search=${search})}" class="next">마지막으로</a>
+                </th:block>
+              </div>
+              <th:block th:if ="${articles.cate1 == 'qna'}">
+                <a
+                        th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=all)}"
+                        th:if="${#authorization.expression('isAuthenticated()')}"
+                        class="btnWrite">문의하기</a>
+                <a
+                        th:href="@{/cs/qna/write(cate1=${articles.getCate1()},cate2=all)}"
+                        th:unless="${#authorization.expression('isAuthenticated()')}"
+                        onclick="afterLogin()"
+                        class="btnWrite">문의하기</a>
+              </th:block>
+              <div class="logo">
+                <form th:action="@{/cs/search(cate1=${cate1},cate2=${cate2})}" method="get" id="searchForm" >
+                  <select name="select" id="selected">
+                    <th:block th:if="${cate1=='qna'}">
+                      <option value="0" selected >선택</option>
+                      <option value="member" >회원</option>
+                      <option value="event">쿠폰/이벤트</option>
+                      <option value="order">주문/결제</option>
+                      <option value="delivery">배송</option>
+                      <option value="cancle">취소/반품/교환</option>
+                      <option value="travel">여행/숙박/항공</option>
+                      <option value="safety">안전거래</option>
+                    </th:block>
+                    <th:block th:if="${cate1=='notice'}">
+                      <option value="0"  selected>선택</option>
+                      <option value="all" >전체</option>
+                      <option value="cs">고객서비스</option>
+                      <option value="safety">안전거래</option>
+                      <option value="danger">위해상품</option>
+                      <option value="everesult">이벤트당첨</option>
+                    </th:block>
+
+                  </select>
+
+                  <input type="text" name="search" placeholder="제목을 입력하세요"/>
+                  <input type="hidden" name="cate1" th:value="${cate1}" />
+                  <input type="hidden" name="cate2" th:value="${cate2}"/>
+                  <button><i class="fa fa-search"></i></button>
+                </form>
+              </div>
+            </article>
+          </section>
+        </div>
+      </section>
+
+<th:block th:insert="~{/cs/_footer.html}"/>

@@ -2,6 +2,7 @@ package kr.co.lotteon.dto.product;
 
 import kr.co.lotteon.entity.product.ProductOrderEntity;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +31,10 @@ public class ProductOrderDTO {
     private int ordPayment;
     private int ordComplete;
     private LocalDateTime ordDate;
-    
+
+    private ProductOrderItemDTO productOrderItem;
+    private ProductDTO product;
+
     public ProductOrderEntity toEntity() {
         return ProductOrderEntity.builder()
                 .ordNo(ordNo)

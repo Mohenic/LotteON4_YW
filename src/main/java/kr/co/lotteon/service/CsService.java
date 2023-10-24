@@ -199,4 +199,72 @@ public class CsService {
         return mapper.selectQnaAndCate3andJoin().stream().map(e -> e.toEntity()).toList();
     }
 
+    public PageResponse2DTO  selectQnaSearch(PageRequestDTO pageRequestDTO,String title){
+
+        Pageable pageable =pageRequestDTO.getPageable("no");
+
+        Page<CsArticleQnaEntity> result =
+                csqnarepo.findCsArticleQnaEntitiesByCate1AndCate2AndUseynAndParentAndTitleContains(pageRequestDTO.getCate1(),
+                        pageRequestDTO.getCate2()
+                        ,"Y",0,title,pageable);
+
+        List<CsArticleQnaDTO> dtoList =result.getContent()
+                .stream()
+                .map(e->modelMapper.map(e, CsArticleQnaDTO.class))
+                .toList();
+
+        int totalElement =(int) result.getTotalElements();
+
+        return PageResponse2DTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElement)
+                .build();
+
+    }
+
+    public PageResponseDTO  selectNoticeSearch(PageRequestDTO pageRequestDTO,String title){
+
+        Pageable pageable =pageRequestDTO.getPageable("no");
+
+        Page<CsArticleNoticeEntity> result =csrepo.findCsArticleNoticeEntitieByCate1AndCate2AndUseynAndParentAndTitleContains(pageRequestDTO.getCate1(),
+                pageRequestDTO.getCate2()
+                ,"Y",0,title,pageable);
+
+        List<CsArticleNoticeDTO> dtoList =result.getContent()
+                .stream()
+                .map(e->modelMapper.map(e, CsArticleNoticeDTO.class))
+                .toList();
+
+        int totalElement =(int) result.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList1(dtoList)
+                .total(totalElement)
+                .build();
+
+    }
+
+    public PageResponseDTO selectNoticeAllSearch(PageRequestDTO pageRequestDTO,String title){
+
+        Pageable pageable =pageRequestDTO.getPageable("no");
+
+        Page<CsArticleNoticeEntity> result =csrepo.findCsArticleNoticeEntitiesByCate1AndUseynAndParentAndTitleContains(pageRequestDTO.getCate1(), "Y",0,title,pageable);
+
+        List<CsArticleNoticeDTO> dtoList =result.getContent()
+                .stream()
+                .map(e-> modelMapper.map(e, CsArticleNoticeDTO.class))
+                .toList();
+
+        int totalElement =(int) result.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList1(dtoList)
+                .total(totalElement)
+                .build();
+
+    }
+
 }

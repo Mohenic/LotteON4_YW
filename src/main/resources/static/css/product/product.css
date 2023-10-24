@@ -513,12 +513,12 @@
 	position: absolute;
   width: 21px;
   height: 21px;
-  background-image: url('../../../templates/product/images/ico_sprites.png');
+    background-image: url(../../images/product/ico_sprites.png);
   font-size: 0;
   background-color: transparent;
   border: none;
 }
-#product > .view > .info > .summary .count > .decrease {
+#product > .view > .info > .summary > .count > .decrease {
 	left:0;
   top:0;
   background-position: 0px -74px;
@@ -1418,4 +1418,17 @@
 #product > .search > .paging > .num > a.on {
   color: #fe434c;
   font-weight: bold;
+}
+
+
+
+/* 추가 view 버튼 css */
+
+
+#product >.view > .info >.summary> .tit_options{
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 10px
+    
+    
 }

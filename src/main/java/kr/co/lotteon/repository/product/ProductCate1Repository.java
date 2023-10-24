@@ -11,6 +11,5 @@ import java.util.List;
 @Repository
 public interface ProductCate1Repository extends JpaRepository<ProductCate1Entity, Integer> {
 
-
-    // ProductCate2DTO findProductIndexCateByProdCate2(ProductCate2DTO cate2DTO);
+    public List<ProductCate1Entity> findByCate1(Integer cate1);
 }

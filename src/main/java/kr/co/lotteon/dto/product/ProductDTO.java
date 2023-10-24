@@ -49,6 +49,7 @@ public class ProductDTO {
     private int etc2;
     private String etc4;
     private String etc5;
+    private int updatedValue;
 
     // 추가필드
     private String thumb1;

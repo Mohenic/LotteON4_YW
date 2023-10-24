@@ -10,7 +10,10 @@
     <title>롯데ON::고객센터</title>
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/cs/favicon.ico}" />
     <link rel="stylesheet" th:href="@{/css/cs/style.css}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+    <link rel="stylesheet"
+          th:href="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css}"/>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}"/>
     <script>
       function afterLogin() {
         if(confirm('로그인후 작성해주세요')){
@@ -19,6 +22,26 @@
           window.location.href='/LotteON/cs/index';
         }
       }
+      $(document).ready(function(){
+
+        $('#searchForm').submit(function(e){
+
+          const selected = document.getElementById('selected');
+          const selectedValue = selected.value;
+          console.log(selectedValue);
+
+          if(selectedValue ==0){
+            e.preventDefault();
+            alert('항목을 선택하고 검색해주세요!')
+          }
+
+        })
+
+      })
+
+
+
+
     </script>
   </head>
   <body>

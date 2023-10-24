@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+        lang="en">
+<head>
+    <meta charset="UTF-8">    
+    <title>롯데ON::대한민국 1등 온라인 쇼핑몰</title>    
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/main/favicon.ico}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/my/star-rating-svg.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <script th:src="@{/js/my/jquery.star-rating-svg.min.js}"></script>
+    <script th:src="@{/js/my/popup.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/my/style.css}">
+</head>
+<body>
+    <div id="wrapper">        
+        <header>
+            <div class="top">
+                <div>
+                    <th:block sec:authorize="isAnonymous()">
+                        <a th:href="@{/member/login}">로그인</a>
+                        <a th:href="@{/member/join}">회원가입</a>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <a href="#" >[[${#authentication.principal.member.name}]]</a>
+                        <th:block sec:authorize="hasRole('1')">
+                            <a href="#">마이페이지</a>
+                        </th:block>
+                        <th:block sec:authorize="hasAnyRole('2','3')" >
+                            <a th:href="@{/admin/index}">관리자</a>
+                        </th:block>
+                        <a th:href="@{/member/logout}">로그아웃</a>
+                        <a href="#">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;
+                            장바구니
+                        </a>
+                    </th:block>
+                </div>
+            </div>
+            <div class="logo">
+                <div>
+                    <a th:href="@{/}"><img th:src="@{/images/main/header_logo.png}" alt="로고"/></a>
+                    <form action="#">
+                        <input type="text" name="search"/>
+                        <button><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <div id="my">
+            <nav>
+                <div>
+                    <a th:href="@{/my/home}"><img th:src="@{/images/my/my_logo.jpg}" alt="나의쇼핑정보"></a>
+
+                    <ol>
+                        <li><a th:href="@{/my/order}">주문·배송<span class="delivery">1</span></a></li>
+                        <li><a th:href="@{/my/coupon}">할인쿠폰<span class="coupon">1</span></a></li>
+                        <li><a th:href="@{/my/point}">포인트<span class="point">1,000</span></a></li>
+                        <li><a th:href="@{/my/qna}">문의내역<span class="qna">1</span></a></li>
+                    </ol>
+
+                </div>
+            </nav>

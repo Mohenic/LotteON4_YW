@@ -7,6 +7,7 @@ import kr.co.lotteon.dto.product.ProductDTO;
 import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.service.ProductService;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,15 +26,44 @@ public class ProductController {
     public String list(Model model, PageRequestDTO pagerequest) {
 
         PageResponseDTO articles1 = null;
+<<<<<<< HEAD
         PageResponse2DTO articles2 = null;
 
+=======
+        PageResponseDTO articles2 = null;
+        
+>>>>>>> 47d0e171771cfae3d7ffeeb94fa9e21a18a4d22e
         log.info("prodCate1:" + pagerequest.getProdCate1()); //10들고왔음
         log.info("sort : " + pagerequest.getSort());
         log.info("orderBy : " + pagerequest.getOrderBy());
 
+<<<<<<< HEAD
          articles1 = prodService.findByCate1Product(pagerequest);
 
          log.info("articles1 Change pg Num: " + articles1.getPg()); //
+=======
+        log.info("prodCate1: ===========================" + pagerequest.getSize()); //10
+        
+        log.info("prodCate1: ===========================" + pagerequest.toString()); //10
+        log.info("prodCate1: ===========================" + pagerequest.getProdCate1()); //10
+        log.info("prodCate1: ===========================" + pagerequest.getProdCate2()); //10
+
+
+        if (pagerequest.getProdCate2() != 0) {
+            // 만약 prodCate2가 존재한다면 articles2를 조회
+            articles1 = prodService.findByCate2Product(pagerequest);
+            model.addAttribute("articles", articles1);
+        } else {
+            // 그 외의 경우에는 articles1를 조회
+            articles1 = prodService.findByCate1Product(pagerequest);
+            model.addAttribute("articles", articles1);
+        }
+
+
+
+
+        log.info("articles1 Change pg Num: " + articles1.getPg()); //
+>>>>>>> 47d0e171771cfae3d7ffeeb94fa9e21a18a4d22e
          log.info("articles1 Change pg Num: " + articles1.getEnd()); //
          log.info("articles1 Change pg Num: " + articles1.getStart()); //
          log.info("articles1 Change pg Num: " + articles1.toString()); //
@@ -46,20 +76,46 @@ public class ProductController {
     @GetMapping("/product/view")
     public String view(int prodNo, Model model){
 
-
+        
         List<ProductEntity> products = prodService.getAllProduct(prodNo);
 
         model.addAttribute("products",products);
+<<<<<<< HEAD
 
+=======
+        model.addAttribute("prodNo",prodNo);
+        
+>>>>>>> 47d0e171771cfae3d7ffeeb94fa9e21a18a4d22e
         return "/product/view";
     }
 
     @GetMapping("/product/order")
+<<<<<<< HEAD
     public String order(){
 
         return "/product/order";
     }
 
+=======
+    public String order(Model model, ProductDTO prodDTO){
+        
+        log.info("prodDTO=============================: " + prodDTO.getProdNo());
+        log.info("prodDTO=============================: " + prodDTO.getUpdatedValue());
+        
+        ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo()); 
+        
+/*        prodNO 서치 + 믈픔 갯수;
+        
+                        
+        prodDTO.getProdNo();~~~
+        model.addAttribute("prodNO",prodDTO.getProdNo());~~
+                */
+                
+        
+        return "/product/order";
+    }
+     
+>>>>>>> 47d0e171771cfae3d7ffeeb94fa9e21a18a4d22e
     @GetMapping("/product/search")
     public String search(){
 
