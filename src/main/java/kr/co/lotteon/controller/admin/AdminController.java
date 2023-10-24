@@ -52,7 +52,7 @@ public class AdminController {
         } else {
             pageResponseDTO = adminService.findByUseyn(pageRequestDTO);
         }
-            model.addAttribute("pageResponseDTO",pageResponseDTO);
+        model.addAttribute("pageResponseDTO",pageResponseDTO);
 
         return "/admin/product/list";
     }

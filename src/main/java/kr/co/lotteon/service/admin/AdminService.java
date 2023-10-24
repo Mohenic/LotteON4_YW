@@ -188,7 +188,7 @@ public class AdminService {
         ProductEntity productEntity = productRepository.save(entity);
 
         // 파일을 경로에 저장
-        String uploadPath = "src/main/resources/static/file/"+dto.getProdCate1()+"/"+dto.getProdCate2()+"/";
+        String uploadPath = "file/"+dto.getProdCate1()+"/"+dto.getProdCate2()+"/";
         saveFile(uploadPath, dto.getFileThumb1(), randomFilename1);
         saveFile(uploadPath, dto.getFileThumb2(), randomFilename2);
         saveFile(uploadPath, dto.getFileThumb3(), randomFilename3);

@@ -51,7 +51,7 @@ spring:
 
   servlet:
     multipart:
-      location: src/main/resources/static/file
+      location: /file
       max-file-size: 10MB
   mail:
     host: smtp.gmail.com
