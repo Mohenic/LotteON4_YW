@@ -23,7 +23,11 @@ public interface AdminCSMapper {
 
     // notice write
 
-    public CsArticleNoticeDTO NoticeWrite(CsArticleNoticeDTO dto, String regip);
+    public void NoticeWrite(CsArticleNoticeDTO dto, String regip);
+
+    // notice modify
+
+    public void NoticeModify(CsArticleNoticeDTO dto, String regip, int no);
 
 
 

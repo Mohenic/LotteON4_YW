@@ -1,11 +1,10 @@
-package kr.co.lotteon.controller.admin;
+package kr.co.lotteon.controller.admin.cs;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.cs.CsArticleNoticeDTO;
 import kr.co.lotteon.entity.cs.CsCate3Entity;
 import kr.co.lotteon.service.CsService;
-import kr.co.lotteon.service.admin.AdminCSService;
-import kr.co.lotteon.service.admin.AdminService;
+import kr.co.lotteon.service.admin.cs.AdminNoticeService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,77 +13,39 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.List;
 
 @Log4j2
 @Controller
-public class AdminCSController {
+public class AdminNoticeController {
 
     @Autowired
-    private AdminCSService service;
+    private AdminNoticeService service;
     @Autowired
     private CsService csService;
 
     // notice part
 
     @GetMapping("/admin/cs/notice/list")
-    public String noticeList(Model model, HttpServletRequest req){
-
-        // 값 요청
-
+    public String noticeList(Model model, HttpServletRequest req) {
+        // 페이지 및 카테고리 정보 요청
         String pg = req.getParameter("pg");
         String cate2 = req.getParameter("cate2");
         List<CsCate3Entity> entity2 = csService.selectCate3List();
-        log.info("entity2 : " + entity2);
-        //페이지 관련 변수
-        int start=0;
-        int currentPage =1;
-        int total=0;
-        int lastPageNum=0;
-        int pageGroupCurrent=1;
-        int pageGroupStart=1;
-        int pageGroupEnd=0;
-        int pageStartNum=0;
 
+        // 페이지 관련 변수
+        int currentPage = (pg != null) ? Integer.parseInt(pg) : 1;
+        int total = (cate2 == null) ? service.selectCountTotal() : service.selectCountTotalCate(cate2);
+        int start = (currentPage - 1) * 10;
+        int lastPageNum = (int) Math.ceil(total / 10.0);
+        int pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
+        int pageGroupStart = (pageGroupCurrent - 1) * 10 + 1;
+        int pageGroupEnd = Math.min(pageGroupCurrent * 10, lastPageNum);
+        int pageStartNum = total - start;
 
-        //현재페이지계산
-        if(pg!=null){
-            currentPage =Integer.parseInt(pg);
-
-        }
-
-        //전체 갯수조회
-        if(cate2 == null) {
-            total = service.selectCountTotal();
-        } else {
-            total = service.selectCountTotalCate(cate2);
-        }
-
-
-        //LIMIT 시작값계산
-        start =(currentPage -1)*10;
-
-
-        if(total%10 == 0){
-            lastPageNum =(total/10);
-        }else{
-            lastPageNum =(total/10)+1;
-        }
-
-        //페이지 그룹계산
-        pageGroupCurrent=(int) Math.ceil(currentPage/10.0);
-        pageGroupStart=(pageGroupCurrent-1)*10+1;
-        pageGroupEnd=pageGroupCurrent*10;
-
-        if(pageGroupEnd > lastPageNum){
-            pageGroupEnd=lastPageNum;
-        }
-
-        //페이지 시작번호 계산
-        pageStartNum = total-start;
-
-
-        List<CsArticleNoticeDTO> lists = null;
+        // 공지사항 목록 조회
+        List<CsArticleNoticeDTO> lists;
 
         if (cate2 != null) {
             switch (cate2) {
@@ -100,16 +61,18 @@ public class AdminCSController {
                 case "everesult":
                     lists = service.NoticeListeveresult(start);
                     break;
+                default:
+                    lists = Collections.emptyList(); // 기본값 설정
+                    break;
             }
         } else {
             lists = service.selectNoticeList(start);
         }
 
-        log.info("cate2" + cate2);
-
-        model.addAttribute("lists",lists);
-        model.addAttribute("entity2",entity2);
-        req.setAttribute("cate2",cate2);
+        // 모델에 속성 추가
+        model.addAttribute("lists", lists);
+        model.addAttribute("entity2", entity2);
+        req.setAttribute("cate2", cate2);
         req.setAttribute("start", start);
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("total", total);
@@ -145,11 +108,28 @@ public class AdminCSController {
     @PostMapping("/admin/cs/notice/write")
     public String noticeWrite(HttpServletRequest req,CsArticleNoticeDTO dto){
         String regip = req.getRemoteAddr();
-        log.info("dto : " + dto);
         service.NoticeWrite(dto,regip);
-        log.info("service.NoticeWrite(dto,regip) : " + service.NoticeWrite(dto,regip));
 
         return "redirect:/admin/cs/notice/list";
+    }
+    @GetMapping("/admin/cs/notice/modify")
+    public String noticeModify(Model model, int no){
+        CsArticleNoticeDTO modList = service.NoticeView(no);
+        model.addAttribute("modList", modList);
+        model.addAttribute("no", no);
+        return "/admin/cs/notice/modify";
+    }
+    @PostMapping("/admin/cs/notice/modify")
+    public String noticeModfiy(HttpServletRequest req, CsArticleNoticeDTO dto){
+
+        int no = Integer.parseInt(req.getParameter("no"));
+        String regip = req.getRemoteAddr();
+
+        log.info("dto: " + dto);
+
+        service.NoticeModify(dto,regip,no);
+
+        return "redirect:/admin/cs/notice/view?no="+no;
     }
 
 }
