@@ -1,5 +1,6 @@
 package kr.co.lotteon.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.cs.PageResponse2DTO;
 import kr.co.lotteon.dto.product.PageRequestDTO;
 import kr.co.lotteon.dto.product.PageResponseDTO;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -79,39 +82,46 @@ public class ProductController {
     }
 
     @GetMapping("/product/order")
-    public String order(Model model, ProductDTO prodDTO){
-
-        log.info("prodDTO=============================: " + prodDTO.getProdNo());
-
-        log.info("prodDTO=============================: " + prodDTO.getFinalValue());
-        
-        ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo()); 
-        
-        
-        model.addAttribute("ProdDTO",orderProdDTO);
-        
-        
-        log.info("orderProdDTO.getTotalPrice=============================: " + prodDTO.getFinalValue());
-        log.info("orderProdDTO.getInputNum=============================: " + prodDTO.getInputValue());
-        log.info("orderProdDTO.getProdNum=============================: " + orderProdDTO.getProdNo());
-        
-
-      //  log.info("prodDTO=============================: " + prodDTO.getUpdatedValue());
-
-        //ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo());
-
-
-/*        prodNO 서치 + 믈픔 갯수;
-
-
-        prodDTO.getProdNo();~~~
-        model.addAttribute("prodNO",prodDTO.getProdNo());~~
-                */
-
+    public String order(){
 
         return "/product/order";
     }
 
+    @PostMapping("/product/order")
+    public String selectOrder(List<ProductDTO> dto, Model model) {
+
+        log.info("dto: " + dto.toString());
+        
+        
+        //log.info("prodDTO  1 =============================: " + request.toString());
+        //int prodNo = request.getParameter("prodNo");
+        /*log.info("prodDTO  1 =============================: " + prodNo);
+        log.info("prodDTO  2 =============================: " + inputNum);
+        log.info("prodDTO  3 =============================: " + price);
+        log.info("prodDTO  4 =============================: " + finalValue);*/
+
+        //ProductDTO orderProdDTO = prodService.selectOrderProd(request.getParameter("prodNo"));
+
+
+
+        //model.addAttribute("ProdDTO",orderProdDTO);
+
+
+     /*   log.info("orderProdDTO.getTotalPrice=============================: " + finalValue);
+        log.info("orderProdDTO.getInputNum=============================: " + inputNum);
+        log.info("orderProdDTO.getProdNum=============================: " + prodNo);
+        log.info("orderProdDTO.price=============================: " + price);*/
+
+        
+        
+        
+        
+        
+        return "/product/order";
+    }
+    
+    
+    
     @GetMapping("/product/search")
     public String search(){
 
