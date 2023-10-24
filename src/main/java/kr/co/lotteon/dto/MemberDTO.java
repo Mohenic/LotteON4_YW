@@ -1,6 +1,7 @@
 package kr.co.lotteon.dto;
 
 import jakarta.persistence.Column;
+import kr.co.lotteon.dto.product.ProductOrderDTO;
 import kr.co.lotteon.entity.MemberEntity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -47,6 +48,8 @@ public class MemberDTO {
     private String etc3;
     private String etc4;
     private String etc5;
+
+    private ProductOrderDTO productOrderDTO;
     public MemberEntity toEntity(){
         return MemberEntity.builder()
                 .uid(uid)

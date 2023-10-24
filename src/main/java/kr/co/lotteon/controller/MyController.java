@@ -1,5 +1,6 @@
 package kr.co.lotteon.controller;
 
+import kr.co.lotteon.dto.MemberDTO;
 import kr.co.lotteon.dto.PageRequestOrderDTO;
 import kr.co.lotteon.dto.PageResponseOrderDTO;
 import kr.co.lotteon.service.MyService;
@@ -25,6 +26,11 @@ public class MyController {
         String version = buildProperties.getVersion(); // build.gradle 파일에서 버전값 가져옴
         return appName+version;
     }
+    /*@ModelAttribute("myInfo")
+    public MemberDTO myinfo(String uid){
+         MemberDTO member = myService.findMyInfo(uid);
+         return member;
+    }*/
 
     @GetMapping("/my/home")
     public String home(Model model){
