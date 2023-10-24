@@ -26,24 +26,14 @@ public class ProductController {
     public String list(Model model, PageRequestDTO pagerequest) {
 
         PageResponseDTO articles1 = null;
-<<<<<<< HEAD
-        PageResponse2DTO articles2 = null;
-
-=======
         PageResponseDTO articles2 = null;
-        
->>>>>>> 47d0e171771cfae3d7ffeeb94fa9e21a18a4d22e
+
         log.info("prodCate1:" + pagerequest.getProdCate1()); //10들고왔음
         log.info("sort : " + pagerequest.getSort());
         log.info("orderBy : " + pagerequest.getOrderBy());
 
-<<<<<<< HEAD
-         articles1 = prodService.findByCate1Product(pagerequest);
-
-         log.info("articles1 Change pg Num: " + articles1.getPg()); //
-=======
         log.info("prodCate1: ===========================" + pagerequest.getSize()); //10
-        
+
         log.info("prodCate1: ===========================" + pagerequest.toString()); //10
         log.info("prodCate1: ===========================" + pagerequest.getProdCate1()); //10
         log.info("prodCate1: ===========================" + pagerequest.getProdCate2()); //10
@@ -63,12 +53,11 @@ public class ProductController {
 
 
         log.info("articles1 Change pg Num: " + articles1.getPg()); //
->>>>>>> 47d0e171771cfae3d7ffeeb94fa9e21a18a4d22e
-         log.info("articles1 Change pg Num: " + articles1.getEnd()); //
-         log.info("articles1 Change pg Num: " + articles1.getStart()); //
-         log.info("articles1 Change pg Num: " + articles1.toString()); //
+        log.info("articles1 Change pg Num: " + articles1.getEnd()); //
+        log.info("articles1 Change pg Num: " + articles1.getStart()); //
+        log.info("articles1 Change pg Num: " + articles1.toString()); //
 
-         model.addAttribute("articles",articles1);
+        model.addAttribute("articles",articles1);
 
         return "/product/list";
     }
@@ -76,46 +65,34 @@ public class ProductController {
     @GetMapping("/product/view")
     public String view(int prodNo, Model model){
 
-        
+
         List<ProductEntity> products = prodService.getAllProduct(prodNo);
 
         model.addAttribute("products",products);
-<<<<<<< HEAD
-
-=======
         model.addAttribute("prodNo",prodNo);
-        
->>>>>>> 47d0e171771cfae3d7ffeeb94fa9e21a18a4d22e
+
         return "/product/view";
     }
 
     @GetMapping("/product/order")
-<<<<<<< HEAD
-    public String order(){
-
-        return "/product/order";
-    }
-
-=======
     public String order(Model model, ProductDTO prodDTO){
-        
+
         log.info("prodDTO=============================: " + prodDTO.getProdNo());
         log.info("prodDTO=============================: " + prodDTO.getUpdatedValue());
-        
-        ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo()); 
-        
+
+        ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo());
+
 /*        prodNO 서치 + 믈픔 갯수;
-        
-                        
+
+
         prodDTO.getProdNo();~~~
         model.addAttribute("prodNO",prodDTO.getProdNo());~~
                 */
-                
-        
+
+
         return "/product/order";
     }
-     
->>>>>>> 47d0e171771cfae3d7ffeeb94fa9e21a18a4d22e
+
     @GetMapping("/product/search")
     public String search(){
 
@@ -126,7 +103,7 @@ public class ProductController {
     public String complete() {
 
         return "/product/complete";
-     }
+    }
 
     @GetMapping("/product/cart")
     public String cart() {
