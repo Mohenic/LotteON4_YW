@@ -3,6 +3,7 @@ package kr.co.lotteon.controller;
 import kr.co.lotteon.dto.PageRequestOrderDTO;
 import kr.co.lotteon.dto.PageResponseOrderDTO;
 import kr.co.lotteon.service.MyService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,7 @@ public class MyController {
     @GetMapping("/my/order")
     public String order(Model model, PageRequestOrderDTO pageRequestOrderDTO){
         PageResponseOrderDTO pageResponseOrderDTO = myService.order(pageRequestOrderDTO);
-        model.addAttribute("pageResponseOrderDTO", pageResponseOrderDTO);
+        model.addAttribute("orderDTO", pageResponseOrderDTO);
         return "/my/order";
     }
     @GetMapping("/my/point")
