@@ -9,8 +9,8 @@
     </select>
 
 
-    
-    <select id="selectProduct" resultType="kr.co.lotteon.dto.cs.ProductDTO">
+
+    <select id="selectProduct" resultType="kr.co.lotteon.dto.product.ProductDTO">
         select * from `lo_product` where `prodNo` = #{prodNo};
     </select>
 

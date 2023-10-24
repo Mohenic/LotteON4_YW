@@ -55,8 +55,8 @@
                                 <td class="hit" th:text="${list.hit}"></td>
                                 <td class="rdate" th:text="${list.rdate.toLocalDate()}"></td>
                                 <td>
-                                    <a href="#">[삭제]</a>
-                                    <a href="#">[수정]</a>
+                                    <a th:href="@{/admin/cs/notice/delete(chk=${list.no})}" onclick="return confirmDelete();">[삭제]</a>
+                                    <a th:href="@{/admin/cs/notice/modify(no=${list.no})}">[수정]</a>
                                 </td>
                             </tr>
                         </form>

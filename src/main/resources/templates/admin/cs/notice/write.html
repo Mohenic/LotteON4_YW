@@ -1,12 +1,5 @@
 <th:block th:insert="~{/admin/_header.html}"/>
 <th:block th:insert="~{/admin/_aside.html}"/>
-<script>
-    // JavaScript를 사용하여 type 값을 cate2 값으로 받음
-    document.getElementById("cate2Select").addEventListener("change", function() {
-        var cate2Value = this.value;
-        document.getElementById("typeInput").value = cate2Value;
-    });
-</script>
             <section id="admin-cs-notice-write">
                 <nav>
                     <h3>공지사항 작성</h3>

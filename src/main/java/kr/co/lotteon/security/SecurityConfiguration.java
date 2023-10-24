@@ -60,7 +60,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 						.requestMatchers("/product/**").permitAll()
 						.requestMatchers("/").permitAll()
 						.requestMatchers("/LotteON").permitAll()
-						.requestMatchers("/css/**", "/js/**", "/images/**", "/file/**").permitAll());
+						.requestMatchers("/css/**", "/js/**", "/images/**", "/file/**", "/thumbs/**", "/banners/**").permitAll());
 
 		return http.build();
 	}
@@ -79,8 +79,12 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 	//기술노트 [Spring] 정적 자원 리소스 경로설정
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/file/**")
+		registry.addResourceHandler("/files/**")
 				.addResourceLocations(resourceLoader.getResource("file:file/"));
+		registry.addResourceHandler("/thumbs/**")
+				.addResourceLocations(resourceLoader.getResource("file:thumbs/"));
+		registry.addResourceHandler("/banners/**")
+				.addResourceLocations(resourceLoader.getResource("file:banners/"));
 	}
 
 

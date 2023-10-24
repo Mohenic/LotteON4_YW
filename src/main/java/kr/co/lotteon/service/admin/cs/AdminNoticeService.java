@@ -1,19 +1,19 @@
-package kr.co.lotteon.service.admin;
+package kr.co.lotteon.service.admin.cs;
 
 import kr.co.lotteon.dto.cs.CsArticleNoticeDTO;
 import kr.co.lotteon.entity.cs.CsArticleNoticeEntity;
-import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.mapper.AdminCSMapper;
 import kr.co.lotteon.repository.CsNoticeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Log4j2
 @RequiredArgsConstructor
-public class AdminCSService {
+public class AdminNoticeService {
 
     private final AdminCSMapper mapper;
     private final CsNoticeRepository csNoticeRepository;
@@ -73,8 +73,14 @@ public class AdminCSService {
     }
 
     // notice write
-    public CsArticleNoticeDTO NoticeWrite(CsArticleNoticeDTO dto, String regip){
-        return mapper.NoticeWrite(dto,regip);
+    public void NoticeWrite(CsArticleNoticeDTO dto, String regip){
+        mapper.NoticeWrite(dto,regip);
+    }
+
+    // notice modify
+
+    public void NoticeModify(CsArticleNoticeDTO dto, String regip, int no){
+        mapper.NoticeModify(dto,regip, no);
     }
 
 }

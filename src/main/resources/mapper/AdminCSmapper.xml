@@ -66,7 +66,21 @@
 
     <!-- notice Write -->
     <insert id="NoticeWrite">
-        INSERT INTO `lo_cs_article_notice`
+        INSERT INTO `lo_cs_article_notice` (cate1,cate2,type,title,content,writer,useyn,regip,rdate)
+        VALUES (#{dto.cate1},#{dto.cate2},#{dto.cate2},#{dto.title},#{dto.content},#{dto.writer},"Y",#{regip},NOW());
     </insert>
+
+    <!-- notice Modify -->
+
+    <update id="NoticeModify" >	UPDATE `lo_cs_article_notice` SET
+                                                                    `cate2`   = #{dto.cate2},
+                                                                    `title`  = #{dto.title},
+                                                                    `content` = #{dto.content},
+                                                                    `regip` = #{regip},
+                                                                    `rdate`     = now()
+                                  WHERE
+                                      `no`    = #{no};
+    </update>
+
 
 </mapper>
