@@ -1,4 +1,4 @@
-package kr.co.lotteon.mapper;
+package kr.co.lotteon.mapper.admin;
 
 import kr.co.lotteon.dto.cs.CsArticleNoticeDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface AdminCSMapper {
+public interface NoticeMapper {
 
     // notice list
     public List<CsArticleNoticeDTO> selectNoticeList(int start);
