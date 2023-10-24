@@ -26,6 +26,7 @@ public class MyService {
     private ProductOrderRepository productOrderRepository;
 
     public PageResponseOrderDTO order(PageRequestOrderDTO requestOrderDTO){
+        log.info("ordUid : "+requestOrderDTO.getOrdUid());
         int total = productOrderRepository.countByOrdUid(requestOrderDTO.getOrdUid());
         PageResponseOrderDTO responseOrderDTO = new PageResponseOrderDTO(requestOrderDTO, total);
         List<ProductOrderDTO> dtoList = mapper.selectProductOrders(requestOrderDTO.getOrdUid(), responseOrderDTO.getStartNum());

@@ -39,7 +39,7 @@
 
                         <tr th:each="list : ${pageResponseDTO.dtoList}">
                             <td class="chk"><input type="checkbox" name ="chk" class="checkbox" th:value="${list.prodNo}"></td>
-                            <td><img th:src="@{/file/}+${list.prodCate1}+'/'+${list.prodCate2}+'/'+${list.thumb1}" class="thumb"></td>
+                            <td><img th:src="@{/thumbs/}+${list.prodCate1}+'/'+${list.prodCate2}+'/'+${list.thumb1}" class="thumb"></td>
                             <td th:text="${list.prodNo}"></td>
                             <td th:text="${list.prodName}"></td>
                             <td th:text="${list.price}"></td>

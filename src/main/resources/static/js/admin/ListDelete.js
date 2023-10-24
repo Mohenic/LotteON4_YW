@@ -6,6 +6,7 @@ $(function() {
         }
     });
 
+    // submit 형식 선택지
     $('.btnDelete').click(function(e) {
         e.preventDefault();
         if (confirm("삭제하시겠습니까?")) {
@@ -29,4 +30,12 @@ $(function() {
             window.location.href = '/LotteON/admin/product/delete?chk=' + prodNo;
         }
     });
+
 });
+    function confirmDelete() {
+        // JavaScript의 confirm 함수를 사용하여 경고 메시지를 표시
+        var confirmed = confirm("삭제하시겠습니까?");
+
+        // 확인 버튼이 눌렸을 때만 true를 반환하여 페이지로 이동
+        return confirmed;
+    }

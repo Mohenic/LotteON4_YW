@@ -8,7 +8,7 @@
     <select id="selectNoticeList" resultType="kr.co.lotteon.dto.cs.CsArticleNoticeDTO">
         SELECT a.*, c.detail
         FROM lo_cs_article_notice a
-        INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
+                 INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
         WHERE a.parent = 0 AND a.useyn = "Y"
         ORDER BY a.no DESC LIMIT #{start}, 10;
     </select>
@@ -16,7 +16,7 @@
     <select id="NoticeListcs" resultType="kr.co.lotteon.dto.cs.CsArticleNoticeDTO">
         SELECT a.*, c.detail
         FROM lo_cs_article_notice a
-        INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
+                 INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
         WHERE a.parent = 0 AND a.cate2 = "cs" AND a.useyn = "Y"
         ORDER BY a.no DESC LIMIT #{start}, 10;
     </select>
@@ -24,7 +24,7 @@
     <select id="NoticeListsafety" resultType="kr.co.lotteon.dto.cs.CsArticleNoticeDTO">
         SELECT a.*, c.detail
         FROM lo_cs_article_notice a
-        INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
+                 INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
         WHERE a.parent = 0 AND a.cate2 = "safety" AND a.useyn = "Y"
         ORDER BY a.no DESC LIMIT #{start}, 10;
     </select>
@@ -32,7 +32,7 @@
     <select id="NoticeListdanger" resultType="kr.co.lotteon.dto.cs.CsArticleNoticeDTO">
         SELECT a.*, c.detail
         FROM lo_cs_article_notice a
-        INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
+                 INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
         WHERE a.parent = 0 AND a.cate2 = "danger" AND a.useyn = "Y"
         ORDER BY a.no DESC LIMIT #{start}, 10;
     </select>
@@ -40,7 +40,7 @@
     <select id="NoticeListeveresult" resultType="kr.co.lotteon.dto.cs.CsArticleNoticeDTO">
         SELECT a.*, c.detail
         FROM lo_cs_article_notice a
-        INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
+                 INNER JOIN lo_cs_cate2 c ON a.cate2 = c.cate2
         WHERE a.parent = 0 AND a.cate2 = "everesult" AND a.useyn = "Y"
         ORDER BY a.no DESC LIMIT #{start}, 10;
     </select>
@@ -66,7 +66,21 @@
 
     <!-- notice Write -->
     <insert id="NoticeWrite">
-        INSERT INTO `lo_cs_article_notice`
+        INSERT INTO `lo_cs_article_notice` (cate1,cate2,type,title,content,writer,useyn,regip,rdate)
+        VALUES (#{dto.cate1},#{dto.cate2},#{dto.cate2},#{dto.title},#{dto.content},#{dto.writer},"Y",#{regip},NOW());
     </insert>
+
+    <!-- notice Modify -->
+
+    <update id="NoticeModify" >	UPDATE `lo_cs_article_notice` SET
+                                                                    `cate2`   = #{dto.cate2},
+                                                                    `title`  = #{dto.title},
+                                                                    `content` = #{dto.content},
+                                                                    `regip` = #{regip},
+                                                                    `rdate`     = now()
+                                  WHERE
+                                      `no`    = #{no};
+    </update>
+
 
 </mapper>

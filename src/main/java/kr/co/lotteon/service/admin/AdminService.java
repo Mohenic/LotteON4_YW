@@ -12,6 +12,7 @@ import kr.co.lotteon.repository.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -169,6 +170,9 @@ public class AdminService {
         return productCate2Repository.findAllByCate1(cate1);
     }
 
+    @Value("${upload.path.thumbs}")
+    private String filepath;
+
     public void save(ProductDTO dto) {
         // 랜덤한 파일 이름 생성
         String randomFilename1 = generateRandomFilename(dto.getFileThumb1().getOriginalFilename());
@@ -187,13 +191,16 @@ public class AdminService {
         // 나머지 저장 로직
         ProductEntity productEntity = productRepository.save(entity);
 
+
         // 파일을 경로에 저장
-        String uploadPath = "src/main/resources/static/file/"+dto.getProdCate1()+"/"+dto.getProdCate2()+"/";
+        String uploadPath = filepath+"/"+dto.getProdCate1()+"/"+dto.getProdCate2()+"/";
         saveFile(uploadPath, dto.getFileThumb1(), randomFilename1);
         saveFile(uploadPath, dto.getFileThumb2(), randomFilename2);
         saveFile(uploadPath, dto.getFileThumb3(), randomFilename3);
         saveFile(uploadPath, dto.getFileDetail(), randomDetailFilename);
     }
+
+
 
     // 파일을 실제 경로에 저장하는 메소드
     private void saveFile(String uploadPath, MultipartFile fileData, String fileName) {

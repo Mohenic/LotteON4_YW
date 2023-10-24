@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /*
  * 날짜 : 2023.10.14
@@ -24,6 +26,10 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 
 	@Autowired
 	private SecurityUserService service;
+
+	//기술노트 [Spring] 정적 자원 리소스 경로설정
+	@Autowired
+	private ResourceLoader resourceLoader;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -54,7 +60,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 						.requestMatchers("/product/**").permitAll()
 						.requestMatchers("/").permitAll()
 						.requestMatchers("/LotteON").permitAll()
-						.requestMatchers("/css/**", "/js/**", "/images/**", "/file/**").permitAll());
+						.requestMatchers("/css/**", "/js/**", "/images/**", "/file/**", "/thumbs/**", "/banners/**").permitAll());
 
 		return http.build();
 	}
@@ -67,6 +73,18 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
+	}
+
+
+	//기술노트 [Spring] 정적 자원 리소스 경로설정
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/files/**")
+				.addResourceLocations(resourceLoader.getResource("file:file/"));
+		registry.addResourceHandler("/thumbs/**")
+				.addResourceLocations(resourceLoader.getResource("file:thumbs/"));
+		registry.addResourceHandler("/banners/**")
+				.addResourceLocations(resourceLoader.getResource("file:banners/"));
 	}
 
 
