@@ -25,97 +25,58 @@
                         </div>
 
                         <table border="0">
-                            <tr>
-                                <th>날짜</th>
-                                <th>상품정보</th>
-                                <th>상태</th>
-                                <th>확인/신청</th>
-                            </tr>
-                            <tr>
-                                <td class="date">2022-12-13</td>
-                                <td>
-                                    <a href="#" class="thumb"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                                    <ul>
-                                        <li class="company">상호명</li>
-                                        <li class="prodName"><a href="#">상품명</a></li>
-                                        <li>수량 : <span class="prodCount">1</span>개 / 주문번호 : <span class="ordNo">1012211341</span></li>
-                                        <li class="prodPrice">34,000</li>
-                                    </ul>
-                                </td>
-                                <td class="status">배송완료</td>
-                                <td class="confirm">
-                                    <a href="#" class="receive">수취확인</a>
-                                    <a href="#" class="review">상품평</a>
-                                    <a href="#" class="refund">반품신청</a>
-                                    <a href="#" class="exchange">교환신청</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="date">2022-12-13</td>
-                                <td>
-                                    <a href="#" class="thumb"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                                    <ul>
-                                        <li class="company">상호명</li>
-                                        <li class="prodName"><a href="#">상품명</a></li>
-                                        <li>수량 : <span class="prodCount">1</span>개 / 주문번호 : <span class="ordNo">1012211341</span></li>
-                                        <li class="prodPrice">34,000</li>
-                                    </ul>
-                                </td>
-                                <td class="status">배송완료</td>
-                                <td class="confirm">
-                                    <a href="#" class="receive">수취확인</a>
-                                    <a href="#" class="review">상품평</a>
-                                    <a href="#" class="refund">반품신청</a>
-                                    <a href="#" class="exchange">교환신청</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="date">2022-12-13</td>
-                                <td>
-                                    <a href="#" class="thumb"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                                    <ul>
-                                        <li class="company">상호명</li>
-                                        <li class="prodName"><a href="#">상품명</a></li>
-                                        <li>수량 : <span class="prodCount">1</span>개 / 주문번호 : <span class="ordNo">1012211341</span></li>
-                                        <li class="prodPrice">34,000</li>
-                                    </ul>
-                                </td>
-                                <td class="status">배송완료</td>
-                                <td class="confirm">
-                                    <a href="#" class="receive">수취확인</a>
-                                    <a href="#" class="review">상품평</a>
-                                    <a href="#" class="refund">반품신청</a>
-                                    <a href="#" class="exchange">교환신청</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="date">2022-12-13</td>
-                                <td>
-                                    <a href="#" class="thumb"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                                    <ul>
-                                        <li class="company">상호명</li>
-                                        <li class="prodName"><a href="#">상품명</a></li>
-                                        <li>수량 : <span class="prodCount">1</span>개 / 주문번호 : <span class="ordNo">1012211341</span></li>
-                                        <li class="prodPrice">34,000</li>
-                                    </ul>
-                                </td>
-                                <td class="status">배송완료</td>
-                                <td class="confirm">
-                                    <a href="#" class="receive">수취확인</a>
-                                    <a href="#" class="review">상품평</a>
-                                    <a href="#" class="refund">반품신청</a>
-                                    <a href="#" class="exchange">교환신청</a>
-                                </td>
-                            </tr>
-                        </table>
+                            <th:block th:if="${#lists.isEmpty(orderDTO.getDtoList())}">
+                                <tr>
+                                    <td style="text-align: center">등록된 주문이 없습니다.</td>
+                                </tr>
+                            </th:block>
+                            <th:block th:unless="${#lists.isEmpty(orderDTO.getDtoList())}">
+                                <tr>
+                                    <th>날짜</th>
+                                    <th>상품정보</th>
+                                    <th>상태</th>
+                                    <th>확인/신청</th>
+                                </tr>
 
-                        <p class="page">
-                            <a href="#" class="prev">이전</a>
-                            <a href="#" class="num on">1</a>
-                            <a href="#" class="num">2</a>
-                            <a href="#" class="num">3</a>
-                            <a href="#" class="next">다음</a>
-                        </p>
+                                <tr th:each="order:${orderDTO.getDtoList()}">
+                                    <td class="date">[[${order.getOrdDate()}]]</td>
+                                    <td>
+                                        <a th:href="@{/product/view(prodCate1=${order.getProduct().getProdCate1()}, prodCate2=${order.getProduct().getProdCate2()}, prodNo=${order.getProductOrderItem().getProdNo()})}" class="thumb"><img th:src="@{/thumbs/}+${order.getProduct().getProdCate1()}+"/"+${order.getProduct().getProdCate2()}+"/"+${order.getProduct().getThumb1()}" alt="${order.getProduct().getProdName()}"></a>
+                                        <ul>
+                                            <li class="company">[[${order.getProduct().getCompany}]]</li>
+                                            <li class="prodName"><a th:href="@{/product/view(prodCate1=${order.getProduct().getProdCate1()}, prodCate2=${order.getProduct().getProdCate2()}, prodNo=${order.getProductOrderItem().getProdNo()})}">[[${order.getProduct().getProdName}]]</a></li>
+                                            <li>수량 : <span class="prodCount">[[${order.getProductOrderItem().getCount()}]]</span>개 / 주문번호 : <span class="ordNo">[[${order.getProductOrderItem().getOrdNo()}]]</span></li>
+                                            <li class="prodPrice" th:text="${#numbers.formatInteger((order.getProductOrderItem().getPrice()-(order.getProductOrderItem().getPrice()*(order.getProductOrderItem().getDiscount()*0.01))), 3, 'COMMA')}"></li>
+                                        </ul>
+                                    </td>
+                                    <td class="status">배송완료</td>
+                                    <td class="confirm">
+                                        <a href="#" class="receive">수취확인</a>
+                                        <a href="#" class="review">상품평</a>
+                                        <a href="#" class="refund">반품신청</a>
+                                        <a href="#" class="exchange">교환신청</a>
+                                    </td>
+
+                                </tr>
+                            </th:block>
+
+
+
+                        </table>
+                        <th:block th:unless="${#lists.isEmpty(orderDTO.getDtoList())}">
+                            <p class="page">
+                                <th:block th:if="${orderDTO.getPageGroupStart() gt 1}">
+                                    <a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},pg=${orderDTO.getPageGroupStart() - 1})}" class="prev">이전</a>
+                                </th:block>
+                                <th:block th:each="num:${#numbers.sequence(orderDTO.getPageGroupStart(), orderDTO.getPageGroupEnd())}">
+                                    <a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},pg=${num})}" th:classappend="${num eq orderDTO.getCurrentPage() ? 'on' : ''}" class="num">[[${num}]]</a>
+                                </th:block>
+                                <th:block th:if="${orderDTO.getPageGroupEnd() lt orderDTO.getLastPageNum()}">
+                                    <a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},pg=${orderDTO.getPageGroupEnd() + 1})}" class="next">다음</a>
+                                </th:block>
+
+                            </p>
+                        </th:block>
 
                     </article>                  
 
