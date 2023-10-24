@@ -71,12 +71,10 @@ public class ProductController {
 
         model.addAttribute("products",products);
         model.addAttribute("prodNo",prodNo);
-<<<<<<< HEAD
+
         model.addAttribute("price",price);
         
-=======
 
->>>>>>> ae9a24e5adc15fef215a7b4dd2496e60546364ea
         return "/product/view";
     }
 
@@ -84,7 +82,7 @@ public class ProductController {
     public String order(Model model, ProductDTO prodDTO){
 
         log.info("prodDTO=============================: " + prodDTO.getProdNo());
-<<<<<<< HEAD
+
         log.info("prodDTO=============================: " + prodDTO.getFinalValue());
         
         ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo()); 
@@ -97,12 +95,12 @@ public class ProductController {
         log.info("orderProdDTO.getInputNum=============================: " + prodDTO.getInputValue());
         log.info("orderProdDTO.getProdNum=============================: " + orderProdDTO.getProdNo());
         
-=======
-        log.info("prodDTO=============================: " + prodDTO.getUpdatedValue());
 
-        ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo());
+      //  log.info("prodDTO=============================: " + prodDTO.getUpdatedValue());
 
->>>>>>> ae9a24e5adc15fef215a7b4dd2496e60546364ea
+        //ProductDTO orderProdDTO = prodService.selectOrderProd(prodDTO.getProdNo());
+
+
 /*        prodNO 서치 + 믈픔 갯수;
 
 
