@@ -43,6 +43,7 @@ dependencies {
 	//implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '3.0.2'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 
 }
 

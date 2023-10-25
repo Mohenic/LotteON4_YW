@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.lotteon.mapper.MyMapper">
+
+
+    <select id="selectQnaMy" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
+        select * from `lo_cs_article_qna` as a inner join `lo_cs_cate3` as b on a.`type` = b.`cate3` where a.`useyn`='Y' AND a.`parent`=0 and a.writer=#{writer} order by a.`no` DESC LIMIT #{start}, 5;
+    </select>
+
+    <select id="selectCountTotal" resultType="int">
+        select count(*) from `lo_cs_article_qna` WHERE parent = 0 AND useyn = "Y";
+    </select>
+
+    <select id="selectCoupon" resultType="kr.co.lotteon.dto.my.CouponDTO">
+        select * from `lo_my_coupon` where `cuid`=#{uid}
+
+    </select>
+
+</mapper>

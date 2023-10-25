@@ -5,7 +5,9 @@ import kr.co.lotteon.dto.PageRequestOrderDTO;
 import kr.co.lotteon.dto.PageResponseOrderDTO;
 import kr.co.lotteon.dto.product.PageResponseDTO;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
+import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.entity.product.ProductOrderEntity;
+import kr.co.lotteon.mapper.MyMapper;
 import kr.co.lotteon.mapper.ProductOrderMapper;
 import kr.co.lotteon.repository.MemberRepository;
 import kr.co.lotteon.repository.product.ProductOrderRepository;
@@ -26,7 +28,6 @@ public class MyService {
 
     private final ProductOrderMapper mapper;
     private final ProductOrderRepository productOrderRepository;
-
     public PageResponseOrderDTO order(PageRequestOrderDTO requestOrderDTO){
         log.info("ordUid : "+requestOrderDTO.getOrdUid());
         int total = productOrderRepository.countByOrdUid(requestOrderDTO.getOrdUid());
@@ -43,4 +44,5 @@ public class MyService {
     /*public MemberDTO findMyInfo(String uid){
         return mapper.selectMyInfo(uid);
     }*/
+
 }

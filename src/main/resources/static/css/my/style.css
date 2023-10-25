@@ -1154,12 +1154,12 @@ footer p > strong {
 }
 #my > .qna > section > article > table .answerRow div > p.content {}
 
-#my > .qna > section > article > .page {
+#my > .qna > section > article > .paging {
     margin: 20px 0;
     text-align: center;
 }
 
-#my > .qna > section > article > .page > a {
+#my > .qna > section > article > .paging > span > a {
     display: inline-block;
     width: 19px;
     height: 19px;            
@@ -1167,19 +1167,22 @@ footer p > strong {
     vertical-align: top;
     color: #777;
 }
-#my > .qna > section > article > .page > a.on {
+#my > .qna > section > article > .paging > span > a.on {
     font-weight: bold;
     color: #1179ea;
 }
 
-#my > .qna > section > article > .page > .prev {
+#my > .qna > section > article > .paging > span > .prev {
     background: url('../../images/my/my_sprites2.png') no-repeat 0 -300px;
     font-size: 0;
 }
 
-#my > .qna > section > article > .page > .next {
+#my > .qna > section > article > .paging > span > .next {
     background: url('../../images/my/my_sprites2.png') no-repeat -120px -300px;
     font-size: 0;
+}
+#my > .qna > section > article > p{
+    text-align: right;
 }
 
 /* my - info(나의설정) */
