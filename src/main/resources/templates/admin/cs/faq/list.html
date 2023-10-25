@@ -9,7 +9,7 @@
             </nav>
             <section>
                 <div>
-                    <select name="cate2" onchange="changeSelect()">
+                    <select name="cate2" onchange="changeSelectCate()">
                         <option value="0">유형선택</option>
                         <option value="member">회원</option>
                         <option value="event">쿠폰/이벤트</option>
@@ -19,14 +19,15 @@
                         <option value="travel">여행/숙박/항공</option>
                         <option value="safety">안전거래</option>
                     </select>
-                    <select name="type">
+                    <select name="type" id="typeSelect">
                         <option value="">유형선택</option>
                     </select>
                 </div>
                 <table>
                     <tbody>
+                    <form id="formCheck" th:action="@{/admin/cs/faq/delete}" method="get">
                         <tr>
-                            <th><input type="checkbox" name="all"></th>
+                            <th><input type="checkbox" name="all" id="selectAll"></th>
                             <th>번호</th>
                             <th>1차유형</th>
                             <th>2차유형</th>
@@ -35,38 +36,46 @@
                             <th>날짜</th>
                             <th>관리</th>
                         </tr>
-                        <tr>
-                            <td class="chk"><input type="checkbox"></td>
-                            <td class="no">1</td>
-                            <td class="cate2">회원</td>
-                            <td class="type">가입</td>
-                            <td class="title">[안내] 해외결제 사칭 문자 주의</td>
-                            <td class="hit">1</td>
-                            <td class="rdate">2023.09.19</td>
+                        <tr th:each="list : ${lists}">
+                            <td class="chk"><input type="checkbox" name="chk" class="checkbox" th:value="${list.no}"></td>
+                            <td class="no" th:text="${list.no}"></td>
+                            <th:block th:each="cate2:${entity2}">
+                                <th:block th:if="${cate2.cate2==list.cate2}">
+                                    <td class="cate2" th:text="${'['+cate2.detail+']'}"></td>
+                                </th:block>
+                            </th:block>
+                            <th:block th:each="cate3:${entity3}">
+                                <th:block th:if="${cate3.cate3==list.type}">
+                                    <td class="type" th:text="${'['+cate3.detail+']'}"></td>
+                                </th:block>
+                            </th:block>
+                            <td><a th:href="@{/admin/cs/faq/view(no=${list.no})}" class="title" th:text="${list.title}"></a></td>
+                            <td class="hit" th:text="${list.hit}"></td>
+                            <td class="rdate" th:text="${list.rdate.toLocalDate()}"></td>
                             <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
+                                <a th:href="@{/admin/cs/faq/delete(chk=${list.no})}" onclick="return confirmDelete();">[삭제]</a>
+                                <a th:href="@{/admin/cs/faq/modify(no=${list.no})}">[수정]</a>
                             </td>
                         </tr>
+                    </form>
                     </tbody>
                 </table>
                 <a href="#" class="btnDelete">선택삭제</a>
-                <a href="#" class="btnWrite">작성하기</a>
+                <a th:href="@{/admin/cs/faq/write}" class="btnWrite">작성하기</a>
                 <div class="paging">
-                    <span class="prev">
-                        <a href="#">&lt;&nbsp;이전</a>
+                    <span class="prev" th:if="${pageGroupStart > 1}">
+                        <a th:href="@{/admin/cs/faq/list(pg=${pageGroupStart - 1})}"><&nbsp;이전</a>
                     </span>
-                    <span class="num">
-                        <a href="#" class="on">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">7</a>
+                    <span class="num" th:each="num: ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                        <th:block th:if="${(cate2 eq null or type eq null)}">
+                            <a th:href="@{/admin/cs/faq/list(pg=${num})}" th:classappend="${num eq currentPage ? 'on' : ''}">[[${num}]]</a>
+                        </th:block>
+                        <th:block th:if="${cate2 != null and type != null}">
+                            <a th:href="@{/admin/cs/faq/list(cate2=${cate2}, type=${type}, pg=${num})}" th:classappend="${num eq currentPage ? 'on' : ''}">[[${num}]]</a>
+                        </th:block>
                     </span>
-                    <span class="next">
-                        <a href="#">다음&nbsp;&gt;</a>
+                    <span class="next" th:if="${pageGroupEnd < lastPageNum}">
+                        <a th:href="@{/admin/cs/faq/list(pg=${pageGroupEnd + 1})}">다음></a>
                     </span>
                 </div>
             </section> <!--table end-->

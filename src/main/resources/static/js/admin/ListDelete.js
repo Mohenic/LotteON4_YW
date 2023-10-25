@@ -13,11 +13,16 @@ $(function() {
             var formCheck = $('#formCheck');
             if (formCheck.length > 0) {
                 formCheck.submit(); // 폼이 있으면 폼을 제출(list page delete)
-            } else {
-                // 폼이 없는 경우, 링크로 이동(view page delete)
-                var urlParams = new URLSearchParams(window.location.search);
-                var no = urlParams.get('no');
-                window.location.href = '/LotteON/admin/cs/notice/delete?chk=' + no; // 또는 원하는 URL로 이동
+            } else { // 폼이 없는 경우, 링크로 이동(view page delete)
+                if (window.location.href.indexOf('/admin/cs/notice/') !== -1) {
+                    var urlParams = new URLSearchParams(window.location.search);
+                    var no = urlParams.get('no');
+                    window.location.href = '/LotteON/admin/cs/notice/delete?chk=' + no;
+                } else if (window.location.href.indexOf('/admin/cs/faq/') !== -1) {
+                    var urlParams = new URLSearchParams(window.location.search);
+                    var no = urlParams.get('no');
+                    window.location.href = '/LotteON/admin/cs/faq/delete?chk=' + no;
+                }
             }
         }
     });
@@ -30,7 +35,6 @@ $(function() {
             window.location.href = '/LotteON/admin/product/delete?chk=' + prodNo;
         }
     });
-
 });
     function confirmDelete() {
         // JavaScript의 confirm 함수를 사용하여 경고 메시지를 표시
