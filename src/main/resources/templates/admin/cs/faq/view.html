@@ -34,8 +34,8 @@
                   </table>
                 </div>
                 <a th:href="@{/admin/cs/faq/list}" class="btnList">목록</a>
-                <a th:href="@{/admin/cs/faq/modify}" class="btnModify">수정</a>
-                <a th:href="@{/admin/cs/faq/delete}" class="btnDelete">삭제</a>
+                <a th:href="@{/admin/cs/faq/modify(no=${view.no})}" class="btnModify">수정</a>
+                <a th:href="@{/admin/cs/faq/delete(chk=${view.no})}" class="btnDelete">삭제</a>
             </article>
         </section>
     </div>
