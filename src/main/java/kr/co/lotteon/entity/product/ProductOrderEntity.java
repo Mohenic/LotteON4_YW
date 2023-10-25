@@ -33,6 +33,7 @@ public class ProductOrderEntity {
     private String recipAddr2;
     private int ordPayment;
     private int ordComplete;
+    private int ordStatus;
     private LocalDateTime ordDate;
     
     

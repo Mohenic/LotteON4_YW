@@ -16,7 +16,18 @@
         FROM lo_product_order_item AS a
                  JOIN lo_product_order AS b ON a.ordNo = b.ordNo
                  JOIN lo_product AS c ON a.prodNo = c.prodNo
-        WHERE b.ordUid = #{ordUid} AND b.ordDate BETWEEN #{beginDate} AND #{endDate}
+        WHERE b.ordUid = #{ordUid} AND b.ordDate BETWEEN DATE(#{beginDate})
+            AND DATE(#{endDate})
+        ORDER BY a.ordNo DESC
+        LIMIT #{startNum}, 10
+    </select>
+    <select id="selectProductOrdersDate2" resultType="kr.co.lotteon.dto.product.ProductOrderDTO">
+        SELECT a.*, b.*, c.prodCate1, c.prodCate2, c.company, c.thumb1, c.prodName
+        FROM lo_product_order_item AS a
+                 JOIN lo_product_order AS b ON a.ordNo = b.ordNo
+                 JOIN lo_product AS c ON a.prodNo = c.prodNo
+        WHERE b.ordUid = #{ordUid} AND b.ordDate BETWEEN DATE_SUB(NOW(), INTERVAL #{start} DAY)
+            AND NOW()
         ORDER BY a.ordNo DESC
         LIMIT #{startNum}, 10
     </select>

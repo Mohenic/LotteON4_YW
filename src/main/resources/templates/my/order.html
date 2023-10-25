@@ -28,7 +28,8 @@
                             <form th:action="@{my/order}" class="dateForm" method="get">
                                 <p>
                                     <input type="date" name="beginDate"><span>~</span><input type="date" name="endDate">
-                                    <input type="hidden" name="ordUid" th:value="${#authentication.principal.member.uid}"><input type="hidden" name="dateType" value="period">
+                                    <input type="hidden" name="ordUid" th:value="${#authentication.principal.member.uid}">
+                                    <input type="hidden" name="dateType" value="period">
                                 </p>
                             </form>
                             <button class="btnConfirm">조회하기</button>
@@ -36,7 +37,7 @@
 
                         <table border="0">
                             <th:block th:if="${#lists.isEmpty(orderDTO.getDtoList())}">
-                                <tr>
+                                <tr th:if="${#lists.isEmpty(orderDTO.getDtoList())}">
                                     <td style="text-align: center">등록된 주문이 없습니다.</td>
                                 </tr>
                             </th:block>
@@ -49,17 +50,18 @@
                                 </tr>
 
                                 <tr th:each="order:${orderDTO.getDtoList()}">
-                                    <td class="date">[[${order.getOrdDate()}]]</td>
+                                    <td class="date">[[${order.getOrdDate().toLocalDate()}]]</td>
                                     <td>
-                                        <a th:href="@{/product/view(prodCate1=${order.getProduct().getProdCate1()}, prodCate2=${order.getProduct().getProdCate2()}, prodNo=${order.getProductOrderItem().getProdNo()})}" class="thumb"><img th:src="@{/thumbs/}+${order.getProduct().getProdCate1()}+"/"+${order.getProduct().getProdCate2()}+"/"+${order.getProduct().getThumb1()}" alt="${order.getProduct().getProdName()}"></a>
+                                        <a th:href="@{/product/view(prodCate1=${order.getProdCate1()}, prodCate2=${order.getProdCate2()}, prodNo=${order.getProdNo()}, price=${order.getPrice()})}"  class="thumb"><img th:src="@{/thumbs/}+${order.prodCate1}+'/'+${order.prodCate2}+'/'+${order.thumb1}" th:alt="${order.getProdName()}"></a>
                                         <ul>
-                                            <li class="company">[[${order.getProduct().getCompany}]]</li>
-                                            <li class="prodName"><a th:href="@{/product/view(prodCate1=${order.getProduct().getProdCate1()}, prodCate2=${order.getProduct().getProdCate2()}, prodNo=${order.getProductOrderItem().getProdNo()})}">[[${order.getProduct().getProdName}]]</a></li>
-                                            <li>수량 : <span class="prodCount">[[${order.getProductOrderItem().getCount()}]]</span>개 / 주문번호 : <span class="ordNo">[[${order.getProductOrderItem().getOrdNo()}]]</span></li>
-                                            <li class="prodPrice" th:text="${#numbers.formatInteger((order.getProductOrderItem().getPrice()-(order.getProductOrderItem().getPrice()*(order.getProductOrderItem().getDiscount()*0.01))), 3, 'COMMA')}"></li>
+                                            <li class="company">[[${order.getCompany}]]</li>
+                                            <li class="prodName"><a th:href="@{/product/view(prodCate1=${order.getProdCate1()}, prodCate2=${order.getProdCate2()}, prodNo=${order.getProdNo()}, price=${order.getPrice()})}">[[${order.getProdName()}]]</a></li>
+                                            <li>수량 : <span class="prodCount">[[${order.getCount()}]]</span>개 / 주문번호 : <span class="ordNo">[[${order.getOrdNo()}]]</span></li>
+                                            <li class="prodPrice" th:text="${#numbers.formatInteger((order.getPrice()-(order.getPrice()*(order.getDiscount()*0.01))), 3, 'COMMA')}"></li>
                                         </ul>
                                     </td>
-                                    <td class="status">배송완료</td>
+                                    <td class="status" th:if="${order.ordStatus eq 1}">배송 중</td>
+                                    <td class="status" th:if="${order.ordStatus eq 2}">배송 중</td>
                                     <td class="confirm">
                                         <a href="#" class="receive">수취확인</a>
                                         <a href="#" class="review">상품평</a>
@@ -76,13 +78,13 @@
                         <th:block th:unless="${#lists.isEmpty(orderDTO.getDtoList())}">
                             <p class="page">
                                 <th:block th:if="${orderDTO.getPageGroupStart() gt 1}">
-                                    <a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},pg=${orderDTO.getPageGroupStart() - 1})}" class="prev">이전</a>
+                                    <a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},pg=${orderDTO.getPageGroupStart() - 1},dateType=${orderDTO.getDateType()})}" class="prev">이전</a>
                                 </th:block>
                                 <th:block th:each="num:${#numbers.sequence(orderDTO.getPageGroupStart(), orderDTO.getPageGroupEnd())}">
-                                    <a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},pg=${num})}" th:classappend="${num eq orderDTO.getCurrentPage() ? 'on' : ''}" class="num">[[${num}]]</a>
+                                    <a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},pg=${num},dateType=${orderDTO.getDateType()})}" th:classappend="${num eq orderDTO.getCurrentPage() ? 'on' : ''}" class="num">[[${num}]]</a>
                                 </th:block>
                                 <th:block th:if="${orderDTO.getPageGroupEnd() lt orderDTO.getLastPageNum()}">
-                                    <a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},pg=${orderDTO.getPageGroupEnd() + 1})}" class="next">다음</a>
+                                    <a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},pg=${orderDTO.getPageGroupEnd() + 1},dateType=${orderDTO.getDateType()})}" class="next">다음</a>
                                 </th:block>
 
                             </p>
