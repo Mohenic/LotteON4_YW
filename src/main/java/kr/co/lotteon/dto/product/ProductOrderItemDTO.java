@@ -19,7 +19,8 @@ public class ProductOrderItemDTO {
     private int point;
     private int delivery;
     private int total;
-    
+    private String ordUid;
+    private String thumb1;
     public ProductOrderItemEntity toEntity() {
         
         return ProductOrderItemEntity.builder()
