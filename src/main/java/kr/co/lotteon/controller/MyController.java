@@ -3,6 +3,7 @@ package kr.co.lotteon.controller;
 import kr.co.lotteon.dto.MemberDTO;
 import kr.co.lotteon.dto.PageRequestOrderDTO;
 import kr.co.lotteon.dto.PageResponseOrderDTO;
+import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.service.MyService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.util.List;
 
 @Controller
 public class MyController {
@@ -32,14 +35,14 @@ public class MyController {
          return member;
     }*/
 
-    @GetMapping("/my/home")
+   /* @GetMapping("/my/home")
     public String home(Model model){
         return "/my/home";
-    }
-    @GetMapping("/my/coupon")
+    }*/
+    /*@GetMapping("/my/coupon")
     public String coupon(Model model){
         return "/my/coupon";
-    }
+    }*/
     @GetMapping("/my/info")
     public String info(Model model){
         return "/my/info";
@@ -54,12 +57,15 @@ public class MyController {
     public String point(Model model){
         return "/my/point";
     }
-    @GetMapping("/my/qna")
-    public String qna(Model model){
+   /* @GetMapping("/my/qna")
+    public String qna(Model model ,String writer){
+        List<CsArticleQnaEntity> entityList1 =myService.selectQnaMy(writer);
+
+        model.addAttribute("entityList1", entityList1);
         return "/my/qna";
     }
     @GetMapping("/my/review")
     public String review(Model model){
         return "/my/review";
-    }
+    }*/
 }
