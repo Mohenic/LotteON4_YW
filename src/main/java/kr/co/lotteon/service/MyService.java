@@ -28,19 +28,36 @@ public class MyService {
     private final ProductOrderRepository productOrderRepository;
 
     public PageResponseOrderDTO order(PageRequestOrderDTO requestOrderDTO){
-        log.info("ordUid : "+requestOrderDTO.getOrdUid());
-        int total = productOrderRepository.countByOrdUid(requestOrderDTO.getOrdUid());
-        PageResponseOrderDTO responseOrderDTO = new PageResponseOrderDTO(requestOrderDTO, total);
-        List<ProductOrderDTO> dtoList = mapper.selectProductOrders(requestOrderDTO.getOrdUid(), responseOrderDTO.getStartNum());
-        log.info("responseOrderDTO : "+responseOrderDTO);
+        log.info("requestOrderDTO.getDateType() : "+requestOrderDTO.getDateType());
+        PageResponseOrderDTO responseOrderDTO=null;
+        if(requestOrderDTO.getDateType() == null){
+            log.info("ordUid : "+requestOrderDTO.getOrdUid());
+            int total = productOrderRepository.countByOrdUid(requestOrderDTO.getOrdUid());
+            responseOrderDTO = new PageResponseOrderDTO(requestOrderDTO, total);
+            List<ProductOrderDTO> dtoList = mapper.selectProductOrders(requestOrderDTO.getOrdUid(), responseOrderDTO.getStartNum());
+            log.info("responseOrderDTO : "+responseOrderDTO);
+            responseOrderDTO.setDtoList(dtoList);
+            log.info("dtoList : "+responseOrderDTO.getDtoList());
+        }else{
+            requestOrderDTO.getBeginDate(requestOrderDTO.getDateType());
 
-        responseOrderDTO.setDtoList(dtoList);
-        log.info("dtoList : "+responseOrderDTO.getDtoList());
+            log.info("ordUid : "+requestOrderDTO.getOrdUid());
+            log.info("beginDate : "+requestOrderDTO.getBeginDate());
+            log.info("EndDate : "+requestOrderDTO.getEndDate());
 
+            int total = productOrderRepository.countByOrdUidAndDate(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getEndDate());
+            responseOrderDTO = new PageResponseOrderDTO(requestOrderDTO, total);
+            List<ProductOrderDTO> dtoList = mapper.selectProductOrdersDate(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getBeginDate(), responseOrderDTO.getStartNum());
+            log.info("responseOrderDTO : "+responseOrderDTO);
+
+            responseOrderDTO.setDtoList(dtoList);
+            log.info("dtoList : "+responseOrderDTO.getDtoList());
+        }
         return responseOrderDTO;
     }
 
     /*public MemberDTO findMyInfo(String uid){
         return mapper.selectMyInfo(uid);
     }*/
+
 }

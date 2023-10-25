@@ -5,15 +5,13 @@ import kr.co.lotteon.dto.product.ProductOrderItemDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
 public interface ProductOrderMapper {
-    public void insertProductOrder(ProductOrderItemDTO dto);
-    public ProductOrderItemDTO selectProductOrder(String orderNo);
-
     public List<ProductOrderDTO> selectProductOrders(String ordUid, int startNum);
 
-    public void updateProductOrder(ProductOrderItemDTO dto);
-    public void deleteProductOrder(String orderNo);
+    public List<ProductOrderDTO> selectProductOrdersDate(String ordUid, LocalDateTime beginDate, LocalDateTime endDate, int startNum);
+
 }
