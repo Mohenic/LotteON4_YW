@@ -1,15 +1,22 @@
 <th:block th:insert="~{/my/layout/header.html}"/>
+<script>
+    $(function() {
+        $('.btnConfirm').click(function() {
+            $('.dateForm').submit();
+        });
+    });
+</script>
             <div class="ordered">
                 <th:block th:insert="~{/my/layout/aside.html}"/>
                     <article>
                         <h3>전체주문내역</h3>
 
                         <div class="byDate">
-                            <span class="tit">기간별조회</span>                            
+                            <span class="tit">기간별조회</span>
                             <ul class="date_3ea">
-                                <li><a href="#"><em>1</em>주일</a></li>
-                                <li><a href="#"><em>15</em>일</a></li>
-                                <li><a href="#" class="on"><em>1</em>개월</a></li>
+                                <li><a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},dateType=day7)}" th:class="${orderDTO.getDateType() eq 'day7'?'on':''}"><em>1</em>주일</a></li>
+                                <li><a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},dateType=day15)}" th:class="${orderDTO.getDateType() eq 'day15'?'on':''}"><em>15</em>일</a></li>
+                                <li><a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},dateType=month1)}" th:class="${orderDTO.getDateType() eq 'month1'?'on':''}"><em>1</em>개월</a></li>
                             </ul>
                             <ul class="date_5ea">
                                 <li><a href="#"><em>11</em>월</a></li>
@@ -18,9 +25,12 @@
                                 <li><a href="#"><em>8</em>월</a></li>
                                 <li><a href="#"><em>7</em>월</a></li>
                             </ul>
-                            <p>
-                                <input type="date" name="begin"><span>~</span><input type="date" name="end">
-                            </p>
+                            <form th:action="@{my/order}" class="dateForm" method="get">
+                                <p>
+                                    <input type="date" name="beginDate"><span>~</span><input type="date" name="endDate">
+                                    <input type="hidden" name="ordUid" th:value="${#authentication.principal.member.uid}"><input type="hidden" name="dateType" value="period">
+                                </p>
+                            </form>
                             <button class="btnConfirm">조회하기</button>
                         </div>
 
