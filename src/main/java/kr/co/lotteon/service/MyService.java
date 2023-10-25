@@ -46,10 +46,9 @@ public class MyService {
             log.info("beginDate : "+requestOrderDTO.getBeginDate());
             log.info("EndDate : "+requestOrderDTO.getEndDate());
 
-            int total = productOrderRepository.countByOrdUidAndDate(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getEndDate());
+            int total = productOrderRepository.countByOrdUidAndOrdDateGreaterThanEqualAndOrdDateLessThanEqual(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getEndDate());
             responseOrderDTO = new PageResponseOrderDTO(requestOrderDTO, total);
-            /*List<ProductOrderDTO> dtoList = mapper.selectProductOrdersDate(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getEndDate(), responseOrderDTO.getStartNum());*/
-            List<ProductOrderDTO> dtoList = mapper.selectProductOrdersDate2(requestOrderDTO.getOrdUid(), requestOrderDTO.getStart(), responseOrderDTO.getStartNum());
+            List<ProductOrderDTO> dtoList = mapper.selectProductOrdersDate(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getEndDate(), responseOrderDTO.getStartNum());
             log.info("responseOrderDTO : "+responseOrderDTO);
 
             responseOrderDTO.setDtoList(dtoList);

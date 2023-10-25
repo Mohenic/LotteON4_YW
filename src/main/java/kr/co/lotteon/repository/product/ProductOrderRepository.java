@@ -15,12 +15,5 @@ import java.time.LocalDateTime;
 public interface ProductOrderRepository extends JpaRepository<ProductOrderEntity, Integer> {
 
     int countByOrdUid(String ordUid);
-
-    @Query("SELECT COUNT(*) FROM ProductOrderEntity o " +
-            "WHERE o.ordUid =:ordUid AND " +
-            "o.ordDate >= :beginDate AND o.ordDate <= :endDate")
-    int countByOrdUidAndDate(
-            @Param("ordUid") String ordUid,
-            @Param("beginDate") LocalDateTime beginDate,
-            @Param("endDate") LocalDateTime endDate);
+    int countByOrdUidAndOrdDateGreaterThanEqualAndOrdDateLessThanEqual(String ordUid, LocalDate beginDate, LocalDate endDate);
 }
