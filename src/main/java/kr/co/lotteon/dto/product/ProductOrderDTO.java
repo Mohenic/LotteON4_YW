@@ -30,10 +30,23 @@ public class ProductOrderDTO {
     private String recipAddr2;
     private int ordPayment;
     private int ordComplete;
+    private int ordStatus;
     private LocalDateTime ordDate;
 
-    private ProductOrderItemDTO productOrderItem;
-    private ProductDTO product;
+    //추가
+    private int prodNo;
+    private int count;
+    private int price;
+    private int discount;
+    private int point;
+    private int delivery;
+    private int total;
+
+    private int prodCate1;
+    private int prodCate2;
+    private String company;
+    private String thumb1;
+    private String prodName;
 
     public ProductOrderEntity toEntity() {
         return ProductOrderEntity.builder()

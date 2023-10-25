@@ -49,7 +49,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 						.logoutUrl("/member/logout")
 						.invalidateHttpSession(true)
 						.clearAuthentication(true)
-						.logoutSuccessUrl("/member/login?success=100"))
+						.logoutSuccessUrl("/member/login?success=101"))
 
 				// 인가 권한 설정
 				.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
