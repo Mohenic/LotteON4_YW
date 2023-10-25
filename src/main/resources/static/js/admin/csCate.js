@@ -14,7 +14,7 @@ function changeSelectCate() {
                 console.log('데이터: ' + data);
 
                 typeSelect.innerHTML = ''; // 기존 옵션 제거
-                typeSelect.appendChild(new Option('선택', '0')); // 기본 옵션 추가
+                typeSelect.appendChild(new Option('2차 선택', '0')); // 기본 옵션 추가
 
                 // 데이터를 기반으로 옵션을 추가
                 data.forEach(function (item) {
@@ -38,6 +38,8 @@ function changeSelectCate() {
         // 페이지 리로드
         if (currentURL.includes("/admin/cs/faq/list")) {
             window.location.href = "/LotteON/admin/cs/faq/list?cate2=" + cate2Value + "&type=" + cate3Value + "&pg=1";
+        } else if (currentURL.includes("/admin/cs/qna/list")) {
+            window.location.href = "/LotteON/admin/cs/qna/list?cate2=" + cate2Value + "&type=" + cate3Value + "&pg=1";
         }
     });
 }

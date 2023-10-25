@@ -21,6 +21,7 @@ public class ProductReviewDTO {
     private String regip;
     private LocalDateTime rdate;
     private String useyn;
+    private String prodName;
     
     public ProductReviewEntity toEntity() {
         return ProductReviewEntity.builder()

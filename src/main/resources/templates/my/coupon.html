@@ -1,4 +1,30 @@
 <th:block th:insert="~{/my/layout/header.html}"/>
+<script>
+    $(document).ready(function() {
+        // "status" 클래스를 가진 모든 셀을 찾아서 처리
+        $('.status2').each(function() {
+            // 현재 셀의 텍스트 가져오기
+            var text = $(this).text();
+
+            // 텍스트에 따라 스타일 변경
+            if (text === '사용가능') {
+                $(this).css('color','black').addClass("possible");
+            } else if (text === '사용불가') {
+                $(this).css('color','red').addClass("impossible");
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        let count =document.querySelectorAll('.possible').length;
+        console.log(count);
+        $('.cntcoupon').text(count);
+
+    })
+
+
+</script>
+
 
             <div class="coupon">
                 <th:block th:insert="~{/my/layout/aside.html}"/>
@@ -10,7 +36,7 @@
                             <dl>
                                 <dt>· 나의 보유쿠폰</dt> <!-- 카운트쿼리 쓸예정~ -->
                                 <dd>
-                                    <strong>2</strong>
+                                    <strong class="cntcoupon">2</strong>
                                     <span>장</span>
                                 </dd>
                             </dl>
@@ -30,12 +56,14 @@
                                 <td class="discount" th:text="${coupon.getPrice(coupon.CPrice)+'원'}"><span>10,000</span>원</td>
                                 <td class="condition" >[[${coupon.getClimit(coupon.climit)+'원 이상 구매시'}]]</td>
                                 <td class="expire" th:text="'~'+${coupon.enddate.toLocalDate()}">~12/29</td>
-                               <!--<th:block th:if="${ }">
-                                    <td class="status" >사용가능</td>
+                                <td class="status" >
+                                <th:block th:if="${coupon.enddate.isAfter(realdate)}">
+                                    <span class="status2">사용가능</span>
                                 </th:block>
-                                <th:block th:if="${#dates.createNow().after(coupon.enddate)}">
-                                    <td class="status" >사용불가</td>
-                                </th:block>-->
+                                <th:block th:if="${coupon.enddate.isBefore(realdate)}">
+                                    <span class="status2">사용불가</span>
+                                </th:block>
+                                </td>
                             </tr>
                             </th:block>
                         </table>

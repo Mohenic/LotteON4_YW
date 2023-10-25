@@ -22,6 +22,10 @@ $(function() {
                     var urlParams = new URLSearchParams(window.location.search);
                     var no = urlParams.get('no');
                     window.location.href = '/LotteON/admin/cs/faq/delete?chk=' + no;
+                } else if (window.location.href.indexOf('/admin/cs/qna/') !== -1) {
+                    var urlParams = new URLSearchParams(window.location.search);
+                    var no = urlParams.get('no');
+                    window.location.href = '/LotteON/admin/cs/qna/delete?chk=' + no;
                 }
             }
         }

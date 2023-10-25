@@ -14,7 +14,36 @@
 
     <select id="selectCoupon" resultType="kr.co.lotteon.dto.my.CouponDTO">
         select * from `lo_my_coupon` where `cuid`=#{uid}
+    </select>
+
+    <select id="selectCouponCount" resultType="int">
+        select COUNT(*) from `lo_my_coupon` where `cuid`=#{uid}
+    </select>
+
+    <select id="selectMyMember" resultType="kr.co.lotteon.dto.MemberDTO">
+        select * from `lo_member` where `uid`=#{uid}
+    </select>
+
+    <select id="selectMyReview" resultType="kr.co.lotteon.dto.product.ProductReviewDTO">
+        select a.*,b.prodName  from `lo_product_review` as a inner join `lo_product` as b ON a.prodNo =b.prodNo  where `uid`=#{uid} order by a.revNo DESC limit #{start}, 10;
 
     </select>
+
+    <select id="selectMyReviewCount" resultType="int">
+        select count(*) from `lo_product_review` where `uid`=#{uid}
+    </select>
+
+    <select id="selectMyReviewLimit5" resultType="kr.co.lotteon.dto.product.ProductReviewDTO">
+       select a.*,b.prodName  from `lo_product_review` as a inner join `lo_product` as b ON a.prodNo =b.prodNo  where `uid`=#{uid} order by a.revNo DESC limit 5;
+    </select>
+
+    <select id="selectQnaMyLimit5" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
+        select a.*,b.detail from `lo_cs_article_qna` as a inner join `lo_cs_cate3` as b on a.`type` = b.`cate3` where a.`useyn`='Y' AND a.`parent`=0 and a.writer=#{uid} order by a.`no` DESC LIMIT 5;
+    </select>
+
+    <select id="selectProductMyLimit5" resultType="kr.co.lotteon.dto.product.ProductOrderItemDTO">
+        select b.*,a.ordUid from `lo_product_order` as a inner join `lo_product_order_item` as b ON a.ordNo=b.ordNo  where a.ordUid  =#{uid} ORDER by ordNo DESC limit 5;
+    </select>
+
 
 </mapper>

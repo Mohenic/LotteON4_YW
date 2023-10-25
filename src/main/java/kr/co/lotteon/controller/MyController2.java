@@ -3,9 +3,13 @@ package kr.co.lotteon.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.PageRequestOrderDTO;
 import kr.co.lotteon.dto.PageResponseOrderDTO;
+import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
+import kr.co.lotteon.dto.product.ProductReviewDTO;
+import kr.co.lotteon.entity.MemberEntity;
 import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.entity.cs.CsCate3Entity;
 import kr.co.lotteon.entity.my.CouponEntity;
+import kr.co.lotteon.entity.product.ProductReviewEntity;
 import kr.co.lotteon.service.CsService;
 import kr.co.lotteon.service.MyService;
 import kr.co.lotteon.service.MyService2;
@@ -19,6 +23,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -43,7 +51,16 @@ public class MyController2 {
     }
 
     @GetMapping("/my/home")
-    public String home(Model model){
+    public String home(Model model,String uid){
+
+       List<ProductReviewDTO> reviewLimit5= myService2.selectMyReviewLimit5(uid);
+       List<CsArticleQnaDTO> qnaLimit5= myService2.selectQnaMyLimit5(uid);
+        MemberEntity member=myService2.selectMyMember(uid);
+
+       model.addAttribute("reviewLimit5", reviewLimit5);
+       model.addAttribute("qnaLimit5", qnaLimit5);
+       model.addAttribute("member", member);
+
         return "/my/home";
     }
     @GetMapping("/my/coupon")
@@ -51,7 +68,11 @@ public class MyController2 {
 
         List<CouponEntity> entityList1=myService2.selectCoupon(uid);
 
+        LocalDateTime realdate = LocalDateTime.now();
+
+        log.info(realdate);
         model.addAttribute("entityList1", entityList1);
+        model.addAttribute("realdate", realdate);
 
         return "/my/coupon";
     }
@@ -86,13 +107,43 @@ public class MyController2 {
         req.setAttribute("pageGroupEnd", pageGroupEnd);
         req.setAttribute("pageStartNum", pageStartNum);
 
+        MemberEntity member=myService2.selectMyMember(writer);
+        model.addAttribute("member", member);
+
 
         log.info(entityList2);
         log.info(entityList1);
         return "/my/qna";
     }
     @GetMapping("/my/review")
-    public String review(Model model){
+    public String review(Model model,HttpServletRequest req, String uid){
+
+        String pg = req.getParameter("pg");
+
+
+        //페이지 관련 변수
+        int currentPage = (pg != null) ? Integer.parseInt(pg) : 1;
+        int total = myService2.selectMyReviewCount(uid);
+        int start = (currentPage - 1) * 10;
+        int lastPageNum = (int) Math.ceil(total / 10.0);
+        int pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
+        int pageGroupStart = (pageGroupCurrent - 1) * 10 + 1;
+        int pageGroupEnd = Math.min(pageGroupCurrent * 10, lastPageNum);
+        int pageStartNum = total - start;
+
+        List<ProductReviewDTO> entityList1 =myService2.selectMyReview(uid,start);
+        model.addAttribute("entityList1", entityList1);
+
+        req.setAttribute("start", start);
+        req.setAttribute("currentPage", currentPage);
+        req.setAttribute("total", total);
+        req.setAttribute("lastPageNum", lastPageNum);
+        req.setAttribute("pageGroupCurrent", pageGroupCurrent);
+        req.setAttribute("pageGroupStart", pageGroupStart);
+        req.setAttribute("pageGroupEnd", pageGroupEnd);
+        req.setAttribute("pageStartNum", pageStartNum);
+
+
         return "/my/review";
     }
 }
