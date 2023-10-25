@@ -13,19 +13,25 @@
                 </p>
               </nav>
 
-              <form action="/product/complete">
+              <form action="/product/complete" id="orderForm">
                 <!-- 주문 상품 목록 -->
-                <input type="hidden" name="prodCount" th:value="${totalQuantity}" />
-                <input type="hidden" name="Price" th:value="${prodDTO.price}" />
-                <input type="hidden" name="delivery" th:value="${prodDTO.delivery}" />
-                <input type="hidden" name="prodNo" th:value="${prodDTO.prodNo}" />
-                <input type="hidden" name="prodDiscount" th:value="${prodDTO.discount}" />
-                <input type="hidden" name="point" th:value="${prodDTO.point}" />
-                <input type="hidden" name="ordDiscount" th:value="${prodDTO.prodNo}" />
-                <!-- totalPrice, savePoint, userPoint, recipName, recipHp, recipaddr1, recipaddr1는 js로 넘겨야함-->
-                  
-                  <input type="hidden" name="ordUid" th:value="${prodDTO.prodNo}" />
-                  
+                <input type="text" name="prodCount" th:value="${totalQuantity}" />
+                <input type="text" name="Price" th:value="${prodDTO.price}" />
+                <input type="text" name="delivery" th:value="${prodDTO.delivery}" />
+                <input type="text" name="prodNo" th:value="${prodDTO.prodNo}" />
+                <input type="text" name="discount" th:value="${prodDTO.discount}" />
+                <input type="text" name="savePoint" th:value="${prodDTO.point}" /> <!-- 여기서의 point는 savePoint임 -->
+                  <!-- totalPrice, savePoint, userPoint, recipName, recipHp, recipaddr1, recipaddr1는 js로 넘겨야함-->
+                  <input type="text" name="totalPrice" th:value="${#numbers.formatInteger(((prodDTO.price * totalQuantity) - ((prodDTO.price * totalQuantity) * (prodDTO.discount * 0.01)) + prodDTO.delivery - prodDTO.point), 3, 'COMMA')}" />
+                  <input type="text" name="subtotal" th:value="${#numbers.formatInteger((prodDTO.price*(prodDTO.discount*0.01)), 3, 'COMMA')}" />
+
+
+
+
+                  <input type="text" name="usePoint" />
+                  <input type="text" name="totalPrice" />
+             
+
                   <table>
                   <thead>
                     <tr>
@@ -53,27 +59,29 @@
                       <td>[[${totalQuantity}]]</td>
                       <td>[[${prodDTO.price}]]</td>
                       <td>[[${prodDTO.delivery}]]</td>
-                      <td> 임시 원</td>
+                      <td name="subTotal" id="subTotal"> </td>
                         <!--총 합계 할인 금액없이 스크립트 라인에서? totalQuantity 만큼 곱해서 .text로 출력 해야할 듯 일단 토탈 먼저 넘기고 -->
                     </tr>
                   </tbody>
                 </table>
-                
-                <!-- 최종 결제 정보 -->
-                <div class="final">
-                  <h2>최종결제 정보</h2>
-                  <table border="0">
-                    <tr>
+
+                  <!-- 최종 결제 정보 -->
+                  <div class="final">
+                    <h2>최종결제 정보</h2>
+                    <table border="0">
+                      <tr>
                       <td>총</td>
                       <td>[[${totalQuantity}]] 건</td>
                     </tr>
-                    <tr>
+                      <tr>
                       <td>상품금액</td>
                       <td>[[${prodDTO.price}]]</td>
                     </tr>
-                    <tr>
-                      <td>할인금액</td>
-                      <td>- [[${#numbers.formatInteger((prodDTO.price*(prodDTO.discount*0.01)), 3, 'COMMA')}]]</td>
+                      <tr>
+                        <td>할인금액</td>
+                        <td>
+                          - [[${#numbers.formatInteger((prodDTO.price*(prodDTO.discount*0.01)), 3, 'COMMA')}]]
+                      </td>
                     </tr>
                     <tr>
                       <td>배송비</td>
@@ -85,7 +93,11 @@
                     </tr>
                     <tr>
                       <td>전체주문금액</td>
-                      <td>총 가격: [[${#numbers.formatInteger(((prodDTO.price-(prodDTO.price*(prodDTO.discount*0.01))) * totalQuantity + prodDTO.delivery - prodDTO.point), 3, 'COMMA')}]]</td>
+                      <td>
+                          총 가격:
+                          [[${#numbers.formatInteger(((prodDTO.price * totalQuantity) - ((prodDTO.price * totalQuantity) * (prodDTO.discount * 0.01)) + prodDTO.delivery - prodDTO.point), 3, 'COMMA')}]]
+                      </td>
+                        <!--여기 위에 총 가격부분 point가 savePoint를 가져오기 때문에 사용하는 포인트를 js에서 잡아줘야함-->
                     </tr>                            
                   </table>
                   <input type="button" name="" value="결제하기">              
@@ -97,7 +109,7 @@
                   <table>
                     <tr>
                       <td>주문자</td>
-                      <td><input type="text" name="orderer" id="memberName" /></td>
+                      <td><input type="text" name="orderer" id="memberName"/></td>
                     </tr>
                     <tr>
                       <td>휴대폰</td>
@@ -109,7 +121,7 @@
                     <tr>
                       <td>우편번호</td>
                       <td>
-                        <input type="text" name="zip"/>
+                        <input type="text" name="zip" id="memberZip"/>
                         <input type="button" value="검색"/>
                       </td>
                     </tr>
@@ -135,7 +147,7 @@
                   <div>
                     <p>현재 포인트 : <span>[[${#authentication.principal.member.point}]]</span>점</p>
                     <label>
-                        <input type="text" name="point" />점
+                        <input type="text" name="point" id="usePoint" />점
                         <input type="button" value="적용"/>
                     </label>
                     <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
@@ -187,21 +199,24 @@
         </main>
 <script>
   // member
-  var mName = document.getElementById("memberName");
-  var mHp = document.getElementById("memberHp");
-  var mAddr1 = document.getElementById("memberAddr1");
-  var mAddr2 = document.getElementById("memberAddr2");
-  var mPoint =  document.getElementById("memberHp");
+              var mName = document.getElementById("memberName");
+              var mHp = document.getElementById("memberHp");
+              var mAddr1 = document.getElementById("memberAddr1");
+              var mAddr2 = document.getElementById("memberAddr2");
+              var UPoint =  document.getElementById("usePoint");
+              var mZip =  document.getElementById("memberZip");
+              var subTotal =  document.getElementById("subTotal");
+              var mPoint =  document.getElementById("subTotal");
 
-
-  mName.value  = " [[${#authentication.principal.member.name}]]";
-  mHp.value    = " [[${#authentication.principal.member.hp}]]";
-  mAddr1.value = " [[${#authentication.principal.member.addr1}]]";
-  mAddr2.value = " [[${#authentication.principal.member.addr2}]]";
-  mPoint.value = " [[${#authentication.principal.member.point}]]";
-  // product
-  
-  
+              mName.value  = " [[${#authentication.principal.member.name}]]";
+              mHp.value    = " [[${#authentication.principal.member.hp}]]";
+              mAddr1.value = " [[${#authentication.principal.member.addr1}]]";
+              mAddr2.value = " [[${#authentication.principal.member.addr2}]]";
+              mPoint.value = " [[${#authentication.principal.member.point}]]";
+              mZip.value   = " [[${#authentication.principal.member.zip}]]"
+              // product
+        
+    
   
 </script>
 <th:block th:insert = "~{/product/layout/footer.html}" />

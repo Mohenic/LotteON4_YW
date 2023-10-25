@@ -48,7 +48,6 @@
 
 
         function updateTotalQuantity(quantity) {
-            console.log(quantity)
             $("#totalQuantity").text(quantity).val(quantity);
         }
         /*  function updateURLParameters() {
@@ -120,7 +119,7 @@
                         <input type="text" name="thumb3"  th:value="${product.getThumb3()}"/>
                         <input type="text" name="delivery"  th:value="${product.getDelivery()}"/>
                         <input type="text" name="discount"  th:value="${product.getDiscount()}"/>
-                        <input type="text" name="point"  th:value="${product.getPoint()}"/>
+                        <input type="text" name="point"  th:value="${product.getPoint()}"/><!-- 이 포인트는 savepoint, 제품을 사면 이만큼 준다는 의미-->
                         <h3>[[${product.prodName}]]</h3>
                         <p>[[${product.descript}]]</p>
                         <h5 class="rating star4"><a href="#">상품평보기</a></h5>
