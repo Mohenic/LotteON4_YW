@@ -22,6 +22,7 @@
                 currentValue--;
                 numInput.val(currentValue);
                 totalPrice = currentValue * disPriceValue;
+                updateTotalQuantity(currentValue);
                 updateFinalValueAndInputValue();
             }
         });
@@ -32,6 +33,7 @@
             currentValue++;
             numInput.val(currentValue);
             totalPrice = currentValue * disPriceValue;
+            updateTotalQuantity(currentValue);
             updateFinalValueAndInputValue();
         });
 
@@ -39,11 +41,16 @@
             finalValue = totalPrice;
             inputValue = numInput.val();
             $("#totalValue").text(totalPrice).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-
             // URL 파라미터 업데이트
             //updateURLParameters();
+            updateTotalQuantity(currentValue);
         }
 
+
+        function updateTotalQuantity(quantity) {
+            console.log(quantity)
+            $("#totalQuantity").text(quantity).val(quantity);
+        }
         /*  function updateURLParameters() {
             const inputValue = this.inputvalue.value();
             const finalValue = this.finalValue.value();
@@ -60,18 +67,18 @@
         }*/
 
         // "구매하기" 버튼 클릭 이벤트
-        $(".order").click(function () {
+/*        $(".order").click(function () {
             console.log("inputValue : " + inputValue);
             console.log("finalValue : " + finalValue);
             console.log("ProdNum : " + oriProdNo);
 
-            alert("주문하기@@@");
+            // alert("주문하기@@@");
 
             //const newURL = "/LotteON/product/order" + window.location.search;
 
             // 이동
             //window.location.href = newURL;
-        });
+        });*/
     });
 
 
@@ -91,10 +98,10 @@
         </nav>
 
         <!-- 상품 전체 정보 내용 -->
-        <form action="/LotteON/product/order" method="post">  <!-- 252라인 -->
+        <form th:action="@{/product/order}" method="post">  <!-- 252라인 -->
             <article class="info" th:each="product:${products}">
                 <div class="image">
-                    <img th:src="@{/file/__${product.prodCate1}__/__${product.prodCate2}__/__${product.thumb3}__}"
+                    <img th:src="@{/thumbs/__${product.prodCate1}__/__${product.prodCate2}__/__${product.thumb3}__}"
                          th:alt="${product.prodName}"/>
                 </div>
                 <div class="summary">
@@ -103,6 +110,17 @@
                         <h2>상품번호&nbsp;:&nbsp;<span>[[${product.prodNo}]]</span></h2>
                     </nav>
                     <nav>
+                        <input type="text" name="totalQuantity" id="totalQuantity" value="1" />
+                        <input type="text" name="prodName" th:value="${product.getProdName()}"/>
+                        <input type="text" name="prodNo"  th:value="${product.getProdNo()}"/>
+                        <input type="text" name="descript"  th:value="${product.getDescript()}"/>
+                        <input type="text" name="price"  th:value="${product.getPrice()}"/>
+                        <input type="text" name="prodCate1"  th:value="${product.getProdCate1()}"/>
+                        <input type="text" name="prodCate2"  th:value="${product.getProdCate2()}"/>
+                        <input type="text" name="thumb3"  th:value="${product.getThumb3()}"/>
+                        <input type="text" name="delivery"  th:value="${product.getDelivery()}"/>
+                        <input type="text" name="discount"  th:value="${product.getDiscount()}"/>
+                        <input type="text" name="point"  th:value="${product.getPoint()}"/>
                         <h3>[[${product.prodName}]]</h3>
                         <p>[[${product.descript}]]</p>
                         <h5 class="rating star4"><a href="#">상품평보기</a></h5>
@@ -150,8 +168,9 @@
                     </div>
                 </div>
             </article>
-
+            </form>
             <!-- 상품 정보 내용 -->
+        <form>
             <article class="detail" th:each="product:${products}">
                 <nav>
                     <h1>상품정보</h1>
@@ -164,7 +183,8 @@
                 <img th:src="@{/file/__${product.prodCate1}__/__${product.prodCate2}__/__${product.thumb3}__}"
                      alt="상세페이지1">
             </article>
-
+        </form>
+        <form>
             <!-- 상품 정보 제공 고시 내용 -->
             <article class="notice" th:each="product:${products}">
                 <nav>

@@ -13,9 +13,20 @@
                 </p>
               </nav>
 
-              <form action="#">
-                <!-- 주문 상품 목록 -->                  
-                <table>
+              <form action="/product/complete">
+                <!-- 주문 상품 목록 -->
+                <input type="hidden" name="prodCount" th:value="${totalQuantity}" />
+                <input type="hidden" name="Price" th:value="${prodDTO.price}" />
+                <input type="hidden" name="delivery" th:value="${prodDTO.delivery}" />
+                <input type="hidden" name="prodNo" th:value="${prodDTO.prodNo}" />
+                <input type="hidden" name="prodDiscount" th:value="${prodDTO.discount}" />
+                <input type="hidden" name="point" th:value="${prodDTO.point}" />
+                <input type="hidden" name="ordDiscount" th:value="${prodDTO.prodNo}" />
+                <!-- totalPrice, savePoint, userPoint, recipName, recipHp, recipaddr1, recipaddr1는 js로 넘겨야함-->
+                  
+                  <input type="hidden" name="ordUid" th:value="${prodDTO.prodNo}" />
+                  
+                  <table>
                   <thead>
                     <tr>
                       <th>상품명</th>
@@ -32,50 +43,21 @@
                     <tr>
                       <td>
                         <article>
-                          <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
+                          <a href="#"><img th:src = "@{/thumbs/__${prodDTO.prodCate1}__/__${prodDTO.prodCate2}__/__${prodDTO.thumb3}__}" alt=""></a>
                           <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
+                            <h2><a href="#">[[${prodDTO.prodName}]]</a></h2>
+                            <p>[[${prodDTO.descript}]]</p>
                           </div>
                         </article>
                       </td>
-                      <td>1</td>
-                      <td>27,000</td>
-                      <td>무료배송</td>
-                      <td>27,000</td>
+                      <td>[[${totalQuantity}]]</td>
+                      <td>[[${prodDTO.price}]]</td>
+                      <td>[[${prodDTO.delivery}]]</td>
+                      <td> 임시 원</td>
+                        <!--총 합계 할인 금액없이 스크립트 라인에서? totalQuantity 만큼 곱해서 .text로 출력 해야할 듯 일단 토탈 먼저 넘기고 -->
                     </tr>
-                    <tr>
-                      <td>
-                        <article>
-                          <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                          <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
-                          </div>
-                        </article>
-                      </td>
-                      <td>1</td>
-                      <td>27,000</td>
-                      <td>무료배송</td>
-                      <td>27,000</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <article>
-                          <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                          <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
-                          </div>
-                        </article>
-                      </td>
-                      <td>1</td>
-                      <td>27,000</td>
-                      <td>무료배송</td>
-                      <td>27,000</td>
-                    </tr>                    
                   </tbody>
-                </table>                 
+                </table>
                 
                 <!-- 최종 결제 정보 -->
                 <div class="final">
@@ -83,27 +65,27 @@
                   <table border="0">
                     <tr>
                       <td>총</td>
-                      <td>2 건</td>
+                      <td>[[${totalQuantity}]] 건</td>
                     </tr>
                     <tr>
                       <td>상품금액</td>
-                      <td>27,000</td>
+                      <td>[[${prodDTO.price}]]</td>
                     </tr>
                     <tr>
                       <td>할인금액</td>
-                      <td>-1,000</td>
+                      <td>- [[${#numbers.formatInteger((prodDTO.price*(prodDTO.discount*0.01)), 3, 'COMMA')}]]</td>
                     </tr>
                     <tr>
                       <td>배송비</td>
-                      <td>0</td>
+                      <td>[[${prodDTO.delivery}]]</td>
                     </tr>
                     <tr>
                       <td>포인트 할인</td>
-                      <td>-1000</td>
+                      <td>- 포인트 사용량을 잡아서 날려줘야함</td>
                     </tr>
                     <tr>
                       <td>전체주문금액</td>
-                      <td>25,000</td>
+                      <td>총 가격: [[${#numbers.formatInteger(((prodDTO.price-(prodDTO.price*(prodDTO.discount*0.01))) * totalQuantity + prodDTO.delivery - prodDTO.point), 3, 'COMMA')}]]</td>
                     </tr>                            
                   </table>
                   <input type="button" name="" value="결제하기">              
@@ -115,12 +97,12 @@
                   <table>
                     <tr>
                       <td>주문자</td>
-                      <td><input type="text" name="orderer" /></td>
+                      <td><input type="text" name="orderer" id="memberName" /></td>
                     </tr>
                     <tr>
                       <td>휴대폰</td>
                       <td>
-                        <input type="text" name="hp" />
+                        <input type="text" name="hp" id="memberHp"/>
                         <span>- 포함 입력</span>
                       </td>
                     </tr>
@@ -134,13 +116,13 @@
                     <tr>
                       <td>기본주소</td>
                       <td>
-                        <input type="text" name="addr1"/>
+                        <input type="text" name="addr1" id="memberAddr1"/>
                       </td>
                     </tr>
                     <tr>
                       <td>상세주소</td>
                       <td>
-                        <input type="text" name="addr2"/>
+                        <input type="text" name="addr2" id="memberAddr2"/>
                       </td>
                     </tr>
                   </table>
@@ -151,7 +133,7 @@
                   <h1>할인정보</h1>
 
                   <div>
-                    <p>현재 포인트 : <span>7200</span>점</p>
+                    <p>현재 포인트 : <span>[[${#authentication.principal.member.point}]]</span>점</p>
                     <label>
                         <input type="text" name="point" />점
                         <input type="button" value="적용"/>
@@ -203,4 +185,23 @@
             </section>
             <!-- 주문 페이지 끝-->
         </main>
+<script>
+  // member
+  var mName = document.getElementById("memberName");
+  var mHp = document.getElementById("memberHp");
+  var mAddr1 = document.getElementById("memberAddr1");
+  var mAddr2 = document.getElementById("memberAddr2");
+  var mPoint =  document.getElementById("memberHp");
+
+
+  mName.value  = " [[${#authentication.principal.member.name}]]";
+  mHp.value    = " [[${#authentication.principal.member.hp}]]";
+  mAddr1.value = " [[${#authentication.principal.member.addr1}]]";
+  mAddr2.value = " [[${#authentication.principal.member.addr2}]]";
+  mPoint.value = " [[${#authentication.principal.member.point}]]";
+  // product
+  
+  
+  
+</script>
 <th:block th:insert = "~{/product/layout/footer.html}" />

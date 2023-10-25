@@ -12,10 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -72,6 +69,7 @@ public class ProductController {
 
         List<ProductEntity> products = prodService.getAllProduct(prodNo);
 
+        log.info("products: " + products.toString());
         model.addAttribute("products",products);
         model.addAttribute("prodNo",prodNo);
 
@@ -83,14 +81,24 @@ public class ProductController {
 
     @GetMapping("/product/order")
     public String order(){
-
+        log.info("222222222222222");
+        
         return "/product/order";
     }
 
     @PostMapping("/product/order")
-    public String selectOrder(List<ProductDTO> dto, Model model) {
-
-        log.info("dto: " + dto.toString());
+    public String selectOrder(Model model, int totalQuantity, ProductDTO prodDTO) {
+//        List<ProductDTO> dto
+        
+        
+        model.addAttribute("totalQuantity",totalQuantity);
+        model.addAttribute("prodDTO",prodDTO);
+        
+        
+        log.info("11111111111111111111111111111111111111111111111" );
+        log.info("222222222222222222222222222222222222222222222  " + totalQuantity );
+        log.info("33333333333333333333333333333333333333333333  " + prodDTO.toString());
+//        log.info("dto: " + dto.toString());
         
         
         //log.info("prodDTO  1 =============================: " + request.toString());
