@@ -287,6 +287,9 @@
 #admin-cs-notice-view .content tr:nth-child(1) td {
     border-bottom: 1px solid #959595;
 }
+#admin-cs-notice-view .content tr:nth-child(1) td > span{
+    font-size: 15px;
+}
 #admin-cs-notice-view .content tr:nth-child(2) td {
     border-bottom: 1px solid #959595;
 }
@@ -371,6 +374,7 @@
     font-size: 13px;
     box-sizing: border-box;
 }
+
 #admin-cs-notice-write > .write > article table select * {
     font-size: inherit;
 }

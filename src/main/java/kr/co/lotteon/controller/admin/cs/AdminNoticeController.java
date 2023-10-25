@@ -2,6 +2,7 @@ package kr.co.lotteon.controller.admin.cs;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.cs.CsArticleNoticeDTO;
+import kr.co.lotteon.entity.cs.CsCate2Entity;
 import kr.co.lotteon.entity.cs.CsCate3Entity;
 import kr.co.lotteon.service.CsService;
 import kr.co.lotteon.service.admin.cs.AdminNoticeService;
@@ -94,7 +95,9 @@ public class AdminNoticeController {
     public String noticeView(Model model, int no){
 
         CsArticleNoticeDTO view = service.NoticeView(no);
+        List<CsCate2Entity> entity2 = csService.selectCate2Detail();
         model.addAttribute("view", view);
+        model.addAttribute("cate2", entity2);
 
         return "/admin/cs/notice/view";
     }

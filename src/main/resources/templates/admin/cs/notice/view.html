@@ -13,7 +13,11 @@
                     <table>
                         <tr>
                             <td>유형</td>
-                            <td>[[${view.cate2}]]</td>
+                            <td>
+                                <th:block th:each="c2 : ${cate2}">
+                                        <span th:if="${c2.cate2==view.cate2}" th:text="${c2.detail}"></span>
+                                </th:block>
+                            </td>
                         </tr>
                         <tr>
                             <td>제목</td>
