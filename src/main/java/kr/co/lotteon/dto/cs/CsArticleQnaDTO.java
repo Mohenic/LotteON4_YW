@@ -28,6 +28,7 @@ public class CsArticleQnaDTO {
     private String useyn;
     private String regip;
     private LocalDateTime rdate;
+    private String detail;
 
     public CsArticleQnaEntity toEntity(){
         return CsArticleQnaEntity.builder()

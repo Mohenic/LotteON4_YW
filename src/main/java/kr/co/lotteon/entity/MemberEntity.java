@@ -10,6 +10,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 /*
  * 날짜 : 2023.10.13
@@ -57,8 +58,8 @@ public class MemberEntity {
     private LocalDateTime wdate;
     @CreationTimestamp
     private LocalDateTime rdate;
-    private String etc1;
-    private String etc2;
+    private LocalDate birth;
+    private LocalDate modidate;
     private String etc3;
     private String etc4;
     private String etc5;
@@ -88,8 +89,8 @@ public class MemberEntity {
                 .regip(regip)
                 .wdate(wdate)
                 .rdate(rdate)
-                .etc1(etc1)
-                .etc2(etc2)
+                .birth(birth)
+                .modidate(modidate)
                 .etc3(etc3)
                 .etc4(etc4)
                 .etc5(etc5)
