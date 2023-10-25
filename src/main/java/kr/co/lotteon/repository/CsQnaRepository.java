@@ -28,4 +28,9 @@ public interface CsQnaRepository extends JpaRepository<CsArticleQnaEntity, Integ
 
     public List<CsArticleQnaEntity> findTop5ByOrderByNo();
 
+ // admin part
+
+ public List<CsArticleQnaEntity> findByNo(int no);
+
+
 }

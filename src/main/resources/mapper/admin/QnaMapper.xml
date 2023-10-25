@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.lotteon.mapper.admin.QnaMapper">
+
+    <!-- qna list -->
+
+    <select id="qnaListAll" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
+        SELECT * FROM lo_cs_article_qna
+        WHERE parent = 0 AND useyn = "Y"
+        ORDER BY no DESC LIMIT #{start}, 10;
+    </select>
+
+    <select id="qnaListCate" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
+        SELECT * FROM lo_cs_article_qna
+        WHERE parent = 0 AND useyn = "Y" AND cate2 = #{cate2} AND type = #{type}
+        ORDER BY no DESC LIMIT #{start}, 10;
+    </select>
+
+    <select id="qnaListType" resultType="kr.co.lotteon.dto.cs.CsCate3DTO">
+        SELECT * FROM lo_cs_cate3 WHERE cate2 = #{cate2};
+    </select>
+
+    <select id="selectCountTotal" resultType="int">
+        SELECT count(*)
+        FROM lo_cs_article_qna
+        WHERE parent = 0 AND useyn = "Y";
+    </select>
+
+    <select id="selectCountTotalCate" resultType="int">
+        SELECT count(*)
+        FROM lo_cs_article_qna
+        WHERE parent = 0 AND useyn = "Y" AND cate2 = #{cate2} AND type = #{type};
+    </select>
+
+    <!-- qna view -->
+    <select id="qnaView" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
+        SELECT *
+        FROM lo_cs_article_qna
+        WHERE no = #{no};
+    </select>
+
+    <!-- qna reply-->
+    <insert id="qnaReply">
+        INSERT INTO `lo_cs_article_qna` (parent,cate1,content,writer,useyn,regip,rdate)
+        VALUES (#{parent},#{cate1},#{content},#{writer},"Y",#{regip},NOW());
+    </insert>
+
+    <update id="qnaReplyComment">
+        UPDATE lo_cs_article_qna
+        SET comment = 1
+        WHERE no = #{parent};
+    </update>
+
+    <select id="qnaReplyView" resultType="kr.co.lotteon.dto.cs.CsArticleQnaDTO">
+        select content from lo_cs_article_qna
+        where parent = #{no};
+    </select>
+
+</mapper>
