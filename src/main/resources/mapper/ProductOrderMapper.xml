@@ -8,6 +8,7 @@
             JOIN lo_product_order AS b ON a.ordNo = b.ordNo
             JOIN lo_product AS c ON a.prodNo = c.prodNo
         WHERE b.ordUid = #{ordUid}
+        AND b.ordDate >= DATE_SUB(NOW(), INTERVAL 1 YEAR)
         ORDER BY a.ordNo DESC
         LIMIT #{startNum}, 10
     </select>
@@ -17,7 +18,8 @@
                  JOIN lo_product_order AS b ON a.ordNo = b.ordNo
                  JOIN lo_product AS c ON a.prodNo = c.prodNo
         WHERE b.ordUid = #{ordUid} AND b.ordDate BETWEEN DATE(#{beginDate})
-            AND DATE(#{endDate})
+        AND DATE(#{endDate})
+        AND b.ordDate >= DATE_SUB(NOW(), INTERVAL 1 YEAR)
         ORDER BY a.ordNo DESC
         LIMIT #{startNum}, 10
     </select>

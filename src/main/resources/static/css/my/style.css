@@ -527,7 +527,7 @@ footer p > strong {
 
 /* my - ordered(전체주문내역) */
 #my > .ordered {}        
-#my > .ordered > section > article > .byDate {
+#my > .ordered > section > article .byDate {
     width: 100%;
     height: auto;
     margin-top: 16px;
@@ -537,15 +537,15 @@ footer p > strong {
     box-sizing: border-box;
     overflow: hidden;            
 }
-#my > .ordered > section > article > .byDate > * {
+#my > .ordered > section > article .byDate > * {
     float: left;
 }
 
-#my > .ordered > section > article > .byDate * {
+#my > .ordered > section > article .byDate * {
     font-family: '돋움';
     color: #444;
 }
-#my > .ordered > section > article > .byDate > .tit {
+#my > .ordered > section > article .byDate > .tit {
     width: 52px;
     height: 11px;
     margin-right: 20px;
@@ -554,18 +554,18 @@ footer p > strong {
     font-size: 0;
 }
 
-#my > .ordered > section > article > .byDate > ul {
+#my > .ordered > section > article .byDate > ul {
     background-image: url('../../images/my/my_sprites.png');
     
 }
-#my > .ordered > section > article > .byDate > ul > li {
+#my > .ordered > section > article .byDate > ul > li {
     float: left;
     width: 54px;
     height: 100%;            
     box-sizing: border-box;
 }
 
-#my > .ordered > section > article > .byDate > ul a {
+#my > .ordered > section > article .byDate > ul a {
     display: block;
     width: 54px;
     height: 27px;
@@ -573,49 +573,49 @@ footer p > strong {
     line-height: 27px;
 }
 
-#my > .ordered > section > article > .byDate > ul a:hover {
+#my > .ordered > section > article .byDate > ul a:hover {
     background: url('../../images/my/my_sprites.png') no-repeat -377px -908px;
     color: rgb(255, 255, 255);
 }
-#my > .ordered > section > article > .byDate > ul a.on {
+#my > .ordered > section > article .byDate > ul a.on {
     background: url('../../images/my/my_sprites.png') no-repeat -377px -908px;
     color: rgb(255, 255, 255);
 }
-#my > .ordered > section > article > .byDate > ul a > em {
+#my > .ordered > section > article .byDate > ul a > em {
     font-weight: bold;
     color: #111;
 }
-#my > .ordered > section > article > .byDate > ul a:hover > em {color: #fff;}
-#my > .ordered > section > article > .byDate > ul a.on > em {color: #fff;}
+#my > .ordered > section > article .byDate > ul a:hover > em {color: #fff;}
+#my > .ordered > section > article .byDate > ul a.on > em {color: #fff;}
 
-#my > .ordered > section > article > .byDate > .date_3ea {
+#my > .ordered > section > article .byDate > .date_3ea {
     width: 165px;
     height: 29px;
     background-position: -485px -908px;
 }
-#my > .ordered > section > article > .byDate > .date_5ea {
+#my > .ordered > section > article .byDate > .date_5ea {
     width: 273px;
     height: 29px;
     background-position: -377px -937px;
 }        
 
-#my > .ordered > section > article > .byDate > p {
+#my > .ordered > section > article .byDate p {
     width: 190px;
     height: 29px;
     background: url('../../images/my/my_sprites.png') no-repeat -461px -879px;
     padding: 5px;
     box-sizing: border-box;
 }
-#my > .ordered > section > article > .byDate > p > span {
+#my > .ordered > section > article .byDate p > span {
     display: inline-block;
     margin: 0 4px;
 }
-#my > .ordered > section > article > .byDate input[type=date] {
+#my > .ordered > section > article .byDate input[type=date] {
     width: 80px;
     border: none;
 }
 
-#my > .ordered > section > article > .byDate > .btnConfirm {
+#my > .ordered > section > article .byDate .btnConfirm {
     width: 69px;
     height: 27px;
     border: none;
@@ -806,14 +806,14 @@ footer p > strong {
     background-position: -377px -937px;
 }        
 
-#my > .point > section > article > .byDate > p {
+#my > .point > section > article > .byDate p {
     width: 190px;
     height: 29px;
     background: url('../../images/my/my_sprites.png') no-repeat -461px -879px;
     padding: 5px;
     box-sizing: border-box;
 }
-#my > .point > section > article > .byDate > p > span {
+#my > .point > section > article > .byDate p > span {
     display: inline-block;
     margin: 0 4px;
 }
@@ -822,7 +822,7 @@ footer p > strong {
     border: none;
 }
 
-#my > .point > section > article > .byDate > .btnConfirm {
+#my > .point > section > article > .byDate .btnConfirm {
     width: 69px;
     height: 27px;
     border: none;

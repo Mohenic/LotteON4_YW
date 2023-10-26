@@ -1,22 +1,17 @@
 package kr.co.lotteon.service;
 
-import kr.co.lotteon.dto.MemberDTO;
-import kr.co.lotteon.dto.PageRequestOrderDTO;
-import kr.co.lotteon.dto.PageResponseOrderDTO;
-import kr.co.lotteon.dto.product.PageResponseDTO;
+import kr.co.lotteon.dto.*;
+import kr.co.lotteon.dto.my.PageRequestOrderDTO;
+import kr.co.lotteon.dto.my.PageRequestPointDTO;
+import kr.co.lotteon.dto.my.PageResponseOrderDTO;
+import kr.co.lotteon.dto.my.PageResponsePointDTO;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
-import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
-import kr.co.lotteon.entity.product.ProductOrderEntity;
-import kr.co.lotteon.mapper.MyMapper;
+import kr.co.lotteon.mapper.MemberPointMapper;
 import kr.co.lotteon.mapper.ProductOrderMapper;
-import kr.co.lotteon.repository.MemberRepository;
-import kr.co.lotteon.repository.product.ProductOrderRepository;
-import kr.co.lotteon.util.Pager;
+import kr.co.lotteon.repository.MemberPointRepository;
+import kr.co.lotteon.repository.product.ProductOrderItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,16 +21,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MyService {
 
-    private final ProductOrderMapper mapper;
-    private final ProductOrderRepository productOrderRepository;
+    private final ProductOrderMapper orderMapper;
+    private final MemberPointMapper pointMapper;
+    private final ProductOrderItemRepository productOrderItemRepository;
+    private final MemberPointRepository memberPointRepository;
     public PageResponseOrderDTO order(PageRequestOrderDTO requestOrderDTO){
         log.info("requestOrderDTO.getDateType() : "+requestOrderDTO.getDateType());
         PageResponseOrderDTO responseOrderDTO=null;
-        if(requestOrderDTO.getDateType() == null){
+        if(requestOrderDTO.getDateType() == null||requestOrderDTO.getDateType().equals("")){
             log.info("ordUid : "+requestOrderDTO.getOrdUid());
-            int total = productOrderRepository.countByOrdUid(requestOrderDTO.getOrdUid());
+            int total = productOrderItemRepository.countByOrdUid(requestOrderDTO.getOrdUid());
+            log.info("total : "+total);
             responseOrderDTO = new PageResponseOrderDTO(requestOrderDTO, total);
-            List<ProductOrderDTO> dtoList = mapper.selectProductOrders(requestOrderDTO.getOrdUid(), responseOrderDTO.getStartNum());
+            log.info("responseOrderDTO.getStartNum : "+responseOrderDTO.getStartNum());
+            log.info("requestOrderDTO.getOrdUid() : "+requestOrderDTO.getOrdUid());
+            List<ProductOrderDTO> dtoList = orderMapper.selectProductOrders(requestOrderDTO.getOrdUid(), responseOrderDTO.getStartNum());
             log.info("responseOrderDTO : "+responseOrderDTO);
             responseOrderDTO.setDtoList(dtoList);
             log.info("dtoList : "+responseOrderDTO.getDtoList());
@@ -46,15 +46,46 @@ public class MyService {
             log.info("beginDate : "+requestOrderDTO.getBeginDate());
             log.info("EndDate : "+requestOrderDTO.getEndDate());
 
-            int total = productOrderRepository.countByOrdUidAndOrdDateGreaterThanEqualAndOrdDateLessThanEqual(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getEndDate());
+            int total = productOrderItemRepository.countByOrdUidAndOrdDateGreaterThanEqualAndOrdDateLessThanEqual(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getEndDate());
             responseOrderDTO = new PageResponseOrderDTO(requestOrderDTO, total);
-            List<ProductOrderDTO> dtoList = mapper.selectProductOrdersDate(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getEndDate(), responseOrderDTO.getStartNum());
+            List<ProductOrderDTO> dtoList = orderMapper.selectProductOrdersDate(requestOrderDTO.getOrdUid(), requestOrderDTO.getBeginDate(), requestOrderDTO.getEndDate(), responseOrderDTO.getStartNum());
             log.info("responseOrderDTO : "+responseOrderDTO);
 
             responseOrderDTO.setDtoList(dtoList);
             log.info("dtoList : "+responseOrderDTO.getDtoList());
         }
         return responseOrderDTO;
+    }
+    public PageResponsePointDTO point(PageRequestPointDTO requestPointDTO){
+        log.info("requestPointDTO.getDateType() : "+requestPointDTO.getDateType());
+        PageResponsePointDTO responsePointDTO=null;
+        if(requestPointDTO.getDateType() == null||requestPointDTO.getDateType().equals("")){
+            log.info("uid : "+requestPointDTO.getUid());
+            int total = memberPointRepository.countByUid(requestPointDTO.getUid());
+            log.info("total : "+total);
+            responsePointDTO = new PageResponsePointDTO(requestPointDTO, total);
+            log.info("responsePointDTO.getStartNum : "+responsePointDTO.getStartNum());
+            log.info("requestPointDTO.getUid() : "+requestPointDTO.getUid());
+            List<MemberPointDTO> dtoList = pointMapper.selectPoints(requestPointDTO.getUid(), responsePointDTO.getStartNum());
+            log.info("responsePointDTO : "+responsePointDTO);
+            responsePointDTO.setDtoList(dtoList);
+            log.info("dtoList : "+responsePointDTO.getDtoList());
+        }else{
+            requestPointDTO.getBeginDate(requestPointDTO.getDateType());
+
+            log.info("uid : "+requestPointDTO.getUid());
+            log.info("beginDate : "+requestPointDTO.getBeginDate());
+            log.info("EndDate : "+requestPointDTO.getEndDate());
+
+            int total = memberPointRepository.countByUidAndPointDateGreaterThanEqualAndPointDateLessThanEqual(requestPointDTO.getUid(), requestPointDTO.getBeginDate(), requestPointDTO.getEndDate());
+            responsePointDTO = new PageResponsePointDTO(requestPointDTO, total);
+            List<MemberPointDTO> dtoList = pointMapper.selectPointsDate(requestPointDTO.getUid(), requestPointDTO.getBeginDate(), requestPointDTO.getEndDate(), responsePointDTO.getStartNum());
+            log.info("responsePointDTO : "+responsePointDTO);
+
+            responsePointDTO.setDtoList(dtoList);
+            log.info("dtoList : "+responsePointDTO.getDtoList());
+        }
+        return responsePointDTO;
     }
 
     /*public MemberDTO findMyInfo(String uid){
