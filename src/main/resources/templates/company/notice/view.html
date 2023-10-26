@@ -1,0 +1,32 @@
+<th:block th:insert="~{/company/layout/_header.html}"/>
+    <main id="notice">
+        <div class="cover">
+            <div>
+                <h1>전자공시</h1>
+                <p>
+                    LotteON의 공지사항을<br>
+                    안내해드립니다.
+                </p>
+            </div>
+        </div>
+        <section class="view">
+            <article>
+                <div class="content">
+                    <table>
+                        <tr>
+                            <td>제목</td>
+                            <td>[[${view.title}]]</td>
+                        </tr>
+                        <tr>
+                            <td>내용</td>
+                            <td>
+                                [[${view.content}]]
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <a th:href="@{/company/notice/list}" class="btn btn-secondary">목록</a>
+            </article>
+        </section>
+    </main>
+<th:block th:insert="~{/company/layout/_footer.html}"/>

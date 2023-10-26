@@ -1,0 +1,36 @@
+<th:block th:insert="~{/company/layout/_header.html}"/>
+    <main id="notice">
+        <div class="cover">
+            <div>
+                <h1>전자공시</h1>
+                <p>
+                    LotteON의 공지사항을<br>
+                    안내해드립니다.
+                </p>
+            </div>
+        </div>
+        <section class="list">
+            <table>
+                <tr>
+                    <th>제목</th>
+                    <th>등록일</th>
+                </tr>
+                <tr th:each="list:${lists}">
+                    <td class="title" ><a th:href="@{/company/notice/view(no=${list.no})}" th:text="${list.title}"></a></td>
+                    <td class="rdate" th:text="${list.rdate.toLocalDate()}"></td>
+                </tr>
+            </table>
+            <div class="paging">
+                <span class="prev" th:if="${pageGroupStart > 1}">
+                    <a th:href="@{/company/notice/list(pg=${pageGroupStart - 1})}"><&nbsp;이전</a>
+                </span>
+                <span class="num" th:each="num: ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                    <a th:href="@{/company/notice/list(pg=${num})}" th:classappend="${num eq currentPage ? 'on' : ''}">[[${num}]]</a>
+                </span>
+                <span class="next" th:if="${pageGroupEnd < lastPageNum}">
+                    <a th:href="@{/company/notice/list(pg=${pageGroupEnd + 1})}">다음></a>
+                </span>
+            </div>
+        </section>
+    </main>
+<th:block th:insert="~{/company/layout/_footer.html}"/>
