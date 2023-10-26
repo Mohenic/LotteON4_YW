@@ -1,14 +1,59 @@
 <th:block th:insert="~{/my/layout/header.html}"/>
+<script th:inline="javascript">
+    window.onload = function() {
+        // ID 마스킹
+        var originalId = /*[[${list.uid}]]*/ '';
+        var maskedId = originalId.substr(0, 3) + "****";
+        document.getElementById("maskedId").textContent = maskedId;
 
+        // Name 마스킹
+        var originalName = /*[[${list.name}]]*/ '';
+        var nameLength = originalName.length;
+        var maskedName;
+
+        if (nameLength === 3) {
+            maskedName = originalName[0] + '*' + originalName[2];
+        } else if (nameLength > 3) {
+            var middleIndex = Math.floor(nameLength / 2);
+            maskedName = originalName.substr(0, middleIndex - 1) + '**' + originalName.substr(middleIndex + 1);
+        } else {
+            maskedName = originalName;
+        }
+
+        document.getElementById("maskedName").textContent = maskedName;
+
+        // 이메일 분할
+        var dbEmail = /*[[${list.email}]]*/ '';
+        var parts = dbEmail.split('@');
+        document.getElementsByName("email1")[0].value = parts[0];
+        document.getElementsByName("email2")[0].value = parts[1];
+
+        // 날짜 형식 변경
+        var birthString = /*[[${list.birth}]]*/ '';
+        var birthDate = new Date(birthString);
+        var formattedBirth = birthDate.getFullYear() + '년 ' + (birthDate.getMonth() + 1) + '월 ' + birthDate.getDate() + '일';
+        document.getElementById("formattedBirth").textContent = formattedBirth;
+
+        // 번호 분할
+        var phoneNumber = /*[[${list.hp}]]*/ ''; // Thymeleaf 변수를 JavaScript 변수로 가져옴
+        var phoneNumberWithoutDash = phoneNumber.replace(/-/g, '');
+        var part1 = phoneNumberWithoutDash.substr(0, 3);
+        var part2 = phoneNumberWithoutDash.substr(3, 4);
+        var part3 = phoneNumberWithoutDash.substr(7);
+        document.getElementsByName("hp1")[0].value = part1;
+        document.getElementsByName("hp2")[0].value = part2;
+        document.getElementsByName("hp3")[0].value = part3;
+    }
+</script>
             <div class="info">
                 <th:block th:insert="~{/my/layout/aside.html}"/>
                     <article>
                         <h3>회원정보 설정</h3>
 
-                        <table border="0">
+                        <table>
                             <tr>
                                 <td>사용자 ID</td>
-                                <td>chh****</td>
+                                <td><span id="maskedId"></span></td>
                             </tr>
                             <tr>
                                 <td>비밀번호</td>
@@ -18,11 +63,11 @@
                             </tr>
                             <tr>
                                 <td>이름</td>
-                                <td>김*학</td>
+                                <td><span id="maskedName"></span></td>
                             </tr>
                             <tr>
                                 <td>생년월일</td>
-                                <td>1983년 05월 03일</td>
+                                <td id="formattedBirth"></td>
                             </tr>
                             <tr>
                                 <td>E-mail</td>

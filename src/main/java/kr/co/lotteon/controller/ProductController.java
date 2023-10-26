@@ -10,6 +10,7 @@ import kr.co.lotteon.service.ProductService;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -81,13 +82,12 @@ public class ProductController {
 
     @GetMapping("/product/order")
     public String order(){
-        log.info("222222222222222");
         
         return "/product/order";
     }
 
     @PostMapping("/product/order")
-    public String selectOrder(Model model, int totalQuantity, ProductDTO prodDTO) {
+    public String selectOrder(Model model, int totalQuantity, ProductDTO prodDTO, Authentication authentication  ) {
 //        List<ProductDTO> dto
         
         
@@ -98,6 +98,10 @@ public class ProductController {
         log.info("11111111111111111111111111111111111111111111111" );
         log.info("222222222222222222222222222222222222222222222  " + totalQuantity );
         log.info("33333333333333333333333333333333333333333333  " + prodDTO.toString());
+        
+        log.info("============================"+ authentication.toString());
+        log.info("============================"+ authentication.getPrincipal().toString());
+        
 //        log.info("dto: " + dto.toString());
         
         
@@ -127,9 +131,36 @@ public class ProductController {
         
         return "/product/order";
     }
-    
-    
-    
+
+
+    @GetMapping("/product/cart")
+    public String cart() {
+
+        return "/product/cart";
+    }
+
+    @PostMapping("/product/cart")
+    public List<ProductDTO> getOrderProduct(){
+
+        return  null;
+    }
+
+    @GetMapping("/product/cart/order")
+    public String cartOrder() {
+
+        return "/product/cartOrder";
+    }
+
+    @PostMapping("/product/cart/order")
+    public List<ProductDTO> getCartOrderProduct(){
+
+        return  null;
+    }
+
+
+
+
+
     @GetMapping("/product/search")
     public String search(){
 
@@ -142,12 +173,7 @@ public class ProductController {
         return "/product/complete";
     }
 
-    @GetMapping("/product/cart")
-    public String cart() {
-
-        return "/product/cart";
-    }
-
+ 
 
 
 

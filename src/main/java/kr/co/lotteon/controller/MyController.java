@@ -1,9 +1,14 @@
 package kr.co.lotteon.controller;
 
-import kr.co.lotteon.dto.my.PageRequestOrderDTO;
-import kr.co.lotteon.dto.my.PageRequestPointDTO;
+
 import kr.co.lotteon.dto.my.PageResponseOrderDTO;
 import kr.co.lotteon.dto.my.PageResponsePointDTO;
+
+import jakarta.servlet.http.HttpServletRequest;
+import kr.co.lotteon.dto.MemberDTO;
+import kr.co.lotteon.dto.PageRequestOrderDTO;
+import kr.co.lotteon.dto.PageResponseOrderDTO;
+import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.service.MyService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +26,7 @@ public class MyController {
 
     @Autowired
     private MyService myService; // �
+
 
     @ModelAttribute("appInfo")
     public String appversion(){
@@ -42,10 +48,6 @@ public class MyController {
     public String coupon(Model model){
         return "/my/coupon";
     }*/
-    @GetMapping("/my/info")
-    public String info(Model model){
-        return "/my/info";
-    }
     @GetMapping("/my/order")
     public String order(Model model, PageRequestOrderDTO pageRequestOrderDTO){
         PageResponseOrderDTO pageResponseOrderDTO = myService.order(pageRequestOrderDTO);

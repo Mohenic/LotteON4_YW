@@ -2,6 +2,7 @@ package kr.co.lotteon.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
+import kr.co.lotteon.dto.product.ProductOrderItemDTO;
 import kr.co.lotteon.dto.product.ProductReviewDTO;
 import kr.co.lotteon.entity.MemberEntity;
 import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,10 +49,12 @@ public class MyController2 {
        List<ProductReviewDTO> reviewLimit5= myService2.selectMyReviewLimit5(uid);
        List<CsArticleQnaDTO> qnaLimit5= myService2.selectQnaMyLimit5(uid);
         MemberEntity member=myService2.selectMyMember(uid);
+        List<ProductOrderItemDTO> myItems = myService2.selectProductMyHomeLimit5(uid);
 
        model.addAttribute("reviewLimit5", reviewLimit5);
        model.addAttribute("qnaLimit5", qnaLimit5);
        model.addAttribute("member", member);
+       model.addAttribute("myItems", myItems);
 
         return "/my/home";
     }
@@ -137,4 +141,6 @@ public class MyController2 {
 
         return "/my/review";
     }
+
+
 }

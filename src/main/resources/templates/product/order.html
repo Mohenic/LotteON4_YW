@@ -1,10 +1,8 @@
 <th:block th:insert = "~{/product/layout/header.html}" />
 <main id="product">
     <th:block th:insert = "~{/product/layout/aside.html}" />
-
             <!-- 주문 페이지 시작-->
             <section class="order">
-              
               <!-- 제목, 페이지 네비게이션 -->
               <nav>
                 <h1>주문결제</h1>
@@ -12,26 +10,20 @@
                   HOME > 장바구니 > <strong>주문결제</strong>
                 </p>
               </nav>
-
               <form action="/product/complete" id="orderForm">
-                <!-- 주문 상품 목록 -->
-                <input type="text" name="prodCount" th:value="${totalQuantity}" />
-                <input type="text" name="Price" th:value="${prodDTO.price}" />
-                <input type="text" name="delivery" th:value="${prodDTO.delivery}" />
-                <input type="text" name="prodNo" th:value="${prodDTO.prodNo}" />
-                <input type="text" name="discount" th:value="${prodDTO.discount}" />
-                <input type="text" name="savePoint" th:value="${prodDTO.point}" /> <!-- 여기서의 point는 savePoint임 -->
+                  <!-- 주문 상품 목록 -->
+                  <input type="text" name="prodCount" th:value="${totalQuantity}" />
+                  <input type="text" name="Price" th:value="${prodDTO.price}" />
+                  <input type="text" name="delivery" th:value="${prodDTO.delivery}" />
+                  <input type="text" name="prodNo" th:value="${prodDTO.prodNo}" />
+                  <input type="text" name="discount" th:value="${prodDTO.discount}" /> <!-- discount 퍼센테이지 -->
+                  <input type="text" name="savePoint" th:value="${prodDTO.point}" /> <!-- 여기서의 point는 savePoint임 -->
                   <!-- totalPrice, savePoint, userPoint, recipName, recipHp, recipaddr1, recipaddr1는 js로 넘겨야함-->
-                  <input type="text" name="totalPrice" th:value="${#numbers.formatInteger(((prodDTO.price * totalQuantity) - ((prodDTO.price * totalQuantity) * (prodDTO.discount * 0.01)) + prodDTO.delivery - prodDTO.point), 3, 'COMMA')}" />
-                  <input type="text" name="subtotal" th:value="${#numbers.formatInteger((prodDTO.price*(prodDTO.discount*0.01)), 3, 'COMMA')}" />
-
-
-
-
+                  <input type="text" name="totalPrice" th:value="0" />
+                  <input type="text" name="discountPrice" th:value="${#numbers.formatInteger(((prodDTO.price* totalQuantity)*(prodDTO.discount*0.01)), 3)}" /> <!-- discount되어 빠질 가격 -->
+                  <input type="text" name="subTotalPrice"  th:value="${#numbers.formatInteger(((prodDTO.price * totalQuantity) + prodDTO.delivery) ,3)}" />
                   <input type="text" name="usePoint" />
-                  <input type="text" name="totalPrice" />
-             
-
+                  <input type="text" name="totalPrice"  />
                   <table>
                   <thead>
                     <tr>
@@ -59,7 +51,8 @@
                       <td>[[${totalQuantity}]]</td>
                       <td>[[${prodDTO.price}]]</td>
                       <td>[[${prodDTO.delivery}]]</td>
-                      <td name="subTotal" id="subTotal"> </td>
+                      <td name="subTotal" id="subTotal">  [[${#numbers.formatInteger(((prodDTO.price * totalQuantity) + prodDTO.delivery) ,3)}]] 원 </td>
+                       
                         <!--총 합계 할인 금액없이 스크립트 라인에서? totalQuantity 만큼 곱해서 .text로 출력 해야할 듯 일단 토탈 먼저 넘기고 -->
                     </tr>
                   </tbody>
@@ -80,23 +73,20 @@
                       <tr>
                         <td>할인금액</td>
                         <td>
-                          - [[${#numbers.formatInteger((prodDTO.price*(prodDTO.discount*0.01)), 3, 'COMMA')}]]
+                          - [[${#numbers.formatInteger(((prodDTO.price * totalQuantity)*(prodDTO.discount*0.01)), 3, 'COMMA')}]]
                       </td>
                     </tr>
                     <tr>
                       <td>배송비</td>
                       <td>[[${prodDTO.delivery}]]</td>
                     </tr>
-                    <tr>
+                    <tr id="disPoint">
                       <td>포인트 할인</td>
-                      <td>- 포인트 사용량을 잡아서 날려줘야함</td>
+                        <!-- - 포인트 사용량을 잡아서 날려줘야함-->
                     </tr>
-                    <tr>
+                    <tr id="oTotalPrice">
                       <td>전체주문금액</td>
-                      <td>
-                          총 가격:
-                          [[${#numbers.formatInteger(((prodDTO.price * totalQuantity) - ((prodDTO.price * totalQuantity) * (prodDTO.discount * 0.01)) + prodDTO.delivery - prodDTO.point), 3, 'COMMA')}]]
-                      </td>
+                      
                         <!--여기 위에 총 가격부분 point가 savePoint를 가져오기 때문에 사용하는 포인트를 js에서 잡아줘야함-->
                     </tr>                            
                   </table>
@@ -144,16 +134,20 @@
                 <article class="discount">
                   <h1>할인정보</h1>
 
-                  <div>
-                    <p>현재 포인트 : <span>[[${#authentication.principal.member.point}]]</span>점</p>
+                  <div> <!-- 만약에 점수가 없으면 포인트가 부족 하다고 띄워야함  -->
+                    <p>현재 포인트 : <span >
+                                      [[${#authentication.principal.member.point}]]  
+                                        <input type="hidden" name="userPoint" id="userPoint" />
+                                    </span>점
+                    </p>
                     <label>
                         <input type="text" name="point" id="usePoint" />점
-                        <input type="button" value="적용"/>
+                        <input type="button" value="적용" id="check" onclick="checkPoint()"/>
                     </label>
                     <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
+                    <div id="pointError" ></div>
                   </div>
                 </article>
-
                 <!-- 결제방법 -->
                 <article class="payment">
                     <h1>결제방법</h1>
@@ -196,27 +190,150 @@
               
             </section>
             <!-- 주문 페이지 끝-->
-        </main>
-<script>
-  // member
-              var mName = document.getElementById("memberName");
-              var mHp = document.getElementById("memberHp");
-              var mAddr1 = document.getElementById("memberAddr1");
-              var mAddr2 = document.getElementById("memberAddr2");
-              var UPoint =  document.getElementById("usePoint");
-              var mZip =  document.getElementById("memberZip");
-              var subTotal =  document.getElementById("subTotal");
-              var mPoint =  document.getElementById("subTotal");
+    <script>
+        // member
 
-              mName.value  = " [[${#authentication.principal.member.name}]]";
-              mHp.value    = " [[${#authentication.principal.member.hp}]]";
-              mAddr1.value = " [[${#authentication.principal.member.addr1}]]";
-              mAddr2.value = " [[${#authentication.principal.member.addr2}]]";
-              mPoint.value = " [[${#authentication.principal.member.point}]]";
-              mZip.value   = " [[${#authentication.principal.member.zip}]]"
-              // product
+        var mName = document.getElementById("memberName");
+        var mHp = document.getElementById("memberHp");
+        var mAddr1 = document.getElementById("memberAddr1");
+        var mAddr2 = document.getElementById("memberAddr2");
+        var usePoint =  document.getElementById("usePoint");
+        var userPoint =  document.getElementById("userPoint");
+        var mZip =  document.getElementById("memberZip");
+        var subTotal =  document.getElementById("subTotal");
+        var mPoint =  document.getElementById("subTotal");
+        var disPoint =  document.getElementById("disPoint");
+        var oTotalPrice =  document.getElementById("oTotalPrice");
+
+        usePoint.value = "0";
+        userPoint.value = "[[${#authentication.principal.member.point}]]";
+        mName.value  = " [[${#authentication.principal.member.name}]]";
+        mHp.value    = " [[${#authentication.principal.member.hp}]]";
+        mAddr1.value = " [[${#authentication.principal.member.addr1}]]";
+        mAddr2.value = " [[${#authentication.principal.member.addr2}]]";
+        mPoint.value = " [[${#authentication.principal.member.point}]]";
+        mZip.value   = " [[${#authentication.principal.member.zip}]]";
+        subTotal.value = "[[${#numbers.formatInteger(((prodDTO.price * totalQuantity) - prodDTO.delivery), 3, 'COMMA')}]]";
+
+
+
+       
+
+
+        var newPtag = document.createElement('td');
+        newPtag.id = 'FPoint';
+        newPtag.innerText = "0";
+        disPoint.append(newPtag);
+
         
-    
-  
-</script>
+   
+
+        var tPoint;
+
+        function checkPoint() {
+            var availablePoint = parseInt(document.getElementById("userPoint").value);/* Calculate available point from your data source */;
+            var usePoint = parseInt(document.getElementById("usePoint").value);
+            var sPoint = document.getElementById("pointError")
+            // 이게 포인트 사용시 5천점 이상 꼭 사용해야 하는건지 5천점 이상 보유하면 사용량에는 상관이 없는건지 정해야함.
+            if(availablePoint >= 5000) {
+
+                if (usePoint <= availablePoint) {
+
+                    sPoint.innerText = "사용 가능한 포인트 입니다.";
+                    sPoint.style.color = "green";
+                    tPoint = usePoint.toString();
+                    newPtag.innerText = tPoint;
+                    console.log("혹시이거냐?22"+tPoint);
+
+                } else {
+                    sPoint.innerText = "포인트가 부족합니다.";
+                    sPoint.style.color = "red";
+                }
+            }else {
+                let sPoint = document.getElementById("pointError")
+                sPoint.innerHTML = "보유하신 포인트가 5000 포인트 이하 입니다."
+                sPoint.style.color = "red";
+            }
+        }
+        var fPointval = document.getElementById('FPoint')
+
+
+
+
+        var cre_tag;
+        
+        function overflow(){
+
+            var FpointValue;
+            $(document).on('click', 'totalPrice',function(){
+
+                FpointValue = fPointval.value;
+                console.log("142412421"+FpointValue);
+                
+                
+
+            });
+            
+            let pPoint = document.getElementById('usePoint').value;
+            
+            console.log("fPointvalfPointvalfPointval" + fPointval );
+            var sumPrice = parseInt([[${prodDTO.price}]]);
+            console.log(sumPrice);
+            var sumQuantity = parseInt([[${totalQuantity}]]);
+            console.log(sumQuantity);
+            var sumDiscount = parseInt([[${prodDTO.discount}]]);
+            console.log(sumDiscount);
+            var sumDelivery = parseInt([[${prodDTO.delivery}]]);
+            console.log(sumDelivery);
+            var sumPoint = parseInt(pPoint);
+            console.log("혹시이거냐?"+sumPoint)
+            var totalPrice = ((sumPrice * sumQuantity) - ((sumPrice * sumQuantity) * (sumDiscount * 0.01)) + sumDelivery - sumPoint);
+            console.log("skfskjfskf" + totalPrice )
+            
+            
+            cre_tag = document.createElement('td');
+            cre_tag.id = 'sumTotalPrice';
+            newPtag.innerText = usePoint.value;
+            cre_tag.innerText = "총 가격: " + totalPrice;
+            oTotalPrice.append(cre_tag);
+        }
+        
+        
+        function changeTotal(){
+            let pPoint = document.getElementById('usePoint').value;
+
+            console.log("fPointvalfPointvalfPointval" + fPointval );
+            var sumPrice = parseInt([[${prodDTO.price}]]);
+            console.log(sumPrice);
+            var sumQuantity = parseInt([[${totalQuantity}]]);
+            console.log(sumQuantity);
+            var sumDiscount = parseInt([[${prodDTO.discount}]]);
+            console.log(sumDiscount);
+            var sumDelivery = parseInt([[${prodDTO.delivery}]]);
+            console.log(sumDelivery);
+            var sumPoint = parseInt(pPoint);
+            console.log("혹시이거냐?"+sumPoint)
+            var totalPrice = ((sumPrice * sumQuantity) - ((sumPrice * sumQuantity) * (sumDiscount * 0.01)) + sumDelivery - sumPoint);
+            console.log("skfskjfskf" + totalPrice )
+
+            cre_tag.innerText = totalPrice;
+            
+            
+            
+        }
+        
+      /*  window.onload = function(){
+            overflow();
+        }*/
+        
+        
+        //document.getElementById('check').addEventListener('click', overflow);
+        document.getElementById('check').addEventListener('click', changeTotal);
+
+
+        setTimeout(overflow, 1000);
+        // product
+
+    </script>
+</main>
 <th:block th:insert = "~{/product/layout/footer.html}" />

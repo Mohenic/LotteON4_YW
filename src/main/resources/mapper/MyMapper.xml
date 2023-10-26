@@ -45,5 +45,46 @@
         select b.*,a.ordUid from `lo_product_order` as a inner join `lo_product_order_item` as b ON a.ordNo=b.ordNo  where a.ordUid  =#{uid} ORDER by ordNo DESC limit 5;
     </select>
 
+    <select id="selectProductMyHomeLimit5" resultType="kr.co.lotteon.dto.product.ProductOrderItemDTO">
+        select a.price ,a.ordNo,a.prodNo ,a.`count` ,b.thumb1,b.prodName,b.prodCate1 ,b.prodCate2,b.seller,c.company,d.ordUid ,d.ordDate,d.ordStatus  from `lo_product_order_item` as a
+        inner join lo_product as b on a.prodNo =b.prodNo
+        inner join lo_member as c on b.seller =c.uid
+        INNER join lo_product_order as d on a.ordNo =d.ordNo
+        where d.ordUid=#{uid} ORDER by d.ordDate DESC LIMIT 5;
+    </select>
+
+    <select id="selectOrderStatus" resultType="kr.co.lotteon.dto.product.ProductOrderDTO">
+        select ordstatus from `lo_product_order`
+        where ordno=#{no} and ordUid=#{uid};
+    </select>
+
+    <select id="selectReviewstatus" resultType="int">
+        select count(*) from `lo_product_review`
+        where ordno=#{ordno} and uid=#{uid} and prodno=#{prodno} and useyn='Y'
+    </select>
+
+    <select id="selectProduct" resultType="kr.co.lotteon.dto.product.ProductDTO">
+        select * from `lo_product`
+        where prodno=#{prodno}
+    </select>
+
+    <insert id="writeReview">
+        insert into `lo_product_review` (`prodNo`,`content`,`uid`,`rating`,`regip`,`rdate`)
+        values (#{prodNo},#{content},#{uid},#{rating},#{regip},#{rdate})
+    </insert>
+
+    <insert id="insertPoint">
+        insert into `lo_member_point` (`uid`,`ordno`,`point`,`pointDate`,`descript`)
+        values (#{uid},#{no},#{point},#{rdate},#{descript})
+    </insert>
+
+    <update id="updateOrderStatus">
+        update `lo_product_order` set `ordStatus`=2 where `ordno`=#{ordno} and `ordUid`=#{uid}
+    </update>
+
+    <select id="selectSeller" resultType="kr.co.lotteon.dto.MemberDTO">
+        select * from `lo_member`
+        where uid=#{seller}
+    </select>
 
 </mapper>
