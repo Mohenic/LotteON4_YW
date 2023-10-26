@@ -1,5 +1,6 @@
 package kr.co.lotteon.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.MemberDTO;
 import kr.co.lotteon.dto.PageRequestOrderDTO;
 import kr.co.lotteon.dto.PageResponseOrderDTO;
@@ -23,6 +24,7 @@ public class MyController {
     @Autowired
     private MyService myService; // �
 
+
     @ModelAttribute("appInfo")
     public String appversion(){
         String appName = buildProperties.getName(); // settings.gradle 파일에서 앱이름 가져옴
@@ -43,10 +45,6 @@ public class MyController {
     public String coupon(Model model){
         return "/my/coupon";
     }*/
-    @GetMapping("/my/info")
-    public String info(Model model){
-        return "/my/info";
-    }
     @GetMapping("/my/order")
     public String order(Model model, PageRequestOrderDTO pageRequestOrderDTO){
         PageResponseOrderDTO pageResponseOrderDTO = myService.order(pageRequestOrderDTO);
