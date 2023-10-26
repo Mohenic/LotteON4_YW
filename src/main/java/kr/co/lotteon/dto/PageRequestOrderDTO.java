@@ -17,13 +17,12 @@ public class PageRequestOrderDTO {
     private String dateType;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime beginDate;
+    private LocalDate beginDate;
 
-    private int start;
 
     @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime endDate = LocalDateTime.now();
+    private LocalDate endDate = LocalDate.now();
 
     @Builder.Default 
     private int pg=1;
@@ -33,11 +32,10 @@ public class PageRequestOrderDTO {
         this.dateType = dateType;
         /*LocalDateTime beginDate=null;*/
         // 현재 날짜와 시간
-        LocalDateTime currentDate = LocalDateTime.now();
+        LocalDate currentDate = LocalDate.now();
         if(dateType.equals("day7")){
             // 1주일 전 날짜와 시간
             beginDate = currentDate.minusWeeks(1);
-            this.start = 7;
         }else if(dateType.equals("day15")){
             // 15일 전 날짜와 시간
             beginDate = currentDate.minusDays(15);

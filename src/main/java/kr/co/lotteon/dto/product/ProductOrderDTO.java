@@ -4,6 +4,7 @@ import kr.co.lotteon.entity.product.ProductOrderEntity;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -31,7 +32,7 @@ public class ProductOrderDTO {
     private int ordPayment;
     private int ordComplete;
     private int ordStatus;
-    private LocalDateTime ordDate;
+    private LocalDate ordDate;
 
     //추가
     private int prodNo;

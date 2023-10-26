@@ -13,7 +13,7 @@ import java.util.List;
 public interface ProductOrderMapper {
     public List<ProductOrderDTO> selectProductOrders(String ordUid, int startNum);
 
-    public List<ProductOrderDTO> selectProductOrdersDate(String ordUid, LocalDateTime beginDate, LocalDateTime endDate, int startNum);
-    public List<ProductOrderDTO> selectProductOrdersDate2(String ordUid, int start, int startNum);
+    public List<ProductOrderDTO> selectProductOrdersDate(String ordUid, LocalDate beginDate, LocalDate endDate, int startNum);
+
 
 }

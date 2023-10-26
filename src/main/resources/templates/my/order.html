@@ -50,7 +50,7 @@
                                 </tr>
 
                                 <tr th:each="order:${orderDTO.getDtoList()}">
-                                    <td class="date">[[${order.getOrdDate().toLocalDate()}]]</td>
+                                    <td class="date">[[${order.getOrdDate()}]]</td>
                                     <td>
                                         <a th:href="@{/product/view(prodCate1=${order.getProdCate1()}, prodCate2=${order.getProdCate2()}, prodNo=${order.getProdNo()}, price=${order.getPrice()})}"  class="thumb"><img th:src="@{/thumbs/}+${order.prodCate1}+'/'+${order.prodCate2}+'/'+${order.thumb1}" th:alt="${order.getProdName()}"></a>
                                         <ul>

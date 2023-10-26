@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -34,7 +35,7 @@ public class ProductOrderEntity {
     private int ordPayment;
     private int ordComplete;
     private int ordStatus;
-    private LocalDateTime ordDate;
+    private LocalDate ordDate;
     
     
     public ProductOrderDTO toDTO(){
