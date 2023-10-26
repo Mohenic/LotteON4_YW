@@ -3,6 +3,8 @@ package kr.co.lotteon.dto.product;
 import kr.co.lotteon.entity.product.ProductOrderItemEntity;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -19,8 +21,16 @@ public class ProductOrderItemDTO {
     private int point;
     private int delivery;
     private int total;
-    private String ordUid;
     private String thumb1;
+    private String prodName;
+    private String company;
+    private String ordUid;
+    private LocalDateTime ordDate;
+    private String ordStatus;
+    private String prodCate1;
+    private String prodCate2;
+    private String seller;
+
     public ProductOrderItemEntity toEntity() {
         
         return ProductOrderItemEntity.builder()
