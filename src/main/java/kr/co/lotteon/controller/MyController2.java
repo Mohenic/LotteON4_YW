@@ -36,8 +36,10 @@ public class MyController2 {
     @Autowired
     public CsService csService;
 
+
     @Autowired
     private MyService myService; // �
+
 
     @ModelAttribute("appInfo")
     public String appversion(){

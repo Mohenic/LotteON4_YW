@@ -97,4 +97,8 @@ public class MyService2 {
        return mapper2.selectSeller(seller);
     }
 
+    public ProductOrderItemDTO selectOrderItem(int itemNo){
+        return mapper2.selectOrderItem(itemNo);
+    }
+
 }
