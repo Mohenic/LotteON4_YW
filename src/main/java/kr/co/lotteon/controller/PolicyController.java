@@ -22,6 +22,7 @@ public class PolicyController {
        model.addAttribute("termsType", termsType);
 
 
+
         return "/policy/terms";
     }
 
