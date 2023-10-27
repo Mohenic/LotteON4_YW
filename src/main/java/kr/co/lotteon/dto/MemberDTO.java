@@ -49,6 +49,11 @@ public class MemberDTO {
     private String useyn;
     private String etc4;
     private String etc5;
+    private String email1;
+    private String email2;
+    private String hp1;
+    private String hp2;
+    private String hp3;
 
 
     private ProductOrderDTO productOrderDTO;

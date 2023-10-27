@@ -43,13 +43,243 @@
         document.getElementsByName("hp1")[0].value = part1;
         document.getElementsByName("hp2")[0].value = part2;
         document.getElementsByName("hp3")[0].value = part3;
+
+        // email readonly 해제 및 select option값 설정
+        document.getElementById("btnChangeEmail").addEventListener("click", function (e) {
+            e.preventDefault();
+            var confirmChange = confirm("이메일 정보를 수정하시겠습니까?");
+
+            if (confirmChange) {
+                var email1Input = document.getElementsByName("email1")[0];
+                var email2Input = document.getElementsByName("email2")[0];
+
+                // email1과 email2의 readonly 해제
+                email1Input.removeAttribute("readonly");
+                email2Input.removeAttribute("readonly");
+
+                // 이메일 2 input이 focus를 받도록 함
+                email2Input.focus();
+            }
+        });
+
+        document.getElementById("emailDomainSelect").addEventListener("change", function () {
+            var selectedOption = this.options[this.selectedIndex];
+            var email2Input = document.getElementsByName("email2")[0];
+
+            if (email2Input.hasAttribute("readonly")) {
+                return; // 수정하기 버튼을 누르지 않은 상태에서는 변경을 허용하지 않음
+            }
+
+            if (selectedOption.value === "직접입력") {
+                email2Input.value = "";
+            } else {
+                email2Input.value = selectedOption.value;
+            }
+        });
+
+        // hp readonly 해제 및 글자수 제한
+        document.getElementById("btnChangeHp").addEventListener("click", function (e) {
+            e.preventDefault();
+            var confirmChange = confirm("휴대폰 정보를 수정하시겠습니까?");
+
+            if (confirmChange) {
+                var hp1Input = document.getElementsByName("hp1")[0];
+                var hp2Input = document.getElementsByName("hp2")[0];
+                var hp3Input = document.getElementsByName("hp3")[0];
+
+                // hp1, hp2, hp3의 readonly 해제
+                hp1Input.removeAttribute("readonly");
+                hp2Input.removeAttribute("readonly");
+                hp3Input.removeAttribute("readonly");
+
+                // 이벤트 리스너 추가 - 글자 수 제한
+                hp1Input.addEventListener("input", function () {
+                    if (hp1Input.value.length > 3) {
+                        hp1Input.value = hp1Input.value.slice(0, 3);
+                    }
+                });
+
+                hp2Input.addEventListener("input", function () {
+                    if (hp2Input.value.length > 4) {
+                        hp2Input.value = hp2Input.value.slice(0, 4);
+                    }
+                });
+
+                hp3Input.addEventListener("input", function () {
+                    if (hp3Input.value.length > 4) {
+                        hp3Input.value = hp3Input.value.slice(0, 4);
+                    }
+                });
+            }
+        });
+
+        /**
+         * 유효성 검사
+         */
+
+
+        // 폼 데이터 검증 상태변수
+        let isEmailOk = false;
+        let isHpOk = false;
+
+        // 데이터 검증에 사용하는 정규표현식
+        const reEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        const reHp = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;
+
+        // Select 필드 값 변경 이벤트 리스너 추가
+        document.getElementById("emailDomainSelect").addEventListener("change", function () {
+            const selectedOption = this.options[this.selectedIndex]; // 선택한 옵션을 가져옴
+            const selectedOptionValue = selectedOption.value; // 선택한 옵션의 값
+
+            const email1 = $('input[name=email1]').val();
+            const email2 = (selectedOptionValue !== "직접입력") ? selectedOptionValue : $('input[name=email2]').val();
+
+            // 이메일 유효성 검사
+            if (!reEmail.test(email1 + "@" + email2)) {
+                $('.msgEmail').css('color', 'red').text('유효한 이메일 주소가 아닙니다.');
+            } else {
+                $('.msgEmail').text(''); // 유효성 검사 메시지 제거
+            }
+        });
+
+        // 이메일 유효성 검사
+        $('input[name=email1], input[name=email2]').keydown(function () {
+            $('.msgEmail').text('');
+            isEmailOk = false;
+        });
+
+        $('input[name=email1], input[name=email2]').focusout(function () {
+            const email1 = $('input[name=email1]').val();
+            const email2 = $('input[name=email2]').val();
+
+            if (reEmail.test(email1 + "@" + email2)) {
+                isEmailOk = true;
+            } else {
+                $('.msgEmail').css('color', 'red').text('유효한 이메일 주소가 아닙니다.');
+                isEmailOk = false;
+            }
+        });
+
+        // 휴대폰 번호 유효성 검사
+        $('input[name=hp1], input[name=hp2], input[name=hp3]').keydown(function () {
+            $('.msgHp').text('');
+            isHpOk = false;
+        });
+
+        $('input[name=hp1], input[name=hp2], input[name=hp3]').focusout(function () {
+            const hp1 = $('input[name=hp1]').val();
+            const hp2 = $('input[name=hp2]').val();
+            const hp3 = $('input[name=hp3]').val();
+
+            if (reHp.test(hp1 + "-" + hp2 + "-" + hp3)) {
+                isHpOk = true;
+            } else {
+                $('.msgHp').css('color', 'red').text('유효한 휴대폰 번호가 아닙니다.');
+                isHpOk = false;
+            }
+        });
+
+        /**
+         * 최종 확인
+         */
+        $('#infoModify').submit(function () {
+
+            // email 및 hp 필드의 현재 값 얻기
+            const email1 = $('input[name=email1]').val();
+            const email2 = $('input[name=email2]').val();
+            const hp1 = $('input[name=hp1]').val();
+            const hp2 = $('input[name=hp2]').val();
+            const hp3 = $('input[name=hp3]').val();
+
+            // 주소 필드의 현재 값 얻기
+            const zip = $('input[name=zip]').val();
+            const addr1 = $('input[name=addr1]').val();
+            const addr2 = $('input[name=addr2]').val();
+
+            // email 및 hp 필드의 원래 값(수정 이전 값) 얻기 (예를 들어, 이전 데이터를 변수로 저장하실 수 있습니다)
+            // email original 값
+            var originalEmail1 = /*[[${list.email.split('@')[0]}]]*/'';
+            var originalEmail2 = /*[[${list.email.split('@')[1]}]]*/'';
+            document.getElementsByName("email1")[0].value = originalEmail1;
+            document.getElementsByName("email2")[0].value = originalEmail2;
+
+            // hp original 값
+            var originalPhoneNumber = /*[[${list.hp}]]*/'';
+            var originalPhoneNumberWithoutDash = originalPhoneNumber.replace(/-/g, '');
+            var originalHp1 = originalPhoneNumberWithoutDash.substr(0, 3);
+            var originalHp2 = originalPhoneNumberWithoutDash.substr(3, 4);
+            var originalHp3 = originalPhoneNumberWithoutDash.substr(7);
+            document.getElementsByName("hp1")[0].value = originalHp1;
+            document.getElementsByName("hp2")[0].value = originalHp2;
+            document.getElementsByName("hp3")[0].value = originalHp3;
+
+            // zip original 값
+            const originalZip = $('input[name=zip]').data('original');
+            const originalAddr1 = $('input[name=addr1]').data('original');
+            const originalAddr2 = $('input[name=addr2]').data('original');
+
+            // email 및 hp 필드가 수정되었는지 확인
+            const isEmailModified = (email1 !== originalEmail1 || email2 !== originalEmail2);
+            const isHpModified = (hp1 !== originalHp1 || hp2 !== originalHp2 || hp3 !== originalHp3);
+            const isAddressModified = (zip !== originalZip || addr1 !== originalAddr1 || addr2 !== originalAddr2);
+
+            // true면 전송, false면 전송 취소
+            if (isEmailModified) {
+                if (!reEmail.test(email1 + "@" + email2)) {
+                    alert('유효한 이메일 주소가 아닙니다.');
+                    return false; // 폼 전송 취소
+                }
+            }
+
+            if (isHpModified) {
+                if (!reHp.test(hp1 + "-" + hp2 + "-" + hp3)) {
+                    alert('유효한 휴대폰 번호가 아닙니다.');
+                    return false; // 폼 전송 취소
+                }
+            }
+
+            if (isAddressModified) {
+                if (zip.trim() === '' || addr1.trim() === '' || addr2.trim() === '') {
+                    alert('주소는 공백일 수 없습니다.');
+                    return false; // 폼 전송 취소
+                }
+            }
+
+            // email 값 설정
+            $('input[name=email1]').val(email1);
+            $('input[name=email2]').val(email2);
+
+            // hp 값 설정
+            $('input[name=hp1]').val(hp1);
+            $('input[name=hp2]').val(hp2);
+            $('input[name=hp3]').val(hp3);
+
+            alert('수정되었습니다');
+            return true; // 폼 전송 시작
+        });
+
+        // 비밀번호 수정 버튼 클릭 이벤트 처리
+        document.getElementById("btnChangePass").addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Thymeleaf 표현식을 사용하여 uid를 동적으로 생성
+            const uid = /*[[${list.uid}]]*/''; //
+
+            // 팝업 창을 열고 크기를 설정
+            const url = `/LotteON/my/passModify?uid=${uid}`; // 열 페이지의 URL
+            const windowName = "PassModifyPopup";
+            const windowFeatures = "width=400,height=300";
+
+            window.open(url, windowName, windowFeatures);
+        });
     }
 </script>
             <div class="info">
                 <th:block th:insert="~{/my/layout/aside.html}"/>
                     <article>
                         <h3>회원정보 설정</h3>
-
+                        <form id="infoModify" th:action="@{/my/info/modify}" method="post">
+                            <input type="hidden" name="uid" th:value="${list.uid}">
                         <table>
                             <tr>
                                 <td>사용자 ID</td>
@@ -59,6 +289,7 @@
                                 <td>비밀번호</td>
                                 <td>
                                     <button id="btnChangePass">비밀번호 수정</button>
+                                    <a th:href="@{/my/passModify(uid=${list.uid})}" id="changePassLink" target="_blank" style="display: none;"></a>
                                 </td>
                             </tr>
                             <tr>
@@ -72,38 +303,40 @@
                             <tr>
                                 <td>E-mail</td>
                                 <td>
-                                    <input type="text" name="email1" value="chakh101">@
-                                    <input type="text" name="email2" value="naver.com">
-                                    <select>
+                                    <input type="text" name="email1" th:value="${list.email.split('@')[0]}" readonly>@
+                                    <input type="text" name="email2" th:value="${list.email.split('@')[1]}" readonly>
+                                    <select id="emailDomainSelect">
                                         <option>직접입력</option>
-                                        <option>naver.com</option>
-                                        <option>daum.net</option>
-                                        <option>gmail.com</option>
-                                        <option>nate.com</option>
-                                        <option>outlook.com</option>
+                                        <option value="naver.com">naver.com</option>
+                                        <option value="daum.net">daum.net</option>
+                                        <option value="gmail.com">gmail.com</option>
+                                        <option value="nate.com">nate.com</option>
+                                        <option value="outlook.com">outlook.com</option>
                                     </select>
-                                    <button id="btnChangeEmail">수정하기</button>
+                                    <button type="button" id="btnChangeEmail">수정하기</button>
+                                    <span class="msgEmail"></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>휴대폰</td>
                                 <td>
                                     <p class="hp">
-                                        <input type="text" name="hp1" value="010"/>-
-                                        <input type="text" name="hp2" value="1234"/>-
-                                        <input type="text" name="hp3" value="1001"/>
-                                        <button id="btnChangeHp">수정하기</button>
+                                        <input type="text" name="hp1" value="010" readonly/>-
+                                        <input type="text" name="hp2" value="1234" readonly/>-
+                                        <input type="text" name="hp3" value="1001" readonly/>
+                                        <button type="button" id="btnChangeHp">수정하기</button>
+                                        <span class="msgHp"></span>
                                     </p>
                                 </td>
                             </tr>
                             <tr>
                                 <td>주소</td>
                                 <td>
-                                    <input type="text" name="zip"/>
-                                    <button id="btnFindZip">주소검색</button>
+                                    <input type="text" name="zip" th:value="${list.zip}" readonly/>
+                                    <button type="button" id="btnFindZip" onclick="zipcode()">주소검색</button>
                                     <p class="address">
-                                        <input type="text" name="addr1"/>
-                                        <input type="text" name="addr2"/>
+                                        <input type="text" name="addr1" th:value="${list.addr1}" readonly/>
+                                        <input type="text" name="addr2" th:value="${list.addr2}"/>
                                     </p>
                                 </td>
                             </tr>
@@ -114,7 +347,8 @@
                                 </td>
                             </tr>
                         </table>
-                        <button id="btnInfoChange">수정하기</button>
+                            <button type="submit" id="btnInfoChange">수정하기</button>
+                        </form>
                     </article>
                 </section>
 

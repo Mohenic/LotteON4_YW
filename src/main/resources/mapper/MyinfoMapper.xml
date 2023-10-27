@@ -7,4 +7,17 @@
         select * from lo_member where uid = #{uid};
     </select>
 
+    <update id="myinfoModify">
+        update lo_member set email = #{email} , hp = #{hp}, zip=#{zip}, addr1 = #{addr1}, addr2 = #{addr2}
+        where uid = #{uid};
+    </update>
+
+    <select id="passCheck">
+        select pass from lo_member where uid = #{uid};
+    </select>
+
+    <update id="passUpdate">
+        update lo_member set pass = #{pass} where uid = #{uid};
+    </update>
+
 </mapper>

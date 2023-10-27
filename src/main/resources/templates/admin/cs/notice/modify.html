@@ -11,7 +11,7 @@
     <section class="write">
         <article>
             <form th:action="@{/admin/cs/notice/modify}" method="post">
-                <input type="text" th:value="${no}" name="no">
+                <input type="hidden" th:value="${no}" name="no">
                 <table>
                     <tr>
                         <td>유형</td>

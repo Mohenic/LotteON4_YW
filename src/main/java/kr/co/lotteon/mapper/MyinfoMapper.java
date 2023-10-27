@@ -7,5 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MyinfoMapper {
 
     public MemberDTO myinfoList(String uid);
+    public void myinfoModify(MemberDTO dto);
+
+    public String passCheck(String uid);
+    public void passUpdate(MemberDTO dto, String uid);
 
 }
