@@ -84,7 +84,11 @@ public class MemberDTO {
                 .rdate(rdate)
                 .birth(birth)
                 .modidate(modidate)
+<<<<<<< HEAD
+                .useyn(useyn)
+=======
                 .useyn(useyn==null?"Y":useyn)
+>>>>>>> 271e3ebe0f6ab1b7082781191058da58d3829bad
                 .etc4(etc4)
                 .etc5(etc5)
                 .build();

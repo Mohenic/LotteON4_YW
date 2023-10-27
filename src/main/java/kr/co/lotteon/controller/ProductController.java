@@ -1,10 +1,9 @@
 package kr.co.lotteon.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import kr.co.lotteon.dto.MemberPointDTO;
 import kr.co.lotteon.dto.cs.PageResponse2DTO;
-import kr.co.lotteon.dto.product.PageRequestDTO;
-import kr.co.lotteon.dto.product.PageResponseDTO;
-import kr.co.lotteon.dto.product.ProductDTO;
+import kr.co.lotteon.dto.product.*;
 import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.service.ProductService;
 import lombok.extern.log4j.Log4j2;
@@ -102,30 +101,6 @@ public class ProductController {
         log.info("============================"+ authentication.toString());
         log.info("============================"+ authentication.getPrincipal().toString());
         
-//        log.info("dto: " + dto.toString());
-        
-        
-        //log.info("prodDTO  1 =============================: " + request.toString());
-        //int prodNo = request.getParameter("prodNo");
-        /*log.info("prodDTO  1 =============================: " + prodNo);
-        log.info("prodDTO  2 =============================: " + inputNum);
-        log.info("prodDTO  3 =============================: " + price);
-        log.info("prodDTO  4 =============================: " + finalValue);*/
-
-        //ProductDTO orderProdDTO = prodService.selectOrderProd(request.getParameter("prodNo"));
-
-
-
-        //model.addAttribute("ProdDTO",orderProdDTO);
-
-
-     /*   log.info("orderProdDTO.getTotalPrice=============================: " + finalValue);
-        log.info("orderProdDTO.getInputNum=============================: " + inputNum);
-        log.info("orderProdDTO.getProdNum=============================: " + prodNo);
-        log.info("orderProdDTO.price=============================: " + price);*/
-
-        
-        
         
         
         
@@ -167,8 +142,36 @@ public class ProductController {
         return "/product/search";
     }
 
-    @GetMapping("/product/complete")
-    public String complete() {
+    @PostMapping("/product/complete")
+    public String complete(String uid, ProductOrderItemDTO prodOitem, ProductOrderDTO prodOrder, MemberPointDTO mPointDto, Model model) {
+
+        log.info("ㄱ>?--------------------------------");
+        prodOrder.setOrdUid(uid);  // ProductOrderDTO 필드에 매핑
+        mPointDto.setUid(uid);
+        
+        log.info("Product getOrdUid =================================" + prodOrder.getOrdUid());
+        log.info("Product getUid =================================" + mPointDto.getUid());
+        log.info("Product mPointDto.toString =================================" + mPointDto.toString());
+        log.info("Product prodOrder.toString =================================" + prodOrder.toString());
+        
+        int inOrderDto = prodService.insertOrder(prodOrder);
+        log.info("Product prodOrderDTO +++++++++++++++++++++ "  + inOrderDto);
+        
+        
+        /*prodService.insertOrderItem(prodOitem);
+        prodService.insertmPoint(mPointDto);*/
+        
+        
+        model.addAttribute("prodOitem" , prodOitem);
+        model.addAttribute("prodOrder" , prodOrder);
+        model.addAttribute("mPointDto" , mPointDto);
+        model.addAttribute("returnOrderDTO" , inOrderDto);
+        
+        return "/product/complete";
+    }
+
+    @PostMapping("/product/cart/complete")
+    public String cartComplete() {
 
         return "/product/complete";
     }

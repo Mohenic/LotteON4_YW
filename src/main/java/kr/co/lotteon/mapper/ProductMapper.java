@@ -1,8 +1,7 @@
 package kr.co.lotteon.mapper;
 
-import kr.co.lotteon.dto.product.ProductCate1DTO;
-import kr.co.lotteon.dto.product.ProductCate2DTO;
-import kr.co.lotteon.dto.product.ProductDTO;
+import kr.co.lotteon.dto.MemberPointDTO;
+import kr.co.lotteon.dto.product.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -23,5 +22,6 @@ public interface ProductMapper {
 
     public ProductDTO selectProduct(int prodNo);
 
-   
+
+
 }

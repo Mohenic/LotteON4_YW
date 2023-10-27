@@ -1,12 +1,11 @@
 package kr.co.lotteon.mapper;
 
+import kr.co.lotteon.dto.MemberPointDTO;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
 import kr.co.lotteon.dto.product.ProductOrderItemDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -16,4 +15,11 @@ public interface ProductOrderMapper {
     public List<ProductOrderDTO> selectProductOrdersDate(String ordUid, LocalDate beginDate, LocalDate endDate, int startNum);
 
 
+    public int insertOrder(ProductOrderDTO prodOrder);
+
+    public void insertOrderItem(ProductOrderItemDTO prodOitem);
+
+    public void insertmPoint(MemberPointDTO mPointDto);
+    
+    
 }
