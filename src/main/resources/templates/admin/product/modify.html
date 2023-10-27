@@ -68,7 +68,7 @@
                 <!-- 상품수정 컨텐츠 시작 -->
                 <article>
                     <form th:action="@{/admin/product/modify}" name="formModify" method="post" enctype="multipart/form-data">
-                        <input type="text" name="seller" value="seller">
+                        <input type="text" name="seller" th:value="${#authentication.principal.member.uid}">
 
                         <!-- 상품분류 -->
                         <section>

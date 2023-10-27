@@ -11,9 +11,9 @@
                 <section class="write">
                     <article>
                     <form th:action="@{/admin/cs/notice/write}" method="post">
-                        <input type="text" name="cate1" value="notice">
-                        <input type="text" name="writer" value="admin">
-                        <input type="text" name="type" id="typeInput" value="">
+                        <input type="hidden" name="cate1" value="notice">
+                        <input type="hidden" name="writer" value="admin">
+                        <input type="hidden" name="type" id="typeInput" value="">
                         <table>
                             <tr>
                                 <td>유형</td>

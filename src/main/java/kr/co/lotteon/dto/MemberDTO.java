@@ -46,9 +46,15 @@ public class MemberDTO {
     private LocalDateTime rdate;
     private LocalDate birth;
     private LocalDate modidate;
-    private String etc3;
+    private String useyn;
     private String etc4;
     private String etc5;
+
+    private String email1;
+    private String email2;
+    private String hp1;
+    private String hp2;
+    private String hp3;
 
     private ProductOrderDTO productOrderDTO;
     public MemberEntity toEntity(){
@@ -78,7 +84,7 @@ public class MemberDTO {
                 .rdate(rdate)
                 .birth(birth)
                 .modidate(modidate)
-                .etc3(etc3)
+                .useyn(useyn)
                 .etc4(etc4)
                 .etc5(etc5)
                 .build();

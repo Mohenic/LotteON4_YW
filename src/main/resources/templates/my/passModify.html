@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>비밀번호 수정</title>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/main/favicon.ico}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/my/star-rating-svg.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script th:src="@{/js/member/zipcode.js}"></script>
+    <script th:src="@{/js/my/jquery.star-rating-svg.min.js}"></script>
+    <script th:src="@{/js/my/popup.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/my/style.css}">
+</head>
+<script>
+    window.onload = function() {
+
+        $('input[name=currentPassword]').focusout(function () {
+            const currentPassword = $('input[name=currentPassword]').val();
+            const savedPass = $('input[name=savedPass]').val();
+
+            if (currentPassword.trim() === '' || currentPassword !== savedPass) {
+                // '현재 비밀번호가 다릅니다' 메시지 출력
+                $('.msgCurrentPassword').css('color', 'red').text('현재 비밀번호와 다릅니다.');
+            } else {
+                $('.msgCurrentPassword').css('color', 'green').text('현재 비밀번호와 다릅니다.');
+            }
+        });
+
+
+        let isPassOk1 = false;
+        let isPassOk2 = false;
+        const rePass = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{5,16}$/;
+
+        // 비밀번호 검사
+        // pass1과 pass2를 같게 만든 다음 pass1만 수정하면 넘어가는지 확인
+        $('input[name=pass1]').focusout(function () {
+            const pass1 = $('input[name=pass1]').val();
+            console.log(pass1);
+            const pass2 = $('input[name=pass2]').val();
+            console.log(pass2);
+            if (pass1.match(rePass)) {
+                $('.msgPass1').css('color', 'green').text('사용할 수 있는 비밀번호입니다.');
+                if (pass2 != '' && pass1 != pass2) {
+                    $('.msgPass2').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
+                    isPassOk1 = false;
+                } else {
+                    isPassOk1 = true;
+                }
+            } else {
+                $('.msgPass1').css('color', 'red').text('사용할 수 없는 비밀번호입니다.');
+                isPassOk1 = false;
+            }
+            console.log(isPassOk1);
+            console.log(isPassOk2);
+        });
+
+        $('input[name=pass2]').focusout(function () {
+            const pass1 = $('input[name=pass1]').val();
+            console.log(pass1);
+            const pass2 = $('input[name=pass2]').val();
+            console.log(pass2);
+            if (pass1 == pass2) {
+                $('.msgPass1').text('');
+                $('.msgPass2').css('color', 'green').text('비밀번호가 일치합니다.');
+                isPassOk1 = true;
+                isPassOk2 = true;
+            } else {
+                $('.msgPass2').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
+                isPassOk2 = false;
+            }
+            console.log(isPassOk1);
+            console.log(isPassOk2);
+        });
+
+        $('input[name=pass1]').keydown(function () {
+            $('.msgPass1').text('');
+            $('.msgPass2').text('');
+            isPassOk1 = false;
+        });
+        $('input[name=pass2]').keydown(function () {
+            $('.msgPass2').text('');
+            isPassOk2 = false;
+        });
+    }
+</script>
+<body>
+<h1>비밀번호 수정</h1>
+<form id="passwordChangeForm">
+    <div>
+        <label for="currentPassword">현재 비밀번호 입력:</label>
+        <input type="password" id="currentPassword" name="currentPassword" required>
+        <input type="hidden" name="savedPass" th:value="${pass}">
+        <span class="msgCurrentPassword"></span>
+    </div>
+    <table>
+        <tr>
+            <td><label for="pass1">변경할 비밀번호 입력:</label></td>
+            <td>
+                <input type="password" id="pass1" name="pass1" required>
+                <span class="msgPass1"></span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="pass2">변경할 비밀번호 확인:</label></td>
+            <td>
+                <input type="password" id="pass2" name="pass2" required>
+                <span class="msgPass2"></span>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit" class="changePass">비밀번호 변경</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

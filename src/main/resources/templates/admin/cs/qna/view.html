@@ -11,9 +11,9 @@
             <article>
                 <div class="content">
                     <form th:action="@{/admin/cs/qna/reply}" method="post">
-                        <input type="text" name="parent" th:value="${view.no}">
-                        <input type="text" name="cate1" th:value="${view.cate1}">
-                        <input type="text" name="writer" value="admin">
+                        <input type="hidden" name="parent" th:value="${view.no}">
+                        <input type="hidden" name="cate1" th:value="${view.cate1}">
+                        <input type="hidden" name="writer" th:value="${#authentication.principal.member.uid}">
                         <table>
                             <tr>
                                 <td>유형</td>
