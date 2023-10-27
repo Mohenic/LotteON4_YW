@@ -1,5 +1,6 @@
 package kr.co.lotteon.service;
 
+import kr.co.lotteon.dto.MemberDTO;
 import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
 
 import kr.co.lotteon.dto.product.ProductDTO;
@@ -94,6 +95,10 @@ public class MyService2 {
 
     public MemberDTO selectSeller(String seller){
        return mapper2.selectSeller(seller);
+    }
+
+    public ProductOrderItemDTO selectOrderItem(int itemNo){
+        return mapper2.selectOrderItem(itemNo);
     }
 
 }

@@ -2,11 +2,14 @@ package kr.co.lotteon.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.MemberDTO;
+import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
 import kr.co.lotteon.dto.product.ProductDTO;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
+import kr.co.lotteon.dto.product.ProductOrderItemDTO;
 import kr.co.lotteon.entity.MemberEntity;
 import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.security.MyUserDetails;
+import kr.co.lotteon.service.CsService;
 import kr.co.lotteon.service.MyService2;
 import lombok.extern.log4j.Log4j2;
 import org.apache.catalina.valves.RemoteAddrValve;
@@ -26,6 +29,9 @@ public class MyController3 {
 
     @Autowired
     private MyService2 myService2;
+
+    @Autowired
+    private CsService csService;
 
 
     @GetMapping("/my/checkRecive")
@@ -103,4 +109,64 @@ public class MyController3 {
         return dto;
     }
 
+    @PostMapping("/my/writeQna")
+    @ResponseBody
+    public String writeQna(@RequestParam("ordUid") String ordUid){
+
+        MemberEntity entity=myService2.selectMyMember(ordUid);
+        String email=entity.getEmail();
+        return email;
+    }
+
+    @PostMapping("/my/insertQna")
+    public String insertQna (
+            @RequestParam("uid") String uid,
+            @RequestParam("content") String content,
+            @RequestParam("email") String email,
+            @RequestParam("title") String title,
+            @RequestParam("kind") String kind,
+            HttpServletRequest req){
+
+        String regip = req.getRemoteAddr();
+        LocalDateTime rdate = LocalDateTime.now();
+        String cate1 = "qna";
+        String type = kind;
+        String writer = uid;
+        String cate2=null;
+
+        if(kind.equals("oproduct")){
+            cate2="order";
+        }else if(kind.equals("dinfo")){
+            cate2="delivery";
+        }else if(kind.equals("return")){
+            cate2="cancle";
+        }else if(kind.equals("minfo")){
+            cate2="member";
+        }else if(kind.equals("change")){
+            cate2="cancle";
+        }
+        //더 간소화활수있지만 귀찮다
+        CsArticleQnaDTO dto = new CsArticleQnaDTO();
+        dto.setCate1(cate1);
+        dto.setCate2(cate2);
+        dto.setType(type);
+        dto.setTitle(title);
+        dto.setContent(content);
+        dto.setWriter(writer);
+        dto.setRegip(regip);
+        dto.setRdate(rdate);
+        dto.setUseyn("Y");
+
+        csService.insertQna(dto);
+
+        return "redirect:/my/home?uid="+uid;
+
+    }
+
+    @PostMapping("/my/orderSelect")
+    @ResponseBody
+    public ProductOrderItemDTO orderSelect(@RequestParam("itemNo") int itemNo){
+        ProductOrderItemDTO dto =myService2.selectOrderItem(itemNo);
+        return dto;
+    }
 }
