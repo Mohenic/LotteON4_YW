@@ -1,11 +1,9 @@
 package kr.co.lotteon.service;
 
 import kr.co.lotteon.dto.*;
-import kr.co.lotteon.dto.my.PageRequestOrderDTO;
-import kr.co.lotteon.dto.my.PageRequestPointDTO;
-import kr.co.lotteon.dto.my.PageResponseOrderDTO;
-import kr.co.lotteon.dto.my.PageResponsePointDTO;
+import kr.co.lotteon.dto.my.*;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
+import kr.co.lotteon.mapper.MemberMapper;
 import kr.co.lotteon.mapper.MemberPointMapper;
 import kr.co.lotteon.mapper.ProductOrderMapper;
 import kr.co.lotteon.repository.MemberPointRepository;
@@ -22,6 +20,7 @@ import java.util.List;
 public class MyService {
 
     private final ProductOrderMapper orderMapper;
+    private final MemberMapper memberMapper;
     private final MemberPointMapper pointMapper;
     private final ProductOrderItemRepository productOrderItemRepository;
     private final MemberPointRepository memberPointRepository;
@@ -88,8 +87,15 @@ public class MyService {
         return responsePointDTO;
     }
 
-    /*public MemberDTO findMyInfo(String uid){
-        return mapper.selectMyInfo(uid);
-    }*/
+    public MyInfoDTO findMyInfo(String uid){
+        log.info("findMyInfo uid : "+uid);
+        MyInfoDTO mDTO = memberMapper.selectMyInfo(uid);
+        log.info("findMyInfo : "+mDTO.toString());
+        log.info("findMyInfo : "+mDTO.getPoint());
+        log.info("findMyInfo : "+mDTO.getCount_b());
+        log.info("findMyInfo : "+mDTO.getCount_d());
+        log.info("findMyInfo : "+mDTO.getCount_c());
+        return mDTO;
+    }
 
 }

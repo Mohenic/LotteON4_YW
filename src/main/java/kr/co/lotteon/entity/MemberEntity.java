@@ -60,7 +60,7 @@ public class MemberEntity {
     private LocalDateTime rdate;
     private LocalDate birth;
     private LocalDate modidate;
-    private String etc3;
+    private String useyn;
     private String etc4;
     private String etc5;
 
@@ -91,7 +91,7 @@ public class MemberEntity {
                 .rdate(rdate)
                 .birth(birth)
                 .modidate(modidate)
-                .etc3(etc3)
+                .useyn(useyn)
                 .etc4(etc4)
                 .etc5(etc5)
                 .build();
