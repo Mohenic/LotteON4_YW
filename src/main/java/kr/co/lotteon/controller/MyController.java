@@ -1,13 +1,13 @@
 package kr.co.lotteon.controller;
 
 
+import kr.co.lotteon.dto.my.PageRequestOrderDTO;
+import kr.co.lotteon.dto.my.PageRequestPointDTO;
 import kr.co.lotteon.dto.my.PageResponseOrderDTO;
 import kr.co.lotteon.dto.my.PageResponsePointDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.MemberDTO;
-import kr.co.lotteon.dto.PageRequestOrderDTO;
-import kr.co.lotteon.dto.PageResponseOrderDTO;
 import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.service.MyService;
 import lombok.extern.log4j.Log4j2;

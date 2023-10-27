@@ -3,6 +3,7 @@ package kr.co.lotteon.entity.product;
 import jakarta.persistence.*;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ public class ProductOrderEntity {
     private int ordPayment;
     private int ordComplete;
     private int ordStatus;
+    @CreationTimestamp
     private LocalDate ordDate;
     
     

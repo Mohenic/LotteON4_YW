@@ -1,5 +1,6 @@
 package kr.co.lotteon.service;
 
+import kr.co.lotteon.dto.MemberDTO;
 import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
 
 import kr.co.lotteon.dto.product.ProductDTO;

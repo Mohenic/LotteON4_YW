@@ -1,14 +1,15 @@
 package kr.co.lotteon.service;
 
+import kr.co.lotteon.dto.MemberPointDTO;
 import kr.co.lotteon.dto.product.*;
 import kr.co.lotteon.entity.product.ProductCate1Entity;
 import kr.co.lotteon.entity.product.ProductCate2Entity;
 import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.mapper.ProductMapper;
+import kr.co.lotteon.mapper.ProductOrderMapper;
 import kr.co.lotteon.repository.product.ProductCate1Repository;
 import kr.co.lotteon.repository.product.ProductCate2Repository;
 import kr.co.lotteon.repository.product.ProductRepository;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -28,6 +29,7 @@ public class ProductService {
     private final ProductCate2Repository prodCate2Repo;
     private final ModelMapper modelMapper;
     private final ProductMapper prodMapper;
+    private final ProductOrderMapper prodOrderMapper;
 
     public PageResponseDTO findByCate1Product(PageRequestDTO pageRequestDTO) {
 
@@ -146,5 +148,23 @@ public class ProductService {
         ProductDTO product = prodMapper.selectProduct(prodNo);
         
         return product;
+    }
+
+    public int insertOrder(ProductOrderDTO prodOrder) {
+
+        int productOrder = prodOrderMapper.insertOrder(prodOrder);
+        
+        return productOrder;
+    }
+
+    public void insertOrderItem(ProductOrderItemDTO prodOitem) {
+
+        prodOrderMapper.insertOrderItem(prodOitem);
+    }
+
+    public void insertmPoint(MemberPointDTO mPointDto) {
+
+        prodOrderMapper.insertmPoint(mPointDto);
+        
     }
 }
