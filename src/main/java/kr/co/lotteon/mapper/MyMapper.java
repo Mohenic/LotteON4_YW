@@ -49,4 +49,6 @@ public interface MyMapper {
 
     public MemberDTO selectSeller(String seller);
 
+    public ProductOrderItemDTO selectOrderItem(int itemNo);
+
 }

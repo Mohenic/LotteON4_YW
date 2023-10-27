@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductOrderItemDTO {
-    
+
+    private int itemNo;
     private int ordNo;
     private int prodNo;
     private int count;
@@ -30,6 +31,12 @@ public class ProductOrderItemDTO {
     private String prodCate1;
     private String prodCate2;
     private String seller;
+    private String recipName;
+    private String recipZip;
+    private String recipAddr1;
+    private String recipAddr2;
+    private String recipHp;
+
 
     public ProductOrderItemEntity toEntity() {
         

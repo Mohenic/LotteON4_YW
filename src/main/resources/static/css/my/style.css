@@ -1384,6 +1384,8 @@ footer p > strong {
     color: white;
 }
 .popup > div > section > article:nth-child(1) > table img {
+    width: 70px;
+    height: 70px;
     float: left;
 }
 .popup > div > section > article:nth-child(1) > table ul {

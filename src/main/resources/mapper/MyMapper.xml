@@ -46,7 +46,7 @@
     </select>
 
     <select id="selectProductMyHomeLimit5" resultType="kr.co.lotteon.dto.product.ProductOrderItemDTO">
-        select a.price ,a.ordNo,a.prodNo ,a.`count` ,b.thumb1,b.prodName,b.prodCate1 ,b.prodCate2,b.seller,c.company,d.ordUid ,d.ordDate,d.ordStatus  from `lo_product_order_item` as a
+        select a.price ,a.ordNo,a.prodNo ,a.`count` ,a.`itemNo` ,b.thumb1,b.prodName,b.prodCate1 ,b.prodCate2,b.seller,c.company,d.ordUid ,d.ordDate,d.ordStatus  from `lo_product_order_item` as a
         inner join lo_product as b on a.prodNo =b.prodNo
         inner join lo_member as c on b.seller =c.uid
         INNER join lo_product_order as d on a.ordNo =d.ordNo
@@ -87,4 +87,11 @@
         where uid=#{seller}
     </select>
 
+    <select id="selectOrderItem" resultType="kr.co.lotteon.dto.product.ProductOrderItemDTO">
+        SELECT a.*,b.recipName ,b.recipHp, b.recipZip ,b.recipAddr1 ,b.recipAddr2 ,b.ordDate ,c.thumb1 , c.company ,c.prodName ,c.prodCate1 ,c.prodCate2  from lo_product_order_item as a
+          inner join lo_product_order as b on a.ordNo  = b.ordNo
+          inner join lo_product as c on a.prodNo  =c.prodNo
+        where a.itemNo =#{itemNo};
+
+    </select>
 </mapper>
