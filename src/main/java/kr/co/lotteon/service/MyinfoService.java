@@ -14,4 +14,16 @@ public class MyinfoService {
     public MemberDTO myinfoList(String uid){
         return mapper.myinfoList(uid);
     }
+
+    public void myinfoModify(MemberDTO dto){
+        mapper.myinfoModify(dto);
+    }
+
+    public String passCheck (String uid){
+        return mapper.passCheck(uid);
+    }
+
+    public void passUpdate(MemberDTO dto, String uid){
+        mapper.passUpdate(dto,uid);
+    }
 }

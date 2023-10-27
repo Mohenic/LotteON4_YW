@@ -1,10 +1,16 @@
 package kr.co.lotteon.controller;
 
 
+<<<<<<< HEAD
 import kr.co.lotteon.dto.my.PageRequestOrderDTO;
 import kr.co.lotteon.dto.my.PageRequestPointDTO;
 import kr.co.lotteon.dto.my.PageResponseOrderDTO;
 import kr.co.lotteon.dto.my.PageResponsePointDTO;
+=======
+
+import kr.co.lotteon.dto.my.*;
+
+>>>>>>> 271e3ebe0f6ab1b7082781191058da58d3829bad
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.MemberDTO;
@@ -17,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Log4j2
 @Controller
@@ -34,11 +41,13 @@ public class MyController {
         String version = buildProperties.getVersion(); // build.gradle 파일에서 버전값 가져옴
         return appName+version;
     }
-    /*@ModelAttribute("myInfo")
-    public MemberDTO myinfo(String uid){
-         MemberDTO member = myService.findMyInfo(uid);
+    @ModelAttribute("myInfo")
+    public MyInfoDTO myinfo(@RequestParam("uid") String uid){
+        log.info("uid : "+uid);
+        MyInfoDTO member = myService.findMyInfo(uid);
+        log.info("member : "+member);
          return member;
-    }*/
+    }
 
    /* @GetMapping("/my/home")
     public String home(Model model){

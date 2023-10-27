@@ -35,10 +35,10 @@
                                 <td class="info">
                                     <a href="#" class="thumb"><img th:src="@{/thumbs/}+${myitem.prodCate1}+'/'+${myitem.prodCate2}+'/'+${myitem.thumb1}" alt="상품이미지"></a>
                                     <ul>
-                                        <li class="company"><a href="#" th:text="${myitem.company}" th:value="${myitem.company}">
+                                        <li class="company"><a href="#" th:text="${myitem.company}" th:value="${myitem.company}" th:onclick="seller([[${myitem.seller}]],[[${myitem.ordUid}]])">
                                             상호명</a></li>
-                                        <li class="prodName"><a href="#" th:text="${myitem.prodName}">상품명</a></li>
-                                        <li class="orderNo">수량 : <span class="prodCount" th:text="${myitem.count}">1</span>개 / 주문번호 : <a href="#" th:text="${myitem.ordNo}">1012211341</a></li>
+                                        <li class="prodName"><a href="#" th:text="${myitem.prodName}" >상품명</a></li>
+                                        <li class="orderNo">수량 : <span class="prodCount" th:text="${myitem.count}">1</span>개 / 주문번호 : <a href="#" th:text="${myitem.ordNo}" th:onclick="product([[${myitem.itemNo}]])">1012211341</a></li>
                                         <li class="prodPrice" th:text="${myitem.price}">34,000</li>
                                     </ul>
                                 </td>

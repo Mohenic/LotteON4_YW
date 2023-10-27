@@ -10,7 +10,7 @@
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
                     <form th:action="@{/admin/product/register}" name="formRegister" method="post" enctype="multipart/form-data">
-                        <input type="text" name="seller" value="seller">
+                        <input type="hidden" name="seller" th:value="${#authentication.principal.member.uid}">
 
                         <!-- 상품분류 -->
                         <section>

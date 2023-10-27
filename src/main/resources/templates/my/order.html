@@ -50,12 +50,13 @@
                                     <th>확인/신청</th>
                                 </tr>
 
+
                                 <tr th:each="order:${orderDTO.getDtoList()}">
                                     <td class="date">[[${order.getOrdDate()}]]</td>
                                     <td>
                                         <a th:href="@{/product/view(prodCate1=${order.getProdCate1()}, prodCate2=${order.getProdCate2()}, prodNo=${order.getProdNo()}, price=${order.getPrice()})}"  class="thumb"><img th:src="@{/thumbs/}+${order.prodCate1}+'/'+${order.prodCate2}+'/'+${order.thumb1}" th:alt="${order.getProdName()}"></a>
                                         <ul>
-                                            <li class="company">[[${order.getCompany}]]</li>
+                                            <li class="company" th:onclick="seller([[${order.seller}]],[[${order.ordUid}]])">[[${order.getCompany}]]</li>
                                             <li class="prodName"><a th:href="@{/product/view(prodCate1=${order.getProdCate1()}, prodCate2=${order.getProdCate2()}, prodNo=${order.getProdNo()}, price=${order.getPrice()})}">[[${order.getProdName()}]]</a></li>
                                             <li>수량 : <span class="prodCount">[[${order.getCount()}]]</span>개 / 주문번호 : <span class="ordNo">[[${order.getOrdNo()}]]</span></li>
                                             <li class="prodPrice" th:text="${#numbers.formatInteger((order.getPrice()-(order.getPrice()*(order.getDiscount()*0.01))), 3, 'COMMA')}"></li>

@@ -25,6 +25,7 @@
 })
     if (!receiveFlag) {
     alert('구매확정을 먼저 해주세요.');
+    location.reload();
     return false;
 }
 
@@ -224,12 +225,13 @@
         })
     }
 
-    function seller(seller){
-
+    function seller(seller,ordUid){
+    console.log(ordUid);
     const popSeller=$('#popSeller');
     popSeller.empty();
     let popflag = false;
 
+    console.log(seller);
     $.ajax({
         url: '/LotteON/my/seller',
         type: 'POST',
@@ -237,15 +239,7 @@
         success: function (data) {
 
             console.log(data)
-            if(data ==null){
-             alert('실패')
-            }else {
-                alert('성공')
-            }
-        }
-        })
-
-        popSeller.append(`
+            popSeller.append(`
             <div>
                 <nav>
                     <h1>판매자 정보</h1>
@@ -259,32 +253,32 @@
                         </tr>
                         <tr>
                             <th>상호</th>
-                            <td class="company"></td>
+                            <td class="company">${data.company}</td>
                         </tr>
                         <tr>
                             <th>대표자</th>
-                            <td class="ceo">홍길동</td>
+                            <td class="ceo">${data.ceo}</td>
                         </tr>
                         <tr>
                             <th>전화번호</th>
-                            <td class="tel">051-123-1000</td>
+                            <td class="tel">${data.tel}</td>
                         </tr>
                         <tr>
                             <th>FAX</th>
-                            <td class="fax">051-123-1001</td>
+                            <td class="fax">${data.fax}</td>
                         </tr>
                         <tr>
                             <th>Email</th>
-                            <td class="email">company@abc.com</td>
+                            <td class="email">${data.email}</td>
                         </tr>
                         <tr>
                             <th>사업자번호</th>
-                            <td class="bizNum">123-12-123457</td>
+                            <td class="bizNum">${data.bizRegNum}</td>
                         </tr>
                         <tr>
                             <th>영업소재지</th>
                             <td class="address">
-                                [210**] 부산광역시 부산진구 대연동 121 10층 1004호
+                                [${data.zip}] ${data.addr1} ${data.addr2}
                             </td>
                         </tr>
                     </table>
@@ -294,15 +288,179 @@
                     </p>
 
                     <div>
-                        <button class="btnPositive btnQuestion">문의하기</button>
+                        <button class="btnPositive btnQuestion" onclick="writeQna('${ordUid}')">문의하기</button>
                     </div>
 
                 </section>
             </div>
         `);
 
-    // 팝업 닫기
-    $('.btnClose').click(function(){
-        $(this).closest('.popup').removeClass('on');
-    })
+        }
+
+        })
+        $('.btnClose').closest('.popup').removeClass('on');
+        popSeller.addClass('on');
  }
+
+ function writeQna(ordUid){
+    const popQuestion = $('#popQuestion');
+    popQuestion.empty();
+
+    $.ajax({
+        url: '/LotteON/my/writeQna',
+        type: 'POST',
+        data: {"ordUid": ordUid},
+        success: function (data) {
+            console.log(data)
+            popQuestion.append(`
+        
+            <div>
+                <nav>
+                    <h1>문의하기</h1>
+                    <button class="btnClose">X</button>
+                </nav>
+                <section>
+                    <form action="/LotteON/my/insertQna" method="post">
+                        <table border="0">
+                            <tr>
+                                <th>문의종류</th>
+                                <td class="kind">
+                                    <label><input type="radio" name="kind" value="oproduct"/>상품</label>
+                                    <label><input type="radio" name="kind" value="dinfo"/>배송</label>
+                                    <label><input type="radio" name="kind" value="return"/>반품/취소</label>
+                                    <label><input type="radio" name="kind" value="minfo"/>교환</label>
+                                    <label><input type="radio" name="kind" value="change"/>기타</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td class="email">
+                                    <input type="text" name="email" value="${data}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>제목</th>
+                                <td class="title">
+                                    <input type="text" name="title" placeholder="제목입력"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>내용</th>
+                                <td class="content">
+                                    <textarea name="content" placeholder="내용입력"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            ※ 정확한 정보를 입력하셔야 빠른 답변을 받으실수 있습니다.
+                        </p>
+
+                        <div>
+                            <input type="hidden" name="uid" value="${ordUid}">
+                            <input type="submit" class="btnPositive" value="등록하기"/>
+                            <button class="btnNegative btnCancel">취소</button>
+                        </div>
+                    </form>
+                </section>
+            </div> `)
+
+        }
+
+    })
+
+     $('.btnClose').closest('.popup').removeClass('on');
+     popQuestion.addClass('on');
+
+
+}
+// 상품정보 ajax 로 받아서 팝업띄울거임
+function product(itemNo){
+    console.log(itemNo);// 상품번호
+    const popOrder = $('#popOrder');
+    popOrder.empty();
+
+    $.ajax({
+        url: '/LotteON/my/orderSelect',
+        type: 'POST',
+        data: {"itemNo": itemNo},
+        success: function (data) {
+            console.log(data)
+            popOrder.append(`
+            <div>
+                <nav>
+                    <h1>주문상세</h1>
+                    <button class="btnClose">X</button>
+                </nav>
+                <section>
+                    <article class="order">
+                        <h3>주문정보</h3>
+                        <table border="0">
+                            <tr>
+                                <th>날짜</th>
+                                <th>상품정보</th>
+                                <th>결제금액</th>
+                                <th>상태</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="date">${data.ordDate}</p>
+                                    주문번호 : <span class="ordNo" >${data.ordNo}</span>
+                                </td>
+                                <td>
+                                    <img src="/LotteON/thumbs/${data.prodCate1}/${data.prodCate2}/${data.thumb1}" alt=""/>
+                                    <ul>
+                                        <li class="company" >${data.company}</li>
+                                        <li class="prodName" >${data.prodName}</li>
+                                        <li>수량 : <span class="prodCount" >${data.count}</span>개</li>
+                                        <li class="prodPrice" >${data.price}원</li>
+                                    </ul>
+                                </td>
+                                <td class="payment">
+                                    <ol>
+                                        <li class="price">
+                                            <span>판매가</span>
+                                            <span >${data.price}원</span>
+                                        </li>
+                                        <li class="discount">
+                                            <span>할인</span>
+                                            <span > - ${data.price*(data.discount*0.01)}원</span>
+                                        </li>
+                                        <li class="total">
+                                            <span>결제금액</span>
+                                            <span >${data.total}원</span>
+                                        </li>
+                                    </ol>
+                                </td>
+                                <td class="status">배송완료</td>
+                            </tr>
+                        </table>
+                    </article>
+                    <article class="delivery">
+                        <h3>배송정보</h3>
+                        <table border="0">
+                            <tr>
+                                <th>주문자</th>
+                                <td class="name" >${data.recipName}</td>
+                            </tr>
+                            <tr>
+                                <th>연락처</th>
+                                <td class="hp" >${data.recipHp}</td>
+                            </tr>
+                            <tr>
+                                <th>배송지</th>
+                                <td class="address">[${data.recipZip}] ${data.recipAddr1} ${data.recipAddr2}</td>
+                            </tr>
+                            <tr>
+                                <th>배송요청사항</th>
+                                <td class="request">없음</td>
+                            </tr>
+                        </table>
+                    </article>
+                </section>
+            </div> `)
+
+        }
+    })
+    $('.btnClose').closest('.popup').removeClass('on');
+    popOrder.addClass('on');
+}

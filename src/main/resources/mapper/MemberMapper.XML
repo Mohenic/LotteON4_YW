@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.LotteOn.mapper.MemberMapper">
+
+    <select id="selectMyInfo" resultType="kr.co.LotteOn.dto.my.MyInfoDTO">
+        SELECT a.`point` AS point,
+               (SELECT COUNT(b.couponno)
+                FROM lo_my_coupon AS b
+                WHERE a.uid = b.cuid AND b.enddate >= NOW() AND b.cstatus = 1) AS count_b,
+               (SELECT COUNT(c.ordNo)
+                FROM lo_product_order AS c
+                WHERE a.uid = c.ordUid AND c.ordStatus = 1) AS count_c,
+               (SELECT COUNT(d.no)
+                FROM lo_cs_article_qna AS d
+                WHERE a.uid = d.writer AND d.comment = 0 AND d.parent = 0) AS count_d
+        FROM lo_member AS a
+        WHERE a.uid = #{uid} AND a.useyn = 'Y'
+        GROUP BY a.`point`;
+
+    </select>
+
+</mapper>

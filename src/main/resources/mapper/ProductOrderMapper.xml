@@ -4,7 +4,7 @@
 <mapper namespace="kr.co.lotteon.mapper.ProductOrderMapper">
     
     <select id="selectProductOrders" resultType="kr.co.lotteon.dto.product.ProductOrderDTO">
-        SELECT a.*, b.*, c.prodCate1, c.prodCate2, c.company, c.thumb1, c.prodName
+        SELECT a.*, b.*, c.seller, c.prodCate1, c.prodCate2, c.company, c.thumb1, c.prodName
         FROM lo_product_order_item AS a
             JOIN lo_product_order AS b ON a.ordNo = b.ordNo
             JOIN lo_product AS c ON a.prodNo = c.prodNo
@@ -14,7 +14,7 @@
         LIMIT #{startNum}, 10
     </select>
     <select id="selectProductOrdersDate" resultType="kr.co.lotteon.dto.product.ProductOrderDTO">
-        SELECT a.*, b.*, c.prodCate1, c.prodCate2, c.company, c.thumb1, c.prodName
+        SELECT a.*, b.*, c.seller, c.prodCate1, c.prodCate2, c.company, c.thumb1, c.prodName
         FROM lo_product_order_item AS a
                  JOIN lo_product_order AS b ON a.ordNo = b.ordNo
                  JOIN lo_product AS c ON a.prodNo = c.prodNo
