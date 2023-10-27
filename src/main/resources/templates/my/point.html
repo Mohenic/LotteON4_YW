@@ -58,7 +58,7 @@
                                     <td class="ordNo">[[${point.getOrdNo()}]]</td>
                                     <td class="point">[[${point.getPoint()}]]</td>
                                     <td class="desc">[[${point.getDescript()}]]</td>
-                                    <!--<td class="expire" th:text="${#dates.point.getPointDate().plusYears(1)}"></td>-->
+                                    <td class="expire" th:text="${point.getPointDate().plusYears(1)}"></td>
                                 </tr>
                             </th:block>
                         </table>

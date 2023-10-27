@@ -20,6 +20,7 @@ public class PageResponseOrderDTO {
     private int pageGroupStart;
     private int pageGroupEnd;
     private List<ProductOrderDTO> dtoList;
+    // ordUid, ordNo, product.seller, product.Name
 
     private int pageStartNum;
     private int startNum;

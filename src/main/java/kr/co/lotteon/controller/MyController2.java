@@ -2,6 +2,7 @@ package kr.co.lotteon.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
+import kr.co.lotteon.dto.my.MyInfoDTO;
 import kr.co.lotteon.dto.product.ProductOrderItemDTO;
 import kr.co.lotteon.dto.product.ProductReviewDTO;
 import kr.co.lotteon.entity.MemberEntity;
@@ -9,6 +10,7 @@ import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.entity.cs.CsCate3Entity;
 import kr.co.lotteon.entity.my.CouponEntity;
 import kr.co.lotteon.service.CsService;
+import kr.co.lotteon.service.MyService;
 import kr.co.lotteon.service.MyService2;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class MyController2 {
     public CsService csService;
 
 
+    @Autowired
+    private MyService myService; // �
+
 
     @ModelAttribute("appInfo")
     public String appversion(){
@@ -42,6 +47,15 @@ public class MyController2 {
         String version = buildProperties.getVersion(); // build.gradle 파일에서 버전값 가져옴
         return appName+version;
     }
+
+    @ModelAttribute("myInfo")
+    public MyInfoDTO myinfo(@RequestParam("uid") String uid){
+        log.info("uid : "+uid);
+        MyInfoDTO member = myService.findMyInfo(uid);
+        log.info("컨트롤러 member : "+member);
+        return member;
+    }
+
 
     @GetMapping("/my/home")
     public String home(Model model,String uid){
