@@ -6,6 +6,7 @@
         });
     });
 </script>
+<script th:src="@{/js/my/home.js}"></script>
             <div class="ordered">
                 <th:block th:insert="~{/my/layout/aside.html}"/>
                     <article>
@@ -58,15 +59,15 @@
                                         <ul>
                                             <li class="company" th:onclick="seller([[${order.seller}]],[[${order.ordUid}]])">[[${order.getCompany}]]</li>
                                             <li class="prodName"><a th:href="@{/product/view(prodCate1=${order.getProdCate1()}, prodCate2=${order.getProdCate2()}, prodNo=${order.getProdNo()}, price=${order.getPrice()})}">[[${order.getProdName()}]]</a></li>
-                                            <li>수량 : <span class="prodCount">[[${order.getCount()}]]</span>개 / 주문번호 : <span class="ordNo">[[${order.getOrdNo()}]]</span></li>
+                                            <li>수량 : <span class="prodCount">[[${order.getCount()}]]</span>개 / 주문번호 : <span class="ordNo" th:onclick="product([[${order.itemNo}]])">[[${order.getOrdNo()}]]</span></li>
                                             <li class="prodPrice" th:text="${#numbers.formatInteger((order.getPrice()-(order.getPrice()*(order.getDiscount()*0.01))), 3, 'COMMA')}"></li>
                                         </ul>
                                     </td>
                                     <td class="status" th:if="${order.ordStatus eq 1}">배송 중</td>
                                     <td class="status" th:if="${order.ordStatus eq 2}">배송 완료</td>
                                     <td class="confirm">
-                                        <a href="#" class="receive">수취확인</a>
-                                        <a href="#" class="review">상품평</a>
+                                        <a href="#" class="receive" th:onclick="'javascript:receivePop(' + ${order.ordNo} + '); return false;'">수취확인</a>
+                                        <a href="#" class="review" th:onclick="'javascript:reviewPop(' + ${order.prodNo} + ', ' + ${order.ordNo} + ','+${order.price}+'); return false;'">상품평</a>
                                         <a href="#" class="refund">반품신청</a>
                                         <a href="#" class="exchange">교환신청</a>
                                     </td>
