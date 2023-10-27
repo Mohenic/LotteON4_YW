@@ -1,10 +1,11 @@
-package kr.co.lotteon.dto;
+package kr.co.lotteon.dto.my;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 
 
 @Data
@@ -30,7 +31,7 @@ public class PageRequestOrderDTO {
 
     public void getBeginDate(String dateType){
         this.dateType = dateType;
-        /*LocalDateTime beginDate=null;*/
+        LocalDate beginDate=null;
         // 현재 날짜와 시간
         LocalDate currentDate = LocalDate.now();
         if(dateType.equals("day7")){
@@ -44,6 +45,21 @@ public class PageRequestOrderDTO {
             beginDate = currentDate.minusMonths(1);
         }else if(dateType.equals("period")){
             beginDate = this.beginDate;
+        }else if(dateType.equals("month_0")){
+            beginDate = currentDate.withDayOfMonth(1);
+            this.endDate = currentDate.with(TemporalAdjusters.lastDayOfMonth());
+        }else if(dateType.equals("month_1")){
+            beginDate = currentDate.minusMonths(1).withDayOfMonth(1);
+            this.endDate = currentDate.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
+        }else if(dateType.equals("month_2")){
+            beginDate = currentDate.minusMonths(2).withDayOfMonth(1);
+            this.endDate = currentDate.minusMonths(2).with(TemporalAdjusters.lastDayOfMonth());
+        }else if(dateType.equals("month_3")){
+            beginDate = currentDate.minusMonths(3).withDayOfMonth(1);
+            this.endDate = currentDate.minusMonths(3).with(TemporalAdjusters.lastDayOfMonth());
+        }else if(dateType.equals("month_4")){
+            beginDate = currentDate.minusMonths(4).withDayOfMonth(1);
+            this.endDate = currentDate.minusMonths(4).with(TemporalAdjusters.lastDayOfMonth());
         }
         this.beginDate = beginDate;
     }

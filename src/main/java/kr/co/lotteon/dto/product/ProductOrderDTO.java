@@ -43,6 +43,7 @@ public class ProductOrderDTO {
     private int delivery;
     private int total;
 
+    private String seller;
     private int prodCate1;
     private int prodCate2;
     private String company;

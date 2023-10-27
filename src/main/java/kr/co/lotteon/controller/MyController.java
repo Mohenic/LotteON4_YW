@@ -1,21 +1,24 @@
 package kr.co.lotteon.controller;
 
+
+
+import kr.co.lotteon.dto.my.*;
+
+
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.MemberDTO;
-import kr.co.lotteon.dto.PageRequestOrderDTO;
-import kr.co.lotteon.dto.PageResponseOrderDTO;
 import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.service.MyService;
-import org.apache.ibatis.annotations.Param;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
+@Log4j2
 @Controller
 public class MyController {
     @Autowired
@@ -31,11 +34,13 @@ public class MyController {
         String version = buildProperties.getVersion(); // build.gradle 파일에서 버전값 가져옴
         return appName+version;
     }
-    /*@ModelAttribute("myInfo")
-    public MemberDTO myinfo(String uid){
-         MemberDTO member = myService.findMyInfo(uid);
+    @ModelAttribute("myInfo")
+    public MyInfoDTO myinfo(@RequestParam("uid") String uid){
+        log.info("uid : "+uid);
+        MyInfoDTO member = myService.findMyInfo(uid);
+        log.info("member : "+member);
          return member;
-    }*/
+    }
 
    /* @GetMapping("/my/home")
     public String home(Model model){
@@ -52,7 +57,9 @@ public class MyController {
         return "/my/order";
     }
     @GetMapping("/my/point")
-    public String point(Model model){
+    public String point(Model model, PageRequestPointDTO pageRequestPointDTO){
+        PageResponsePointDTO pageResponsePointDTO = myService.point(pageRequestPointDTO);
+        model.addAttribute("pointDTO", pageResponsePointDTO);
         return "/my/point";
     }
    /* @GetMapping("/my/qna")

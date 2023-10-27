@@ -1,13 +1,11 @@
-package kr.co.lotteon.dto;
+package kr.co.lotteon.dto.my;
 
-import kr.co.lotteon.dto.product.PageRequestDTO;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
 import kr.co.lotteon.util.Pager;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
 
 
@@ -22,6 +20,7 @@ public class PageResponseOrderDTO {
     private int pageGroupStart;
     private int pageGroupEnd;
     private List<ProductOrderDTO> dtoList;
+    // ordUid, ordNo, product.seller, product.Name
 
     private int pageStartNum;
     private int startNum;

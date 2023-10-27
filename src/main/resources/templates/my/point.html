@@ -1,81 +1,82 @@
 <th:block th:insert="~{/my/layout/header.html}"/>
-
+<script>
+    $(function() {
+        $('.btnConfirm').click(function () {
+            $('.dateForm').submit();
+        });
+    });
+</script>
             <div class="point">
                 <th:block th:insert="~{/my/layout/aside.html}"/>
                     <article>
                         <h3>포인트내역</h3>
 
                         <div class="byDate">
-                            <span class="tit">기간별조회</span>                            
+                            <span class="tit">기간별조회</span>
                             <ul class="date_3ea">
-                                <li><a href="#"><em>1</em>주일</a></li>
-                                <li><a href="#"><em>15</em>일</a></li>
-                                <li><a href="#" class="on"><em>1</em>개월</a></li>
+                                <li><a th:href="@{/my/point(uid=${#authentication.principal.member.uid},dateType=day7)}" th:class="${pointDTO.getDateType() eq 'day7'?'on':''}"><em>1</em>주일</a></li>
+                                <li><a th:href="@{/my/point(uid=${#authentication.principal.member.uid},dateType=day15)}" th:class="${pointDTO.getDateType() eq 'day15'?'on':''}"><em>15</em>일</a></li>
+                                <li><a th:href="@{/my/point(uid=${#authentication.principal.member.uid},dateType=month1)}" th:class="${pointDTO.getDateType() eq 'month1'?'on':''}"><em>1</em>개월</a></li>
                             </ul>
                             <ul class="date_5ea">
-                                <li><a href="#"><em>11</em>월</a></li>
-                                <li><a href="#"><em>10</em>월</a></li>
-                                <li><a href="#"><em>9</em>월</a></li>
-                                <li><a href="#"><em>8</em>월</a></li>
-                                <li><a href="#"><em>7</em>월</a></li>
+                                <li><a th:href="@{/my/point(uid=${#authentication.principal.member.uid},dateType=month_0)}" th:class="${pointDTO.getDateType() eq 'month_0'?'on':''}"><em th:text="${#dates.createNow().getMonth()+1}"></em>월</a></li>
+                                <li th:if="${#dates.createNow().getMonth() gt 0}"><a th:href="@{/my/point(uid=${#authentication.principal.member.uid},dateType=month_1)}" th:class="${pointDTO.getDateType() eq 'month_1'?'on':''}"><em th:text="${#dates.createNow().getMonth()}"></em>월</a></li>
+                                <li th:if="${#dates.createNow().getMonth() -1 gt 0}"><a th:href="@{/my/point(uid=${#authentication.principal.member.uid},dateType=month_2)}" th:class="${pointDTO.getDateType() eq 'month_2'?'on':''}"><em th:text="${#dates.createNow().getMonth()-1}"></em>월</a></li>
+                                <li th:if="${#dates.createNow().getMonth() -2 gt 0}"><a th:href="@{/my/point(uid=${#authentication.principal.member.uid},dateType=month_3)}" th:class="${pointDTO.getDateType() eq 'month_3'?'on':''}"><em th:text="${#dates.createNow().getMonth()-2}"></em>월</a></li>
+                                <li th:if="${#dates.createNow().getMonth() -3 gt 0}"><a th:href="@{/my/point(uid=${#authentication.principal.member.uid},dateType=month_4)}" th:class="${pointDTO.getDateType() eq 'month_4'?'on':''}"><em th:text="${#dates.createNow().getMonth()-3}"></em>월</a></li>
+
                             </ul>
-                            <p>
-                                <input type="date" name="begin"><span>~</span><input type="date" name="end">
-                            </p>
+                            <form th:action="@{/my/point}" class="dateForm" method="get">
+                                <p>
+                                    <input type="date" name="beginDate"><span>~</span><input type="date" name="endDate">
+                                    <input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}">
+                                    <input type="hidden" name="dateType" value="period">
+                                </p>
+                            </form>
                             <button class="btnConfirm">조회하기</button>
                         </div>
 
                         <table border="0">
-                            <tr>
-                                <th>날짜</th>
-                                <th>구분</th>
-                                <th>주문번호</th>                                
-                                <th>적립금액</th>
-                                <th>비고</th>
-                                <th>유효기간</th>
-                            </tr>
-                            <tr>
-                                <td class="date">2022-12-13</td>
-                                <td class="type">적립</td>
-                                <td class="ordNo">2022121001</td>                                
-                                <td class="point">340</td>
-                                <td class="desc">상품 구매확정</td>
-                                <td class="expire">2024-12-12</td>
-                            </tr>
-                            <tr>
-                                <td class="date">2022-12-13</td>
-                                <td class="type">적립</td>
-                                <td class="ordNo">2022121001</td>
-                                <td class="point">100</td>
-                                <td class="desc">상품 리뷰 작성 추가 포인트</td>
-                                <td class="expire">2024-12-12</td>
-                            </tr>
-                            <tr>
-                                <td class="date">2022-12-13</td>
-                                <td class="type">적립</td>
-                                <td class="ordNo">2022121001</td>
-                                <td class="point">340</td>
-                                <td class="desc">상품 구매확정</td>
-                                <td class="expire">2024-12-12</td>
-                            </tr>
-                            <tr>
-                                <td class="date">2022-12-13</td>
-                                <td class="type">적립</td>
-                                <td class="ordNo">2022121001</td>
-                                <td class="point">340</td>
-                                <td class="desc">상품 구매확정</td>
-                                <td class="expire">2024-12-12</td>
-                            </tr>
-                            
+                            <th:block th:if="${#lists.isEmpty(pointDTO.getDtoList())}">
+                                <tr th:if="${#lists.isEmpty(pointDTO.getDtoList())}">
+                                    <td style="text-align: center">등록된 포인트가 없습니다.</td>
+                                </tr>
+                            </th:block>
+                            <th:block th:unless="${#lists.isEmpty(pointDTO.getDtoList())}">
+                                <tr>
+                                    <th>날짜</th>
+                                    <th>구분</th>
+                                    <th>주문번호</th>
+                                    <th>적립금액</th>
+                                    <th>비고</th>
+                                    <th>유효기간</th>
+                                </tr>
+                                <tr th:each="point:${pointDTO.getDtoList()}">
+                                    <td class="date">[[${point.getPointDate()}]]</td>
+                                    <td class="type" th:if="${point.getPoint() > 0}">적립</td>
+                                    <td class="type" th:if="${point.getPoint() < 0}">사용</td>
+                                    <td class="ordNo">[[${point.getOrdNo()}]]</td>
+                                    <td class="point">[[${point.getPoint()}]]</td>
+                                    <td class="desc">[[${point.getDescript()}]]</td>
+                                    <td class="expire" th:text="${point.getPointDate().plusYears(1)}"></td>
+                                </tr>
+                            </th:block>
                         </table>
 
-                        <p class="page">
-                            <a href="#" class="prev">이전</a>
-                            <a href="#" class="num on">1</a>
-                            <a href="#" class="num">2</a>
-                            <a href="#" class="num">3</a>
-                            <a href="#" class="next">다음</a>
-                        </p>
+                        <th:block th:unless="${#lists.isEmpty(pointDTO.getDtoList())}">
+                            <p class="page">
+                                <th:block th:if="${pointDTO.getPageGroupStart() gt 1}">
+                                    <a th:href="@{/my/point(uid=${#authentication.principal.member.uid},pg=${pointDTO.getPageGroupStart() - 1},dateType=${pointDTO.getDateType()})}" class="prev">이전</a>
+                                </th:block>
+                                <th:block th:each="num:${#numbers.sequence(pointDTO.getPageGroupStart(), pointDTO.getPageGroupEnd())}">
+                                    <a th:href="@{/my/point(uid=${#authentication.principal.member.uid},pg=${num},dateType=${pointDTO.getDateType()})}" th:classappend="${num eq pointDTO.getCurrentPage() ? 'on' : ''}" class="num">[[${num}]]</a>
+                                </th:block>
+                                <th:block th:if="${pointDTO.getPageGroupEnd() lt pointDTO.getLastPageNum()}">
+                                    <a th:href="@{/my/point(uid=${#authentication.principal.member.uid},pg=${pointDTO.getPageGroupEnd() + 1},dateType=${pointDTO.getDateType()})}" class="next">다음</a>
+                                </th:block>
+
+                            </p>
+                        </th:block>
 
                     </article>                  
 

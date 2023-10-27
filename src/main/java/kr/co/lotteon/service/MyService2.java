@@ -1,15 +1,20 @@
 package kr.co.lotteon.service;
 
 import kr.co.lotteon.dto.MemberDTO;
-import kr.co.lotteon.dto.PageRequestOrderDTO;
-import kr.co.lotteon.dto.PageResponseOrderDTO;
 import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
+
+import kr.co.lotteon.dto.product.ProductDTO;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
+import kr.co.lotteon.dto.product.ProductOrderItemDTO;
+
 import kr.co.lotteon.dto.product.ProductReviewDTO;
 import kr.co.lotteon.entity.MemberEntity;
 import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.entity.my.CouponEntity;
+
+import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.entity.product.ProductReviewEntity;
+
 import kr.co.lotteon.mapper.MyMapper;
 import kr.co.lotteon.mapper.ProductOrderMapper;
 import kr.co.lotteon.repository.product.ProductOrderRepository;
@@ -56,9 +61,44 @@ public class MyService2 {
         return mapper2.selectMyReviewLimit5(uid);
     }
 
-    public List<CsArticleQnaDTO> selectQnaMyLimit5(String uid){
+    public List<CsArticleQnaDTO> selectQnaMyLimit5(String uid) {
         return mapper2.selectQnaMyLimit5(uid);
     }
 
+    public List<ProductOrderItemDTO> selectProductMyHomeLimit5(String uid){
+        return mapper2.selectProductMyHomeLimit5(uid);
+    }
+
+    public ProductOrderDTO selectOrderStatus (String uid, int no){
+        return mapper2.selectOrderStatus(uid,no);
+    }
+
+    public int selectReviewstatus(int ordno,int prodno,String uid){
+        return mapper2.selectReviewstatus(ordno,prodno,uid);
+    }
+
+    public ProductDTO selectProduct(int prodno){
+        return mapper2.selectProduct(prodno);
+    }
+
+    public void writeReview(int prodNo, String content, int rating ,String uid, String regip, String rdate) {
+         mapper2.writeReview(prodNo,content,rating,uid,regip,rdate);
+    }
+
+    public void insertPoint(int no, String uid, int point, String rdate, String descript) {
+        mapper2.insertPoint(no,uid,point,rdate,descript);
+    }
+
+    public void updateOrderStatus(int ordno, String uid){
+        mapper2.updateOrderStatus(ordno,uid);
+    }
+
+    public MemberDTO selectSeller(String seller){
+       return mapper2.selectSeller(seller);
+    }
+
+    public ProductOrderItemDTO selectOrderItem(int itemNo){
+        return mapper2.selectOrderItem(itemNo);
+    }
 
 }

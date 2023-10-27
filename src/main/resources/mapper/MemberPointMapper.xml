@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.lotteon.mapper.MemberPointMapper">
+
+    <select id="selectPoints" resultType="kr.co.lotteon.dto.MemberPointDTO">
+        SELECT *
+        FROM lo_member_point
+        WHERE uid = #{uid}
+        AND pointDate >= DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        ORDER BY pointNo DESC
+        LIMIT #{startNum}, 10
+    </select>
+    <select id="selectPointsDate" resultType="kr.co.lotteon.dto.MemberPointDTO">
+        SELECT *
+        FROM lo_member_point
+        WHERE uid = #{uid} AND pointDate BETWEEN DATE(#{beginDate})
+        AND DATE(#{endDate})
+        AND pointDate >= DATE_SUB(NOW(), INTERVAL 1 YEAR)
+        ORDER BY pointNo DESC
+        LIMIT #{startNum}, 10
+    </select>
+</mapper>

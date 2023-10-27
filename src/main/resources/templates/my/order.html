@@ -1,7 +1,7 @@
 <th:block th:insert="~{/my/layout/header.html}"/>
 <script>
     $(function() {
-        $('.btnConfirm').click(function() {
+        $('.btnConfirm').click(function () {
             $('.dateForm').submit();
         });
     });
@@ -19,13 +19,14 @@
                                 <li><a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},dateType=month1)}" th:class="${orderDTO.getDateType() eq 'month1'?'on':''}"><em>1</em>개월</a></li>
                             </ul>
                             <ul class="date_5ea">
-                                <li><a href="#"><em>11</em>월</a></li>
-                                <li><a href="#"><em>10</em>월</a></li>
-                                <li><a href="#"><em>9</em>월</a></li>
-                                <li><a href="#"><em>8</em>월</a></li>
-                                <li><a href="#"><em>7</em>월</a></li>
+                                <li><a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},dateType=month_0)}" th:class="${orderDTO.getDateType() eq 'month_0'?'on':''}"><em th:text="${#dates.createNow().getMonth()+1}"></em>월</a></li>
+                                <li th:if="${#dates.createNow().getMonth() gt 0}"><a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},dateType=month_1)}" th:class="${orderDTO.getDateType() eq 'month_1'?'on':''}"><em th:text="${#dates.createNow().getMonth()}"></em>월</a></li>
+                                <li th:if="${#dates.createNow().getMonth() -1 gt 0}"><a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},dateType=month_2)}" th:class="${orderDTO.getDateType() eq 'month_2'?'on':''}"><em th:text="${#dates.createNow().getMonth()-1}"></em>월</a></li>
+                                <li th:if="${#dates.createNow().getMonth() -2 gt 0}"><a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},dateType=month_3)}" th:class="${orderDTO.getDateType() eq 'month_3'?'on':''}"><em th:text="${#dates.createNow().getMonth()-2}"></em>월</a></li>
+                                <li th:if="${#dates.createNow().getMonth() -3 gt 0}"><a th:href="@{/my/order(ordUid=${#authentication.principal.member.uid},dateType=month_4)}" th:class="${orderDTO.getDateType() eq 'month_4'?'on':''}"><em th:text="${#dates.createNow().getMonth()-3}"></em>월</a></li>
+
                             </ul>
-                            <form th:action="@{my/order}" class="dateForm" method="get">
+                            <form th:action="@{/my/order}" class="dateForm" method="get">
                                 <p>
                                     <input type="date" name="beginDate"><span>~</span><input type="date" name="endDate">
                                     <input type="hidden" name="ordUid" th:value="${#authentication.principal.member.uid}">
@@ -49,19 +50,20 @@
                                     <th>확인/신청</th>
                                 </tr>
 
+
                                 <tr th:each="order:${orderDTO.getDtoList()}">
                                     <td class="date">[[${order.getOrdDate()}]]</td>
                                     <td>
                                         <a th:href="@{/product/view(prodCate1=${order.getProdCate1()}, prodCate2=${order.getProdCate2()}, prodNo=${order.getProdNo()}, price=${order.getPrice()})}"  class="thumb"><img th:src="@{/thumbs/}+${order.prodCate1}+'/'+${order.prodCate2}+'/'+${order.thumb1}" th:alt="${order.getProdName()}"></a>
                                         <ul>
-                                            <li class="company">[[${order.getCompany}]]</li>
+                                            <li class="company" th:onclick="seller([[${order.seller}]],[[${order.ordUid}]])">[[${order.getCompany}]]</li>
                                             <li class="prodName"><a th:href="@{/product/view(prodCate1=${order.getProdCate1()}, prodCate2=${order.getProdCate2()}, prodNo=${order.getProdNo()}, price=${order.getPrice()})}">[[${order.getProdName()}]]</a></li>
                                             <li>수량 : <span class="prodCount">[[${order.getCount()}]]</span>개 / 주문번호 : <span class="ordNo">[[${order.getOrdNo()}]]</span></li>
                                             <li class="prodPrice" th:text="${#numbers.formatInteger((order.getPrice()-(order.getPrice()*(order.getDiscount()*0.01))), 3, 'COMMA')}"></li>
                                         </ul>
                                     </td>
                                     <td class="status" th:if="${order.ordStatus eq 1}">배송 중</td>
-                                    <td class="status" th:if="${order.ordStatus eq 2}">배송 중</td>
+                                    <td class="status" th:if="${order.ordStatus eq 2}">배송 완료</td>
                                     <td class="confirm">
                                         <a href="#" class="receive">수취확인</a>
                                         <a href="#" class="review">상품평</a>
