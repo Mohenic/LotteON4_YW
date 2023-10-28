@@ -145,7 +145,7 @@ public class ProductController {
     @PostMapping("/product/complete")
     public String complete(String uid, ProductOrderItemDTO prodOitem, ProductOrderDTO prodOrder, MemberPointDTO mPointDto, Model model) {
 
-        log.info("ㄱ>?--------------------------------");
+        log.info("ㄱ?--------------------------------");
         prodOrder.setOrdUid(uid);  // ProductOrderDTO 필드에 매핑
         mPointDto.setUid(uid);
         
@@ -155,11 +155,11 @@ public class ProductController {
         log.info("Product prodOrder.toString =================================" + prodOrder.toString());
         
         int inOrderDto = prodService.insertOrder(prodOrder);
-        log.info("Product prodOrderDTO +++++++++++++++++++++ "  + inOrderDto);
+        log.info("Product inOrderDto +++++++++++++++++++++ "  + inOrderDto);
         
         
-        /*prodService.insertOrderItem(prodOitem);
-        prodService.insertmPoint(mPointDto);*/
+        //prodService.insertOrderItem(prodOitem);
+        //prodService.insertmPoint(mPointDto);
         
         
         model.addAttribute("prodOitem" , prodOitem);
@@ -175,9 +175,6 @@ public class ProductController {
 
         return "/product/complete";
     }
-
- 
-
 
 
 }

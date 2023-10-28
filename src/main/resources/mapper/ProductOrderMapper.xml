@@ -27,14 +27,18 @@
     
     
     
-    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="ordNo">
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="ordNo" parameterType="kr.co.lotteon.dto.product.ProductOrderDTO">
+        
         insert into `lo_product_order` (`ordUid`,`ordCount`,`ordPrice`,`ordDiscount`, `ordDelivery`,`savePoint`, 
                                         `usedPoint`, `ordTotPrice`, `recipName`, `recipHp`, `recipZip`, `recipAddr1`, 
                                         `recipAddr2`, `ordPayment`, `ordComplete`, `ordStatus`)
         values (#{ordUid},#{ordCount},#{ordPrice},#{ordDiscount},#{ordDelivery},#{savePoint}
                ,#{usedPoint},#{ordTotPrice},#{recipName},#{recipHp},#{recipZip},#{recipAddr1}
                ,#{recipAddr2},#{ordPayment},#{ordComplete},#{ordStatus})
-
+        <selectKey resultType="Integer" keyProperty="ordNo" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+            
     </insert>
     
     
