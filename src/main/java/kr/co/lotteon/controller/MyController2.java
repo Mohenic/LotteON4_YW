@@ -49,10 +49,22 @@ public class MyController2 {
     }
 
     @ModelAttribute("myInfo")
-    public MyInfoDTO myinfo(@RequestParam("uid") String uid){
+    public MyInfoDTO myinfo(String uid,
+                            String ordUid,
+                            String writer){
+
         log.info("uid : "+uid);
-        MyInfoDTO member = myService.findMyInfo(uid);
-        log.info("컨트롤러 member : "+member);
+        log.info("ordUid : "+ordUid);
+        log.info("writer : "+writer);
+        MyInfoDTO member = null;
+        if(uid != null){
+            member = myService.findMyInfo(uid);
+        }else if(ordUid != null){
+            member = myService.findMyInfo(ordUid);
+        }else if(writer != null){
+            member = myService.findMyInfo(writer);
+        }
+        log.info("member : "+member);
         return member;
     }
 

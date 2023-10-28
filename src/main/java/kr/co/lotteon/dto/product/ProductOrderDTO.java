@@ -35,6 +35,7 @@ public class ProductOrderDTO {
     private LocalDate ordDate;
 
     //추가
+    private int itemNo;
     private int prodNo;
     private int count;
     private int price;

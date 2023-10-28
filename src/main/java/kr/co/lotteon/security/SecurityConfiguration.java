@@ -51,6 +51,14 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 						.clearAuthentication(true)
 						.logoutSuccessUrl("/member/login?success=101"))
 
+				// 자동 로그인 설정
+				.rememberMe(httpSecurityRememberMeConfigurer -> httpSecurityRememberMeConfigurer
+						.rememberMeParameter("auto")
+						.alwaysRemember(false)
+						.tokenValiditySeconds(60*60*24*30*3)
+						.key("autoLogin")
+						.userDetailsService(service))
+
 				// 인가 권한 설정
 				.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
 						.requestMatchers("/admin/**").permitAll()

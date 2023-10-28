@@ -3,10 +3,12 @@ package kr.co.lotteon.controller;
 
 
 
+import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
 import kr.co.lotteon.dto.my.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.MemberDTO;
+import kr.co.lotteon.dto.product.ProductOrderDTO;
 import kr.co.lotteon.entity.cs.CsArticleQnaEntity;
 import kr.co.lotteon.service.MyService;
 import lombok.extern.log4j.Log4j2;
@@ -34,10 +36,23 @@ public class MyController {
         String version = buildProperties.getVersion(); // build.gradle 파일에서 버전값 가져옴
         return appName+version;
     }
+
     @ModelAttribute("myInfo")
-    public MyInfoDTO myinfo(@RequestParam("uid") String uid){
+    public MyInfoDTO myinfo(String uid,
+                            String ordUid,
+                            String writer){
+
         log.info("uid : "+uid);
-        MyInfoDTO member = myService.findMyInfo(uid);
+        log.info("ordUid : "+ordUid);
+        log.info("writer : "+writer);
+        MyInfoDTO member = null;
+        if(uid != null){
+            member = myService.findMyInfo(uid);
+        }else if(ordUid != null){
+            member = myService.findMyInfo(ordUid);
+        }else if(writer != null){
+            member = myService.findMyInfo(writer);
+        }
         log.info("member : "+member);
          return member;
     }

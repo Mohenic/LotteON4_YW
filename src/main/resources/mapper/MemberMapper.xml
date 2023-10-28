@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.LotteOn.mapper.MemberMapper">
 
-    <select id="selectMyInfo" resultType="kr.co.LotteOn.dto.my.MyInfoDTO">
+<mapper namespace="kr.co.lotteon.mapper.MemberMapper">
+
+    <select id="selectMyInfo" resultType="kr.co.lotteon.dto.my.MyInfoDTO">
         SELECT a.`point` AS point,
                (SELECT COUNT(b.couponno)
                 FROM lo_my_coupon AS b
@@ -17,7 +18,8 @@
         FROM lo_member AS a
         WHERE a.uid = #{uid} AND a.useyn = 'Y'
         GROUP BY a.`point`;
-
     </select>
+
+
 
 </mapper>

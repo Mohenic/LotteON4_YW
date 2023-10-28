@@ -3,6 +3,7 @@ package kr.co.lotteon.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import kr.co.lotteon.dto.MemberDTO;
 import kr.co.lotteon.dto.cs.CsArticleQnaDTO;
+import kr.co.lotteon.dto.my.MyInfoDTO;
 import kr.co.lotteon.dto.product.ProductDTO;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
 import kr.co.lotteon.dto.product.ProductOrderItemDTO;
@@ -10,16 +11,14 @@ import kr.co.lotteon.entity.MemberEntity;
 import kr.co.lotteon.entity.product.ProductEntity;
 import kr.co.lotteon.security.MyUserDetails;
 import kr.co.lotteon.service.CsService;
+import kr.co.lotteon.service.MyService;
 import kr.co.lotteon.service.MyService2;
 import lombok.extern.log4j.Log4j2;
 import org.apache.catalina.valves.RemoteAddrValve;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -32,6 +31,7 @@ public class MyController3 {
 
     @Autowired
     private CsService csService;
+
 
 
     @GetMapping("/my/checkRecive")
