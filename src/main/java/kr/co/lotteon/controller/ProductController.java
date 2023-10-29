@@ -1,6 +1,7 @@
 package kr.co.lotteon.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import kr.co.lotteon.dto.MemberDTO;
 import kr.co.lotteon.dto.MemberPointDTO;
 import kr.co.lotteon.dto.cs.PageResponse2DTO;
 import kr.co.lotteon.dto.product.*;
@@ -143,29 +144,86 @@ public class ProductController {
     }
 
     @PostMapping("/product/complete")
-    public String complete(String uid, ProductOrderItemDTO prodOitem, ProductOrderDTO prodOrder, MemberPointDTO mPointDto, Model model) {
+    public String complete(String uid, int ordTotPrice, int ordDelivery, int ordCount, int prodNo, int usedPoint, int ordDiscount, int ordPrice,
+                           int savePoint, int getPoint, ProductDTO product, String memberHp,
+                           ProductOrderItemDTO orderItem, ProductOrderDTO prodOrder, MemberPointDTO mPointDto, MemberDTO memberDto, Model model) {
 
-        log.info("ㄱ?--------------------------------");
+        // ProductOrderDTO
         prodOrder.setOrdUid(uid);  // ProductOrderDTO 필드에 매핑
+        prodOrder.setOrdStatus(1);  
+        prodOrder.setOrdPayment(1); 
+        prodOrder.setDelivery(1); 
+        // prodOrder.setProdName(prodName);
+        
+        // MemberPointDTO
         mPointDto.setUid(uid);
+        
+        // ProductOrderItemDTO
+        orderItem.setTotal(ordTotPrice);
+        orderItem.setDelivery(ordDelivery);
+        orderItem.setCount(ordCount);
+        orderItem.setProdNo(prodNo);
+        orderItem.setPrice(ordPrice);
+        orderItem.setDiscount(ordDiscount);
+        orderItem.setPoint(usedPoint);
+        
+        // MemberDTO
+        // member
+        
         
         log.info("Product getOrdUid =================================" + prodOrder.getOrdUid());
         log.info("Product getUid =================================" + mPointDto.getUid());
         log.info("Product mPointDto.toString =================================" + mPointDto.toString());
         log.info("Product prodOrder.toString =================================" + prodOrder.toString());
         
+        // order
         int inOrderDto = prodService.insertOrder(prodOrder);
         log.info("Product inOrderDto +++++++++++++++++++++ "  + inOrderDto);
+        log.info(inOrderDto);
+        
+        // select Order
+        ProductOrderDTO selectOrderDTO = prodService.selectOrder();
+        int ordNo = selectOrderDTO.getOrdNo();
+        
+        log.info("투스트링=== " + selectOrderDTO.toString());
+        log.info("getOrdNo=== " + selectOrderDTO.getOrdNo());
+        log.info("ordNo값=== " + ordNo);
         
         
-        //prodService.insertOrderItem(prodOitem);
-        //prodService.insertmPoint(mPointDto);
+        // order Item
+        prodService.insertOrderItem(orderItem, ordNo);
         
         
-        model.addAttribute("prodOitem" , prodOitem);
+        // insert Point
+        if(savePoint > 0) {
+            mPointDto.setPoint(savePoint);
+            mPointDto.setDescript("적립");
+            prodService.insertMPoint(mPointDto, ordNo);
+        }
+        
+        if(usedPoint > 0){
+            mPointDto.setPoint(usedPoint);
+            mPointDto.setDescript("사용");
+            prodService.insertMPoint(mPointDto, ordNo);
+        }
+        
+        // member Point
+        int memberPoint = getPoint + savePoint - usedPoint; 
+        log.info("memberP=)))))))))))))" + getPoint);
+        log.info("memberP=((((((((((((( " + savePoint);
+        log.info("memberP=&&&&&&&&&&" + usedPoint);
+        log.info("member**************************************"  + memberPoint);
+        log.info("member**************************************212라인 "  + memberDto.getUid());
+        log.info("member**************************************214라인 "  + memberDto.getPoint());
+        prodService.updatePoint(memberDto, memberPoint);
+        
+        model.addAttribute("productItem" , orderItem);
         model.addAttribute("prodOrder" , prodOrder);
         model.addAttribute("mPointDto" , mPointDto);
-        model.addAttribute("returnOrderDTO" , inOrderDto);
+        model.addAttribute("prodDTO" , product);
+        model.addAttribute("member" , memberDto);
+        model.addAttribute("ordNo" , ordNo);
+        model.addAttribute("memberHp" , memberHp);
         
         return "/product/complete";
     }

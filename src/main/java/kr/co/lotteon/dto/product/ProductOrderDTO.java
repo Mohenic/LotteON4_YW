@@ -50,6 +50,7 @@ public class ProductOrderDTO {
     private String company;
     private String thumb1;
     private String prodName;
+    private String paymentMethod;
 
     public ProductOrderEntity toEntity() {
         return ProductOrderEntity.builder()
