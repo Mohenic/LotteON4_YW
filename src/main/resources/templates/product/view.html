@@ -109,17 +109,17 @@
                         <h2>상품번호&nbsp;:&nbsp;<span>[[${product.prodNo}]]</span></h2>
                     </nav>
                     <nav>
-                        <input type="text" name="totalQuantity" id="totalQuantity" value="1" />
-                        <input type="text" name="prodName" th:value="${product.getProdName()}"/>
-                        <input type="text" name="prodNo"  th:value="${product.getProdNo()}"/>
-                        <input type="text" name="descript"  th:value="${product.getDescript()}"/>
-                        <input type="text" name="price"  th:value="${product.getPrice()}"/>
-                        <input type="text" name="prodCate1"  th:value="${product.getProdCate1()}"/>
-                        <input type="text" name="prodCate2"  th:value="${product.getProdCate2()}"/>
-                        <input type="text" name="thumb3"  th:value="${product.getThumb3()}"/>
-                        <input type="text" name="delivery"  th:value="${product.getDelivery()}"/>
-                        <input type="text" name="discount"  th:value="${product.getDiscount()}"/>
-                        <input type="text" name="point"  th:value="${product.getPoint()}"/><!-- 이 포인트는 savepoint, 제품을 사면 이만큼 준다는 의미-->
+                        <input type="hidden" name="totalQuantity" id="totalQuantity" value="1" />
+                        <input type="hidden" name="prodName" th:value="${product.getProdName()}"/>
+                        <input type="hidden" name="prodNo"  th:value="${product.getProdNo()}"/>
+                        <input type="hidden" name="descript"  th:value="${product.getDescript()}"/>
+                        <input type="hidden" name="price"  th:value="${product.getPrice()}"/>
+                        <input type="hidden" name="prodCate1"  th:value="${product.getProdCate1()}"/>
+                        <input type="hidden" name="prodCate2"  th:value="${product.getProdCate2()}"/>
+                        <input type="hidden" name="thumb3"  th:value="${product.getThumb3()}"/>
+                        <input type="hidden" name="delivery"  th:value="${product.getDelivery()}"/>
+                        <input type="hidden" name="discount"  th:value="${product.getDiscount()}"/>
+                        <input type="hidden" name="point"  th:value="${product.getPoint()}"/><!-- 이 포인트는 savepoint, 제품을 사면 이만큼 준다는 의미-->
                         <h3>[[${product.prodName}]]</h3>
                         <p>[[${product.descript}]]</p>
                         <h5 class="rating star4"><a href="#">상품평보기</a></h5>

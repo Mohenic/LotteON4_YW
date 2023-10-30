@@ -16,7 +16,7 @@
               </nav>
 
               <div class="content">
-                <p th:text="${articles.content}"></p>
+                <pre><p th:text="${articles.content}"></p></pre>
               </div>
 
               <th:block th:if="${cate1=='qna' && comment != null}">
