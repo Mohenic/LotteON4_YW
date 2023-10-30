@@ -13,26 +13,26 @@
         </nav>
         <form th:action="@{/product/complete}" id="orderForm" method="post">
             <!-- 주문 상품 목록 -->
-            <input type="text" name="ordCount" th:value="${totalQuantity}" />  <!-- 주문 총량 -->
-            <input type="text" name="ordPrice" th:value="${prodDTO.price}" />     <!-- 제품 한개 가격 -->
-            <input type="text" name="ordDelivery" th:value="${prodDTO.delivery}" />   <!-- 배송비 -->
-            <input type="text" name="prodNo" th:value="${prodDTO.prodNo}" />   <!-- 제품 번호 -->
-            <input type="text" name="ordDiscount" th:value="${prodDTO.discount}" /> <!-- discount 퍼센테이지 -->
-            <input type="text" name="savePoint" th:value="${prodDTO.point}" /> <!-- 여기서의 point는 savePoint임 -->
-            <input type="text" name="discountPrice" th:value="${#numbers.formatInteger(((prodDTO.price* totalQuantity)*(prodDTO.discount*0.01)), 3)}" /> <!-- discount되어 빠질 가격 -->
-            <input type="text" name="subTotalPrice"  th:value="${#numbers.formatInteger(((prodDTO.price * totalQuantity) + prodDTO.delivery) ,3)}" />     <!-- view의 소계 -->
-            <input type="text" name="usedPoint" />    <!-- 사용하는 포인트 -->
-            <input type="text" name="ordTotPrice"  />     <!-- 가격의 총합 -->
-            <input type="text" name="userName" id="userName"  />      <!-- 로그인 유저 이름 받는사람 이름 X -->
-            <input type="text" name="uid" id="userId"  />             <!-- 로그인 유저 아이디 -->
-            <input type="text" name="memberHp" id="userhp"  />             <!-- 로그인 유저 전화번호 -->
-            <input type="text" name="getPoint" id="getPoint"  />             <!-- 로그인 유저의 보유 포인트 -->
-            <input type="text" name="prodName" id="prodName"  />             <!-- 제품명 -->
-            <input type="text" name="descript" id="descript"  />             <!-- 제품명 -->
-            <input type="text" name="prodCate1" id="prodCate1" th:value="${prodDTO.prodCate1}" />             <!-- 제품명 -->
-            <input type="text" name="prodCate2" id="prodCate2" th:value="${prodDTO.prodCate2}" />             <!-- 제품명 -->
-            <input type="text" name="thumb3" id="thumb3"  th:value="${prodDTO.thumb3}" />             <!-- 제품명 -->
-            <input type="text" name="paymentMethod" id="paymentMethod"  />             <!-- 지불방법 -->
+            <input type="hidden" name="ordCount" th:value="${totalQuantity}" />  <!-- 주문 총량 -->
+            <input type="hidden" name="ordPrice" th:value="${prodDTO.price}" />     <!-- 제품 한개 가격 -->
+            <input type="hidden" name="ordDelivery" th:value="${prodDTO.delivery}" />   <!-- 배송비 -->
+            <input type="hidden" name="prodNo" th:value="${prodDTO.prodNo}" />   <!-- 제품 번호 -->
+            <input type="hidden" name="ordDiscount" th:value="${prodDTO.discount}" /> <!-- discount 퍼센테이지 -->
+            <input type="hidden" name="savePoint" th:value="${prodDTO.point}" /> <!-- 여기서의 point는 savePoint임 -->
+            <input type="hidden" name="discountPrice" th:value="${#numbers.formatInteger(((prodDTO.price* totalQuantity)*(prodDTO.discount*0.01)), 3)}" /> <!-- discount되어 빠질 가격 -->
+            <input type="hidden" name="subTotalPrice"  th:value="${#numbers.formatInteger(((prodDTO.price * totalQuantity) + prodDTO.delivery) ,3)}" />     <!-- view의 소계 -->
+            <input type="hidden" name="usedPoint" />    <!-- 사용하는 포인트 -->
+            <input type="hidden" name="ordTotPrice"  />     <!-- 가격의 총합 -->
+            <input type="hidden" name="userName" id="userName"  />      <!-- 로그인 유저 이름 받는사람 이름 X -->
+            <input type="hidden" name="uid" id="userId"  />             <!-- 로그인 유저 아이디 -->
+            <input type="hidden" name="memberHp" id="userhp"  />             <!-- 로그인 유저 전화번호 -->
+            <input type="hidden" name="getPoint" id="getPoint"  />             <!-- 로그인 유저의 보유 포인트 -->
+            <input type="hidden" name="prodName" id="prodName"  />             <!-- 제품명 -->
+            <input type="hidden" name="descript" id="descript"  />             <!-- 제품명 -->
+            <input type="hidden" name="prodCate1" id="prodCate1" th:value="${prodDTO.prodCate1}" />             <!-- 제품명 -->
+            <input type="hidden" name="prodCate2" id="prodCate2" th:value="${prodDTO.prodCate2}" />             <!-- 제품명 -->
+            <input type="hidden" name="thumb3" id="thumb3"  th:value="${prodDTO.thumb3}" />             <!-- 제품명 -->
+            <input type="hidden" name="paymentMethod" id="paymentMethod"  />             <!-- 지불방법 -->
             <!-- 받는 사람 이름, 주소1/2/zip, 전화번호는 아래에 inputTag에 있음 -->
             <table>
                 <thead>
