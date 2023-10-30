@@ -1,5 +1,6 @@
 package kr.co.lotteon.mapper;
 
+import kr.co.lotteon.dto.MemberDTO;
 import kr.co.lotteon.dto.MemberPointDTO;
 import kr.co.lotteon.dto.product.ProductOrderDTO;
 import kr.co.lotteon.dto.product.ProductOrderItemDTO;
@@ -17,9 +18,11 @@ public interface ProductOrderMapper {
 
     public int insertOrder(ProductOrderDTO prodOrder);
 
-    public void insertOrderItem(ProductOrderItemDTO prodOitem);
+    ProductOrderDTO selectOrder();
 
-    public void insertmPoint(MemberPointDTO mPointDto);
-    
-    
+    public void insertOrderItem(ProductOrderItemDTO oderItem, int ordNo);
+
+    public void insertMPoint(MemberPointDTO mPointDto, int ordNo);
+
+    public void updatePoint(MemberDTO memberDTO, int point);
 }

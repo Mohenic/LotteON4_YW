@@ -1,5 +1,6 @@
 package kr.co.lotteon.service;
 
+import kr.co.lotteon.dto.MemberDTO;
 import kr.co.lotteon.dto.MemberPointDTO;
 import kr.co.lotteon.dto.product.*;
 import kr.co.lotteon.entity.product.ProductCate1Entity;
@@ -157,14 +158,28 @@ public class ProductService {
         return productOrder;
     }
 
-    public void insertOrderItem(ProductOrderItemDTO prodOitem) {
-
-        prodOrderMapper.insertOrderItem(prodOitem);
+    public ProductOrderDTO selectOrder() {
+        
+        ProductOrderDTO selectOrder = prodOrderMapper.selectOrder();
+        
+        return selectOrder;
     }
 
-    public void insertmPoint(MemberPointDTO mPointDto) {
+    public void insertOrderItem(ProductOrderItemDTO orderItem, int ordNo) {
 
-        prodOrderMapper.insertmPoint(mPointDto);
+        prodOrderMapper.insertOrderItem(orderItem, ordNo);
+    }
+
+    public void insertMPoint(MemberPointDTO mPointDto, int ordNo) {
+
+        prodOrderMapper.insertMPoint(mPointDto, ordNo);
         
+    }
+
+    public void updatePoint(MemberDTO member, int memberPoint) {
+        log.info("service===========1 "+member.getPoint());
+        log.info("service=========== 2 "+member.getUid());
+        
+        prodOrderMapper.updatePoint(member, memberPoint);
     }
 }

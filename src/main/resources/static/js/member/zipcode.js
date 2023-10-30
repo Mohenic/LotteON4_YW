@@ -42,6 +42,11 @@ function zipcode() {
                 document.getElementsByName("addr1")[0].value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementsByName("addr2")[0].focus();
+                
+                // product Order
+                document.getElementsByName('recipZip')[0].value = data.zonecode;
+                document.getElementsByName("recipAddr1")[0].value = addr;
+                document.getElementsByName("recipAddr2")[0].focus();
             }
         }).open();
     } 

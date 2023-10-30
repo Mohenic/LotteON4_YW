@@ -29,30 +29,44 @@
     
     <insert id="insertOrder" useGeneratedKeys="true" keyProperty="ordNo" parameterType="kr.co.lotteon.dto.product.ProductOrderDTO">
         
-        insert into `lo_product_order` (`ordUid`,`ordCount`,`ordPrice`,`ordDiscount`, `ordDelivery`,`savePoint`, 
+        insert into `lo_product_order` (`ordNo`,`ordUid`,`ordCount`,`ordPrice`,`ordDiscount`, `ordDelivery`,`savePoint`, 
                                         `usedPoint`, `ordTotPrice`, `recipName`, `recipHp`, `recipZip`, `recipAddr1`, 
-                                        `recipAddr2`, `ordPayment`, `ordComplete`, `ordStatus`)
-        values (#{ordUid},#{ordCount},#{ordPrice},#{ordDiscount},#{ordDelivery},#{savePoint}
+                                        `recipAddr2`, `ordPayment`, `ordComplete`, `ordStatus`, `paymentMethod`)
+        values (#{ordNo},#{ordUid},#{ordCount},#{ordPrice},#{ordDiscount},#{ordDelivery},#{savePoint}
                ,#{usedPoint},#{ordTotPrice},#{recipName},#{recipHp},#{recipZip},#{recipAddr1}
-               ,#{recipAddr2},#{ordPayment},#{ordComplete},#{ordStatus})
-        <selectKey resultType="Integer" keyProperty="ordNo" order="AFTER">
+               ,#{recipAddr2},#{ordPayment},#{ordComplete},#{ordStatus},#{paymentMethod})
+        <selectKey resultType="Int" keyProperty="ordNo" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
             
     </insert>
     
+    <select id="selectOrder" resultType="kr.co.lotteon.dto.product.ProductOrderDTO">
+        SELECT * FROM `lo_product_order`
+        ORDER BY `ordNo` DESC
+        LIMIT 1;
+    </select>
     
-    <insert id="insertOrderItem">
-        
-
+    
+    <insert id="insertOrderItem" >
+        insert into `lo_product_order_item` (`itemNo`,`ordNo`,`prodNo`,`count`,`price`, `discount`,`point`,
+                                        `delivery`, `total`)
+        values (#{oderItem.itemNo},#{ordNo},#{oderItem.prodNo},#{oderItem.count},#{oderItem.price},#{oderItem.discount},#{oderItem.point}
+               ,#{oderItem.delivery},#{oderItem.total})
     </insert>
     
     
-    <insert id="insertmPoint">
+    <insert id="insertMPoint">
+        insert into `lo_member_point` (uid, ordNo, point, descript)
         
+        values(#{mPointDto.uid}, #{ordNo},#{mPointDto.point},#{mPointDto.descript})
 
     </insert>
     
-    
+    <update id="updatePoint">
+        update `lo_member`
+        set  `point` = #{point}
+        where `uid` = #{memberDTO.uid}
+    </update>
     
 </mapper>
