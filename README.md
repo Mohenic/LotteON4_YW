@@ -75,3 +75,7 @@
   -policy HTML 추가
 
   -company HTML 추가
+
+  0.0.10 -SNAPSHOT
+
+  - 배포
